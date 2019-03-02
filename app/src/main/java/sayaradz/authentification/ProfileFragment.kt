@@ -10,14 +10,13 @@ import android.widget.TextView
 import com.google.firebase.auth.FirebaseAuth
 import com.squareup.picasso.Picasso
 
-class ProfileFragment: Fragment() {
+class ProfileFragment : Fragment() {
 
 
     var firebaseAuth: FirebaseAuth? = null
     lateinit var ivProfilePicture: ImageView
     lateinit var tvName: TextView
     lateinit var tvEmail: TextView
-    lateinit var idToken : String
 
 
     companion object {
@@ -26,7 +25,7 @@ class ProfileFragment: Fragment() {
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val rootView= inflater.inflate(R.layout.profile_fragment, container, false)
+        val rootView = inflater.inflate(R.layout.profile_fragment, container, false)
 
         firebaseAuth = FirebaseAuth.getInstance()
         ivProfilePicture = rootView.findViewById<ImageView>(R.id.iv_profile)
