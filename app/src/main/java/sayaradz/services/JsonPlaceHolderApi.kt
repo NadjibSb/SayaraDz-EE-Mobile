@@ -9,12 +9,12 @@ import retrofit2.http.Path
 interface JsonPlaceHolderApi {
 
 // Getting all the brands
-    @GET("api/marque")  // relative url ..  gonna change name of tha table
+    @GET("marque")  // relative url ..  gonna change name of tha table
     fun getMarques(@Header("Authorization") token : String): Call<List<Marque>>
 
 
 // Getting all the models
-    @GET("api/modele")
+    @GET("modele")
     fun getModels(@Header("Authorization") token : String): Call<List<Model>>
 
     @GET("/media/images/marque/{imageName}")

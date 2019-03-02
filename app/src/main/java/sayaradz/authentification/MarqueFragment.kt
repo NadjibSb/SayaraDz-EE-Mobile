@@ -44,7 +44,7 @@ class MarqueFragment:Fragment() {
         var mMarques: List<Marque>
         //mMarques = retrofit("aaaaa")!!
 
-        val url="http://7874fe86.ngrok.io/"    // the url of service
+        val url="http://7874fe86.ngrok.io/api/"    // the url of service
         val retrofit = Retrofit.Builder()
                 .baseUrl(url)
                 .addConverterFactory(GsonConverterFactory.create())
