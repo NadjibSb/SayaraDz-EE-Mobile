@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        app:showAsAction="ifRoom"
+        android:id="@+id/nav_home"
+        android:icon="@drawable/ic_visibility_black_24dp"
+        android:title="Consulter" />
+
+    <item
+        app:showAsAction="ifRoom"
+        android:id="@+id/nav_favorites"
+        android:icon="@drawable/ic_search_black_24dp"
+        android:title="Chercher"/>
+
+    <item
+        app:showAsAction="ifRoom"
+        android:id="@+id/nav_search"
+        android:icon="@drawable/ic_format_list_bulleted_black_24dp"
+        android:title="Composer"/>
+
+    <item
+        app:showAsAction="ifRoom"
+        android:id="@+id/nav_profile"
+        android:icon="@drawable/ic_account_circle_black_24dp"
+        android:title="Profile"/>
+
+
+
+</menu>
