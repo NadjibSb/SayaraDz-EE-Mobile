@@ -5,7 +5,6 @@ import android.support.v4.app.Fragment
 import android.support.v4.content.res.ResourcesCompat
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.util.JsonToken
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -20,13 +19,16 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import sayaradz.services.JsonPlaceHolderApi
 import sayaradz.services.Marque
-
+import android.graphics.drawable.Drawable
+import java.io.InputStream
+import java.net.URL
 
 
 class MarqueFragment:Fragment() {
 
     lateinit var token: String
     companion object {
+        val url="http://3e37268f.ngrok.io/api/"
         fun getInstance() = MarqueFragment()
     }
 
@@ -37,6 +39,7 @@ class MarqueFragment:Fragment() {
         Log.i("TOKEN",token)
 
         Log.i("TOKEN","blabla")
+        DisplayMarqueList(rootView,token)
 
 
 
@@ -44,7 +47,7 @@ class MarqueFragment:Fragment() {
         var mMarques: List<Marque>
         //mMarques = retrofit("aaaaa")!!
 
-        val url="http://7874fe86.ngrok.io/api/"    // the url of service
+/*        val url="http://3e37268f.ngrok.io/api/"    // the url of service
         val retrofit = Retrofit.Builder()
                 .baseUrl(url)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -89,7 +92,7 @@ class MarqueFragment:Fragment() {
         })
         //
         Log.i("TOKEN","444444444")
-        Log.i("TOKEN",token)
+        Log.i("TOKEN",token)*/
 
 
         return rootView
@@ -97,8 +100,9 @@ class MarqueFragment:Fragment() {
 
 
 
-    private fun retrofit(idToken: String): List<Marque>?{
-        val url="http://7874fe86.ngrok.io/api/"    // the url of service
+    private fun DisplayMarqueList(rootView: View,idToken: String){
+           // the url of service
+
         val retrofit = Retrofit.Builder()
                 .baseUrl(url)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -108,6 +112,7 @@ class MarqueFragment:Fragment() {
         val jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi::class.java)
         val call = jsonPlaceHolderApi.getMarques(idToken) // The request included the token
         var marques: List<Marque>? = null
+        var mMarqueList=ArrayList<Marque>()
 
         Log.i("TOKEN",call.toString())
 
@@ -128,7 +133,9 @@ class MarqueFragment:Fragment() {
                         content += "ID: " + m.IdMarque + "\n"
                         content += "Name: " + m.NomMarque + "\n"
                         Log.i("CONTENT",content)
+                        mMarqueList.add(m)
 
+                        setUpRecycleView(rootView, mMarqueList)
                         //tvResult.append(content) // Displaying results temporary in text view
                     }
                 }
@@ -141,7 +148,6 @@ class MarqueFragment:Fragment() {
         //
         Log.i("TOKEN","444444444")
         Log.i("TOKEN",idToken)
-        return marques
     }
 
     private fun constructList(): List<Marque>{
@@ -201,11 +207,21 @@ class MarqueFragment:Fragment() {
             var marque = mMarques[position]
             holder.nameTextView.setText(marque.NomMarque)
             Log.i("marque",marque.NomMarque)
-            //holder.image.setImageDrawable(R.drawable.m_audi/*marque.Image*/)
-
+            holder.image.setImageDrawable(LoadImageFromWebOperations(marque.Image))
         }
 
         override fun getItemCount() = mMarques.size
+
+        fun LoadImageFromWebOperations(url: String): Drawable? {
+            try {
+                val input = URL(url).getContent() as InputStream
+                return Drawable.createFromStream(input, url)
+            } catch (e: Exception) {
+                return null
+            }
+
+        }
     }
+
 
 }

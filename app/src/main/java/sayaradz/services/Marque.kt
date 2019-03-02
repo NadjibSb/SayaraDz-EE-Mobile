@@ -28,10 +28,10 @@ class Marque{
             nomMarque = value
         }
 
-/*    public var Image: Drawable
+    public var Image: String
         get() = imageMarque
         set(value) {
             imageMarque = value
-        }*/
+        }
 
 }
