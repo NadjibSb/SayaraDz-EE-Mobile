@@ -36,32 +36,84 @@ class MarqueFragment:Fragment() {
         token = this.arguments.getString("Token")
         Log.i("TOKEN",token)
 
+        Log.i("TOKEN","blabla")
 
 
-        var mMarqueList = constructList()
-        var mMarques: List<sayaradz.services.Marque>
-        mMarques = retrofit(token)!!
 
-        setUpRecycleView(rootView,mMarques)
+        var mMarqueList=ArrayList<Marque>() //= constructList()
+        var mMarques: List<Marque>
+        //mMarques = retrofit("aaaaa")!!
+
+        val url="http://7874fe86.ngrok.io/"    // the url of service
+        val retrofit = Retrofit.Builder()
+                .baseUrl(url)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+        Log.i("TOKEN","111111")
+
+        val jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi::class.java)
+        val call = jsonPlaceHolderApi.getMarques(token) // The request included the token
+        var marques: List<Marque>? = null
+
+        Log.i("TOKEN",call.toString())
+
+        call.enqueue(object : Callback<List<Marque>> {
+            override fun onResponse(call: Call<List<Marque>>, response: Response<List<Marque>>) {
+                Log.i("TOKEN","22222")
+                if (!response.isSuccessful()) {
+                    //tvResult.setText("Code: "+response.code()); // Displayin the code of teh response
+                    Log.i("CODE",response.code().toString())
+                    return
+                }
+                marques = response.body()  // Getting the marques
+
+                if (marques != null) {
+                    Log.i("REPONSES","HERE is ALL THE BRANDS FROM OUR SERVER:")
+                    for (m in marques!!) {
+                        var content = ""
+                        content += "ID: " + m.IdMarque + "\n"
+                        content += "Name: " + m.NomMarque + "\n"
+                        mMarqueList.add(m)
+
+                        Log.i("CONTENT",content)
+
+                        //tvResult.append(content) // Displaying results temporary in text view
+                    }
+                    setUpRecycleView(rootView, mMarqueList)
+                }
+            }
+            override fun onFailure(call: Call<List<Marque>>, t: Throwable) {
+                //tvResult.setText(t.message);  // ERROR CODE
+                Log.i("TOKEN","3333333333")
+            }
+        })
+        //
+        Log.i("TOKEN","444444444")
+        Log.i("TOKEN",token)
+
+
         return rootView
     }
 
 
 
     private fun retrofit(idToken: String): List<Marque>?{
-        val url="http://bacb41cf.ngrok.io/api/"    // the url of service
+        val url="http://7874fe86.ngrok.io/api/"    // the url of service
         val retrofit = Retrofit.Builder()
                 .baseUrl(url)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
+        Log.i("TOKEN","111111")
 
         val jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi::class.java)
         val call = jsonPlaceHolderApi.getMarques(idToken) // The request included the token
         var marques: List<Marque>? = null
 
+        Log.i("TOKEN",call.toString())
+
         call.enqueue(object : Callback<List<Marque>> {
             override fun onResponse(call: Call<List<Marque>>, response: Response<List<Marque>>) {
-
+                Log.i("TOKEN","22222")
                 if (!response.isSuccessful()) {
                     //tvResult.setText("Code: "+response.code()); // Displayin the code of teh response
                     Log.i("CODE",response.code().toString())
@@ -83,9 +135,11 @@ class MarqueFragment:Fragment() {
             }
             override fun onFailure(call: Call<List<Marque>>, t: Throwable) {
                 //tvResult.setText(t.message);  // ERROR CODE
+                Log.i("TOKEN","3333333333")
             }
         })
         //
+        Log.i("TOKEN","444444444")
         Log.i("TOKEN",idToken)
         return marques
     }
@@ -105,7 +159,7 @@ class MarqueFragment:Fragment() {
             var m = Marque()
             m.IdMarque = i.toString()
             m.NomMarque = "Marque $i"
-            m.Image= drawable!!
+            //m.Image= drawable!!
             mMarqueList.add(m)
         }
         return mMarqueList
@@ -146,7 +200,8 @@ class MarqueFragment:Fragment() {
         override fun onBindViewHolder(holder: MarqueViewHolder, position: Int) {
             var marque = mMarques[position]
             holder.nameTextView.setText(marque.NomMarque)
-            holder.image.setImageDrawable(marque.Image)
+            Log.i("marque",marque.NomMarque)
+            //holder.image.setImageDrawable(R.drawable.m_audi/*marque.Image*/)
 
         }
 

@@ -19,7 +19,7 @@ import com.google.android.gms.tasks.Task
 
 
 class MainActivity : AppCompatActivity() {
-    val TAG = "MainActivity"
+    val TAG = "MainActivityTesttt"
     // Firebase Auth Object.
     var firebaseAuth: FirebaseAuth? = null
     lateinit var idToken : String   // the access token
@@ -29,27 +29,53 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        idToken = getUserToken()
 
-        setUpBottomNavigationBar(idToken)
-    }
-
-    private fun getUserToken(): String {
-        var token=""
+        var token="test"
         firebaseAuth = FirebaseAuth.getInstance()
         val user = firebaseAuth?.currentUser
+
+        Log.i(TAG,firebaseAuth?.currentUser.toString())
 
         ///**THE TOKEN + REQUEST **///
         user?.getIdToken(true)
                 ?.addOnCompleteListener(object : OnCompleteListener<GetTokenResult> {
                     override  fun onComplete(task: Task<GetTokenResult>) {
+                        Log.i(TAG,"before if")
                         if (task.isSuccessful()) {
+                            Log.i(TAG,"inside if")
                             token = task.getResult()!!.getToken()!!  // Having the token
                         } else {
                             // Handle error -> task.getException();
                         }
                     }
                 })
+        Log.i(TAG,token)
+        idToken = token
+
+        setUpBottomNavigationBar(idToken)
+    }
+
+    private fun getUserToken(): String {
+        var token="test"
+        firebaseAuth = FirebaseAuth.getInstance()
+        val user = firebaseAuth?.currentUser
+
+        Log.i("user",user?.email)
+
+        ///**THE TOKEN + REQUEST **///
+        user?.getIdToken(true)
+                ?.addOnCompleteListener(object : OnCompleteListener<GetTokenResult> {
+                    override  fun onComplete(task: Task<GetTokenResult>) {
+                        Log.i(TAG,"before if")
+                        if (task.isSuccessful()) {
+                            Log.i(TAG,"inside if")
+                            token = task.getResult()!!.getToken()!!  // Having the token
+                        } else {
+                            // Handle error -> task.getException();
+                        }
+                    }
+                })
+        Log.i("TOKEN2",token)
         return token
 
 /*/// this is the profile fragement in ur version ..

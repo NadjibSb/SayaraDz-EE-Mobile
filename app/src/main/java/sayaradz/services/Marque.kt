@@ -4,9 +4,10 @@ import android.graphics.drawable.Drawable
 
 class Marque{
 
+    private var pk=""
     private var idMarque=""
     private var nomMarque=""
-    lateinit private var image: Drawable
+    private var imageMarque: String =""
 
     /** Getters & Setters **/
     /** idMarque**/
@@ -27,10 +28,10 @@ class Marque{
             nomMarque = value
         }
 
-    public var Image : Drawable
-        get() = image
+/*    public var Image: Drawable
+        get() = imageMarque
         set(value) {
-            image = value
-        }
+            imageMarque = value
+        }*/
 
 }

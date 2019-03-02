@@ -41,6 +41,7 @@ class CreateAccountActivity : AppCompatActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_account)
+        Log.i(TAG,"test")
 
         googleSignInButton = findViewById<View>(R.id.google_sign_in_button) as SignInButton
         facebookSignInButton = findViewById<View>(R.id.facebook_sign_in_button) as LoginButton
@@ -57,9 +58,10 @@ class CreateAccountActivity : AppCompatActivity(), View.OnClickListener {
 
         // Creating and Configuring Google Api Client.
         googleApiClient = GoogleApiClient.Builder(this@CreateAccountActivity)
-                .enableAutoManage(this@CreateAccountActivity  /* OnConnectionFailedListener */) { }
+                .enableAutoManage(this@CreateAccountActivity  /* OnConnectionFailedListener */){}
                 .addApi(Auth.GOOGLE_SIGN_IN_API, googleSignInOptions)
                 .build()
+
 
 
 
