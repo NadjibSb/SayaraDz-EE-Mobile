@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "1078199315736",
+    "firebase_url": "https://sayaradz.firebaseio.com",
+    "project_id": "sayaradz",
+    "storage_bucket": "sayaradz.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1078199315736:android:a985e8d0cbe42286",
+        "android_client_info": {
+          "package_name": "sayaradz.authentification"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1078199315736-tutm29gji4t02p731mp3o51v21l4imlk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBdewJ-St1kDirMKucZmvTvdNAlFT87LSo"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
