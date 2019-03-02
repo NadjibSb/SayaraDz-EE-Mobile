@@ -20,6 +20,13 @@ import retrofit2.converter.gson.GsonConverterFactory
 import sayaradz.services.JsonPlaceHolderApi
 import sayaradz.services.Marque
 import android.graphics.drawable.Drawable
+import com.squareup.okhttp.ResponseBody
+import android.graphics.Bitmap
+import java.io.File.separator
+import android.graphics.BitmapFactory
+import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
 import java.io.InputStream
 import java.net.URL
 
@@ -28,7 +35,7 @@ class MarqueFragment:Fragment() {
 
     lateinit var token: String
     companion object {
-        val url="http://3e37268f.ngrok.io/api/"
+        val url="http://3e37268f.ngrok.io/"
         fun getInstance() = MarqueFragment()
     }
 
@@ -134,6 +141,7 @@ class MarqueFragment:Fragment() {
                         content += "Name: " + m.NomMarque + "\n"
                         Log.i("CONTENT",content)
                         mMarqueList.add(m)
+                        //getMarqueImage(token,m.Image)
 
                         setUpRecycleView(rootView, mMarqueList)
                         //tvResult.append(content) // Displaying results temporary in text view
@@ -207,13 +215,14 @@ class MarqueFragment:Fragment() {
             var marque = mMarques[position]
             holder.nameTextView.setText(marque.NomMarque)
             Log.i("marque",marque.NomMarque)
-            holder.image.setImageDrawable(LoadImageFromWebOperations(marque.Image))
+            holder.image.setImageDrawable(LoadImageFromWeb(marque.Image))
         }
 
         override fun getItemCount() = mMarques.size
 
-        fun LoadImageFromWebOperations(url: String): Drawable? {
+        fun LoadImageFromWeb(url: String): Drawable? {
             try {
+                Log.i("image", url)
                 val input = URL(url).getContent() as InputStream
                 return Drawable.createFromStream(input, url)
             } catch (e: Exception) {
@@ -222,6 +231,94 @@ class MarqueFragment:Fragment() {
 
         }
     }
+/*
+    private fun getMarqueImage(token : String, imgUrl : String){
+        // the url of service
+
+        val retrofit = Retrofit.Builder()
+                .baseUrl(url)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+        Log.i("TOKEN","111111")
+
+        var splits = imgUrl.split("/")
+        var imgName = splits[splits.size-1]
+        Log.i("TOKEN",imgName)
+
+
+        val jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi::class.java)
+        val call = jsonPlaceHolderApi.getImage(token,imgName)// The request included the token
+
+        Log.i("TOKEN",call.toString())
+
+        call.enqueue(object : Callback<ResponseBody> {
+            override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+                Log.i("TOKEN","22222")
+                if (!response.isSuccessful()) {
+                    //tvResult.setText("Code: "+response.code()); // Displayin the code of teh response
+                    Log.i("CODE",response.code().toString())
+                    return
+                }
+                if(response.body()!=null){
+                    var fileDownloaded = DownloadImage(response.body()!!,imgName)
+                    Log.i("REPONSES","HERE is ALL THE BRANDS FROM OUR SERVER: $fileDownloaded")
+                }
+
+            }
+            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                //tvResult.setText(t.message);  // ERROR CODE
+                Log.i("TOKEN","3333333333")
+            }
+        })
+        //
+        Log.i("TOKEN","444444444")
+        Log.i("TOKEN",token)
+    }
+
+    private fun DownloadImage(body: ResponseBody, imgName: String): Boolean {
+
+        try {
+            Log.d("DownloadImage", "Reading and writing file")
+            var `in`: InputStream? = null
+            var out: FileOutputStream? = null
+
+            try {
+                `in` = body!!.byteStream()
+                out = FileOutputStream("./$imgName")
+                var c: Int
+
+                c = `in`!!.read()
+                while (c != -1) {
+                    out!!.write(c)
+                    c = `in`!!.read()
+                }
+            } catch (e: IOException) {
+                Log.d("DownloadImage", e.toString())
+                return false
+            } finally {
+                `in`?.close()
+                if (out != null) {
+                    out!!.close()
+                }
+            }
+*//*
+            val width: Int
+            val height: Int
+            val image = findViewById(R.id.imageViewId) as ImageView
+            val bMap = BitmapFactory.decodeFile(getExternalFilesDir(null) + File.separator + "AndroidTutorialPoint.jpg")
+            width = 2 * bMap.width
+            height = 6 * bMap.height
+            val bMap2 = Bitmap.createScaledBitmap(bMap, width, height, false)
+            image.setImageBitmap(bMap2)*//*
+
+            return true
+
+        } catch (e: IOException) {
+            Log.d("DownloadImage", e.toString())
+            return false
+        }
+
+    }*/
 
 
 }
