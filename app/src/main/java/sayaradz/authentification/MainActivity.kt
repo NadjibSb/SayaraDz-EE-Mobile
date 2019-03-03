@@ -13,6 +13,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GetTokenResult
 import android.view.Menu
 import android.widget.Toast
+import com.facebook.login.LoginManager
 
 
 class MainActivity : AppCompatActivity() {
@@ -88,6 +89,7 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         Toast.makeText(this,"logout",Toast.LENGTH_SHORT).show()
         firebaseAuth?.signOut()
+        LoginManager.getInstance().logOut()
         startActivity(Intent(this@MainActivity,CreateAccountActivity::class.java))
         return super.onOptionsItemSelected(item)
     }
