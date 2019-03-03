@@ -23,7 +23,7 @@ import com.google.firebase.auth.GoogleAuthProvider
 
 class CreateAccountActivity : AppCompatActivity(), View.OnClickListener {
 
-    val TAG = "CreateAccountActivity"
+    val TAG = "TAG-CreateAccount"
 
     //Init views
     lateinit var googleSignInButton: SignInButton
@@ -33,18 +33,28 @@ class CreateAccountActivity : AppCompatActivity(), View.OnClickListener {
     val GOOGLE_LOG_IN_RC = 1
     val FACEBOOK_LOG_IN_RC = 2
 
-    // Google API Client object.
-    var googleApiClient: GoogleApiClient? = null
 
     // Firebase Auth Object.
     var firebaseAuth: FirebaseAuth? = null
+    // Google API Client object.
+    var googleApiClient: GoogleApiClient? = null
     //Facebook Callback manager
     var callbackManager: CallbackManager? = null
+
+
+    //********
+    var mAuthListner: FirebaseAuth.AuthStateListener? = null
+    override fun onStart() {
+        super.onStart()
+        firebaseAuth!!.addAuthStateListener(mAuthListner!!)
+    }
+    //********
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_account)
-        Log.i(TAG, "test")
+        Log.i(TAG, "onCreat")
 
         googleSignInButton = findViewById<View>(R.id.google_sign_in_button) as SignInButton
         facebookSignInButton = findViewById<View>(R.id.facebook_sign_in_button) as LoginButton
@@ -52,6 +62,23 @@ class CreateAccountActivity : AppCompatActivity(), View.OnClickListener {
         googleSignInButton.setOnClickListener(this@CreateAccountActivity)
 
         firebaseAuth = FirebaseAuth.getInstance()
+
+        /******************
+        val user = firebaseAuth?.currentUser
+        if(user !=null){
+            startActivity(Intent(this@CreateAccountActivity, MainActivity::class.java))
+        }
+        ****************/
+        //******
+        mAuthListner = FirebaseAuth.AuthStateListener { firebaseAuth ->
+            if (firebaseAuth.currentUser != null) {
+                startActivity(Intent(this@CreateAccountActivity, MainActivity::class.java))
+            }
+            //firebaseAuth.currentUser?.getIdToken(true).addOnCompleteListener()
+        }
+
+        //********
+
 
         // Configure Google Sign In
         val googleSignInOptions = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -82,14 +109,11 @@ class CreateAccountActivity : AppCompatActivity(), View.OnClickListener {
                 // App code
                 handleFacebookAccessToken(loginResult.accessToken);
             }
-
             override fun onCancel() {
                 // App code
             }
-
             override fun onError(exception: FacebookException) {
                 // App code
-
                 Log.i(TAG, "FACEBOOK ERROR.")
             }
         })

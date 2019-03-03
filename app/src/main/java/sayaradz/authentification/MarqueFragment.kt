@@ -21,20 +21,20 @@ import sayaradz.services.Marque
 class MarqueFragment : Fragment() {
     val TAG = "TAG-MarqueFragment"
 
-    lateinit var token: String
+    var token: String? =""
 
     companion object {
-        val url = " http://7c9f1b56.ngrok.io/"
+        val url = "https://sayaradz-ee-backend.herokuapp.com/"
         fun getInstance() = MarqueFragment()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val rootView = inflater.inflate(R.layout.marque_fragment, container, false)
 
-        token = this.arguments.getString("Token")
-        Log.i(TAG, "TOKEN: $token")
+        token = this.arguments.getString("TOKEN")
+        Log.i(TAG, "TOKEN RECEIVED: $token")
 
-        DisplayMarqueList(rootView, token)
+        DisplayMarqueList(rootView, token!!)
 
         return rootView
     }
@@ -69,8 +69,9 @@ class MarqueFragment : Fragment() {
                         var content = ""
                         content += "ID: " + m.IdMarque + "\n"
                         content += "Name: " + m.NomMarque + "\n"
-                        Log.i(TAG, "CONTENT $content")
-                        marqueList .add(m)
+                        content += "Name: " + m.Image
+                        Log.i(TAG, "\n=> CONTENT:  $content")
+                        marqueList.add(m)
 
                         setUpRecycleView(rootView, marqueList )
                     }

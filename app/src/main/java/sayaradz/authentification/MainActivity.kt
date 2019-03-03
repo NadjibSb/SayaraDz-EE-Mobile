@@ -1,5 +1,6 @@
 package sayaradz.authentification
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
@@ -22,62 +23,28 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        setSupportActionBar(findViewById(R.id.TopToolbar))
 
-        var token = "test"
         firebaseAuth = FirebaseAuth.getInstance()
         val user = firebaseAuth?.currentUser
-
-        Log.i(TAG, firebaseAuth?.currentUser.toString())
-
         ///**THE TOKEN + REQUEST **///
         user?.getIdToken(true)
                 ?.addOnCompleteListener(object : OnCompleteListener<GetTokenResult> {
                     override fun onComplete(task: Task<GetTokenResult>) {
-                        Log.i(TAG, "before if")
                         if (task.isSuccessful()) {
-                            Log.i(TAG, "inside if")
-                            token = task.getResult()!!.getToken()!!  // Having the token
+                            idToken = task.getResult()!!.getToken()!!  // Having the token
+
+                            Log.i(TAG, "TOKEN CORRECT: $idToken")
+                            setUpBottomNavigationBar(idToken)
+
                         } else {
                             // Handle error -> task.getException();
+                            startActivity(Intent(this@MainActivity,CreateAccountActivity::class.java))
                         }
                     }
                 })
-        Log.i(TAG, token)
-        idToken = token
-
-        setUpBottomNavigationBar(idToken)
     }
 
-    private fun getUserToken(): String {
-        var token = "test"
-        firebaseAuth = FirebaseAuth.getInstance()
-        val user = firebaseAuth?.currentUser
-
-        Log.i("user", user?.email)
-
-        ///**THE TOKEN + REQUEST **///
-        user?.getIdToken(true)
-                ?.addOnCompleteListener(object : OnCompleteListener<GetTokenResult> {
-                    override fun onComplete(task: Task<GetTokenResult>) {
-                        Log.i(TAG, "before if")
-                        if (task.isSuccessful()) {
-                            Log.i(TAG, "inside if")
-                            token = task.getResult()!!.getToken()!!  // Having the token
-                        } else {
-                            // Handle error -> task.getException();
-                        }
-                    }
-                })
-        Log.i("TOKEN2", token)
-        return token
-
-/*/// this is the profile fragement in ur version ..
-        Log.i(TAG, "User account ID ${user?.uid}")
-        Log.i(TAG, "Display Name : ${user?.displayName}")
-        Log.i(TAG, "Email : ${user?.email}")
-        Log.i(TAG, "Photo URL : ${user?.photoUrl}")
-        Log.i(TAG, "Provider ID : ${user?.providerId}")*/
-    }
 
     private fun setUpBottomNavigationBar(token: String) {
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
@@ -90,7 +57,8 @@ class MainActivity : AppCompatActivity() {
                             R.id.nav_profile -> fragment = ProfileFragment.getInstance()
                             else -> fragment = MarqueFragment.getInstance()
                         }
-                        fragment.arguments = attachArgs("Token", token)
+                        Log.i(TAG, "TOKEN TO SEND: $token")
+                        fragment.arguments = attachArgs("TOKEN", token)
                         replaceFragment(fragment)
                         return true
                     }
@@ -110,4 +78,11 @@ class MainActivity : AppCompatActivity() {
         fragmentTransaction.commit()
     }
 
+
+/*/// this is the profile fragement in ur version ..
+        Log.i(TAG, "User account ID ${user?.uid}")
+        Log.i(TAG, "Display Name : ${user?.displayName}")
+        Log.i(TAG, "Email : ${user?.email}")
+        Log.i(TAG, "Photo URL : ${user?.photoUrl}")
+        Log.i(TAG, "Provider ID : ${user?.providerId}")*/
 }
