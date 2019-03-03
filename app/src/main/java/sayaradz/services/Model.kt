@@ -2,15 +2,15 @@ package sayaradz.services
 
 class Model {
 
-    private var pk=""
-    private var nomModele=""
-    private var idModele=""
+    private var pk = ""
+    private var nomModele = ""
+    private var idModele = ""
 
 
     /** Getters & Setters **/
 
     /** pk**/
-     public var Pk : String
+    public var Pk: String
         get() {
             return pk
         }
@@ -18,7 +18,7 @@ class Model {
             pk = value
         }
     /** idModel**/
-     public var IdModel : String
+    public var IdModel: String
         get() {
             return idModele
         }
@@ -27,17 +27,13 @@ class Model {
         }
 
     /** nomModel**/
-    public var NomModel : String
+    public var NomModel: String
         get() {
             return nomModele
         }
         set(value) {
             nomModele = value
         }
-
-
-
-
 
 
 }

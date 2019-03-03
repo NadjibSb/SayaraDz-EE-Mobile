@@ -1,12 +1,15 @@
 package sayaradz.authentification
+
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.View
 import android.widget.Toast
-import com.facebook.*
-import com.facebook.appevents.AppEventsLogger
+import com.facebook.AccessToken
+import com.facebook.CallbackManager
+import com.facebook.FacebookCallback
+import com.facebook.FacebookException
 import com.facebook.login.LoginResult
 import com.facebook.login.widget.LoginButton
 import com.google.android.gms.auth.api.Auth
@@ -20,7 +23,7 @@ import com.google.firebase.auth.GoogleAuthProvider
 
 class CreateAccountActivity : AppCompatActivity(), View.OnClickListener {
 
-    val TAG = "CreateAccountActivity"
+    val TAG = "TAG-CreateAccount"
 
     //Init views
     lateinit var googleSignInButton: SignInButton
@@ -30,18 +33,28 @@ class CreateAccountActivity : AppCompatActivity(), View.OnClickListener {
     val GOOGLE_LOG_IN_RC = 1
     val FACEBOOK_LOG_IN_RC = 2
 
-    // Google API Client object.
-    var googleApiClient: GoogleApiClient? = null
 
     // Firebase Auth Object.
     var firebaseAuth: FirebaseAuth? = null
+    // Google API Client object.
+    var googleApiClient: GoogleApiClient? = null
     //Facebook Callback manager
     var callbackManager: CallbackManager? = null
+
+
+    //********
+    var mAuthListner: FirebaseAuth.AuthStateListener? = null
+    override fun onStart() {
+        super.onStart()
+        firebaseAuth!!.addAuthStateListener(mAuthListner!!)
+    }
+    //********
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_account)
-        Log.i(TAG,"test")
+        Log.i(TAG, "onCreat")
 
         googleSignInButton = findViewById<View>(R.id.google_sign_in_button) as SignInButton
         facebookSignInButton = findViewById<View>(R.id.facebook_sign_in_button) as LoginButton
@@ -49,6 +62,23 @@ class CreateAccountActivity : AppCompatActivity(), View.OnClickListener {
         googleSignInButton.setOnClickListener(this@CreateAccountActivity)
 
         firebaseAuth = FirebaseAuth.getInstance()
+
+        /******************
+        val user = firebaseAuth?.currentUser
+        if(user !=null){
+            startActivity(Intent(this@CreateAccountActivity, MainActivity::class.java))
+        }
+        ****************/
+        //******
+        mAuthListner = FirebaseAuth.AuthStateListener { firebaseAuth ->
+            if (firebaseAuth.currentUser != null) {
+                startActivity(Intent(this@CreateAccountActivity, MainActivity::class.java))
+            }
+            //firebaseAuth.currentUser?.getIdToken(true).addOnCompleteListener()
+        }
+
+        //********
+
 
         // Configure Google Sign In
         val googleSignInOptions = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -58,11 +88,9 @@ class CreateAccountActivity : AppCompatActivity(), View.OnClickListener {
 
         // Creating and Configuring Google Api Client.
         googleApiClient = GoogleApiClient.Builder(this@CreateAccountActivity)
-                .enableAutoManage(this@CreateAccountActivity  /* OnConnectionFailedListener */){}
+                .enableAutoManage(this@CreateAccountActivity  /* OnConnectionFailedListener */) {}
                 .addApi(Auth.GOOGLE_SIGN_IN_API, googleSignInOptions)
                 .build()
-
-
 
 
         //FaceBook Sign IN
@@ -81,14 +109,11 @@ class CreateAccountActivity : AppCompatActivity(), View.OnClickListener {
                 // App code
                 handleFacebookAccessToken(loginResult.accessToken);
             }
-
             override fun onCancel() {
                 // App code
             }
-
             override fun onError(exception: FacebookException) {
                 // App code
-
                 Log.i(TAG, "FACEBOOK ERROR.")
             }
         })
@@ -150,28 +175,26 @@ class CreateAccountActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-////
+    ////
     private fun handleFacebookAccessToken(token: AccessToken) {
-    Log.d(TAG, "handleFacebookAccessToken:" + token)
+        Log.d(TAG, "handleFacebookAccessToken:" + token)
 
-    val credential = FacebookAuthProvider.getCredential(token.token)
-    firebaseAuth!!.signInWithCredential(credential)
-            .addOnCompleteListener(this) { task ->
-                if (task.isSuccessful) {
-                    // Sign in success, update UI with the signed-in user's information
-                    Log.d(TAG, "signInWithCredential:success")
-                    val user = firebaseAuth!!.currentUser
-                    startActivity(Intent(this@CreateAccountActivity, MainActivity::class.java))
-                } else {
-                    // If sign in fails, display a message to the user.
-                    Log.w(TAG, "signInWithCredential:failure", task.getException())
-                    Toast.makeText(this@CreateAccountActivity, "Authentication failed.",
-                            Toast.LENGTH_SHORT).show()
+        val credential = FacebookAuthProvider.getCredential(token.token)
+        firebaseAuth!!.signInWithCredential(credential)
+                .addOnCompleteListener(this) { task ->
+                    if (task.isSuccessful) {
+                        // Sign in success, update UI with the signed-in user's information
+                        Log.d(TAG, "signInWithCredential:success")
+                        val user = firebaseAuth!!.currentUser
+                        startActivity(Intent(this@CreateAccountActivity, MainActivity::class.java))
+                    } else {
+                        // If sign in fails, display a message to the user.
+                        Log.w(TAG, "signInWithCredential:failure", task.getException())
+                        Toast.makeText(this@CreateAccountActivity, "Authentication failed.",
+                                Toast.LENGTH_SHORT).show()
+                    }
                 }
-            }
-}
-
-
+    }
 
 
 }

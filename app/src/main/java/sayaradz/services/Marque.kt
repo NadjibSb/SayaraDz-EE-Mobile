@@ -1,17 +1,15 @@
 package sayaradz.services
 
-import android.graphics.drawable.Drawable
+class Marque {
 
-class Marque{
-
-    private var pk=""
-    private var idMarque=""
-    private var nomMarque=""
-    private var imageMarque: String =""
+    private var pk = ""
+    private var idMarque = ""
+    private var nomMarque = ""
+    private var imageMarque: String = ""
 
     /** Getters & Setters **/
     /** idMarque**/
-    public var IdMarque : String
+    public var IdMarque: String
         get() {
             return idMarque
         }
@@ -20,7 +18,7 @@ class Marque{
         }
 
     /** nomMarque**/
-    public var NomMarque : String
+    public var NomMarque: String
         get() {
             return nomMarque
         }
