@@ -11,6 +11,8 @@ import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GetTokenResult
+import android.view.Menu
+import android.widget.Toast
 
 
 class MainActivity : AppCompatActivity() {
@@ -78,8 +80,19 @@ class MainActivity : AppCompatActivity() {
         fragmentTransaction.commit()
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_top_toolbar,menu)
+        return true
+    }
 
-/*/// this is the profile fragement in ur version ..
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        Toast.makeText(this,"logout",Toast.LENGTH_SHORT).show()
+        firebaseAuth?.signOut()
+        startActivity(Intent(this@MainActivity,CreateAccountActivity::class.java))
+        return super.onOptionsItemSelected(item)
+    }
+
+    /*/// this is the profile fragement in ur version ..
         Log.i(TAG, "User account ID ${user?.uid}")
         Log.i(TAG, "Display Name : ${user?.displayName}")
         Log.i(TAG, "Email : ${user?.email}")
