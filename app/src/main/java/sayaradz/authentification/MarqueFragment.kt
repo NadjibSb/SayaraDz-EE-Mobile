@@ -25,6 +25,7 @@ class MarqueFragment : Fragment() {
 
     companion object {
         val url = "https://sayaradz-ee-backend.herokuapp.com/"
+        //val url = "http://192.168.0.36:8000/"
         fun getInstance() = MarqueFragment()
     }
 
@@ -73,8 +74,8 @@ class MarqueFragment : Fragment() {
                         Log.i(TAG, "\n=> CONTENT:  $content")
                         marqueList.add(m)
 
-                        setUpRecycleView(rootView, marqueList )
                     }
+                    setUpRecycleView(rootView, marqueList )
                 }
             }
 
@@ -87,7 +88,7 @@ class MarqueFragment : Fragment() {
     //RecycleView--------------------------------------------
     private fun setUpRecycleView(rootView: View, list: List<Marque>) {
         var recyclerView = rootView.findViewById(R.id.marqueListView) as RecyclerView
-        recyclerView.adapter = MarqueAdapter(list, this@MarqueFragment.context)
+        recyclerView.adapter = MarqueAdapter(list, this@MarqueFragment.context,token!!)
         recyclerView.layoutManager = GridLayoutManager(context, 2)
         recyclerView.itemAnimator = SlideInUpAnimator()
         recyclerView.setHasFixedSize(true)

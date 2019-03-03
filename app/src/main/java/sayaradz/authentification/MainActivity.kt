@@ -58,7 +58,7 @@ class MainActivity : AppCompatActivity() {
                         when (item.getItemId()) {
                             R.id.nav_home -> fragment = MarqueFragment.getInstance()
                             R.id.nav_profile -> fragment = ProfileFragment.getInstance()
-                            else -> fragment = MarqueFragment.getInstance()
+                            else -> fragment = DefaultFragment.getInstance()
                         }
                         Log.i(TAG, "TOKEN TO SEND: $token")
                         fragment.arguments = attachArgs("TOKEN", token)
