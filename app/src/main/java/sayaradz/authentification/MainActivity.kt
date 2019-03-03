@@ -19,10 +19,10 @@ import com.google.android.gms.tasks.Task
 
 
 class MainActivity : AppCompatActivity() {
-    val TAG = "MainActivityTesttt"
+    val TAG = "MainActivity"
     // Firebase Auth Object.
     var firebaseAuth: FirebaseAuth? = null
-    lateinit var idToken : String   // the access token
+    var idToken =""   // the access token
 
 
 
@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        var token="test"
+       // var token="test"
         firebaseAuth = FirebaseAuth.getInstance()
         val user = firebaseAuth?.currentUser
 
@@ -43,14 +43,15 @@ class MainActivity : AppCompatActivity() {
                         Log.i(TAG,"before if")
                         if (task.isSuccessful()) {
                             Log.i(TAG,"inside if")
-                            token = task.getResult()!!.getToken()!!  // Having the token
+                            idToken = task.getResult()!!.getToken()!!  // Having the token
+                            Log.i("IDTOKEN",idToken)
                         } else {
                             // Handle error -> task.getException();
                         }
                     }
                 })
-        Log.i(TAG,token)
-        idToken = token
+        Log.i(TAG,idToken)
+        //idToken = token
 
         setUpBottomNavigationBar(idToken)
     }
@@ -97,6 +98,7 @@ class MainActivity : AppCompatActivity() {
                             R.id.nav_profile -> fragment = ProfileFragment.getInstance()
                             else -> fragment = MarqueFragment.getInstance()
                         }
+                        Log.i("FUnCTION_TOKEN",token)
                         fragment.arguments = attachArgs("Token",token)
                         replaceFragment(fragment)
                         return true

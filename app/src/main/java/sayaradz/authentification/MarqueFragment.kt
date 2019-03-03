@@ -28,17 +28,17 @@ class MarqueFragment:Fragment() {
 
     lateinit var token: String
     companion object {
-        val url="http://3e37268f.ngrok.io/api/"
+        val url="http://7c9f1b56.ngrok.io/api/"
         fun getInstance() = MarqueFragment()
     }
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        Log.i("MAIN","ONCREATE")
         val rootView= inflater.inflate(R.layout.marque_fragment, container, false)
-        token = this.arguments.getString("Token")
-        Log.i("TOKEN",token)
 
-        Log.i("TOKEN","blabla")
+        token = this.arguments.getString("Token")!!
+        Log.i("TOKEN",token)
         DisplayMarqueList(rootView,token)
 
 
@@ -107,20 +107,19 @@ class MarqueFragment:Fragment() {
                 .baseUrl(url)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
-        Log.i("TOKEN","111111")
 
         val jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi::class.java)
         val call = jsonPlaceHolderApi.getMarques(idToken) // The request included the token
         var marques: List<Marque>? = null
         var mMarqueList=ArrayList<Marque>()
 
-        Log.i("TOKEN",call.toString())
 
         call.enqueue(object : Callback<List<Marque>> {
             override fun onResponse(call: Call<List<Marque>>, response: Response<List<Marque>>) {
-                Log.i("TOKEN","22222")
+
                 if (!response.isSuccessful()) {
                     //tvResult.setText("Code: "+response.code()); // Displayin the code of teh response
+                    Log.i("TOKEN",idToken)
                     Log.i("CODE",response.code().toString())
                     return
                 }
@@ -142,11 +141,9 @@ class MarqueFragment:Fragment() {
             }
             override fun onFailure(call: Call<List<Marque>>, t: Throwable) {
                 //tvResult.setText(t.message);  // ERROR CODE
-                Log.i("TOKEN","3333333333")
             }
         })
         //
-        Log.i("TOKEN","444444444")
         Log.i("TOKEN",idToken)
     }
 
