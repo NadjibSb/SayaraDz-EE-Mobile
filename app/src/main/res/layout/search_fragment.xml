@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/parentView"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+
+    <Spinner
+        android:layout_marginTop="10dp"
+        android:id="@+id/spinner_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <Spinner
+        android:layout_marginTop="10dp"
+        android:id="@+id/spinner_yearStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/spinner_type"
+        />
+    <Spinner
+        android:layout_marginTop="10dp"
+        android:id="@+id/spinner_yearEnd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/spinner_yearStart"
+        />
+
+    <Spinner
+        android:layout_marginTop="10dp"
+        android:id="@+id/spinner_price_min"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/spinner_yearEnd"
+        />
+
+    <Spinner
+        android:id="@+id/spinner_price_max"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@+id/spinner_price_min" />
+
+
+
+   <!-- <LinearLayout
+        android:id="@+id/ll_min"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf= "@id/spinner_yearEnd"
+        android:orientation="vertical"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        >
+        <TextView
+            android:id="@+id/tv_min"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15dp"
+            android:text="Prix Min"
+
+            />
+        <NumberPicker
+            android:id="@+id/np_price_min"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:id="@+id/ll_max"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf= "@id/ll_min"
+        android:orientation="vertical"
+        android:layout_marginLeft="10dp"
+        >
+        <TextView
+            android:id="@+id/tv_max"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15dp"
+            android:text="Prix Max"
+
+            />
+        <NumberPicker
+            android:id="@+id/np_price_max"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/tv_max"
+            />
+
+    </LinearLayout>-->
+
+
+
+
+
+</RelativeLayout>

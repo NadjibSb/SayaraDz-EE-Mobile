@@ -14,6 +14,7 @@ import com.google.firebase.auth.GetTokenResult
 import android.view.Menu
 import android.widget.Toast
 import com.facebook.login.LoginManager
+import sayaradz.services.SearchFragment
 
 
 class MainActivity : AppCompatActivity() {
@@ -50,7 +51,7 @@ class MainActivity : AppCompatActivity() {
                 })
     }
 
-
+   // Sending the token to the fragement
     private fun setUpBottomNavigationBar(token: String) {
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
         bottomNavigationView.setOnNavigationItemSelectedListener(
@@ -58,9 +59,10 @@ class MainActivity : AppCompatActivity() {
                     override fun onNavigationItemSelected(item: MenuItem): Boolean {
                         val fragment: Fragment
                         when (item.getItemId()) {
-                            R.id.nav_home -> fragment = MarqueFragment.getInstance()
+                            R.id.nav_consult -> fragment = MarqueFragment.getInstance()
                             R.id.nav_profile -> fragment = ProfileFragment.getInstance()
-                            else -> fragment = MarqueFragment.getInstance()
+                            R.id.nav_search-> fragment = SearchFragment.getInstance()
+                            else -> fragment = ProfileFragment.getInstance()
                         }
               Log.i(TAG, "TOKEN TO SEND: $token")
                         fragment.arguments = attachArgs("TOKEN", token)
@@ -68,7 +70,7 @@ class MainActivity : AppCompatActivity() {
                         return true
                     }
                 })
-        bottomNavigationView.selectedItemId = R.id.nav_home
+        bottomNavigationView.selectedItemId = R.id.nav_search  /// consult .. just for the test
     }
 
     private fun attachArgs(tag: String, data: String): Bundle {

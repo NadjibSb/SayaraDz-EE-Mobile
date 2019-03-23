@@ -3,19 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         app:showAsAction="ifRoom"
-        android:id="@+id/nav_home"
+        android:id="@+id/nav_consult"
         android:icon="@drawable/ic_visibility_black_24dp"
         android:title="Consulter" />
 
     <item
         app:showAsAction="ifRoom"
-        android:id="@+id/nav_favorites"
+        android:id="@+id/nav_search"
         android:icon="@drawable/ic_search_black_24dp"
         android:title="Chercher"/>
 
     <item
         app:showAsAction="ifRoom"
-        android:id="@+id/nav_search"
+        android:id="@+id/nav_compose"
         android:icon="@drawable/ic_format_list_bulleted_black_24dp"
         android:title="Composer"/>
 

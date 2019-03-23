@@ -24,8 +24,8 @@ class MarqueFragment : Fragment() {
     var token: String? =""
 
     companion object {
-
         val url = "https://sayaradz-ee-backend.herokuapp.com/"
+      //val url = "http://a7fde9a6.ngrok.io"
         fun getInstance() = MarqueFragment()
     }
 
@@ -77,8 +77,9 @@ class MarqueFragment : Fragment() {
                         Log.i(TAG, "\n=> CONTENT:  $content")
                         marqueList.add(m)
 
-                        setUpRecycleView(rootView, marqueList )
+
                     }
+                    setUpRecycleView(rootView, marqueList )
                 }
             }
 

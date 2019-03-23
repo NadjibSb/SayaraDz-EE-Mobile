@@ -44,43 +44,9 @@ public fun testResponse ()
                     var response = jsonPlaceHolderApi.getMarques(idToken).execute()
                        var marques=response.body()
 
-                    assertEquals(13,marques!!.size)
+                    assertEquals(15,marques!!.size)
                     assertEquals("200",response.code().toString())
 
-
-                       // val call =
-                                 // The request included the token
-
-/*                        call.enqueue(object : Callback<List<Marque>> {
-                            override fun onResponse(call: Call<List<Marque>>, response: Response<List<Marque>>) {
-
-                                    Log.i("CODE",response.code().toString())
-
-                                var marques = response.body()  // Getting the marques
-                                assertEquals(13,marques!!.size)
-                                assertEquals("200",response.code().toString())
-
-                                *//*  if (marques != null) {
-                                      Log.i("REPONSES","HERE is ALL THE BRANDS FROM OUR SERVER:")
-                                      for (m in marques!!) {
-                                          var content = ""
-                                          content += "ID: " + m.IdMarque + "\n"
-                                          content += "Name: " + m.NomMarque + "\n"
-                                          Log.i("CONTENT",content)
-                                      }
-                                  }*//*
-                            }
-                            override fun onFailure(call: Call<List<Marque>>, t: Throwable) {
-                               Assert.fail()
-                            }
-                        })*/
-
-
-
-
-                 /*   } else {
-                        // Handle error -> task.getException();
-                    }*/
                 }
             })
 
