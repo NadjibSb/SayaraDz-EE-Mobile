@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/parentView"
+    android:id="@+id/root_layout"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical" >
@@ -11,22 +11,30 @@
         android:id="@+id/spinner_type"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
-
-    <Spinner
-        android:layout_marginTop="10dp"
-        android:id="@+id/spinner_yearStart"
+    <Button
+        android:id="@+id/btn_year"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/spinner_type"
+        android:text="Année"
+        android:layout_toEndOf="@+id/spinner_type"
+        />
+    <Button
+        android:id="@+id/btn_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Prix"
+        android:layout_toEndOf="@+id/btn_year"
         />
     <Spinner
         android:layout_marginTop="10dp"
-        android:id="@+id/spinner_yearEnd"
+        android:id="@+id/spinner_marque"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/spinner_yearStart"
-        />
+        android:layout_toEndOf="@+id/btn_price"/>
 
+
+
+<!--
     <Spinner
         android:layout_marginTop="10dp"
         android:id="@+id/spinner_price_min"
@@ -41,59 +49,12 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_toRightOf="@+id/spinner_price_min" />
+-->
 
 
 
-   <!-- <LinearLayout
-        android:id="@+id/ll_min"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toEndOf= "@id/spinner_yearEnd"
-        android:orientation="vertical"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        >
-        <TextView
-            android:id="@+id/tv_min"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="15dp"
-            android:text="Prix Min"
 
-            />
-        <NumberPicker
-            android:id="@+id/np_price_min"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            />
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_marginTop="10dp"
-        android:id="@+id/ll_max"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toEndOf= "@id/ll_min"
-        android:orientation="vertical"
-        android:layout_marginLeft="10dp"
-        >
-        <TextView
-            android:id="@+id/tv_max"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="15dp"
-            android:text="Prix Max"
-
-            />
-        <NumberPicker
-            android:id="@+id/np_price_max"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toEndOf="@id/tv_max"
-            />
-
-    </LinearLayout>-->
 
 
 
