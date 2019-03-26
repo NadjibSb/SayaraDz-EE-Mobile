@@ -4,7 +4,10 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical" >
-
+<RelativeLayout
+    android:id="@+id/layout_filters"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
 
     <Spinner
         android:layout_marginTop="10dp"
@@ -31,32 +34,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toEndOf="@+id/btn_price"/>
+</RelativeLayout>
 
-
-
-<!--
-    <Spinner
-        android:layout_marginTop="10dp"
-        android:id="@+id/spinner_price_min"
+    <Button
+        android:id="@+id/btn_more_filters"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/spinner_yearEnd"
+        android:text="Plus de filters"
+        android:layout_below="@+id/layout_filters"
+        android:layout_centerHorizontal="true"
         />
-
-    <Spinner
-        android:id="@+id/spinner_price_max"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_toRightOf="@+id/spinner_price_min" />
--->
-
-
-
-
-
-
-
 
 
 

@@ -6,51 +6,53 @@
     >
 
     <LinearLayout
-        android:id="@+id/ll_min"
+        android:id="@+id/ll_models"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         >
         <TextView
-            android:id="@+id/tv_min"
+            android:id="@+id/tv_marque"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="15dp"
-            android:text="Prix Min"
+            android:text="Marque"
 
             />
-        <EditText
-            android:id="@+id/et_price_min"
+        <Spinner
+            android:id="@+id/spinner_models"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
             />
-
 
 
     </LinearLayout>
     <LinearLayout
-        android:id="@+id/ll_max"
+        android:id="@+id/ll_kilometrage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/ll_models"
         android:orientation="horizontal"
-        android:layout_marginLeft="10dp"
-        android:layout_below="@+id/ll_min"
         >
         <TextView
-            android:id="@+id/tv_max"
+            android:id="@+id/tv_km"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="15dp"
-            android:text="Prix Max"
+            android:text="Kilométrage"
 
             />
         <EditText
-            android:id="@+id/et_price_max"
+            android:id="@+id/et_km"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             />
+
+
+
     </LinearLayout>
+
+
 
 </RelativeLayout>
