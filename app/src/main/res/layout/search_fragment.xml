@@ -4,10 +4,12 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical" >
-<RelativeLayout
-    android:id="@+id/layout_filters"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/layout_filters"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
 
     <Spinner
         android:layout_marginTop="10dp"
@@ -54,6 +56,34 @@
         android:layout_centerHorizontal="true"
         android:text="Plus de filtres"
         android:drawableBottom="@drawable/ic_expand_more_black_24dp"/>
+
+
+
+
+<!--
+    <Spinner
+        android:layout_marginTop="10dp"
+        android:id="@+id/spinner_price_min"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/spinner_yearEnd"
+        />
+>>>>>>> parent of aec1e15... MoreFilterPopUp
+
+    <Spinner
+        android:id="@+id/spinner_price_max"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@+id/spinner_price_min" />
+-->
+
+
+
+
+
+
+
 
 
 
