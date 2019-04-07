@@ -1,10 +1,12 @@
-package sayaradz.services
+package sayaradz.api
 
 import com.squareup.okhttp.ResponseBody
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Path
+import sayaradz.dataClasses.Marque
+import sayaradz.dataClasses.Model
 
 
 interface JsonPlaceHolderApi {

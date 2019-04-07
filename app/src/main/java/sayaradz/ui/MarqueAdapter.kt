@@ -1,4 +1,4 @@
-package sayaradz.authentification
+package sayaradz.ui
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
@@ -9,10 +9,10 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
-import sayaradz.services.Marque
+import sayaradz.dataClasses.Marque
 import com.bumptech.glide.load.model.LazyHeaders
 import com.bumptech.glide.load.model.GlideUrl
-
+import sayaradz.authentification.R
 
 
 class MarqueAdapter(private val marques: List<Marque>, val context: Context, val token: String)
@@ -43,10 +43,11 @@ class MarqueAdapter(private val marques: List<Marque>, val context: Context, val
         var marque = mMarques[position]
         holder.nameTextView.setText(marque.NomMarque)
         Log.i("marque", marque.NomMarque)
-        val imageUrl = GlideUrl(marque.Image, LazyHeaders.Builder()
+        /*val imageUrl = GlideUrl(marque.Image, LazyHeaders.Builder()
                 .addHeader("Authorization", token)
                 .build())
-        Glide.with(context).load(imageUrl).into(holder.image)
+        Glide.with(context).load(imageUrl).into(holder.image)*/
+        holder.image.setImageResource(R.drawable.m_audi)
     }
 
     override fun getItemCount() = mMarques.size

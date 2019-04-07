@@ -1,4 +1,4 @@
-package sayaradz.authentification
+package sayaradz.ui
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -14,8 +14,9 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import sayaradz.services.JsonPlaceHolderApi
-import sayaradz.services.Marque
+import sayaradz.api.JsonPlaceHolderApi
+import sayaradz.authentification.R
+import sayaradz.dataClasses.Marque
 
 
 class MarqueFragment : Fragment() {
@@ -35,12 +36,14 @@ class MarqueFragment : Fragment() {
         token = this.arguments.getString("TOKEN")
         Log.i(TAG, "TOKEN RECEIVED: $token")
 
-        DisplayMarqueList(rootView, token!!)
+        //DisplayMarqueList(rootView, token!!)
+
+        setUpRecycleView(rootView, defaultList() )
 
         return rootView
     }
 
-
+/*
     private fun DisplayMarqueList(rootView: View, idToken: String) {
 
         val retrofit = Retrofit.Builder()
@@ -83,14 +86,24 @@ class MarqueFragment : Fragment() {
                 Log.i(TAG, "error CODE:"+t.message)
             }
         })
-    }
+    }*/
 
     //RecycleView--------------------------------------------
     private fun setUpRecycleView(rootView: View, list: List<Marque>) {
         var recyclerView = rootView.findViewById(R.id.marqueListView) as RecyclerView
-        recyclerView.adapter = MarqueAdapter(list, this@MarqueFragment.context,token!!)
+        recyclerView.adapter = MarqueAdapter(list, this@MarqueFragment.context, token!!)
         recyclerView.layoutManager = GridLayoutManager(context, 2)
         recyclerView.itemAnimator = SlideInUpAnimator()
         recyclerView.setHasFixedSize(true)
+    }
+
+    private fun defaultList():ArrayList<Marque>{
+
+        var marqueList  = ArrayList<Marque>()
+        for (i in 0..7){
+            marqueList.add(Marque(i.toString(),"Marque $i",R.drawable.m_audi.toString()))
+        }
+        return marqueList
+
     }
 }

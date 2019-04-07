@@ -1,4 +1,4 @@
-package sayaradz.services
+package sayaradz.dataClasses
 
 class Model {
 

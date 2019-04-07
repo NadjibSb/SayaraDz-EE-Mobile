@@ -1,4 +1,4 @@
-package sayaradz.authentification
+package sayaradz.ui
 
 import android.content.Intent
 import android.os.Bundle
@@ -14,6 +14,8 @@ import com.google.firebase.auth.GetTokenResult
 import android.view.Menu
 import android.widget.Toast
 import com.facebook.login.LoginManager
+import sayaradz.authentification.CreateAccountActivity
+import sayaradz.authentification.R
 
 
 class MainActivity : AppCompatActivity() {
@@ -42,7 +44,7 @@ class MainActivity : AppCompatActivity() {
 
                         } else {
                             // Handle error -> task.getException();
-                            startActivity(Intent(this@MainActivity,CreateAccountActivity::class.java))
+                            startActivity(Intent(this@MainActivity, CreateAccountActivity::class.java))
                         }
                     }
                 })
@@ -90,7 +92,7 @@ class MainActivity : AppCompatActivity() {
         Toast.makeText(this,"logout",Toast.LENGTH_SHORT).show()
         firebaseAuth?.signOut()
         LoginManager.getInstance().logOut()
-        startActivity(Intent(this@MainActivity,CreateAccountActivity::class.java))
+        startActivity(Intent(this@MainActivity, CreateAccountActivity::class.java))
         return super.onOptionsItemSelected(item)
     }
 

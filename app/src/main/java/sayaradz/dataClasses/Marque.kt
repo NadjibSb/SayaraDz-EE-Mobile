@@ -1,6 +1,9 @@
-package sayaradz.services
+package sayaradz.dataClasses
 
-class Marque {
+class Marque(
+        var IdMarque:String,
+        var NomMarque:String,
+        var Image:String) /*{
 
     private var pk = ""
     private var idMarque = ""
@@ -32,4 +35,4 @@ class Marque {
             imageMarque = value
         }
 
-}
+}*/

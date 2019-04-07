@@ -1,4 +1,4 @@
-package sayaradz.authentification
+package sayaradz.ui
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -9,6 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.google.firebase.auth.FirebaseAuth
 import com.squareup.picasso.Picasso
+import sayaradz.authentification.R
 
 class ProfileFragment : Fragment() {
 
