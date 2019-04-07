@@ -1,9 +1,9 @@
 package sayaradz.ui
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -33,7 +33,7 @@ class MarqueFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val rootView = inflater.inflate(R.layout.marque_fragment, container, false)
 
-        token = this.arguments.getString("TOKEN")
+        token = this.arguments!!.getString("TOKEN")
         Log.i(TAG, "TOKEN RECEIVED: $token")
 
         //DisplayMarqueList(rootView, token!!)
@@ -90,9 +90,9 @@ class MarqueFragment : Fragment() {
 
     //RecycleView--------------------------------------------
     private fun setUpRecycleView(rootView: View, list: List<Marque>) {
-        var recyclerView = rootView.findViewById(R.id.marqueListView) as RecyclerView
-        recyclerView.adapter = MarqueAdapter(list, this@MarqueFragment.context, token!!)
-        recyclerView.layoutManager = GridLayoutManager(context, 2)
+        var recyclerView = rootView.findViewById(R.id.marqueListView) as androidx.recyclerview.widget.RecyclerView
+        recyclerView.adapter = MarqueAdapter(list, this@MarqueFragment.context!!, token!!)
+        recyclerView.layoutManager = androidx.recyclerview.widget.GridLayoutManager(context, 2)
         recyclerView.itemAnimator = SlideInUpAnimator()
         recyclerView.setHasFixedSize(true)
     }

@@ -2,9 +2,9 @@ package sayaradz.ui
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.design.widget.BottomNavigationView
-import android.support.v4.app.Fragment
-import android.support.v7.app.AppCompatActivity
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import androidx.fragment.app.Fragment
+import androidx.appcompat.app.AppCompatActivity
 import android.util.Log
 import android.view.MenuItem
 import com.google.android.gms.tasks.OnCompleteListener
@@ -56,7 +56,7 @@ class MainActivity : AppCompatActivity() {
         bottomNavigationView.setOnNavigationItemSelectedListener(
                 object : BottomNavigationView.OnNavigationItemSelectedListener {
                     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-                        val fragment: Fragment
+                        val fragment: androidx.fragment.app.Fragment
                         when (item.getItemId()) {
                             R.id.nav_home -> fragment = MarqueFragment.getInstance()
                             R.id.nav_profile -> fragment = ProfileFragment.getInstance()
@@ -77,7 +77,7 @@ class MainActivity : AppCompatActivity() {
         return bundle
     }
 
-    private fun replaceFragment(fragment: Fragment) {
+    private fun replaceFragment(fragment: androidx.fragment.app.Fragment) {
         val fragmentTransaction = supportFragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.fragment_container, fragment)
         fragmentTransaction.commit()
