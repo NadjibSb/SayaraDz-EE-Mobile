@@ -7,14 +7,15 @@ import android.view.View
 import android.view.ViewGroup
 import sayaradz.authentification.R
 
-class DefaultFragment: Fragment() {
+class SearchFragment: Fragment() {
     companion object {
-        fun getInstance() = DefaultFragment()
+        fun getInstance() = SearchFragment()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val rootView = inflater?.inflate(R.layout.default_fragment, container, false)
+        val rootView = inflater?.inflate(R.layout.search_fragment, container, false)
 
         return rootView
     }
+
 }

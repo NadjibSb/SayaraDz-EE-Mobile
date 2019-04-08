@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/consult_graph"
+    app:startDestination="@id/marqueFragment"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <fragment
+        android:id="@+id/marqueFragment"
+        android:name="sayaradz.ui.MarqueFragment"
+        android:label="MarqueFragment"
+        tools:layout="@layout/marque_fragment"/>
+</navigation>

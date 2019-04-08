@@ -33,7 +33,7 @@ class MarqueFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val rootView = inflater.inflate(R.layout.marque_fragment, container, false)
 
-        token = this.arguments!!.getString("TOKEN")
+        token = "token" //this.arguments!!.getString("TOKEN")
         Log.i(TAG, "TOKEN RECEIVED: $token")
 
         //DisplayMarqueList(rootView, token!!)
