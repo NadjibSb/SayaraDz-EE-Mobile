@@ -90,9 +90,9 @@ class MarqueFragment : Fragment() {
 
     //RecycleView--------------------------------------------
     private fun setUpRecycleView(rootView: View, list: List<Marque>) {
-        var recyclerView = rootView.findViewById(R.id.marqueListView) as androidx.recyclerview.widget.RecyclerView
+        var recyclerView = rootView.findViewById(R.id.marqueListView) as RecyclerView
         recyclerView.adapter = MarqueAdapter(list, this@MarqueFragment.context!!, token!!)
-        recyclerView.layoutManager = androidx.recyclerview.widget.GridLayoutManager(context, 2)
+        recyclerView.layoutManager = GridLayoutManager(context, 2)
         recyclerView.itemAnimator = SlideInUpAnimator()
         recyclerView.setHasFixedSize(true)
     }
@@ -101,7 +101,7 @@ class MarqueFragment : Fragment() {
 
         var marqueList  = ArrayList<Marque>()
         for (i in 0..20){
-            marqueList.add(Marque(i.toString(),"Marque $i",R.drawable.m_audi.toString()))
+            marqueList.add(Marque(i.toString(),"Marque $i","${R.drawable.m_audi}"))
         }
         return marqueList
 

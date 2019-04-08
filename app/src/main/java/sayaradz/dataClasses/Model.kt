@@ -1,15 +1,26 @@
 package sayaradz.dataClasses
 
-class Model {
+class Model (
+        var IdModel: String,
+        var NomModel: String,
+        var ImageModel: String
+)
+/*
+
+{
 
     private var pk = ""
     private var nomModele = ""
     private var idModele = ""
 
 
-    /** Getters & Setters **/
+    */
+/** Getters & Setters **//*
 
-    /** pk**/
+
+    */
+/** pk**//*
+
     public var Pk: String
         get() {
             return pk
@@ -17,7 +28,9 @@ class Model {
         set(value) {
             pk = value
         }
-    /** idModel**/
+    */
+/** idModel**//*
+
     public var IdModel: String
         get() {
             return idModele
@@ -26,7 +39,9 @@ class Model {
             idModele = value
         }
 
-    /** nomModel**/
+    */
+/** nomModel**//*
+
     public var NomModel: String
         get() {
             return nomModele
@@ -36,4 +51,4 @@ class Model {
         }
 
 
-}
+}*/

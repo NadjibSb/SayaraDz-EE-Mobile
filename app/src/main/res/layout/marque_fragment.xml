@@ -9,7 +9,6 @@
         android:layout_marginTop="8dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="sayaradz.ui.MainActivity"
         tools:listitem="@layout/marque_list_item">
 
     </androidx.recyclerview.widget.RecyclerView>

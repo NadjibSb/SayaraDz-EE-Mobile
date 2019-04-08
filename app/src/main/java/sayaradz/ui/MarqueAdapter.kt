@@ -18,7 +18,7 @@ import com.bumptech.glide.load.model.GlideUrl
 import sayaradz.authentification.R
 
 
-class MarqueAdapter(private val marques: List<Marque>, val context: Context, val token: String)
+class MarqueAdapter(val marques: List<Marque>, val context: Context, val token: String)
     : RecyclerView.Adapter<MarqueAdapter.MarqueViewHolder>() {
 
     private var mMarques: List<Marque>
@@ -29,12 +29,12 @@ class MarqueAdapter(private val marques: List<Marque>, val context: Context, val
 
 
     class MarqueViewHolder(val layout: View) : RecyclerView.ViewHolder(layout) {
-        var nameTextView: TextView
-        var image: ImageView
+        var marqueName: TextView
+        var marqueImage: ImageView
 
         init {
-            nameTextView = itemView.findViewById(R.id.marqueName)
-            image = itemView.findViewById(R.id.logoImg)
+            marqueName = itemView.findViewById(R.id.marqueName)
+            marqueImage = itemView.findViewById(R.id.logoImg)
         }
     }
 
@@ -48,7 +48,7 @@ class MarqueAdapter(private val marques: List<Marque>, val context: Context, val
 
     override fun onBindViewHolder(holder: MarqueViewHolder, position: Int) {
         var marque = mMarques[position]
-        holder.nameTextView.setText(marque.NomMarque)
+        holder.marqueName.setText(marque.NomMarque)
         handleClick(holder.layout,marque.IdMarque)
 
         Log.i("marque", marque.NomMarque)
@@ -56,7 +56,7 @@ class MarqueAdapter(private val marques: List<Marque>, val context: Context, val
                 .addHeader("Authorization", token)
                 .build())
         Glide.with(context).load(imageUrl).into(holder.image)*/
-        holder.image.setImageResource(R.drawable.m_audi)
+        holder.marqueImage.setImageResource(R.drawable.m_audi)
     }
 
     private fun handleClick(view: View, marqueId: String){
