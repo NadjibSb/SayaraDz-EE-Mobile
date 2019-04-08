@@ -8,5 +8,17 @@
         android:id="@+id/marqueFragment"
         android:name="sayaradz.ui.MarqueFragment"
         android:label="MarqueFragment"
-        tools:layout="@layout/marque_fragment"/>
+        tools:layout="@layout/marque_fragment">
+        <action
+            android:id="@+id/action_marqueFragment_to_modelFragment"
+            app:destination="@id/modelFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/modelFragment"
+        android:name="sayaradz.ui.ModelFragment"
+        android:label="ModelFragment" >
+        <argument
+            android:name="marqueId"
+            app:argType="string" />
+    </fragment>
 </navigation>

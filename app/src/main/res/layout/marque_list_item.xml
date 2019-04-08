@@ -19,7 +19,8 @@
             android:id="@+id/logoImg"
             android:layout_width="200dp"
             android:layout_height="100dp"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            tools:src="@drawable/m_audi"/>
 
         <TextView
             android:id="@+id/marqueName"
@@ -27,9 +28,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="12dp"
             android:fontFamily="serif"
-            android:text="test"
-            android:textSize="20sp"
-            tools:src="@drawable/m_audi"/>
+            android:text="Marque test"
+            android:textSize="20sp"/>
     </LinearLayout>
 
 </LinearLayout>

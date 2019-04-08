@@ -100,7 +100,7 @@ class MarqueFragment : Fragment() {
     private fun defaultList():ArrayList<Marque>{
 
         var marqueList  = ArrayList<Marque>()
-        for (i in 0..7){
+        for (i in 0..20){
             marqueList.add(Marque(i.toString(),"Marque $i",R.drawable.m_audi.toString()))
         }
         return marqueList
