@@ -17,13 +17,15 @@ import sayaradz.dataClasses.Model
 
 class ModelFragment:Fragment() {
 
+    lateinit var args: ModelFragmentArgs
+
     companion object {
         fun getInstance() = SearchFragment()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val rootView = inflater?.inflate(R.layout.model_fragment, container, false)
-        val args = ModelFragmentArgs.fromBundle(arguments!!)
+        args = ModelFragmentArgs.fromBundle(arguments!!)
         Toast.makeText(context,"Marque id: ${args.marqueId}",Toast.LENGTH_SHORT).show()
 
 
@@ -34,7 +36,7 @@ class ModelFragment:Fragment() {
     //RecycleView--------------------------------------------
     private fun setUpRecycleView(rootView: View, list: List<Model>) {
         var recyclerView = rootView.findViewById(R.id.modelListView) as RecyclerView
-        recyclerView.adapter = ModelAdapter(list, this@ModelFragment.context!!)
+        recyclerView.adapter = ModelAdapter(list, this@ModelFragment.context!!,args.marqueId)
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.itemAnimator = SlideInUpAnimator()
         recyclerView.setHasFixedSize(true)

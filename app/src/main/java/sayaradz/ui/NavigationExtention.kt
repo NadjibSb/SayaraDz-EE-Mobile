@@ -50,7 +50,7 @@ fun BottomNavigationView.setupWithNavController(
         }
 
         // Save to the map
-        graphIdToTagMap.put(graphId,fragmentTag)
+        graphIdToTagMap.put(graphId, fragmentTag)
 
         // Attach or detach nav host fragment depending on whether it's the selected item.
         if (this.selectedItemId == graphId) {
@@ -90,7 +90,7 @@ fun BottomNavigationView.setupWithNavController(
                             .setPrimaryNavigationFragment(selectedFragment)
                             .apply {
                                 // Detach all other Fragments
-                                for(i in 0 until graphIdToTagMap.size()){
+                                for (i in 0 until graphIdToTagMap.size()) {
                                     if (graphIdToTagMap[i] != newlySelectedItemTag) {
                                         detach(fragmentManager.findFragmentByTag(firstFragmentTag)!!)
                                     }

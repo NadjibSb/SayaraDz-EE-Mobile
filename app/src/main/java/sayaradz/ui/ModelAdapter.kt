@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import sayaradz.authentification.R
 import sayaradz.dataClasses.Model
 
-class ModelAdapter(val models: List<Model>, val context: Context)
+class ModelAdapter(val models: List<Model>, val context: Context, val marqueId: String)
     :RecyclerView.Adapter<ModelAdapter.ModelViewHolder>() {
 
     private var mModels: List<Model>
@@ -39,7 +39,7 @@ class ModelAdapter(val models: List<Model>, val context: Context)
     override fun onBindViewHolder(holder: ModelAdapter.ModelViewHolder, position: Int) {
         var model = mModels[position]
         holder.modelName.setText(model.NomModel)
-        //handleClick(holder.layout,model.IdModel)
+        handleClick(holder.layout,marqueId,model.IdModel)
 
         Log.i("marque", model.NomModel)
         /*val imageUrl = GlideUrl(marque.Image, LazyHeaders.Builder()
@@ -49,8 +49,8 @@ class ModelAdapter(val models: List<Model>, val context: Context)
         holder.modelImage.setImageResource(R.drawable.m_volkswagen)
     }
 
-    private fun handleClick(view: View, marqueId: String){
-        val action = MarqueFragmentDirections.actionMarqueFragmentToModelFragment(marqueId)
+    private fun handleClick(view: View, marqueId: String, modelId: String){
+        val action = ModelFragmentDirections.actionModelFragmentToVersionFragment(marqueId,modelId)
         view.setOnClickListener {v:View ->
             v.findNavController().navigate(action)
         }
