@@ -34,7 +34,7 @@
         </activity>
 
         <!--   FACEBOOK -->
-        <activity android:name="sayaradz.ui.MainActivity">
+        <activity android:name="sayaradz.ui.mainActivity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 <!--                <action android:name="android.intent.action.MAIN" />

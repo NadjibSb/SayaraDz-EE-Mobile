@@ -20,7 +20,7 @@ import com.google.android.gms.common.api.GoogleApiClient
 import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
-import sayaradz.ui.MainActivity
+import sayaradz.ui.mainActivity.MainActivity
 
 class CreateAccountActivity : AppCompatActivity(), View.OnClickListener {
 

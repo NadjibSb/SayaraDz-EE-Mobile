@@ -1,98 +1,77 @@
-package sayaradz.ui
+package sayaradz.ui.mainActivity
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.NavController
 import androidx.navigation.ui.setupActionBarWithNavController
-import com.facebook.login.LoginManager
-import com.google.android.gms.tasks.OnCompleteListener
-import com.google.android.gms.tasks.Task
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.GetTokenResult
 import sayaradz.authentification.CreateAccountActivity
 import sayaradz.authentification.R
+import sayaradz.authentification.databinding.ActivityMainBinding
+import sayaradz.ui.MainActivityViewModel
+import sayaradz.ui.setupWithNavController
 
 
 class MainActivity : AppCompatActivity() {
     val TAG = "TAG-MainActivity"
+    private lateinit var binding: ActivityMainBinding
     private var currentNavController: LiveData<NavController>? = null
+    lateinit var mainActivityViewModel: MainActivityViewModel
 
-    var firebaseAuth: FirebaseAuth? = null
-    lateinit var idToken: String   // the access token
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        setSupportActionBar(findViewById(R.id.TopToolbar))
-        checkAuth()
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
-        //setupNavigation()
+        mainActivityViewModel = ViewModelProviders.of(this)
+                .get(MainActivityViewModel::class.java)
+
+        //Setuo UI elements
+        setSupportActionBar(binding.TopToolbar)
         setupBottomNavigationBar()
-
+        //setupNavigation()
     }
 
-
-    //-- checkout if auth and get the token ***********************************
-    private fun checkAuth() {
-        firebaseAuth = FirebaseAuth.getInstance()
-        val user = firebaseAuth?.currentUser
-        ///**THE TOKEN + REQUEST **///
-        user?.getIdToken(true)
-                ?.addOnCompleteListener(object : OnCompleteListener<GetTokenResult> {
-                    override fun onComplete(task: Task<GetTokenResult>) {
-                        if (task.isSuccessful()) {
-                            idToken = task.getResult()!!.getToken()!!  // Having the token
-
-                            Log.i(TAG, "TOKEN CORRECT: $idToken")
-                            //________________setUpBottomNavigationBar(idToken)
-
-                        } else {
-                            // Handle error -> task.getException();
-                            startActivity(Intent(this@MainActivity, CreateAccountActivity::class.java))
-                        }
-                    }
-                })
+    override fun onStart() {
+        super.onStart()
+        mainActivityViewModel.isAuth().observe(this, Observer { isAuth ->
+            if (!isAuth)
+                Toast.makeText(this, "Not connected", Toast.LENGTH_SHORT).show()
+                //startActivity(Intent(this@MainActivity, CreateAccountActivity::class.java))
+        })
     }
-    //_____________________________________________________________
 
-
-    //-- Menu Methods *********************************************
+    /**
+     ****************Menu Methods
+     */
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_top_toolbar, menu)
         return true
     }
-    //****
+
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        Toast.makeText(this, "logout", Toast.LENGTH_SHORT).show()
-        firebaseAuth?.signOut()
-        LoginManager.getInstance().logOut()
+        mainActivityViewModel.signOut()
+        Toast.makeText(this, "Sign out", Toast.LENGTH_SHORT).show()
         startActivity(Intent(this@MainActivity, CreateAccountActivity::class.java))
         return super.onOptionsItemSelected(item)
     }
-    //_____________________________________________________________
+    /**_____________________________________________________________**/
 
-
-    //-- Setup buttom navigation**************************************
-    override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
-        super.onRestoreInstanceState(savedInstanceState)
-        setupBottomNavigationBar()
-    }
 
     /**
-     * Called on first creation and when restoring state.
+     ****************Setup buttom navigation
      */
     private fun setupBottomNavigationBar() {
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
-
         val navGraphIds = listOf(R.navigation.consult_graph, R.navigation.search_graph, R.navigation.compose_graph, R.navigation.profile_graph)
 
         // Setup the bottom navigation view with a list of navigation graphs
@@ -102,7 +81,6 @@ class MainActivity : AppCompatActivity() {
                 containerId = R.id.NavHostFragment,
                 intent = intent
         )
-
         // Whenever the selected controller changes, setup the action bar.
         controller.observe(this, Observer { navController ->
             setupActionBarWithNavController(navController)
@@ -114,15 +92,17 @@ class MainActivity : AppCompatActivity() {
         return currentNavController?.value?.navigateUp() ?: false
     }
 
-    /**
-     * Overriding popBackStack is necessary in this case if the app is started from the deep link.
-     */
     override fun onBackPressed() {
         if (currentNavController?.value?.popBackStack() != true) {
             super.onBackPressed()
         }
     }
-    //_____________________________________________________________
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
+        super.onRestoreInstanceState(savedInstanceState)
+        setupBottomNavigationBar()
+    }
+    /**_____________________________________________________________**/
 }
 
 
