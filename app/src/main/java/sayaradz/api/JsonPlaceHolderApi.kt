@@ -5,8 +5,9 @@ import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Path
+import retrofit2.http.Query
 import sayaradz.dataClasses.Marque
-import sayaradz.dataClasses.Model
+import sayaradz.dataClasses.Modele
 
 
 interface JsonPlaceHolderApi {
@@ -16,11 +17,11 @@ interface JsonPlaceHolderApi {
     fun getMarques(@Header("Authorization") token: String): Call<List<Marque>>
 
 
-    // Getting all the models
+    // Getting all the modeles
     @GET("api/modele")
-    fun getModels(@Header("Authorization") token: String): Call<List<Model>>
+    fun getModels(@Header("Authorization") token: String, @Query("marqueId") marqueId: String): Call<List<Modele>>
 
-    @GET("/media/images/marques/{imageName}")
+    @GET("/media/images/list/{imageName}")
     fun getImage(@Header("Authorization") token: String, @Path("imageName") img: String): Call<ResponseBody>
 
 }

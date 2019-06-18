@@ -19,6 +19,8 @@ import sayaradz.authentification.databinding.ActivityMainBinding
 import sayaradz.ui.MainActivityViewModel
 import sayaradz.ui.setupWithNavController
 
+const val API_URL="https://sayaradz-ee-backend.herokuapp.com/"
+
 
 class MainActivity : AppCompatActivity() {
     val TAG = "TAG-MainActivity"
