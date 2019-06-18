@@ -36,7 +36,7 @@ class MarqueViewModel : ViewModel() {
     }
 
 
-    fun getMarques(idToken: String): MutableLiveData<ArrayList<Marque>> {
+    private fun getMarques(idToken: String): MutableLiveData<ArrayList<Marque>> {
 
         val retrofit = Retrofit.Builder()
                 .baseUrl(API_URL)

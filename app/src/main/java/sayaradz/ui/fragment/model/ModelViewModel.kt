@@ -18,7 +18,7 @@ class ModelViewModel(val marqueId: String) : ViewModel() {
     var models: MutableLiveData<ArrayList<Modele>>
 
     init {
-        models = getModels("token")
+        models = getModels("token",marqueId)
     }
 
     private fun defaultList(): MutableLiveData<ArrayList<Modele>> {
@@ -34,7 +34,7 @@ class ModelViewModel(val marqueId: String) : ViewModel() {
     }
 
 
-    fun getModels(idToken: String): MutableLiveData<ArrayList<Modele>> {
+    private fun getModels(idToken: String, marqueId: String): MutableLiveData<ArrayList<Modele>> {
 
         val retrofit = Retrofit.Builder()
                 .baseUrl(API_URL)
@@ -43,7 +43,7 @@ class ModelViewModel(val marqueId: String) : ViewModel() {
         Log.i(TAG, "DisplayModelList")
 
         val jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi::class.java)
-        val call = jsonPlaceHolderApi.getModels(idToken, marqueId) // The request included the token
+        val call = jsonPlaceHolderApi.getModelsByMarque(idToken, marqueId) // The request included the token
         var modeleRespond: List<Modele>? = null
         var modelList = ArrayList<Modele>()
         var finalList = MutableLiveData<ArrayList<Modele>>()

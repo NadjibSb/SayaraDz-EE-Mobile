@@ -30,7 +30,7 @@ class MarqueFragment : Fragment() {
         marqueViewModel = ViewModelProviders.of(this).get(MarqueViewModel::class.java)
 
 
-        marqueViewModel.getMarques("token").observe(this, Observer { marques->
+        marqueViewModel.marques.observe(this, Observer { marques->
             setUpRecycleView(binding.root, marques )
         })
         return binding.root

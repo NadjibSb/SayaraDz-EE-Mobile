@@ -24,18 +24,17 @@ class ModelFragment : Fragment() {
     lateinit var args: ModelFragmentArgs
     lateinit var modelViewModel: ModelViewModel
 
-    lateinit var marqueId: String
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         binding = DataBindingUtil.inflate(inflater, R.layout.model_fragment, container, false)
         args = ModelFragmentArgs.fromBundle(arguments!!)
-        marqueId = args.marqueId
         Toast.makeText(context, "Marque id: ${args.marqueId}", Toast.LENGTH_SHORT).show()
 
-        var viewModelFactory = ModelViewModelFactory(marqueId)
-        modelViewModel = ViewModelProviders.of(this,viewModelFactory).get(ModelViewModel::class.java)
+        var viewModelFactory = ModelViewModelFactory(args.marqueId)
+        modelViewModel = ViewModelProviders.of(this,viewModelFactory)
+                .get(ModelViewModel::class.java)
 
         modelViewModel.models.observe(this, Observer { modeles ->
             //setUpRecycleView(binding.root, modeles)
