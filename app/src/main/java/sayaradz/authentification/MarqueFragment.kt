@@ -14,8 +14,9 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import sayaradz.services.JsonPlaceHolderApi
+import sayaradz.services.ServiceProvider
 import sayaradz.services.Marque
+import sayaradz.services.ServiceBuilder
 
 
 class MarqueFragment : Fragment() {
@@ -45,15 +46,11 @@ class MarqueFragment : Fragment() {
 
     private fun DisplayMarqueList(rootView: View, idToken: String) {
 
-        val retrofit = Retrofit.Builder()
-                .baseUrl(url)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
-
+       val service = ServiceBuilder.buildService(ServiceProvider ::class.java)
         Log.i(TAG, "DisplayMarqueList")
 
-        val jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi::class.java)
-        val call = jsonPlaceHolderApi.getMarques(idToken) // The request included the token
+
+        val call = service.getMarques(idToken) // The request included the token
         var marqueRespond: List<Marque>? = null
         var marqueList  = ArrayList<Marque>()
 

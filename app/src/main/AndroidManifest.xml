@@ -37,7 +37,7 @@
             </intent-filter>
         </activity> <!-- FACEBOOK -->
         <activity android:name=".MainActivity"
-            android:windowSoftInputMode="adjustResize"
+            android:windowSoftInputMode="adjustNothing"
             >
 
             <intent-filter>

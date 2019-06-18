@@ -1,51 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/root_layout"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:fitsSystemWindows="true"
+    android:background="@color/cardview_light_background">
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    <LinearLayout
         android:id="@+id/layout_filters"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical" >
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
-    <Spinner
-        android:layout_marginTop="10dp"
-        android:id="@+id/spinner_type"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/spinner_border"/>
-    <Button
-        android:id="@+id/btn_year"
-        android:layout_margin="3dp"
-        style="@style/Widget.AppCompat.Button.Borderless"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toEndOf="@+id/spinner_type"
-        android:text="Année"
-        android:background="@drawable/button_border"
-        />
+        <Spinner
+            android:id="@+id/spinner_type"
+            style="@style/Widget.AppCompat.Spinner.Underlined"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:theme="@style/ThemeSpinner" />
 
-    <Button
-        android:id="@+id/btn_price"
-        android:layout_margin="3dp"
-        style="@style/Widget.AppCompat.Button.Borderless"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toEndOf="@+id/btn_year"
-        android:text="Prix"
-        android:background="@drawable/button_border"
-        />
-    <Spinner
-        android:layout_marginTop="10dp"
-        android:id="@+id/spinner_marque"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toEndOf="@+id/btn_price"
-        />
-</RelativeLayout>
+        <Spinner
+            android:id="@+id/spinner_marque"
+            style="@style/Widget.AppCompat.Spinner.Underlined"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:theme="@style/ThemeSpinner" />
+
+        <Button
+            android:id="@+id/btn_year"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:background="@drawable/button_border"
+            android:text="Année" />
+
+        <Button
+            android:id="@+id/btn_price"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:background="@drawable/button_border"
+            android:text="Prix" />
+
+
+    </LinearLayout>
 
     <Button
         android:id="@+id/btn_more_filters"
@@ -54,33 +58,17 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/layout_filters"
         android:layout_centerHorizontal="true"
-        android:text="Plus de filtres"
-        android:drawableBottom="@drawable/ic_expand_more_black_24dp"/>
+        android:drawableBottom="@drawable/ic_expand_more_black_24dp"
+        android:text="Plus de filtres" />
 
-
-
-
-<!--
-    <Spinner
-        android:layout_marginTop="10dp"
-        android:id="@+id/spinner_price_min"
-        android:layout_width="wrap_content"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/carListView"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/spinner_yearEnd"
-        />
->>>>>>> parent of aec1e15... MoreFilterPopUp
+        android:layout_below="@+id/btn_more_filters"
+        >
 
-    <Spinner
-        android:id="@+id/spinner_price_max"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_toRightOf="@+id/spinner_price_min" />
--->
-
-
-
-
+    </android.support.v7.widget.RecyclerView>
 
 
 
