@@ -33,7 +33,7 @@ class VersionFragment : Fragment() {
                 .get(VersionViewModel::class.java)
 
         viewModel.versions.observe(this, Observer { versions ->
-            //setUpRecycleView(binding.root,versions)
+            setUpRecycleView(binding.root,versions)
         })
 
 

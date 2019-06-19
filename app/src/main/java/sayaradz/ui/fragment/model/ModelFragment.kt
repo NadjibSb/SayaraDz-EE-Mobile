@@ -37,7 +37,7 @@ class ModelFragment : Fragment() {
                 .get(ModelViewModel::class.java)
 
         modelViewModel.models.observe(this, Observer { modeles ->
-            //setUpRecycleView(binding.root, modeles)
+            setUpRecycleView(binding.root, modeles)
 
         })
         return binding.root

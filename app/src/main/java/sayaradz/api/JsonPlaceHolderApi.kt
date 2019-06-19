@@ -24,7 +24,7 @@ interface JsonPlaceHolderApi {
 
     // Getting versions by model
     @GET("api/version")
-    fun getVersionsByModele(@Header("Authorization") token: String, @Query("modeleId") modeleId: String): Call<List<Version>>
+    fun getVersionsByModele(@Header("Authorization") token: String, @Query("modelId") modeleId: String): Call<List<Version>>
 
     @GET("/media/images/list/{imageName}")
     fun getImage(@Header("Authorization") token: String, @Path("imageName") img: String): Call<ResponseBody>

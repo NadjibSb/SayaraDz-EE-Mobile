@@ -18,9 +18,10 @@ class VersionViewModel(val modeleId: String) : ViewModel() {
 
     val TAG = "VersionViewModel"
     var versions: MutableLiveData<ArrayList<Version>>
+    var token = ""
 
     init {
-        versions = defaultList()
+        versions = getVersions(token,modeleId)
     }
 
     private fun defaultList(): MutableLiveData<ArrayList<Version>> {
@@ -28,7 +29,7 @@ class VersionViewModel(val modeleId: String) : ViewModel() {
         var versionList = ArrayList<Version>()
         var finalList = MutableLiveData<ArrayList<Version>>()
         for (i in 0..20) {
-            versionList.add(Version("$i", "Version $i", "${R.drawable.m_volkswagen}"))
+            //versionList.add(Version("$i", "Version $i", "${R.drawable.m_volkswagen}"))
         }
         finalList.value = versionList
         return finalList
