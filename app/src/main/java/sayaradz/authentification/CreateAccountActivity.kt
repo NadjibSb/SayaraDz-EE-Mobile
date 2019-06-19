@@ -64,18 +64,11 @@ class CreateAccountActivity : AppCompatActivity(), View.OnClickListener {
 
         firebaseAuth = FirebaseAuth.getInstance()
 
-        /******************
-        val user = firebaseAuth?.currentUser
-        if(user !=null){
-            startActivity(Intent(this@CreateAccountActivity, MainActivity::class.java))
-        }
-        ****************/
         //******
         mAuthListner = FirebaseAuth.AuthStateListener { firebaseAuth ->
             if (firebaseAuth.currentUser != null) {
                 startActivity(Intent(this@CreateAccountActivity, MainActivity::class.java))
             }
-            //firebaseAuth.currentUser?.getIdToken(true).addOnCompleteListener()
         }
 
         //********
@@ -130,7 +123,7 @@ class CreateAccountActivity : AppCompatActivity(), View.OnClickListener {
 
         }
     }
-
+    //Displaying
     private fun googleLogin() {
         Log.i(TAG, "Starting Google LogIn Flow.")
         val signInIntent = Auth.GoogleSignInApi.getSignInIntent(googleApiClient)

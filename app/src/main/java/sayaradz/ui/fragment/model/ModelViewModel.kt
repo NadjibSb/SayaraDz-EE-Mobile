@@ -6,18 +6,18 @@ import androidx.lifecycle.ViewModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-import sayaradz.api.JsonPlaceHolderApi
 import sayaradz.dataClasses.Modele
-import sayaradz.ui.mainActivity.API_URL
+import sayaradz.api.ServiceBuilder
+import sayaradz.api.ServiceProvider
 
 class ModelViewModel(val marqueId: String) : ViewModel() {
 
     val TAG = "ModelViewModel"
     var models: MutableLiveData<ArrayList<Modele>>
+    val api: ServiceProvider
 
     init {
+        api = ServiceBuilder.buildService(ServiceProvider::class.java)
         models = getModels("token",marqueId)
     }
 
@@ -36,14 +36,7 @@ class ModelViewModel(val marqueId: String) : ViewModel() {
 
     private fun getModels(idToken: String, marqueId: String): MutableLiveData<ArrayList<Modele>> {
 
-        val retrofit = Retrofit.Builder()
-                .baseUrl(API_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
-        Log.i(TAG, "DisplayModelList")
-
-        val jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi::class.java)
-        val call = jsonPlaceHolderApi.getModelsByMarque(idToken, marqueId) // The request included the token
+        val call = api.getModelsByMarque(idToken, marqueId) // The request included the token
         var modeleRespond: List<Modele>? = null
         var modelList = ArrayList<Modele>()
         var finalList = MutableLiveData<ArrayList<Modele>>()

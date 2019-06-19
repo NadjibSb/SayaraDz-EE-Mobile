@@ -6,20 +6,20 @@ import androidx.lifecycle.ViewModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-import sayaradz.api.JsonPlaceHolderApi
 import sayaradz.authentification.R
 import sayaradz.dataClasses.Marque
-import sayaradz.ui.mainActivity.API_URL
+import sayaradz.api.ServiceBuilder
+import sayaradz.api.ServiceProvider
 
 class MarqueViewModel : ViewModel() {
 
     val TAG = "MarqueViewModel"
     val token = "token"
     var marques: MutableLiveData<ArrayList<Marque>>
+    val api: ServiceProvider
 
     init {
+        api = ServiceBuilder.buildService(ServiceProvider::class.java)
         marques = getMarques(token)
     }
 
@@ -38,14 +38,8 @@ class MarqueViewModel : ViewModel() {
 
     private fun getMarques(idToken: String): MutableLiveData<ArrayList<Marque>> {
 
-        val retrofit = Retrofit.Builder()
-                .baseUrl(API_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
-        Log.i(TAG, "DisplayMarqueList")
 
-        val jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi::class.java)
-        val call = jsonPlaceHolderApi.getMarques(idToken) // The request included the token
+        val call = api.getMarques(idToken) // The request included the token
         var marqueRespond: List<Marque>? = null
         var marqueList = ArrayList<Marque>()
         var finalList = MutableLiveData<ArrayList<Marque>>()

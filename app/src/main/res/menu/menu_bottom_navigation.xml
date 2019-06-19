@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
     <item
         app:showAsAction="ifRoom"
         android:id="@+id/consult_graph"
-        android:icon="@drawable/ic_visibility_black_24dp"
-        android:title="Consulter" />
+        android:icon="@drawable/ic_directions_car_black_24dp"
+        android:title="Vehicule neuf" />
+    <item
+        app:showAsAction="ifRoom"
+        android:id="@+id/compose_graph"
+        android:icon="@drawable/ic_car"
+        android:title="Annonce"/>
 
     <item
         app:showAsAction="ifRoom"
@@ -13,11 +20,7 @@
         android:icon="@drawable/ic_search_black_24dp"
         android:title="Chercher"/>
 
-    <item
-        app:showAsAction="ifRoom"
-        android:id="@+id/compose_graph"
-        android:icon="@drawable/ic_format_list_bulleted_black_24dp"
-        android:title="Composer"/>
+
 
     <item
         app:showAsAction="ifRoom"

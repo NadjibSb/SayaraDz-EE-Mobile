@@ -6,21 +6,19 @@ import androidx.lifecycle.ViewModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-import sayaradz.api.JsonPlaceHolderApi
-import sayaradz.authentification.R
-import sayaradz.dataClasses.Modele
 import sayaradz.dataClasses.Version
-import sayaradz.ui.mainActivity.API_URL
+import sayaradz.api.ServiceBuilder
+import sayaradz.api.ServiceProvider
 
 class VersionViewModel(val modeleId: String) : ViewModel() {
 
     val TAG = "VersionViewModel"
     var versions: MutableLiveData<ArrayList<Version>>
     var token = ""
+    val api: ServiceProvider
 
     init {
+        api = ServiceBuilder.buildService(ServiceProvider::class.java)
         versions = getVersions(token,modeleId)
     }
 
@@ -38,14 +36,7 @@ class VersionViewModel(val modeleId: String) : ViewModel() {
 
     private fun getVersions(idToken: String, modeleId: String): MutableLiveData<ArrayList<Version>> {
 
-        val retrofit = Retrofit.Builder()
-                .baseUrl(API_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
-        Log.i(TAG, "DisplayVersionList")
-
-        val jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi::class.java)
-        val call = jsonPlaceHolderApi.getVersionsByModele(idToken, modeleId) // The request included the token
+        val call = api.getVersionsByModele(idToken, modeleId) // The request included the token
         var versioneRespond: List<Version>? = null
         var versionList = ArrayList<Version>()
         var finalList = MutableLiveData<ArrayList<Version>>()

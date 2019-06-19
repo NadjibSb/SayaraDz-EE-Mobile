@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import sayaradz.authentification.R
+import sayaradz.ui.fragment.search.SearchFragment
 
 
 class ComposeFragment: Fragment() {

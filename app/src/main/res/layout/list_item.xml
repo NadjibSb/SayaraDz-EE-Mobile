@@ -29,6 +29,7 @@
             android:layout_margin="12dp"
             android:fontFamily="serif"
             android:text="Marque test"
+            android:textColor="#000"
             android:textSize="20sp"/>
     </LinearLayout>
 

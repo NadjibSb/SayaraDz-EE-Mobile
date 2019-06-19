@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/searchFragment"
-        android:name="sayaradz.ui.SearchFragment"
+        android:name="sayaradz.ui.fragment.search.SearchFragment"
         android:label="SearchFragment"
         tools:layout="@layout/search_fragment"/>
 </navigation>
