@@ -4,8 +4,13 @@
     <item
         app:showAsAction="ifRoom"
         android:id="@+id/nav_consult"
-        android:icon="@drawable/ic_visibility_black_24dp"
-        android:title="Consulter" />
+        android:icon="@drawable/ic_directions_car_black_24dp"
+        android:title="Vehicule neuf" />
+    <item
+        app:showAsAction="ifRoom"
+        android:id="@+id/nav_compose"
+        android:icon="@drawable/ic_car"
+        android:title="Composer"/>
 
     <item
         app:showAsAction="ifRoom"
@@ -13,11 +18,7 @@
         android:icon="@drawable/ic_search_black_24dp"
         android:title="Chercher"/>
 
-    <item
-        app:showAsAction="ifRoom"
-        android:id="@+id/nav_compose"
-        android:icon="@drawable/ic_format_list_bulleted_black_24dp"
-        android:title="Composer"/>
+
 
     <item
         app:showAsAction="ifRoom"

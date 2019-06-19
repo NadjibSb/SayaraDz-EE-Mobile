@@ -2,9 +2,11 @@ package sayaradz.services
 
 class Model {
 
+    private var nom = ""
     private var pk = ""
-    private var nomModele = ""
-    private var idModele = ""
+    private var marque=""
+    private var codeModele=""
+    private var couleur_set = arrayListOf<String>()
 
 
     /** Getters & Setters **/
@@ -17,22 +19,22 @@ class Model {
         set(value) {
             pk = value
         }
-    /** idModel**/
-    public var IdModel: String
+    /** codeModel**/
+    public var CodeModele: String
         get() {
-            return idModele
+            return codeModele
         }
         set(value) {
-            idModele = value
+            codeModele = value
         }
 
     /** nomModel**/
     public var NomModel: String
         get() {
-            return nomModele
+            return nom
         }
         set(value) {
-            nomModele = value
+            nom= value
         }
 
 

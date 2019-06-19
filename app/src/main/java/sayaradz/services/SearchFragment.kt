@@ -29,10 +29,10 @@ class SearchFragment : Fragment()  {
     var token: String? =""
     val TAG = "TAG-SearchFragment"
     var brandList=mutableListOf<String>()//ArrayList<String>()
-    var modelsList=ArrayList<String>()
+    var modelList=mutableListOf<String>()
     var carsList=ArrayList<Car>()
     var carsList1=ArrayList<Car>()
-    var typeSelected :String ? =null
+    var typeSelected =""
     var marqueSelected :String ? =null
     var modelSelected:String ?=null
     var priceMin :String ? =null
@@ -41,16 +41,19 @@ class SearchFragment : Fragment()  {
     var kmMax :String ? =null
     var yearMin :String ?=null
     var yearMax :String ? =null
+    lateinit var marqueAdapter : ArrayAdapter<String>
+    lateinit var modelAdapter : ArrayAdapter<String>
     lateinit var popup : PopupWindow
     val marqueeList = mutableListOf("Marque","Ford", "Infiniti", "Renault") //For test
     val modellsList = mutableListOf("Model","208", "301") //For test
     lateinit var recyclerView : RecyclerView
     val service = ServiceBuilder.buildService(ServiceProvider ::class.java)
     lateinit var adapter :CarAdapter
+    var M1 = "-01-01"
+    var M2 = "-12-31"
 
 
     companion object {
-        val url = "https://sayaradz-ee-backend.herokuapp.com/"
         fun getInstance() =SearchFragment()
     }
 
@@ -67,6 +70,10 @@ class SearchFragment : Fragment()  {
         recyclerView = rootView.findViewById(R.id.carListView) as RecyclerView
         setUpRecycleView(carsList)
         getResult(token!!)
+        updateList()
+        setUpRecycleView(carsList)
+
+
 
         //Havinge tge Token to  ACCESS
         token = this.arguments.getString("TOKEN")
@@ -75,7 +82,12 @@ class SearchFragment : Fragment()  {
         // REMPLIR LIST WITH QUERY
         brandList=getMarquesList(rootView, token!!)
         // REMPLIR LIST WITH QUERY
-        getModelsList(rootView, token!!)
+        modelList=getModelsList(rootView, token!!)
+
+        modelAdapter= ArrayAdapter<String>(activity.applicationContext, R.layout.spinner_item, modelList)
+        // Set layout to use when the list of choices appear
+        modelAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+
 
 
         //PopUpYear
@@ -98,7 +110,7 @@ class SearchFragment : Fragment()  {
             val current_year = Calendar.getInstance().get(Calendar.YEAR).toString()
             val yearsList: MutableList<String> = mutableListOf(current_year)
             for (i in 1..10) yearsList.add((current_year.toInt() - i).toString())
-            yearsList.add(0,"Choisir..")
+            yearsList.add(0,"Choisir")
 
             val adapter = ArrayAdapter<String>(activity.applicationContext, R.layout.spinner_item, yearsList)
             // Set layout to use when the list of choices appear
@@ -116,8 +128,8 @@ class SearchFragment : Fragment()  {
 
                 override fun onItemSelected(parent: AdapterView<*>, view: View, pos: Int, id: Long) {
                     // An item was selected. You can retrieve the selected item using
-                    if ( parent.getItemAtPosition(pos).toString() != "Choisir..")
-                    yearMin = parent.getItemAtPosition(pos).toString()
+                    if ( parent.getItemAtPosition(pos).toString() != "Choisir")
+                    yearMin = parent.getItemAtPosition(pos).toString()+M1
                     else yearMin=null
                      getResult(token!!)
                     Toast.makeText(activity.applicationContext, yearMin, Toast.LENGTH_SHORT).show()
@@ -130,8 +142,8 @@ class SearchFragment : Fragment()  {
                 }
 
                 override fun onItemSelected(parent: AdapterView<*>, view: View, pos: Int, id: Long) {
-                    if ( parent.getItemAtPosition(pos).toString() != "Choisir..")
-                    yearMax = parent.getItemAtPosition(pos).toString()
+                    if ( parent.getItemAtPosition(pos).toString() != "Choisir")
+                    yearMax = parent.getItemAtPosition(pos).toString()+M2
                     else yearMax=null
                     getResult(token!!)
                     Toast.makeText(activity.applicationContext, yearMax, Toast.LENGTH_SHORT).show()
@@ -194,11 +206,9 @@ class SearchFragment : Fragment()  {
 
 
 
-                val adapter = ArrayAdapter<String>(activity.applicationContext, R.layout.spinner_item, modellsList)
-                // Set layout to use when the list of choices appear
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+
                 // Set Adapter to Spinner
-                spinnerModel.setAdapter(adapter)
+                spinnerModel.setAdapter(modelAdapter)
                 spinnerModel.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
 
                     override fun onNothingSelected(p0: AdapterView<*>?) {
@@ -239,18 +249,19 @@ class SearchFragment : Fragment()  {
                    Log.i("TYPE","IN")
                    if ( parent.getItemAtPosition(pos).toString().toLowerCase() != "type")
                         typeSelected = parent.getItemAtPosition(pos).toString().toLowerCase()
-                   else typeSelected=null
+                   else typeSelected=""
                    getResult(token!!)
                    Toast.makeText(activity.applicationContext, typeSelected, Toast.LENGTH_SHORT).show()
                }
            }
+         ///ModelAdapter
 
         //MarqueSpinner//
-            val adapter = ArrayAdapter<String>(activity.applicationContext, R.layout.spinner_item, marqueeList)
+            marqueAdapter = ArrayAdapter<String>(activity.applicationContext, R.layout.spinner_item, brandList)
             // Set layout to use when the list of choices appear
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            marqueAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             // Set Adapter to Spinner
-            spinnerMarque.setAdapter(adapter)
+            spinnerMarque.setAdapter(marqueAdapter)
             spinnerMarque.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
 
                 override fun onNothingSelected(p0: AdapterView<*>?) {
@@ -278,8 +289,8 @@ class SearchFragment : Fragment()  {
 
     }
 
-    private fun getModelsList(rootView: View?, idToken: String) {
-
+    private fun getModelsList(rootView: View?, idToken: String) : MutableList<String>{
+        var modelsList = mutableListOf<String>()
 
         Log.i(TAG, "DisplayModelList")
 
@@ -306,6 +317,8 @@ class SearchFragment : Fragment()  {
 
 
                     }
+                    modelsList!!.add(0,"Model")
+                    modelAdapter.notifyDataSetChanged()
                 }
             }
 
@@ -313,6 +326,7 @@ class SearchFragment : Fragment()  {
                 Log.i(TAG, "error CODE:"+t.message)
             }
         })
+        return  modelsList
     }
 
 
@@ -342,6 +356,8 @@ class SearchFragment : Fragment()  {
 
 
                     }
+                    marquesList!!.add(0,"Marque")
+                    marqueAdapter.notifyDataSetChanged()
                 }
 
             }
@@ -435,7 +451,7 @@ class SearchFragment : Fragment()  {
     private fun setUpRecycleView(list: ArrayList<Car>) {
         adapter= CarAdapter(list, this@SearchFragment.context)
         recyclerView.adapter = adapter
-        recyclerView.layoutManager = GridLayoutManager(context, 2)
+        recyclerView.layoutManager = GridLayoutManager(context, 1)
         recyclerView.itemAnimator = SlideInUpAnimator()
         recyclerView.setHasFixedSize(true)
     }
