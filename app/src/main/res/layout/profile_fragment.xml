@@ -22,8 +22,8 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="24dp"
                 android:src="@drawable/google_logo"
-                app:civ_border_color="#FFF"
-                app:civ_border_width="4dp"
+                app:civ_border_color="#AAF05545"
+                app:civ_border_width="3dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
