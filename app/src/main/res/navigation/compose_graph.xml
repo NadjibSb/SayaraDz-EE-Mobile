@@ -7,6 +7,6 @@
     <fragment
         android:id="@+id/composeFragment"
         android:name="sayaradz.ui.ComposeFragment"
-        android:label="ComposeFragment"
+        android:label="Composer"
         tools:layout="@layout/compose_fragment"/>
 </navigation>

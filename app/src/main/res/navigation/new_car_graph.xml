@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/marqueFragment"
         android:name="sayaradz.ui.fragment.marque.MarqueFragment"
-        android:label="MarqueFragment"
+        android:label="Marques"
         tools:layout="@layout/marque_fragment">
         <action
             android:id="@+id/action_marqueFragment_to_modelFragment"
@@ -17,7 +17,7 @@
     <fragment
         android:id="@+id/modelFragment"
         android:name="sayaradz.ui.fragment.model.ModelFragment"
-        android:label="ModelFragment"
+        android:label="Modeles"
         tools:layout="@layout/model_fragment">
         <argument
             android:name="marqueId"
@@ -29,7 +29,7 @@
     <fragment
         android:id="@+id/versionFragment"
         android:name="sayaradz.ui.fragment.version.VersionFragment"
-        android:label="VersionFragment"
+        android:label="Versions"
         tools:layout="@layout/version_fragment">
         <argument
             android:name="modelId"
@@ -41,6 +41,6 @@
     <fragment
         android:id="@+id/ficheTechFragment"
         android:name="sayaradz.ui.fragment.fichTech.FicheTechFragment"
-        android:label="fiche_tech_fragment"
+        android:label="Fiche Technique"
         tools:layout="@layout/fiche_tech_fragment" />
 </navigation>

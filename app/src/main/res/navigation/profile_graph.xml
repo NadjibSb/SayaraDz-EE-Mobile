@@ -7,6 +7,6 @@
     <fragment
         android:id="@+id/profileFragment"
         android:name="sayaradz.ui.ProfileFragment"
-        android:label="ProfileFragment"
+        android:label="Profile"
         tools:layout="@layout/profile_fragment"/>
 </navigation>
