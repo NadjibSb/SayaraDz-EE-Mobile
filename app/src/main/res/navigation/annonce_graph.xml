@@ -7,5 +7,5 @@
     <fragment
         android:id="@+id/annonceFragment"
         android:name="sayaradz.ui.fragment.annonce.AnnonceFragment"
-        android:label="Annonce" />
+        android:label="Mes Annonces" />
 </navigation>

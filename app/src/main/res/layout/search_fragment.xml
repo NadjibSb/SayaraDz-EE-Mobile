@@ -99,12 +99,15 @@
             android:id="@+id/btn_reset"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginRight="0dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/colored_button"
+            android:text="Réinitialiser"
             android:textAllCaps="false"
-            android:textSize="15dp"
-            android:background="@drawable/borders"
-            android:text="Réinitialiser" />
+            android:textColor="#FFF"
+            android:textSize="15dp" />
 
 
     </RelativeLayout>
