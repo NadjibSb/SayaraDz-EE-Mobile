@@ -6,9 +6,9 @@ import androidx.lifecycle.ViewModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import sayaradz.dataClasses.Version
 import sayaradz.api.ServiceBuilder
 import sayaradz.api.ServiceProvider
+import sayaradz.dataClasses.Version
 
 class VersionViewModel(val modeleId: String) : ViewModel() {
 
@@ -19,7 +19,7 @@ class VersionViewModel(val modeleId: String) : ViewModel() {
 
     init {
         api = ServiceBuilder.buildService(ServiceProvider::class.java)
-        versions = getVersions(token,modeleId)
+        versions = getVersions(token, modeleId)
     }
 
     private fun defaultList(): MutableLiveData<ArrayList<Version>> {
@@ -37,7 +37,7 @@ class VersionViewModel(val modeleId: String) : ViewModel() {
     private fun getVersions(idToken: String, modeleId: String): MutableLiveData<ArrayList<Version>> {
 
         val call = api.getVersionsByModele(idToken, modeleId) // The request included the token
-        var versioneRespond: List<Version>? = null
+        var versioneRespond: List<Version>?
         var versionList = ArrayList<Version>()
         var finalList = MutableLiveData<ArrayList<Version>>()
 

@@ -8,7 +8,10 @@ import sayaradz.dataClasses.Modele
 import sayaradz.dataClasses.Version
 
 
-class ListAdapter(val list: List<out Any>, val viewHolderType: ViewHolderType, val context: Context, val token: String)
+class ListAdapter(val list: List<Any>,
+                  val viewHolderType: ViewHolderType,
+                  val context: Context,
+                  val token: String)
     : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     enum class ViewHolderType {

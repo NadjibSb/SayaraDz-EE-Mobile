@@ -9,7 +9,7 @@ import sayaradz.authentification.R
 import sayaradz.ui.fragment.search.SearchFragment
 
 
-class ComposeFragment: Fragment() {
+class ComposeFragment : Fragment() {
     companion object {
         fun getInstance() = SearchFragment()
     }

@@ -7,50 +7,53 @@ import android.transition.Slide
 import android.transition.TransitionManager
 import android.util.Log
 import android.view.Gravity
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.smarteist.autoimageslider.*
+import com.smarteist.autoimageslider.DefaultSliderView
+import com.smarteist.autoimageslider.IndicatorAnimations
+import com.smarteist.autoimageslider.SliderAnimations
+import com.smarteist.autoimageslider.SliderLayout
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import sayaradz.authentification.R
-import sayaradz.dataClasses.Marque
-import sayaradz.dataClasses.Modele
-import sayaradz.dataClasses.Car
-import sayaradz.ui.fragment.adapter.CarAdapter
 import sayaradz.api.ServiceBuilder
 import sayaradz.api.ServiceProvider
+import sayaradz.authentification.R
+import sayaradz.dataClasses.Car
+import sayaradz.dataClasses.Marque
+import sayaradz.dataClasses.Modele
+import sayaradz.ui.fragment.adapter.CarAdapter
 import java.util.*
 
 
-class SearchFragment: Fragment() {
-    var token: String? =""
+class SearchFragment : Fragment() {
+    var token: String? = ""
     val TAG = "TAG-SearchFragment"
-    var brandList=mutableListOf<String>()//ArrayList<String>()
-    var modelsList= ArrayList<String>()
-    var carsList= ArrayList<Car>()
-    var carsList1= ArrayList<Car>()
-    var typeSelected :String ? =null
-    var marqueSelected :String ? =null
-    var modelSelected:String ?=null
-    var priceMin :String ? =null
-    var priceMax :String ?=null
-    var kmMin:String ? =null
-    var kmMax :String ? =null
-    var yearMin :String ?=null
-    var yearMax :String ? =null
-    lateinit var popup : PopupWindow
-    val marqueeList = mutableListOf("Marque","Ford", "Infiniti", "Renault") //For test
-    val modellsList = mutableListOf("Model","208", "301") //For test
-    lateinit var recyclerView : RecyclerView
+    var brandList = mutableListOf<String>()//ArrayList<String>()
+    var modelsList = ArrayList<String>()
+    var carsList = ArrayList<Car>()
+    var carsList1 = ArrayList<Car>()
+    var typeSelected: String? = null
+    var marqueSelected: String? = null
+    var modelSelected: String? = null
+    var priceMin: String? = null
+    var priceMax: String? = null
+    var kmMin: String? = null
+    var kmMax: String? = null
+    var yearMin: String? = null
+    var yearMax: String? = null
+    lateinit var popup: PopupWindow
+    val marqueeList = mutableListOf("Marque", "Ford", "Infiniti", "Renault") //For test
+    val modellsList = mutableListOf("Model", "208", "301") //For test
+    lateinit var recyclerView: RecyclerView
     val service = ServiceBuilder.buildService(ServiceProvider::class.java)
-    lateinit var adapter : CarAdapter
+    lateinit var adapter: CarAdapter
 
 
     companion object {
@@ -60,17 +63,14 @@ class SearchFragment: Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val rootView = inflater?.inflate(R.layout.search_fragment, container, false)
-        //setSliderViews(rootView.findViewById(R.id.imageSlider))
 
-
-        ///
 
         var spinnerType = rootView.findViewById<View>(R.id.spinner_type) as Spinner
         var spinnerMarque = rootView.findViewById<View>(R.id.spinner_marque) as Spinner
         var rootLayout = rootView.findViewById<View>(R.id.root_layout) as RelativeLayout
-        var btnYear =  rootView.findViewById<View>(R.id.btn_year) as Button
-        var btnPrice =rootView.findViewById<View>(R.id.btn_price) as Button
-        var btnMore =rootView.findViewById<View>(R.id.btn_more_filters) as Button
+        var btnYear = rootView.findViewById<View>(R.id.btn_year) as Button
+        var btnPrice = rootView.findViewById<View>(R.id.btn_price) as Button
+        var btnMore = rootView.findViewById<View>(R.id.btn_more_filters) as Button
         recyclerView = rootView.findViewById(R.id.carListView) as RecyclerView
         setUpRecycleView(carsList)
         getResult(token!!)
@@ -80,7 +80,7 @@ class SearchFragment: Fragment() {
         Log.i(TAG, "TOKEN RECEIVED: $token")
 
         // REMPLIR LIST WITH QUERY
-        brandList=getMarquesList(rootView, token!!)
+        brandList = getMarquesList(rootView, token!!)
         // REMPLIR LIST WITH QUERY
         getModelsList(rootView, token!!)
 
@@ -100,12 +100,11 @@ class SearchFragment: Fragment() {
             var spinnerYearEnd = view.findViewById<View>(R.id.spinner_yearEnd) as Spinner
 
 
-
             //YearSpinner 10 last years
             val current_year = Calendar.getInstance().get(Calendar.YEAR).toString()
             val yearsList: MutableList<String> = mutableListOf(current_year)
             for (i in 1..10) yearsList.add((current_year.toInt() - i).toString())
-            yearsList.add(0,"Choisir..")
+            yearsList.add(0, "Choisir..")
 
             val adapter = ArrayAdapter<String>(activity?.applicationContext, R.layout.spinner_item, yearsList)
             // Set layout to use when the list of choices appear
@@ -123,9 +122,9 @@ class SearchFragment: Fragment() {
 
                 override fun onItemSelected(parent: AdapterView<*>, view: View, pos: Int, id: Long) {
                     // An item was selected. You can retrieve the selected item using
-                    if ( parent.getItemAtPosition(pos).toString() != "Choisir..")
+                    if (parent.getItemAtPosition(pos).toString() != "Choisir..")
                         yearMin = parent.getItemAtPosition(pos).toString()
-                    else yearMin=null
+                    else yearMin = null
                     getResult(token!!)
                     Toast.makeText(activity!!.applicationContext, yearMin, Toast.LENGTH_SHORT).show()
                 }
@@ -137,9 +136,9 @@ class SearchFragment: Fragment() {
                 }
 
                 override fun onItemSelected(parent: AdapterView<*>, view: View, pos: Int, id: Long) {
-                    if ( parent.getItemAtPosition(pos).toString() != "Choisir..")
+                    if (parent.getItemAtPosition(pos).toString() != "Choisir..")
                         yearMax = parent.getItemAtPosition(pos).toString()
-                    else yearMax=null
+                    else yearMax = null
                     getResult(token!!)
                     Toast.makeText(activity?.applicationContext, yearMax, Toast.LENGTH_SHORT).show()
                 }
@@ -153,7 +152,7 @@ class SearchFragment: Fragment() {
             // Inflate a custom view using layout inflater
             val view = inflater.inflate(R.layout.price_pop_up_layout, null)
 
-            popup= popUpFun(view, rootLayout)
+            popup = popUpFun(view, rootLayout)
 
             // Get the widgets reference from custom view
             var priceMinEt = view.findViewById<EditText>(R.id.et_min)
@@ -180,7 +179,7 @@ class SearchFragment: Fragment() {
 
             // Initialize a new instance of popup window
 
-            popup=popUpFun(view, rootLayout)
+            popup = popUpFun(view, rootLayout)
 
             // Get the widgets reference from custom view
             var kmMinEt = view.findViewById<View>(R.id.et_km_min) as EditText
@@ -191,14 +190,13 @@ class SearchFragment: Fragment() {
                 kmMin = kmMinEt.text.toString()
                 kmMax = kmMaxEt.text.toString()
                 getResult(token!!)
-                Toast.makeText(activity?.applicationContext, "KmMin"+kmMin + "  KmMax" + kmMax, Toast.LENGTH_SHORT).show()
+                Toast.makeText(activity?.applicationContext, "KmMin" + kmMin + "  KmMax" + kmMax, Toast.LENGTH_SHORT).show()
                 Toast.makeText(activity?.applicationContext, modelSelected, Toast.LENGTH_SHORT).show()
                 popup.dismiss()
 
 
             }
             var spinnerModel = view.findViewById<View>(R.id.spinner_modele) as Spinner
-
 
 
             val adapter = ArrayAdapter<String>(activity?.applicationContext, R.layout.spinner_item, modellsList)
@@ -216,7 +214,7 @@ class SearchFragment: Fragment() {
                     // An item was selected. You can retrieve the selected item using
                     if (parent?.getItemAtPosition(pos).toString() != "Model")
                         modelSelected = parent.getItemAtPosition(pos).toString()
-                    else modelSelected=null
+                    else modelSelected = null
 
                 }
             }
@@ -243,10 +241,10 @@ class SearchFragment: Fragment() {
 
             override fun onItemSelected(parent: AdapterView<*>, view: View, pos: Int, id: Long) {
                 // An item was selected. You can retrieve the selected item using
-                Log.i("TYPE","IN")
-                if ( parent.getItemAtPosition(pos).toString().toLowerCase() != "type")
+                Log.i("TYPE", "IN")
+                if (parent.getItemAtPosition(pos).toString().toLowerCase() != "type")
                     typeSelected = parent.getItemAtPosition(pos).toString().toLowerCase()
-                else typeSelected=null
+                else typeSelected = null
                 getResult(token!!)
                 Toast.makeText(activity!!.applicationContext, typeSelected, Toast.LENGTH_SHORT).show()
             }
@@ -261,57 +259,25 @@ class SearchFragment: Fragment() {
         spinnerMarque.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
 
             override fun onNothingSelected(p0: AdapterView<*>?) {
-                Log.i("MARQUE","OUT")
+                Log.i("MARQUE", "OUT")
             }
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, pos: Int, id: Long) {
                 // An item was selected. You can retrieve the selected item using
-                Log.i("MARQUE","IN")
+                Log.i("MARQUE", "IN")
                 if (parent!!.getItemAtPosition(pos).toString() != "Marque")
                     marqueSelected = parent!!.getItemAtPosition(pos).toString()
-                else marqueSelected=null
+                else marqueSelected = null
                 getResult(token!!)
                 Toast.makeText(activity!!.applicationContext, marqueSelected, Toast.LENGTH_SHORT).show()
             }
         }
 
 
-
         ///
 
         return rootView
     }
-
-
-
-    private fun setSliderViews(layout: SliderLayout) {
-
-        var sliderLayout= layout
-        sliderLayout.setIndicatorAnimation(IndicatorAnimations.THIN_WORM) //set indicator animation by using SliderLayout.Animations. :WORM or THIN_WORM or COLOR or DROP or FILL or NONE or SCALE or SCALE_DOWN or SLIDE and SWAP!!
-        sliderLayout.setSliderTransformAnimation(SliderAnimations.FADETRANSFORMATION)
-        sliderLayout.setScrollTimeInSec(2)
-
-        for (i in 0..3) {
-
-            val sliderView = DefaultSliderView(context)
-
-            when (i) {
-                0 -> sliderView.imageUrl = "https://images.pexels.com/photos/547114/pexels-photo-547114.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-                1 -> sliderView.imageUrl = "https://images.pexels.com/photos/218983/pexels-photo-218983.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-                2 -> sliderView.imageUrl = "https://images.pexels.com/photos/747964/pexels-photo-747964.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"
-                3 -> sliderView.imageUrl = "https://images.pexels.com/photos/929778/pexels-photo-929778.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-            }
-
-            sliderView.setImageScaleType(ImageView.ScaleType.CENTER_CROP)
-            sliderView.description = "setDescription " + (i + 1)
-            sliderView.setOnSliderClickListener { Toast.makeText(context, "This is slider " + (i + 1), Toast.LENGTH_SHORT).show() }
-
-            //at last add this view in your layout :
-            sliderLayout.addSliderView(sliderView)
-        }
-    }
-
-
 
 
     private fun getModelsList(rootView: View?, idToken: String) {
@@ -327,7 +293,7 @@ class SearchFragment: Fragment() {
                 Log.i(TAG, "DisplayModelList: call enqueue")
 
                 if (!response.isSuccessful()) {
-                    Log.i(TAG, "CODE:"+ response.code().toString())
+                    Log.i(TAG, "CODE:" + response.code().toString())
                     return
                 }
 
@@ -346,13 +312,13 @@ class SearchFragment: Fragment() {
             }
 
             override fun onFailure(call: Call<List<Modele>>, t: Throwable) {
-                Log.i(TAG, "error CODE:"+t.message)
+                Log.i(TAG, "error CODE:" + t.message)
             }
         })
     }
 
 
-    private fun getMarquesList(rootView: View, idToken: String) : MutableList<String> {
+    private fun getMarquesList(rootView: View, idToken: String): MutableList<String> {
         var marquesList = mutableListOf<String>()
         Log.i(TAG, "DisplayMarqueList")
         val call = service.getMarques(idToken) // The request included the token
@@ -364,7 +330,7 @@ class SearchFragment: Fragment() {
                 Log.i(TAG, "DisplayMarqueList: call enqueue")
 
                 if (!response.isSuccessful()) {
-                    Log.i(TAG, "CODE:"+ response.code().toString())
+                    Log.i(TAG, "CODE:" + response.code().toString())
                     return
                 }
                 marqueRespond = response.body()  // Getting the marques
@@ -383,17 +349,18 @@ class SearchFragment: Fragment() {
             }
 
             override fun onFailure(call: Call<List<Marque>>, t: Throwable) {
-                Log.i(TAG, "error CODE:"+t.message)
+                Log.i(TAG, "error CODE:" + t.message)
             }
         })
         return marquesList
     }
+
     private fun getResult(idToken: String) {
 
         Log.i(TAG, "DisplayCarList")
 
-        val call = service.getResult(idToken,typeSelected,yearMin,yearMax,kmMin,kmMax,marqueSelected,modelSelected,priceMin,priceMax)
-        if (typeSelected != null) Log.i("TYPEIN",typeSelected)
+        val call = service.getResult(idToken, typeSelected, yearMin, yearMax, kmMin, kmMax, marqueSelected, modelSelected, priceMin, priceMax)
+        if (typeSelected != null) Log.i("TYPEIN", typeSelected)
         var carRespond: List<Car>? = null
 
         call.enqueue(object : Callback<List<Car>> {
@@ -401,7 +368,7 @@ class SearchFragment: Fragment() {
                 Log.i(TAG, "DisplayCarList: call enqueue")
 
                 if (!response.isSuccessful()) {
-                    Log.i(TAG, "CODE:"+ response.code().toString())
+                    Log.i(TAG, "CODE:" + response.code().toString())
                     return
                 }
 
@@ -416,7 +383,6 @@ class SearchFragment: Fragment() {
                         carsList1.add(m)
 
 
-
                     }
                     updateList()
 
@@ -424,12 +390,12 @@ class SearchFragment: Fragment() {
             }
 
             override fun onFailure(call: Call<List<Car>>, t: Throwable) {
-                Log.i(TAG, "error CODE:"+t.message)
+                Log.i(TAG, "error CODE:" + t.message)
             }
         })
     }
 
-    fun popUpFun (view: View ,rootLayout : RelativeLayout) : PopupWindow {
+    fun popUpFun(view: View, rootLayout: RelativeLayout): PopupWindow {
 
         val popupWindow = PopupWindow(
                 view, // Custom view to show in popup window
@@ -443,7 +409,7 @@ class SearchFragment: Fragment() {
 
 
         // If API level 23 or higher then execute the code
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             // Create a new slide animation for popup window enter transition
             val slideIn = Slide()
             slideIn.slideEdge = Gravity.TOP
@@ -470,13 +436,14 @@ class SearchFragment: Fragment() {
     }
 
     private fun setUpRecycleView(list: ArrayList<Car>) {
-        adapter= CarAdapter(list, this@SearchFragment.context!!)
+        adapter = CarAdapter(list, this@SearchFragment.context!!)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = GridLayoutManager(context, 1)
         recyclerView.itemAnimator = SlideInUpAnimator()
         recyclerView.setHasFixedSize(true)
     }
-    private  fun updateList () {
+
+    private fun updateList() {
         carsList.clear()
         carsList.addAll(carsList1)
         adapter.notifyDataSetChanged()
