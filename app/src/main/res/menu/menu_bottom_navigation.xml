@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item
-        app:showAsAction="ifRoom"
-        android:id="@+id/nav_consult"
-        android:icon="@drawable/ic_directions_car_black_24dp"
-        android:title="Vehicule neuf" />
-    <item
-        app:showAsAction="ifRoom"
-        android:id="@+id/nav_compose"
-        android:icon="@drawable/ic_car"
-        android:title="Composer"/>
+
 
     <item
         app:showAsAction="ifRoom"
-        android:id="@+id/nav_search"
+        android:id="@+id/new_car_graph"
+        android:icon="@drawable/ic_directions_car_black_24dp"
+        android:title="Vehicules neufs" />
+    <item
+        app:showAsAction="ifRoom"
+        android:id="@+id/compose_graph"
+        android:icon="@drawable/ic_car"
+        android:title="Annonces"/>
+
+    <item
+        app:showAsAction="ifRoom"
+        android:id="@+id/search_graph"
         android:icon="@drawable/ic_search_black_24dp"
         android:title="Chercher"/>
 
@@ -22,7 +24,7 @@
 
     <item
         app:showAsAction="ifRoom"
-        android:id="@+id/nav_profile"
+        android:id="@+id/profile_graph"
         android:icon="@drawable/ic_account_circle_black_24dp"
         android:title="Profile"/>
 

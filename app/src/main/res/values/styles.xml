@@ -9,9 +9,9 @@
     </style>
     <style name="ThemeSpinner">
         <!-- Color when pressed -->
-        <item name="colorAccent">#ffa000</item>
+        <item name="colorAccent">#00FFFF</item>
         <!-- Default color for the dropdown arrow and line -->
-        <item name="colorControlNormal">@color/colorOrange</item>
+        <item name="colorControlNormal">@color/colorBlue</item>
     </style>
 
 </resources>

@@ -1,6 +1,7 @@
 package sayaradz.authentification
 
-import android.support.test.runner.AndroidJUnit4
+//import android.support.test.runner.AndroidJUnit4
+import androidx.test.runner.AndroidJUnit4
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
@@ -10,7 +11,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import sayaradz.services.ServiceProvider
+import sayaradz.api.ServiceProvider
 
 @RunWith(AndroidJUnit4::class)
 class TestServices : TestCase() {

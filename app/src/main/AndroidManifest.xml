@@ -15,6 +15,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <!-- FACEBOOK -->
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
@@ -36,10 +37,9 @@
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity> <!-- FACEBOOK -->
-        <activity android:name=".MainActivity"
-            android:windowSoftInputMode="adjustNothing"
-            >
-
+        <activity
+            android:name="sayaradz.ui.mainActivity.MainActivity"
+            android:windowSoftInputMode="adjustNothing">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <!--

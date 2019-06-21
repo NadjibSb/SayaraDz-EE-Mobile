@@ -5,4 +5,7 @@
     <string name="fb_login_protocol_scheme">f160971222fc33a78dde29db0c208280</string>
     <string name="login"> Se connecter </string>
 
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>

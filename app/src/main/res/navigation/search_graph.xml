@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/search_graph"
+    app:startDestination="@id/searchFragment"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="sayaradz.ui.fragment.search.SearchFragment"
+        android:label="SearchFragment"
+        tools:layout="@layout/search_fragment"/>
+</navigation>

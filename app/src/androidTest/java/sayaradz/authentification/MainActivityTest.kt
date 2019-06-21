@@ -1,21 +1,20 @@
 package sayaradz.authentification
 
-import android.support.design.widget.BottomNavigationView
-import android.support.test.rule.ActivityTestRule
-import android.view.View
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import sayaradz.ui.mainActivity.MainActivity
 import org.junit.*
 
 class MainActivityTest {
 
-        //@get:Rule var activityTestRule = ActivityTestRule(MainActivity::class.java)
+        ////@get:Rule var activityTestRule = ActivityTestRule(MainActivity::class.java)
 
         @Rule
-        @JvmField var mActivityTestRule = ActivityTestRule(MainActivity::class.java)
+        //@JvmField var mActivityTestRule = ActivityTestRule(MainActivity::class.java)
         var mActivity : MainActivity? = null
 
         @Before
         fun setUp() {
-            mActivity = mActivityTestRule.activity
+            //mActivity = mActivityTestRule.activity
 
         }
         @Test

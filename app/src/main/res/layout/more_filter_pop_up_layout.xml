@@ -1,25 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/colorGrey">
+    android:background="@drawable/pop_up"
+
+    >
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:layout_editor_absoluteX="233dp"
-        tools:layout_editor_absoluteY="16dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         android:id="@+id/rl">
 
         <LinearLayout
             android:id="@+id/ll_model"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_centerHorizontal="true">
             <TextView
+                android:minWidth="155dp"
+                android:textColor="#000"
                 android:id="@+id/tv_model"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -29,10 +40,11 @@
 
             <Spinner
                 android:id="@+id/spinner_modele"
-                style="@style/Widget.AppCompat.Spinner.Underlined"
+                android:background="@drawable/spinner"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
+                android:minWidth="80dp"
                 android:theme="@style/ThemeSpinner" />
         </LinearLayout>
 
@@ -40,9 +52,10 @@
             android:id="@+id/ll_min"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
             android:layout_below="@+id/ll_model"
+            android:layout_alignParentStart="true"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="0dp"
             android:orientation="horizontal">
 
             <TextView
@@ -51,29 +64,31 @@
                 android:layout_height="wrap_content"
                 android:text="Kilométrage Min"
                 android:textSize="17dp"
+                android:minWidth="155dp"
+                android:textColor="#000"
 
 
                 />
 
-            <android.support.v7.widget.AppCompatEditText
+            <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/et_km_min"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint=" (en km) "
                 android:minWidth="80dp"
                 android:textSize="17dp"
-                app:backgroundTint="@color/colorOrange" />
+                app:backgroundTint="@color/colorBlue" />
 
 
         </LinearLayout>
 
         <LinearLayout
+            android:layout_alignParentStart="true"
             android:id="@+id/ll_max"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/ll_min"
             android:layout_centerHorizontal="true"
-            android:layout_marginLeft="10dp"
             android:orientation="horizontal">
 
             <TextView
@@ -82,17 +97,18 @@
                 android:layout_height="wrap_content"
                 android:text="kilométrage Max"
                 android:textSize="17dp"
-
+                android:minWidth="155dp"
+                android:textColor="#000"
                 />
 
-            <android.support.v7.widget.AppCompatEditText
+            <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/et_km_max"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint=" (en km) "
                 android:minWidth="80dp"
                 android:textSize="17dp"
-                app:backgroundTint="@color/colorOrange" />
+                app:backgroundTint="@color/colorBlue" />
 
         </LinearLayout>
 
@@ -103,18 +119,30 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/rl"
         app:layout_constraintRight_toRightOf="@id/rl"
+
         >
         <Button
-            android:id="@+id/btn_apply"
-            style="@style/Widget.AppCompat.Button.Borderless"
+            android:id="@+id/btn_cancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="3dp"
+            android:background="@drawable/borders"
+            android:textAllCaps="false"
+            android:text="Annuler" />
+        <!--android:layout_alignParentStart="true"
+         style="@style/Widget.AppCompat.Button.Borderless"
+        -->
+        <Button
+            android:id="@+id/btn_apply"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:background="@drawable/borders"
+            android:textAllCaps="false"
             android:text="Appliquer" />
-
 
 
     </LinearLayout>
 
 
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

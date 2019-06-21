@@ -4,6 +4,6 @@
     >
     <solid android:color="@color/cardview_light_background" />
     <stroke
-        android:color="@color/colorOrange"
+        android:color="@color/colorBlue"
         android:width="3dp" />
 </shape>

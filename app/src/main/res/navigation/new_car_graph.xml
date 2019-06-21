@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/new_car_graph"
+    app:startDestination="@+id/marqueFragment">
+
+    <fragment
+        android:id="@+id/marqueFragment"
+        android:name="sayaradz.ui.fragment.marque.MarqueFragment"
+        android:label="MarqueFragment">
+        <action
+            android:id="@+id/action_marqueFragment_to_modelFragment"
+            app:destination="@id/modelFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/modelFragment"
+        android:name="sayaradz.ui.fragment.model.ModelFragment"
+        android:label="ModelFragment">
+        <argument
+            android:name="marqueId"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_modelFragment_to_versionFragment"
+            app:destination="@id/versionFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/versionFragment"
+        android:name="sayaradz.ui.fragment.version.VersionFragment"
+        android:label="VersionFragment">
+        <argument
+            android:name="modelId"
+            app:argType="string" />
+    </fragment>
+</navigation>

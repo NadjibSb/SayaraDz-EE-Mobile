@@ -3,9 +3,22 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="colorOrange">#B1771E</color>
+    <color name="colorBlue">#303F9F</color>
+    <color name="colorOrng">#B1771E</color>
     <color name="colorOrangeClaire">#ffedcc</color>
     <color name="colorGrey">#eeeeee</color>
     <color name="colorGrey1">#f5f5dc</color>
+    <color name="Silver">#C0C0C0</color>
+    <color name="Gray">#808080</color>
+    <color name="Blue">#0000FF</color>
+    <color name="DarkBlue">#0000A0</color>
+    <color name="LightBlue">#ADD8E6</color>
+    <color name="Cyan">#00FFFF</color>
+    <color name="Azure">#F0FFFF</color>
+    <color name="Platinum">#E5E4E2</color>
+    <color name="BlurPlatinum">#88E5E4E2</color>
+    <color name="BlurAzure">#99F0FFFF</color>
+
+
 
 </resources>
