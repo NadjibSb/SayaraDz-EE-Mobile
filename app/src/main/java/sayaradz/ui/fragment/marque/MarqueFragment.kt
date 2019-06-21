@@ -27,6 +27,7 @@ class MarqueFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         binding = DataBindingUtil.inflate(inflater, R.layout.marque_fragment, container, false)
+        //(activity as MainActivity).actionBar.title = "Marques"
         marqueViewModel = ViewModelProviders.of(this).get(MarqueViewModel::class.java)
 
 

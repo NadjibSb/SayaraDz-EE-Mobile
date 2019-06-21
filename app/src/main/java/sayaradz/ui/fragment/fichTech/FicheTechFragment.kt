@@ -4,16 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
 import android.widget.ImageView
-import android.widget.ListView
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.smarteist.autoimageslider.DefaultSliderView
 import com.smarteist.autoimageslider.IndicatorAnimations
 import com.smarteist.autoimageslider.SliderAnimations
@@ -21,9 +16,7 @@ import com.smarteist.autoimageslider.SliderLayout
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator
 import sayaradz.authentification.R
 import sayaradz.authentification.databinding.FicheTechFragmentBinding
-import sayaradz.dataClasses.Marque
 import sayaradz.ui.fragment.adapter.ColorAdapter
-import sayaradz.ui.fragment.adapter.ListAdapter
 
 
 class FicheTechFragment : Fragment() {
@@ -47,15 +40,16 @@ class FicheTechFragment : Fragment() {
         setSliderViews(binding.imageSlider)
 
 
-        val mobileArray = arrayListOf("#A14AAF", "#2BBB19", "#123456", "B42381", "F65F13")
+        val mobileArray = arrayListOf("Bleu", "Rouge", "Noir", "Gris", "Blanc", "bordeaux")
         setUpRecycleView(mobileArray)
 
     }
+
     //RecycleView--------------------------------------------
     private fun setUpRecycleView(list: ArrayList<String>) {
         var recyclerView = binding.colorsListView
-        recyclerView.adapter = ColorAdapter(this.context!!,list)
-        recyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL,false)
+        recyclerView.adapter = ColorAdapter(this.context!!, list)
+        recyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         recyclerView.itemAnimator = SlideInUpAnimator()
         recyclerView.setHasFixedSize(true)
     }

@@ -7,7 +7,8 @@
     <color name="colorOrange">#B1771E</color>
     <color name="option_background">#CCCCCC</color>
     <color name="window_background">#FFF</color>
-    <color name="text_color">#FFF</color>
+    <color name="text_color_light">#FFF</color>
+    <color name="dark_grey">#333333</color>
 
 
     <!--<color name="colorPrimary">#3F51B5</color>-->

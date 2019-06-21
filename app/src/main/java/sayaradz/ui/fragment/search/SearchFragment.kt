@@ -359,7 +359,7 @@ class SearchFragment : Fragment() {
 
         Log.i(TAG, "DisplayCarList")
 
-        val call = service.getResult(idToken, typeSelected, yearMin, yearMax, kmMin, kmMax, marqueSelected, modelSelected, priceMin, priceMax)
+        val call = service.getResult(idToken, typeSelected!!, yearMin, yearMax, kmMin, kmMax, marqueSelected, modelSelected, priceMin, priceMax)
         if (typeSelected != null) Log.i("TYPEIN", typeSelected)
         var carRespond: List<Car>? = null
 
