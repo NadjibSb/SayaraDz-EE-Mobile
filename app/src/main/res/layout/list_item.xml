@@ -17,7 +17,7 @@
         android:layout_height="wrap_content">
         <ImageView
             android:id="@+id/img_item_logo"
-            android:layout_width="200dp"
+            android:layout_width="400dp"
             android:layout_height="100dp"
             android:layout_weight="1"
             tools:src="@drawable/m_audi"/>
@@ -27,7 +27,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="12dp"
-            android:fontFamily="serif"
+            android:fontFamily="@font/proxima_nova_regular"
             android:text="Marque test"
             android:textColor="#000"
             android:textSize="20sp"/>

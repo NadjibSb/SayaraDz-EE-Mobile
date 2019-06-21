@@ -35,6 +35,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Modèle de vehicule"
+                android:fontFamily="@font/proxima_nova_regular"
                 android:textSize="17dp"
                 />
 
@@ -63,7 +64,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Kilométrage Min"
+                android:fontFamily="@font/proxima_nova_regular"
                 android:textSize="17dp"
+
                 android:minWidth="155dp"
                 android:textColor="#000"
 
@@ -74,6 +77,7 @@
                 android:id="@+id/et_km_min"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/proxima_nova_regular"
                 android:hint=" (en km) "
                 android:minWidth="80dp"
                 android:textSize="17dp"
@@ -105,6 +109,7 @@
                 android:id="@+id/et_km_max"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/proxima_nova_regular"
                 android:hint=" (en km) "
                 android:minWidth="80dp"
                 android:textSize="17dp"
@@ -128,6 +133,7 @@
             android:layout_margin="3dp"
             android:background="@drawable/borders"
             android:textAllCaps="false"
+            android:fontFamily="@font/proxima_nova_regular"
             android:text="Annuler" />
         <!--android:layout_alignParentStart="true"
          style="@style/Widget.AppCompat.Button.Borderless"
@@ -139,6 +145,7 @@
             android:layout_margin="3dp"
             android:background="@drawable/borders"
             android:textAllCaps="false"
+            android:fontFamily="@font/proxima_nova_regular"
             android:text="Appliquer" />
 
 

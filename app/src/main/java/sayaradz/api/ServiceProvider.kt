@@ -36,7 +36,7 @@ interface ServiceProvider {
 
     // Getting  Query Result Car
     @GET("api/annonce/{type}")
-    fun getResult(@Header("Authorization") token: String ,  @Path("type") type: String?,
+    fun getResult(@Header("Authorization") token: String ,  @Path("type") type: String,
                                                                   @Query("date1") date1 :String?,
                                                                   @Query("date2") date2 :String?,
                                                                   @Query("km1") km1 :String?,

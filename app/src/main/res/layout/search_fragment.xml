@@ -13,13 +13,13 @@
 </androidx.constraintlayout.widget.ConstraintLayout>-->
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/root_layout"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:foreground="@drawable/blur"
     >
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout
 
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
@@ -107,9 +107,16 @@
 
     </androidx.recyclerview.widget.RecyclerView>
 
-
-
-
+    <Button
+        android:id="@+id/btn_reset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:textAllCaps="false"
+        android:textSize="15dp"
+        android:background="@drawable/borders"
+        android:text="Réinitialiser" />
 
 
 </RelativeLayout>
