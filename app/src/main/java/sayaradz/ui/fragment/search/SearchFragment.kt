@@ -39,7 +39,7 @@ class SearchFragment : Fragment() {
     var modelsList = ArrayList<String>()
     var carsList = ArrayList<Car>()
     var carsList1 = ArrayList<Car>()
-    var typeSelected: String? = " "
+    var typeSelected: String ="occasion"
     var marqueSelected: String? = null
     var modelSelected: String? = null
     var priceMin: String? = null

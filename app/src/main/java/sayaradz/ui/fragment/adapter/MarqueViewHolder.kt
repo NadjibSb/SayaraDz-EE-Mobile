@@ -8,6 +8,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.model.GlideUrl
+import com.bumptech.glide.load.model.LazyHeaders
 import sayaradz.authentification.R
 import sayaradz.dataClasses.Marque
 import sayaradz.ui.fragment.marque.MarqueFragmentDirections
@@ -35,11 +38,10 @@ class MarqueViewHolder private constructor(val layout: View) : RecyclerView.View
         handleClick(layout, marque.id)
 
         Log.i("marque", marque.name)
-        /*val imageUrl = GlideUrl(marque.imageUrl, LazyHeaders.Builder()
-                .addHeader("Authorization", token)
+        val imageUrl = GlideUrl(marque.imageUrl, LazyHeaders.Builder()
                 .build())
-        Glide.with(context).load(imageUrl).into(holder.image)*/
-        marqueImage.setImageResource(R.drawable.m_audi)
+        Glide.with(this.marqueImage.context).load(imageUrl).into(this.marqueImage)
+        //marqueImage.setImageResource(R.drawable.m_audi)
     }
 
     private fun handleClick(view: View, marqueId: String) {

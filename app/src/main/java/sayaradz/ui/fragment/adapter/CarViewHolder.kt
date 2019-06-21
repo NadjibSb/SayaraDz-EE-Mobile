@@ -7,6 +7,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.model.GlideUrl
+import com.bumptech.glide.load.model.LazyHeaders
 import sayaradz.authentification.R
 import sayaradz.dataClasses.Car
 import sayaradz.ui.fragment.marque.MarqueFragmentDirections
@@ -33,11 +36,11 @@ class CarViewHolder private constructor(val layout: View) : RecyclerView.ViewHol
         handleClick(layout, announce.id.toString())
 
         Log.i("announce", announce.title)
-        /*val imageUrl = GlideUrl(marque.imageUrl, LazyHeaders.Builder()
-                .addHeader("Authorization", token)
+        //Glide.with(context).load(announce.imageVehicle1).into(this.image)
+        val imageUrl = GlideUrl(announce.imageVehicle1, LazyHeaders.Builder()
                 .build())
-        Glide.with(context).load(imageUrl).into(holder.image)*/
-        announceImage.setImageResource(R.drawable.m_audi)
+        Glide.with(this.announceImage.context).load(imageUrl).into(this.announceImage)
+
     }
 
     private fun handleClick(view: View, marqueId: String) {
