@@ -1,6 +1,6 @@
 package sayaradz.authentification
 
-import android.support.test.rule.ActivityTestRule
+//import android.support.test.rule.ActivityTestRule
 import android.view.View
 import org.junit.After
 import org.junit.Before
@@ -13,12 +13,12 @@ class CreateAccountActivityTest {
 
     //@get:Rule var activityTestRule = ActivityTestRule(MainActivity::class.java)
 
-    @Rule @JvmField var mActivityTestRule = ActivityTestRule(CreateAccountActivity::class.java)
+ //   @Rule @JvmField var mActivityTestRule = ActivityTestRule(CreateAccountActivity::class.java)
     var mActivity : CreateAccountActivity? = null
 
     @Before
     fun setUp() {
-        mActivity = mActivityTestRule.activity
+   //     mActivity = mActivityTestRule.activity
 
     }
    @Test

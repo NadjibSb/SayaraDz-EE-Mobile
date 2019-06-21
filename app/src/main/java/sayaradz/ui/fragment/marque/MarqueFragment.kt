@@ -19,19 +19,19 @@ import sayaradz.ui.fragment.adapter.ListAdapter
 
 class MarqueFragment : Fragment() {
     val TAG = "TAG-MarqueFragment"
-    lateinit var binding : MarqueFragmentBinding
+    lateinit var binding: MarqueFragmentBinding
 
     private lateinit var marqueViewModel: MarqueViewModel
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        binding = DataBindingUtil.inflate(inflater,R.layout.marque_fragment,container,false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.marque_fragment, container, false)
         marqueViewModel = ViewModelProviders.of(this).get(MarqueViewModel::class.java)
 
 
-        marqueViewModel.marques.observe(this, Observer { marques->
-            setUpRecycleView(binding.root, marques )
+        marqueViewModel.marques.observe(this, Observer { marques ->
+            setUpRecycleView(binding.root, marques)
         })
         return binding.root
     }

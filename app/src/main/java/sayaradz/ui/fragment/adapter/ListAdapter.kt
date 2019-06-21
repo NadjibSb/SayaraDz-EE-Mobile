@@ -3,6 +3,7 @@ package sayaradz.ui.fragment.adapter
 import android.content.Context
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import sayaradz.dataClasses.Car
 import sayaradz.dataClasses.Marque
 import sayaradz.dataClasses.Modele
 import sayaradz.dataClasses.Version
@@ -17,7 +18,8 @@ class ListAdapter(val list: List<Any>,
     enum class ViewHolderType {
         MARQUE,
         MODEL,
-        VERSION
+        VERSION,
+        CAR
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -25,6 +27,7 @@ class ListAdapter(val list: List<Any>,
             ViewHolderType.MARQUE -> MarqueViewHolder.creat(parent)
             ViewHolderType.MODEL -> ModelViewHolder.creat(parent)
             ViewHolderType.VERSION -> VersionViewHolder.creat(parent)
+            ViewHolderType.CAR -> CarViewHolder.creat(parent)
         }
 
     }
@@ -45,6 +48,11 @@ class ListAdapter(val list: List<Any>,
                 var version = list[position] as Version
                 holder as VersionViewHolder
                 holder.bind(version)
+            }
+            ViewHolderType.CAR -> {
+                var announce = list[position] as Car
+                holder as CarViewHolder
+                holder.bind(announce)
             }
         }
     }

@@ -8,6 +8,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import sayaradz.api.ServiceBuilder
 import sayaradz.api.ServiceProvider
+import sayaradz.authentification.R
 import sayaradz.dataClasses.Version
 
 class VersionViewModel(val modeleId: String) : ViewModel() {
@@ -19,7 +20,7 @@ class VersionViewModel(val modeleId: String) : ViewModel() {
 
     init {
         api = ServiceBuilder.buildService(ServiceProvider::class.java)
-        versions = getVersions(token, modeleId)
+        versions = defaultList()//getVersions(token, modeleId)
     }
 
     private fun defaultList(): MutableLiveData<ArrayList<Version>> {
@@ -27,7 +28,7 @@ class VersionViewModel(val modeleId: String) : ViewModel() {
         var versionList = ArrayList<Version>()
         var finalList = MutableLiveData<ArrayList<Version>>()
         for (i in 0..20) {
-            //versionList.add(Version("$i", "Version $i", "${R.drawable.m_volkswagen}"))
+            versionList.add(Version("$i", "Version $i", "${R.drawable.m_volkswagen}","url"))
         }
         finalList.value = versionList
         return finalList

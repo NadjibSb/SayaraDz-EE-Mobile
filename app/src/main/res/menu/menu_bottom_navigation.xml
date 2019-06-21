@@ -4,30 +4,27 @@
 
 
     <item
-        app:showAsAction="ifRoom"
-        android:id="@+id/consult_graph"
+        android:id="@+id/new_car_graph"
         android:icon="@drawable/ic_directions_car_black_24dp"
-        android:title="Vehicule neuf" />
+        android:title="Vehicules neufs"
+        app:showAsAction="ifRoom" />
     <item
-        app:showAsAction="ifRoom"
         android:id="@+id/compose_graph"
         android:icon="@drawable/ic_car"
-        android:title="Annonce"/>
+        android:title="Annonces"
+        app:showAsAction="ifRoom" />
 
     <item
-        app:showAsAction="ifRoom"
         android:id="@+id/search_graph"
-        android:icon="@drawable/ic_search_black_24dp"
-        android:title="Chercher"/>
-
-
+        android:icon="@drawable/ic_car_search"
+        android:title="Chercher"
+        app:showAsAction="ifRoom" />
 
     <item
-        app:showAsAction="ifRoom"
         android:id="@+id/profile_graph"
         android:icon="@drawable/ic_account_circle_black_24dp"
-        android:title="Profile"/>
-
+        android:title="Profile"
+        app:showAsAction="ifRoom" />
 
 
 </menu>

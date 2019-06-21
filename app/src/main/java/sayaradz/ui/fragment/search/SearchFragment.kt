@@ -39,7 +39,7 @@ class SearchFragment : Fragment() {
     var modelsList = ArrayList<String>()
     var carsList = ArrayList<Car>()
     var carsList1 = ArrayList<Car>()
-    var typeSelected: String? = null
+    var typeSelected: String? = " "
     var marqueSelected: String? = null
     var modelSelected: String? = null
     var priceMin: String? = null
@@ -244,7 +244,7 @@ class SearchFragment : Fragment() {
                 Log.i("TYPE", "IN")
                 if (parent.getItemAtPosition(pos).toString().toLowerCase() != "type")
                     typeSelected = parent.getItemAtPosition(pos).toString().toLowerCase()
-                else typeSelected = null
+                else typeSelected = " "
                 getResult(token!!)
                 Toast.makeText(activity!!.applicationContext, typeSelected, Toast.LENGTH_SHORT).show()
             }

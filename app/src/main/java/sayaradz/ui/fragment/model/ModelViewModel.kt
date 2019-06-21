@@ -27,6 +27,7 @@ class ModelViewModel(val marqueId: String) : ViewModel() {
         var finalList = MutableLiveData<ArrayList<Modele>>()
         for (i in 0..20) {
             modelList.add(Modele("$i", "Modele $i", "Marque $marqueId", arrayListOf()))//, "${R.drawable.m_volkswagen}"))
+
         }
         finalList.value = modelList
         return finalList
