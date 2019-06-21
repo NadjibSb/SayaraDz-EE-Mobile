@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/compose_graph"
-    app:startDestination="@id/annonceFragment"
+    app:startDestination="@id/composeFragment"
     xmlns:tools="http://schemas.android.com/tools">
 
     <fragment
-        android:id="@+id/annonceFragment"
-        android:name="sayaradz.ui.fragment.annonce.AnnonceFragment"
-        android:label="Annonce" />
+        android:id="@+id/composeFragment"
+        android:name="sayaradz.ui.ComposeFragment"
+        android:label="Composer"
+        tools:layout="@layout/compose_fragment"/>
 </navigation>

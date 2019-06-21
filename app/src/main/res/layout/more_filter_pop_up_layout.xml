@@ -1,50 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/pop_up"
 
     >
+
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 
         xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/rl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:id="@+id/rl">
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:id="@+id/ll_model"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentStart="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_centerHorizontal="true">
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:orientation="horizontal">
+
             <TextView
-                android:minWidth="155dp"
-                android:textColor="#000"
                 android:id="@+id/tv_model"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Modèle de vehicule"
                 android:fontFamily="@font/proxima_nova_regular"
-                android:textSize="17dp"
-                />
+                android:minWidth="155dp"
+                android:text="Modèle de vehicule"
+                android:textColor="#000"
+                android:textSize="17dp" />
 
             <Spinner
                 android:id="@+id/spinner_modele"
-                android:background="@drawable/spinner"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
+                android:background="@drawable/spinner"
                 android:minWidth="80dp"
                 android:theme="@style/ThemeSpinner" />
         </LinearLayout>
@@ -63,12 +61,12 @@
                 android:id="@+id/tv_km_min"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Kilométrage Min"
                 android:fontFamily="@font/proxima_nova_regular"
-                android:textSize="17dp"
-
                 android:minWidth="155dp"
+                android:text="Kilométrage Min"
+
                 android:textColor="#000"
+                android:textSize="17dp"
 
 
                 />
@@ -81,17 +79,17 @@
                 android:hint=" (en km) "
                 android:minWidth="80dp"
                 android:textSize="17dp"
-                app:backgroundTint="@color/colorBlue" />
+                app:backgroundTint="@color/colorRed" />
 
 
         </LinearLayout>
 
         <LinearLayout
-            android:layout_alignParentStart="true"
             android:id="@+id/ll_max"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/ll_min"
+            android:layout_alignParentStart="true"
             android:layout_centerHorizontal="true"
             android:orientation="horizontal">
 
@@ -99,11 +97,10 @@
                 android:id="@+id/tv_km_max"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="kilométrage Max"
-                android:textSize="17dp"
                 android:minWidth="155dp"
+                android:text="kilométrage Max"
                 android:textColor="#000"
-                />
+                android:textSize="17dp" />
 
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/et_km_max"
@@ -113,28 +110,30 @@
                 android:hint=" (en km) "
                 android:minWidth="80dp"
                 android:textSize="17dp"
-                app:backgroundTint="@color/colorBlue" />
+                app:backgroundTint="@color/colorRed" />
 
         </LinearLayout>
 
 
     </RelativeLayout>
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/rl"
         app:layout_constraintRight_toRightOf="@id/rl"
+        app:layout_constraintTop_toBottomOf="@+id/rl"
 
         >
+
         <Button
             android:id="@+id/btn_cancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="3dp"
             android:background="@drawable/borders"
-            android:textAllCaps="false"
             android:fontFamily="@font/proxima_nova_regular"
-            android:text="Annuler" />
+            android:text="Annuler"
+            android:textAllCaps="false" />
         <!--android:layout_alignParentStart="true"
          style="@style/Widget.AppCompat.Button.Borderless"
         -->
@@ -144,9 +143,9 @@
             android:layout_height="wrap_content"
             android:layout_margin="3dp"
             android:background="@drawable/borders"
-            android:textAllCaps="false"
             android:fontFamily="@font/proxima_nova_regular"
-            android:text="Appliquer" />
+            android:text="Appliquer"
+            android:textAllCaps="false" />
 
 
     </LinearLayout>

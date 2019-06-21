@@ -29,11 +29,11 @@ class VersionFragment : Fragment() {
         Toast.makeText(context, "Modele id: ${args.modelId}", Toast.LENGTH_SHORT).show()
 
         var viewModelFactory = VersionViewModelFactory(args.modelId)
-        viewModel = ViewModelProviders.of(this,viewModelFactory)
+        viewModel = ViewModelProviders.of(this, viewModelFactory)
                 .get(VersionViewModel::class.java)
 
         viewModel.versions.observe(this, Observer { versions ->
-            setUpRecycleView(binding.root,versions)
+            setUpRecycleView(binding.root, versions)
         })
 
 

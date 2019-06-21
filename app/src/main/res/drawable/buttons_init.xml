@@ -6,19 +6,18 @@
         android:endColor="#29568C"
         android:startColor="#29568C"
         android:type="sweep"
-        android:useLevel="true"/>
+        android:useLevel="true" />
     <padding
+        android:bottom="10dp"
         android:left="10dp"
-        android:top="10dp"
         android:right="10dp"
-        android:bottom="10dp" />
+        android:top="10dp" />
     <stroke
         android:width="1dp"
         android:color="#29568C"
         android:dashWidth="100dp"
-        android:dashGap="0dp"/>
-    <corners
-        android:radius="20dp"/>
+        android:dashGap="0dp" />
+    <corners android:radius="20dp" />
     <!--android:topLeftRadius="0dp"
     android:topRightRadius="0dp"
     android:bottomLeftRadius="0dp"
@@ -26,6 +25,5 @@
     <size
         android:width="1000dp"
         android:height="100dp" />
-    <solid
-        android:color="#29568C" />
+    <solid android:color="#29568C" />
 </shape>

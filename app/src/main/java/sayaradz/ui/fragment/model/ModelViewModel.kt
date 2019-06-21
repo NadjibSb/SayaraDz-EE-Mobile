@@ -6,9 +6,9 @@ import androidx.lifecycle.ViewModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import sayaradz.dataClasses.Modele
 import sayaradz.api.ServiceBuilder
 import sayaradz.api.ServiceProvider
+import sayaradz.dataClasses.Modele
 
 class ModelViewModel(val marqueId: String) : ViewModel() {
 
@@ -18,7 +18,7 @@ class ModelViewModel(val marqueId: String) : ViewModel() {
 
     init {
         api = ServiceBuilder.buildService(ServiceProvider::class.java)
-        models = getModels("token",marqueId)
+        models = getModels("token", marqueId)
     }
 
     private fun defaultList(): MutableLiveData<ArrayList<Modele>> {
@@ -26,7 +26,8 @@ class ModelViewModel(val marqueId: String) : ViewModel() {
         var modelList = ArrayList<Modele>()
         var finalList = MutableLiveData<ArrayList<Modele>>()
         for (i in 0..20) {
-            modelList.add(Modele("$i","Modele $i","Marque $marqueId", arrayListOf()))//, "${R.drawable.m_volkswagen}"))
+            modelList.add(Modele("$i", "Modele $i", "Marque $marqueId", arrayListOf()))//, "${R.drawable.m_volkswagen}"))
+
         }
         finalList.value = modelList
         return finalList
@@ -37,7 +38,7 @@ class ModelViewModel(val marqueId: String) : ViewModel() {
     private fun getModels(idToken: String, marqueId: String): MutableLiveData<ArrayList<Modele>> {
 
         val call = api.getModelsByMarque(idToken, marqueId) // The request included the token
-        var modeleRespond: List<Modele>? = null
+        var modeleRespond: List<Modele>?
         var modelList = ArrayList<Modele>()
         var finalList = MutableLiveData<ArrayList<Modele>>()
 

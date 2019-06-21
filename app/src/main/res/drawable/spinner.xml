@@ -1,23 +1,26 @@
-<layer-list xmlns:tools="http://schemas.android.com/tools" xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item><shape xmlns:android="http://schemas.android.com/apk/res/android">
-        <solid android:color="@android:color/transparent" />
-        <corners android:radius="20dp" />
-        <stroke
-            android:width="1dp"
-            android:color="@color/colorBlue"
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <item>
+        <shape xmlns:android="http://schemas.android.com/apk/res/android">
+            <solid android:color="@android:color/transparent" />
+            <corners android:radius="20dp" />
+            <stroke
+                android:width="1dp"
+                android:color="@color/colorRed"
 
-            />
-        <padding android:bottom="6dp"
-            android:top="2dp"
-            android:left="5dp"
-            android:right="5dp"/>
-    </shape>
+                />
+            <padding
+                android:bottom="6dp"
+                android:left="5dp"
+                android:right="5dp"
+                android:top="2dp" />
+        </shape>
     </item>
     <item>
-        <bitmap android:gravity="right|center"
-            android:src="@drawable/sort_down16"
-            tools:ignore="VectorDrawableCompat"/>
+        <bitmap
+            android:gravity="right|center"
+            android:src="@drawable/sort_down_red"
+            tools:ignore="VectorDrawableCompat" />
 
     </item>
 

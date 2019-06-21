@@ -1,16 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<!--<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <com.smarteist.autoimageslider.SliderLayout
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:layout_alignParentTop="true"
-        android:id="@+id/imageSlider"/>
-
-</androidx.constraintlayout.widget.ConstraintLayout>-->
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -19,105 +7,105 @@
     android:layout_height="fill_parent"
     android:foreground="@drawable/blur"
     >
-<RelativeLayout
+    <RelativeLayout
 
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:orientation="vertical"
-    android:fitsSystemWindows="true"
-    android:background="@color/cardview_light_background">
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:fitsSystemWindows="true"
+        android:background="@color/cardview_light_background">
 
 
-    <LinearLayout
-        android:id="@+id/layout_filters"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-        <Spinner
-            android:id="@+id/spinner_type"
-            android:background="@drawable/spinner2"
+        <LinearLayout
+            android:id="@+id/layout_filters"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:minWidth="90dp"
-            android:textAlignment="center"
-            android:theme="@style/ThemeSpinner" />
+            android:layout_height="wrap_content">
 
-        <Spinner
-            android:id="@+id/spinner_marque"
-            android:background="@drawable/spinner2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:layout_marginStart="5dp"
-            android:minWidth="120dp"
-            android:textAlignment="center"
-            android:theme="@style/ThemeSpinner" />
+            <Spinner
+                android:id="@+id/spinner_type"
+                android:background="@drawable/spinner2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:minWidth="90dp"
+                android:textAlignment="center"
+                android:theme="@style/ThemeSpinner" />
+
+            <Spinner
+                android:id="@+id/spinner_marque"
+                android:background="@drawable/spinner2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginStart="5dp"
+                android:minWidth="120dp"
+                android:textAlignment="center"
+                android:theme="@style/ThemeSpinner" />
+
+            <Button
+                android:id="@+id/btn_year"
+                android:layout_marginStart="5dp"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/button_border"
+                android:textAllCaps="false"
+                android:minHeight="5dp"
+                android:textColor="@color/colorRed"
+                android:textSize="15dp"
+                android:text="Année" />
+
+            <Button
+                android:id="@+id/btn_price"
+                android:minHeight="5dp"
+                android:layout_marginStart="5dp"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/button_border"
+                android:textAllCaps="false"
+                android:textSize="15dp"
+                android:textColor="@color/colorRed"
+                android:text="Prix" />
+
+
+        </LinearLayout>
 
         <Button
-            android:id="@+id/btn_year"
-            android:layout_marginStart="5dp"
+            android:id="@+id/btn_more_filters"
             style="@style/Widget.AppCompat.Button.Borderless"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:background="@drawable/button_border"
+            android:layout_below="@+id/layout_filters"
+            android:layout_centerHorizontal="true"
+            android:drawableBottom="@drawable/btn_more"
             android:textAllCaps="false"
-            android:minHeight="5dp"
-            android:textColor="@color/colorBlue"
-            android:textSize="15dp"
-            android:text="Année" />
+            android:textColor="@color/colorRed"
+            android:minWidth="0dp"
+            android:text="Plus de filtres" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/carListView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/btn_more_filters"
+            >
+
+        </androidx.recyclerview.widget.RecyclerView>
 
         <Button
-            android:id="@+id/btn_price"
-            android:minHeight="5dp"
-            android:layout_marginStart="5dp"
-            style="@style/Widget.AppCompat.Button.Borderless"
+            android:id="@+id/btn_reset"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:background="@drawable/button_border"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
             android:textAllCaps="false"
             android:textSize="15dp"
-            android:textColor="@color/colorBlue"
-            android:text="Prix" />
+            android:background="@drawable/borders"
+            android:text="Réinitialiser" />
 
 
-    </LinearLayout>
-
-    <Button
-        android:id="@+id/btn_more_filters"
-        style="@style/Widget.AppCompat.Button.Borderless"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/layout_filters"
-        android:layout_centerHorizontal="true"
-        android:drawableBottom="@drawable/btn_more"
-        android:textAllCaps="false"
-        android:textColor="@color/colorBlue"
-        android:minWidth="0dp"
-        android:text="Plus de filtres" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/carListView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/btn_more_filters"
-        >
-
-    </androidx.recyclerview.widget.RecyclerView>
-
-    <Button
-        android:id="@+id/btn_reset"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:textAllCaps="false"
-        android:textSize="15dp"
-        android:background="@drawable/borders"
-        android:text="Réinitialiser" />
-
-
-</RelativeLayout>
+    </RelativeLayout>
 </FrameLayout>

@@ -1,15 +1,15 @@
 package sayaradz.ui.fragment.marque
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator
 import sayaradz.authentification.R
 import sayaradz.authentification.databinding.MarqueFragmentBinding
@@ -19,19 +19,20 @@ import sayaradz.ui.fragment.adapter.ListAdapter
 
 class MarqueFragment : Fragment() {
     val TAG = "TAG-MarqueFragment"
-    lateinit var binding : MarqueFragmentBinding
+    lateinit var binding: MarqueFragmentBinding
 
     private lateinit var marqueViewModel: MarqueViewModel
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        binding = DataBindingUtil.inflate(inflater,R.layout.marque_fragment,container,false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.marque_fragment, container, false)
+        //(activity as MainActivity).actionBar.title = "Marques"
         marqueViewModel = ViewModelProviders.of(this).get(MarqueViewModel::class.java)
 
 
-        marqueViewModel.marques.observe(this, Observer { marques->
-            setUpRecycleView(binding.root, marques )
+        marqueViewModel.marques.observe(this, Observer { marques ->
+            setUpRecycleView(binding.root, marques)
         })
         return binding.root
     }

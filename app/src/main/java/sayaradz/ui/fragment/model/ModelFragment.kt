@@ -16,7 +16,6 @@ import sayaradz.authentification.R
 import sayaradz.authentification.databinding.ModelFragmentBinding
 import sayaradz.dataClasses.Modele
 import sayaradz.ui.fragment.adapter.ListAdapter
-import sayaradz.ui.fragment.model.ModelFragmentArgs
 
 class ModelFragment : Fragment() {
 

@@ -1,11 +1,11 @@
 package sayaradz.dataClasses
 
 import com.google.gson.annotations.SerializedName
-// Annonce & véhicule neuf
+
 data class Car(
         @SerializedName("id")
         var id: Int = 0,
-        @SerializedName("titre")
+        @SerializedName("title")
         var title: String = "",
         @SerializedName("pseudoUser")
         var userPseudo: String = "",

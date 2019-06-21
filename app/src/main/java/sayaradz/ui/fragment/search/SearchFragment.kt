@@ -94,15 +94,15 @@ class SearchFragment : Fragment() {
         marqueAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         //Reset
         btnReset.setOnClickListener{
-             typeSelected=""
-             marqueSelected =null
-             modelSelected= null
-             priceMin= null
-             priceMax = null
-             kmMin = null
-             kmMax= null
-             yearMin= null
-             yearMax = null
+            typeSelected=""
+            marqueSelected =null
+            modelSelected= null
+            priceMin= null
+            priceMax = null
+            kmMin = null
+            kmMax= null
+            yearMin= null
+            yearMax = null
             spinnerMarque.setSelection(0)
             spinnerType.setSelection(0)
             getResult(token!!)

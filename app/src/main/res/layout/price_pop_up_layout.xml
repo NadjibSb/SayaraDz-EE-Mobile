@@ -26,10 +26,10 @@
                 android:id="@+id/tv_min"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Prix Min"
-                android:textSize="17dp"
                 android:minWidth="90dp"
+                android:text="Prix Min"
                 android:textColor="#000"
+                android:textSize="17dp"
 
 
                 />
@@ -41,7 +41,7 @@
                 android:hint=" (en million) "
                 android:minWidth="100dp"
                 android:textSize="17dp"
-                app:backgroundTint="@color/colorBlue" />
+                app:backgroundTint="@color/colorRed" />
 
 
         </LinearLayout>
@@ -61,8 +61,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:minWidth="90dp"
-                android:textColor="#000"
                 android:text="Prix Max"
+                android:textColor="#000"
                 android:textSize="17dp"
 
                 />
@@ -74,7 +74,7 @@
                 android:hint=" (en million) "
                 android:minWidth="100dp"
                 android:textSize="17dp"
-                app:backgroundTint="@color/colorBlue" />
+                app:backgroundTint="@color/colorRed" />
 
         </LinearLayout>
     </RelativeLayout>

@@ -6,10 +6,10 @@ import androidx.lifecycle.ViewModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import sayaradz.authentification.R
-import sayaradz.dataClasses.Marque
 import sayaradz.api.ServiceBuilder
 import sayaradz.api.ServiceProvider
+import sayaradz.authentification.R
+import sayaradz.dataClasses.Marque
 
 class MarqueViewModel : ViewModel() {
 
@@ -31,7 +31,7 @@ class MarqueViewModel : ViewModel() {
             marqueList.add(Marque(i.toString(), "Marque $i", "${R.drawable.m_audi}"))
         }
         finalList.value = marqueList
-        return  finalList
+        return finalList
 
     }
 
@@ -40,7 +40,7 @@ class MarqueViewModel : ViewModel() {
 
 
         val call = api.getMarques(idToken) // The request included the token
-        var marqueRespond: List<Marque>? = null
+        var marqueRespond: List<Marque>?
         var marqueList = ArrayList<Marque>()
         var finalList = MutableLiveData<ArrayList<Marque>>()
 

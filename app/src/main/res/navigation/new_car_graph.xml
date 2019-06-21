@@ -3,12 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/new_car_graph"
-    app:startDestination="@+id/marqueFragment">
+    app:startDestination="@id/marqueFragment">
 
     <fragment
         android:id="@+id/marqueFragment"
         android:name="sayaradz.ui.fragment.marque.MarqueFragment"
-        android:label="MarqueFragment">
+        android:label="Marques"
+        tools:layout="@layout/marque_fragment">
         <action
             android:id="@+id/action_marqueFragment_to_modelFragment"
             app:destination="@id/modelFragment" />
@@ -16,7 +17,8 @@
     <fragment
         android:id="@+id/modelFragment"
         android:name="sayaradz.ui.fragment.model.ModelFragment"
-        android:label="ModelFragment">
+        android:label="Modeles"
+        tools:layout="@layout/model_fragment">
         <argument
             android:name="marqueId"
             app:argType="string" />
@@ -27,9 +29,18 @@
     <fragment
         android:id="@+id/versionFragment"
         android:name="sayaradz.ui.fragment.version.VersionFragment"
-        android:label="VersionFragment">
+        android:label="Versions"
+        tools:layout="@layout/version_fragment">
         <argument
             android:name="modelId"
             app:argType="string" />
+        <action
+            android:id="@+id/action_versionFragment_to_ficheTechFragment"
+            app:destination="@id/ficheTechFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/ficheTechFragment"
+        android:name="sayaradz.ui.fragment.fichTech.FicheTechFragment"
+        android:label="Fiche Technique"
+        tools:layout="@layout/fiche_tech_fragment" />
 </navigation>

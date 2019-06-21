@@ -6,13 +6,15 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowBackground">@color/window_background</item>
         <item name="android:fontFamily">@font/proxima_nova_regular</item>
     </style>
+
     <style name="ThemeSpinner">
         <!-- Color when pressed -->
         <item name="colorAccent">#00FFFF</item>
         <!-- Default color for the dropdown arrow and line -->
-        <item name="colorControlNormal">@color/colorBlue</item>
+        <item name="colorControlNormal">@color/colorRed</item>
     </style>
 
 </resources>
