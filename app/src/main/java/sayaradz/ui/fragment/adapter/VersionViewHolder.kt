@@ -10,7 +10,6 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import sayaradz.authentification.R
 import sayaradz.dataClasses.Version
-import sayaradz.ui.fragment.marque.MarqueFragmentDirections
 import sayaradz.ui.fragment.version.VersionFragmentDirections
 
 class VersionViewHolder private constructor(val layout: View) : RecyclerView.ViewHolder(layout) {
@@ -39,7 +38,7 @@ class VersionViewHolder private constructor(val layout: View) : RecyclerView.Vie
                 .addHeader("Authorization", token)
                 .build())
         Glide.with(context).load(imageUrl).into(holder.image)*/
-        versionImage.setImageResource(R.drawable.m_audi)
+        versionImage.setImageResource(R.drawable.a3_sedan)
     }
 
     private fun handleClick(view: View, marqueId: String) {

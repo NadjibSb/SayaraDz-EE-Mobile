@@ -36,7 +36,7 @@ class SearchFragment : Fragment() {
     var token: String? = ""
     val TAG = "TAG-SearchFragment"
     var brandList = mutableListOf<String>()//ArrayList<String>()
-    var modelsList = ArrayList<String>()
+    var modelList = mutableListOf<String>()
     var carsList = ArrayList<Car>()
     var carsList1 = ArrayList<Car>()
     var typeSelected: String ="occasion"
@@ -48,42 +48,66 @@ class SearchFragment : Fragment() {
     var kmMax: String? = null
     var yearMin: String? = null
     var yearMax: String? = null
+    lateinit var marqueAdapter: ArrayAdapter<String>
+    lateinit var modelAdapter: ArrayAdapter<String>
     lateinit var popup: PopupWindow
     val marqueeList = mutableListOf("Marque", "Ford", "Infiniti", "Renault") //For test
-    val modellsList = mutableListOf("Model", "208", "301") //For test
+    val modellsList = mutableListOf("Modèle", "208", "301") //For test
     lateinit var recyclerView: RecyclerView
     val service = ServiceBuilder.buildService(ServiceProvider::class.java)
     lateinit var adapter: CarAdapter
+    var M1 = "-01-01"
+    var M2 = "-12-31"
 
 
     companion object {
         fun getInstance() = SearchFragment()
     }
 
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val rootView = inflater?.inflate(R.layout.search_fragment, container, false)
-
-
+        val rootView = inflater.inflate(R.layout.search_fragment, container, false)
         var spinnerType = rootView.findViewById<View>(R.id.spinner_type) as Spinner
         var spinnerMarque = rootView.findViewById<View>(R.id.spinner_marque) as Spinner
-        var rootLayout = rootView.findViewById<View>(R.id.root_layout) as RelativeLayout
+        var rootLayout = rootView.findViewById<View>(R.id.root_layout) as FrameLayout
         var btnYear = rootView.findViewById<View>(R.id.btn_year) as Button
         var btnPrice = rootView.findViewById<View>(R.id.btn_price) as Button
         var btnMore = rootView.findViewById<View>(R.id.btn_more_filters) as Button
+        var btnReset = rootView.findViewById<View>(R.id.btn_reset) as Button
+        rootView.foreground.alpha = 0
         recyclerView = rootView.findViewById(R.id.carListView) as RecyclerView
         setUpRecycleView(carsList)
         getResult(token!!)
-
-        //Havinge tge Token to  ACCESS
+        Log.i(TAG, "QUERY")
+        updateList()
+        setUpRecycleView(carsList)
+        //Having the Token to  ACCESS
         token = ""// this.arguments!!.getString("TOKEN")
         Log.i(TAG, "TOKEN RECEIVED: $token")
 
         // REMPLIR LIST WITH QUERY
         brandList = getMarquesList(rootView, token!!)
-        // REMPLIR LIST WITH QUERY
-        getModelsList(rootView, token!!)
+        modelList = getModelsList(rootView, token!!)
 
+        modelAdapter = ArrayAdapter<String>(activity?.applicationContext, R.layout.spinner_item, modelList)
+        modelAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        marqueAdapter = ArrayAdapter<String>(activity?.applicationContext, R.layout.spinner_item, brandList)
+        marqueAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        //Reset
+        btnReset.setOnClickListener{
+            typeSelected=""
+            marqueSelected =null
+            modelSelected= null
+            priceMin= null
+            priceMax = null
+            kmMin = null
+            kmMax= null
+            yearMin= null
+            yearMax = null
+            spinnerMarque.setSelection(0)
+            spinnerType.setSelection(0)
+            getResult(token!!)
+
+        }
 
         //PopUpYear
         btnYear.setOnClickListener {
@@ -92,28 +116,25 @@ class SearchFragment : Fragment() {
 
             // Inflate a custom view using layout inflater
             val view = inflater.inflate(R.layout.year_pop_up_layout, null)
-
-            popUpFun(view, rootLayout)
+            rootView.foreground.alpha = 255
+            popup = popUpFun(view, rootLayout)
 
             // Get the widgets reference from custom view
             var spinnerYear = view.findViewById<View>(R.id.spinner_yearStart) as Spinner
             var spinnerYearEnd = view.findViewById<View>(R.id.spinner_yearEnd) as Spinner
-
-
+            var btnApply = view.findViewById<Button>(R.id.btn_apply)
+            var btnCancel = view.findViewById<Button>(R.id.btn_cancel)
             //YearSpinner 10 last years
             val current_year = Calendar.getInstance().get(Calendar.YEAR).toString()
             val yearsList: MutableList<String> = mutableListOf(current_year)
             for (i in 1..10) yearsList.add((current_year.toInt() - i).toString())
-            yearsList.add(0, "Choisir..")
+            yearsList.add(0, "Choisir")
 
             val adapter = ArrayAdapter<String>(activity?.applicationContext, R.layout.spinner_item, yearsList)
-            // Set layout to use when the list of choices appear
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             // Set Adapter to Spinner
             spinnerYear!!.setAdapter(adapter)
             spinnerYearEnd!!.setAdapter(adapter)
-
-
             spinnerYear.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
 
                 override fun onNothingSelected(p0: AdapterView<*>?) {
@@ -122,11 +143,10 @@ class SearchFragment : Fragment() {
 
                 override fun onItemSelected(parent: AdapterView<*>, view: View, pos: Int, id: Long) {
                     // An item was selected. You can retrieve the selected item using
-                    if (parent.getItemAtPosition(pos).toString() != "Choisir..")
-                        yearMin = parent.getItemAtPosition(pos).toString()
+                    if (parent.getItemAtPosition(pos).toString() != "Choisir")
+                        yearMin = parent.getItemAtPosition(pos).toString() + M1
                     else yearMin = null
-                    getResult(token!!)
-                    Toast.makeText(activity!!.applicationContext, yearMin, Toast.LENGTH_SHORT).show()
+
                 }
             }
             spinnerYearEnd.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -136,74 +156,84 @@ class SearchFragment : Fragment() {
                 }
 
                 override fun onItemSelected(parent: AdapterView<*>, view: View, pos: Int, id: Long) {
-                    if (parent.getItemAtPosition(pos).toString() != "Choisir..")
-                        yearMax = parent.getItemAtPosition(pos).toString()
+                    if (parent.getItemAtPosition(pos).toString() != "Choisir")
+                        yearMax = parent.getItemAtPosition(pos).toString() + M2
                     else yearMax = null
-                    getResult(token!!)
-                    Toast.makeText(activity?.applicationContext, yearMax, Toast.LENGTH_SHORT).show()
+
                 }
+            }
+            btnApply.setOnClickListener {
+                getResult(token!!)
+                popup.dismiss()
+                rootView.foreground.alpha = 0
+            }
+            btnCancel.setOnClickListener {
+                yearMax = null
+                yearMin = null
+                popup.dismiss()
+                rootView.foreground.alpha = 0
             }
         }
         //PopUpPrice
         btnPrice.setOnClickListener {
-
             val inflater: LayoutInflater = getActivity()?.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-
-            // Inflate a custom view using layout inflater
             val view = inflater.inflate(R.layout.price_pop_up_layout, null)
-
+            rootView.foreground.alpha = 255
             popup = popUpFun(view, rootLayout)
-
-            // Get the widgets reference from custom view
             var priceMinEt = view.findViewById<EditText>(R.id.et_min)
             var priceMaxEt = view.findViewById<EditText>(R.id.et_max)
             var btnApply = view.findViewById<Button>(R.id.btn_apply)
-            btnApply.setOnClickListener {
+            var btnCancel = view.findViewById<Button>(R.id.btn_cancel)
 
+            btnApply.setOnClickListener {
                 priceMin = priceMinEt.text.toString()
                 priceMax = priceMaxEt.text.toString()
                 getResult(token!!)
                 Toast.makeText(activity!!.applicationContext, priceMin + " " + priceMax, Toast.LENGTH_SHORT).show()
                 popup.dismiss()
+                rootView.foreground.alpha = 0
 
+            }
+
+            btnCancel.setOnClickListener {
+                priceMin = null
+                priceMax = null
+                popup.dismiss()
+                rootView.getForeground().alpha = 0
             }
         }
 
         //PopUpMoreFilter
         btnMore.setOnClickListener {
-
             val inflater: LayoutInflater = getActivity()?.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-
-            // Inflate a custom view using layout inflater
             val view = inflater.inflate(R.layout.more_filter_pop_up_layout, null)
-
-            // Initialize a new instance of popup window
-
+            rootView.foreground.alpha = 255
             popup = popUpFun(view, rootLayout)
-
-            // Get the widgets reference from custom view
             var kmMinEt = view.findViewById<View>(R.id.et_km_min) as EditText
             var kmMaxEt = view.findViewById<View>(R.id.et_km_max) as EditText
             var btnApply = view.findViewById<Button>(R.id.btn_apply)
+            var btnCancel = view.findViewById<Button>(R.id.btn_cancel)
             btnApply.setOnClickListener {
 
                 kmMin = kmMinEt.text.toString()
                 kmMax = kmMaxEt.text.toString()
                 getResult(token!!)
-                Toast.makeText(activity?.applicationContext, "KmMin" + kmMin + "  KmMax" + kmMax, Toast.LENGTH_SHORT).show()
-                Toast.makeText(activity?.applicationContext, modelSelected, Toast.LENGTH_SHORT).show()
                 popup.dismiss()
+                rootView.getForeground().alpha = 0
 
 
             }
+            btnCancel.setOnClickListener {
+
+                kmMin = null
+                kmMax = null
+                modelSelected = null
+                popup.dismiss()
+                rootView.getForeground().alpha = 0
+            }
             var spinnerModel = view.findViewById<View>(R.id.spinner_modele) as Spinner
 
-
-            val adapter = ArrayAdapter<String>(activity?.applicationContext, R.layout.spinner_item, modellsList)
-            // Set layout to use when the list of choices appear
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            // Set Adapter to Spinner
-            spinnerModel.adapter = adapter
+            spinnerModel.adapter = modelAdapter
             spinnerModel.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
 
                 override fun onNothingSelected(p0: AdapterView<*>?) {
@@ -211,8 +241,7 @@ class SearchFragment : Fragment() {
                 }
 
                 override fun onItemSelected(parent: AdapterView<*>, view: View, pos: Int, id: Long) {
-                    // An item was selected. You can retrieve the selected item using
-                    if (parent?.getItemAtPosition(pos).toString() != "Model")
+                    if (parent.getItemAtPosition(pos).toString() != "Modèle")
                         modelSelected = parent.getItemAtPosition(pos).toString()
                     else modelSelected = null
 
@@ -221,70 +250,50 @@ class SearchFragment : Fragment() {
 
         }
 
-
         // TypeSpinner
         ArrayAdapter.createFromResource(
                 activity!!.applicationContext,
                 R.array.types_array,
                 R.layout.spinner_item
         ).also { adapter ->
-            // Specify the layout to use when the list of choices appears
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            // Apply the adapter to the spinner
             spinnerType.adapter = adapter
         }
         spinnerType.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
 
             override fun onNothingSelected(p0: AdapterView<*>?) {
 
+
             }
 
             override fun onItemSelected(parent: AdapterView<*>, view: View, pos: Int, id: Long) {
-                // An item was selected. You can retrieve the selected item using
                 Log.i("TYPE", "IN")
                 if (parent.getItemAtPosition(pos).toString().toLowerCase() != "type")
                     typeSelected = parent.getItemAtPosition(pos).toString().toLowerCase()
-                else typeSelected = " "
+                else typeSelected = ""
                 getResult(token!!)
-                Toast.makeText(activity!!.applicationContext, typeSelected, Toast.LENGTH_SHORT).show()
             }
         }
 
-        //MarqueSpinner//
-        val adapter = ArrayAdapter<String>(activity!!.applicationContext, R.layout.spinner_item, marqueeList)
-        // Set layout to use when the list of choices appear
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        // Set Adapter to Spinner
-        spinnerMarque.setAdapter(adapter)
+        spinnerMarque.adapter = marqueAdapter
         spinnerMarque.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
 
             override fun onNothingSelected(p0: AdapterView<*>?) {
-                Log.i("MARQUE", "OUT")
             }
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, pos: Int, id: Long) {
-                // An item was selected. You can retrieve the selected item using
-                Log.i("MARQUE", "IN")
                 if (parent!!.getItemAtPosition(pos).toString() != "Marque")
-                    marqueSelected = parent!!.getItemAtPosition(pos).toString()
+                    marqueSelected = parent.getItemAtPosition(pos).toString()
                 else marqueSelected = null
                 getResult(token!!)
-                Toast.makeText(activity!!.applicationContext, marqueSelected, Toast.LENGTH_SHORT).show()
             }
         }
-
-
-        ///
-
         return rootView
     }
 
-
-    private fun getModelsList(rootView: View?, idToken: String) {
-
-
+    private fun getModelsList(rootView: View?, idToken: String): MutableList<String> {
+        var modelsList = mutableListOf<String>()
         Log.i(TAG, "DisplayModelList")
-
         val call = service.getModels(idToken) // The request included the token
         var modelRespond: List<Modele>? = null
 
@@ -296,18 +305,16 @@ class SearchFragment : Fragment() {
                     Log.i(TAG, "CODE:" + response.code().toString())
                     return
                 }
-
                 modelRespond = response.body()  // Getting the marques
                 if (modelRespond != null) {
                     Log.i(TAG, "REPONSES: HERE is ALL MODELS FROM OUR SERVER:")
                     for (m in modelRespond!!) {
                         var content = "Name: " + m.name + "\n"
-
                         Log.i(TAG, "\n=> MODEL:  $content")
                         modelsList!!.add(m.name)
-
-
                     }
+                    modelsList.add(0, "Modèle")
+                    modelAdapter.notifyDataSetChanged()
                 }
             }
 
@@ -315,6 +322,7 @@ class SearchFragment : Fragment() {
                 Log.i(TAG, "error CODE:" + t.message)
             }
         })
+        return modelsList
     }
 
 
@@ -322,13 +330,10 @@ class SearchFragment : Fragment() {
         var marquesList = mutableListOf<String>()
         Log.i(TAG, "DisplayMarqueList")
         val call = service.getMarques(idToken) // The request included the token
-
         var marqueRespond: List<Marque>? = null
-
         call.enqueue(object : Callback<List<Marque>> {
             override fun onResponse(call: Call<List<Marque>>, response: Response<List<Marque>>) {
                 Log.i(TAG, "DisplayMarqueList: call enqueue")
-
                 if (!response.isSuccessful()) {
                     Log.i(TAG, "CODE:" + response.code().toString())
                     return
@@ -338,12 +343,11 @@ class SearchFragment : Fragment() {
                     Log.i(TAG, "REPONSES: HERE is ALL THE BRANDS FROM OUR SERVER:")
                     for (m in marqueRespond!!) {
                         var content = "Name: " + m.name + "\n"
-
                         Log.i(TAG, "\n=> CONTENT:  $content")
                         marquesList!!.add(m.name)
-
-
                     }
+                    marquesList.add(0, "Marque")
+                    marqueAdapter.notifyDataSetChanged()
                 }
 
             }
@@ -354,12 +358,9 @@ class SearchFragment : Fragment() {
         })
         return marquesList
     }
-
     private fun getResult(idToken: String) {
-
         Log.i(TAG, "DisplayCarList")
-
-        val call = service.getResult(idToken, typeSelected!!, yearMin, yearMax, kmMin, kmMax, marqueSelected, modelSelected, priceMin, priceMax)
+        val call = service.getResult(idToken, typeSelected, yearMin, yearMax, kmMin, kmMax, marqueSelected, modelSelected, priceMin, priceMax)
         if (typeSelected != null) Log.i("TYPEIN", typeSelected)
         var carRespond: List<Car>? = null
 
@@ -381,11 +382,8 @@ class SearchFragment : Fragment() {
 
                         Log.i(TAG, "\n=> CONTENT:  $content")
                         carsList1.add(m)
-
-
                     }
                     updateList()
-
                 }
             }
 
@@ -395,32 +393,24 @@ class SearchFragment : Fragment() {
         })
     }
 
-    fun popUpFun(view: View, rootLayout: RelativeLayout): PopupWindow {
+    fun popUpFun(view: View, rootLayout: FrameLayout): PopupWindow {
 
         val popupWindow = PopupWindow(
                 view, // Custom view to show in popup window
                 LinearLayout.LayoutParams.WRAP_CONTENT, // Width of popup window
                 LinearLayout.LayoutParams.WRAP_CONTENT // Window height
         )
-        // Set an elevation for the popup window
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            popupWindow.elevation = 10.0F
-        }
-
-
         // If API level 23 or higher then execute the code
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             // Create a new slide animation for popup window enter transition
             val slideIn = Slide()
             slideIn.slideEdge = Gravity.TOP
             popupWindow.enterTransition = slideIn
-
             // Slide animation for popup window exit transition
             val slideOut = Slide()
             slideOut.slideEdge = Gravity.RIGHT
             popupWindow.exitTransition = slideOut
             popupWindow.isFocusable = true
-            //popupWindow.setFocusable(true)
             popupWindow.update()
         }
 

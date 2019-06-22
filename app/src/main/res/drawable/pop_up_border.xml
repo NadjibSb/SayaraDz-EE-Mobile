@@ -4,5 +4,5 @@
     <solid android:color="@color/cardview_light_background" />
     <stroke
         android:width="3dp"
-        android:color="@color/colorBlue" />
+        android:color="@color/colorRed" />
 </shape>

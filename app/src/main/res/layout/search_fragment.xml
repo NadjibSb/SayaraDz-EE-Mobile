@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/root_layout"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:foreground="@drawable/blur">
-
+    android:foreground="@drawable/blur"
+    >
     <RelativeLayout
 
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:background="@color/cardview_light_background"
+        android:orientation="vertical"
         android:fitsSystemWindows="true"
-        android:orientation="vertical">
+        android:background="@color/cardview_light_background">
 
 
         <LinearLayout
@@ -22,52 +23,52 @@
 
             <Spinner
                 android:id="@+id/spinner_type"
+                android:background="@drawable/spinner2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:background="@drawable/spinner2"
                 android:minWidth="90dp"
                 android:textAlignment="center"
                 android:theme="@style/ThemeSpinner" />
 
             <Spinner
                 android:id="@+id/spinner_marque"
+                android:background="@drawable/spinner2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
                 android:layout_marginTop="15dp"
-                android:background="@drawable/spinner2"
+                android:layout_marginStart="5dp"
                 android:minWidth="120dp"
                 android:textAlignment="center"
                 android:theme="@style/ThemeSpinner" />
 
             <Button
                 android:id="@+id/btn_year"
+                android:layout_marginStart="5dp"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
                 android:layout_marginTop="15dp"
                 android:background="@drawable/button_border"
-                android:minHeight="5dp"
-                android:text="Année"
                 android:textAllCaps="false"
-                android:textColor="@color/colorBlue"
-                android:textSize="15dp" />
+                android:minHeight="5dp"
+                android:textColor="@color/colorRed"
+                android:textSize="15dp"
+                android:text="Année" />
 
             <Button
                 android:id="@+id/btn_price"
+                android:minHeight="5dp"
+                android:layout_marginStart="5dp"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
                 android:layout_marginTop="15dp"
                 android:background="@drawable/button_border"
-                android:minHeight="5dp"
-                android:text="Prix"
                 android:textAllCaps="false"
-                android:textColor="@color/colorBlue"
-                android:textSize="15dp" />
+                android:textSize="15dp"
+                android:textColor="@color/colorRed"
+                android:text="Prix" />
 
 
         </LinearLayout>
@@ -80,16 +81,17 @@
             android:layout_below="@+id/layout_filters"
             android:layout_centerHorizontal="true"
             android:drawableBottom="@drawable/btn_more"
-            android:minWidth="0dp"
-            android:text="Plus de filtres"
             android:textAllCaps="false"
-            android:textColor="@color/colorBlue" />
+            android:textColor="@color/colorRed"
+            android:minWidth="0dp"
+            android:text="Plus de filtres" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/carListView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/btn_more_filters">
+            android:layout_below="@+id/btn_more_filters"
+            >
 
         </androidx.recyclerview.widget.RecyclerView>
 
@@ -99,11 +101,14 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"
-            android:background="@drawable/borders"
+            android:layout_marginRight="0dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/colored_button"
             android:text="Réinitialiser"
             android:textAllCaps="false"
+            android:textColor="#FFF"
             android:textSize="15dp" />
 
 
     </RelativeLayout>
-</RelativeLayout>
+</FrameLayout>

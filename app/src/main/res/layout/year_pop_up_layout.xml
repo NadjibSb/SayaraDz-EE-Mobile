@@ -64,7 +64,6 @@
                 android:layout_height="wrap_content"
                 android:minWidth="120dp"
                 android:text="Année Fin"
-
                 android:textColor="#000"
                 android:textSize="17dp" />
 

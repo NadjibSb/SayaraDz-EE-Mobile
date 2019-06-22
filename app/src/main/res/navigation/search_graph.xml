@@ -8,6 +8,6 @@
     <fragment
         android:id="@+id/searchFragment"
         android:name="sayaradz.ui.fragment.search.SearchFragment"
-        android:label="Search"
+        android:label="Rechercher Véhicule"
         tools:layout="@layout/search_fragment" />
 </navigation>

@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
     <item>
         <shape android:shape="rectangle" >
-            <solid android:color="@color/colorBlue" />
+            <solid android:color="@color/colorRed" />
         </shape>
     </item>
     <item android:bottom="2dp">
@@ -13,7 +13,7 @@
     </item>
     <item>
         <bitmap android:gravity="right|center"
-            android:src="@drawable/sort_down16"
+            android:src="@drawable/sort_down_red"
             tools:ignore="VectorDrawableCompat"/>
 
     </item>

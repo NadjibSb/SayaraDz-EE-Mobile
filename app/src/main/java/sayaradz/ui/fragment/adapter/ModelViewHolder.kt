@@ -8,9 +8,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.model.GlideUrl
-import com.bumptech.glide.load.model.LazyHeaders
 import sayaradz.authentification.R
 import sayaradz.dataClasses.Modele
 import sayaradz.ui.fragment.model.ModelFragmentDirections
@@ -40,7 +37,7 @@ class ModelViewHolder private constructor(val layout: View) : RecyclerView.ViewH
       /*  val imageUrl = GlideUrl(modele.imageUrl, LazyHeaders.Builder()
                 .build())
         Glide.with(this.modelImage.context).load(imageUrl).into(this.modelImage)*/
-        modelImage.setImageResource(R.drawable.m_audi)
+        modelImage.setImageResource(R.drawable.a3_sedan)
     }
 
     private fun handleClick(view: View, modelId: String) {

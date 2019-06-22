@@ -20,7 +20,7 @@ class VersionViewModel(val modeleId: String) : ViewModel() {
 
     init {
         api = ServiceBuilder.buildService(ServiceProvider::class.java)
-        versions = defaultList()//getVersions(token, modeleId)
+        versions = getVersions(token, modeleId)
     }
 
     private fun defaultList(): MutableLiveData<ArrayList<Version>> {
@@ -28,7 +28,7 @@ class VersionViewModel(val modeleId: String) : ViewModel() {
         var versionList = ArrayList<Version>()
         var finalList = MutableLiveData<ArrayList<Version>>()
         for (i in 0..20) {
-            versionList.add(Version("$i", "Version $i", "${R.drawable.m_volkswagen}","url"))
+            versionList.add(Version("$i", "Version $i", "${R.drawable.a3_sedan}","url"))
         }
         finalList.value = versionList
         return finalList
