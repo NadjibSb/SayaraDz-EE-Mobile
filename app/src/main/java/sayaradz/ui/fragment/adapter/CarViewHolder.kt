@@ -15,13 +15,8 @@ import sayaradz.dataClasses.Car
 import sayaradz.ui.fragment.marque.MarqueFragmentDirections
 
 class CarViewHolder private constructor(val layout: View) : RecyclerView.ViewHolder(layout) {
-    var announceName: TextView
-    var announceImage: ImageView
-
-    init {
-        announceName = itemView.findViewById(R.id.item_name)
-        announceImage = itemView.findViewById(R.id.img_item_logo)
-    }
+    private var announceName: TextView = itemView.findViewById(R.id.item_name)
+    private var announceImage: ImageView = itemView.findViewById(R.id.img_item_logo)
 
     companion object {
         fun creat(parent: ViewGroup): CarViewHolder {
@@ -32,7 +27,7 @@ class CarViewHolder private constructor(val layout: View) : RecyclerView.ViewHol
     }
 
     fun bind(announce: Car) {
-        announceName.setText(announce.title)
+        announceName.text = announce.title
         handleClick(layout, announce.id.toString())
 
         Log.i("announce", announce.title)

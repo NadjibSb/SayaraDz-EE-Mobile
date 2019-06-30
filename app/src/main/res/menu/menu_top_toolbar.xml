@@ -6,6 +6,6 @@
     <item
         android:id="@+id/action_favorite"
         android:icon="@drawable/ic_logout"
-        android:title="logout"
+        android:title="Logout"
         app:showAsAction="ifRoom"/>
 </menu>

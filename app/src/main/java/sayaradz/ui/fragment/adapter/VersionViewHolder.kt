@@ -13,13 +13,8 @@ import sayaradz.dataClasses.Version
 import sayaradz.ui.fragment.version.VersionFragmentDirections
 
 class VersionViewHolder private constructor(val layout: View) : RecyclerView.ViewHolder(layout) {
-    var versionName: TextView
-    var versionImage: ImageView
-
-    init {
-        versionName = itemView.findViewById(R.id.item_name)
-        versionImage = itemView.findViewById(R.id.img_item_logo)
-    }
+    private var versionName: TextView = itemView.findViewById(R.id.item_name)
+    private var versionImage: ImageView = itemView.findViewById(R.id.img_item_logo)
 
     companion object {
         fun creat(parent: ViewGroup): VersionViewHolder {
@@ -30,7 +25,7 @@ class VersionViewHolder private constructor(val layout: View) : RecyclerView.Vie
     }
 
     fun bind(version: Version) {
-        versionName.setText(version.name)
+        versionName.text = version.name
         handleClick(layout, version.id)
 
         Log.i("version", version.name)

@@ -20,7 +20,7 @@ class MarqueViewModel : ViewModel() {
 
     init {
         api = ServiceBuilder.buildService(ServiceProvider::class.java)
-        marques = getMarques(token)
+        marques = defaultList()//getMarques(token)
     }
 
     private fun defaultList(): MutableLiveData<ArrayList<Marque>> {

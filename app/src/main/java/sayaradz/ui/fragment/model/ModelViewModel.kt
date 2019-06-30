@@ -18,7 +18,7 @@ class ModelViewModel(val marqueId: String) : ViewModel() {
 
     init {
         api = ServiceBuilder.buildService(ServiceProvider::class.java)
-        models = getModels("token", marqueId)
+        models = defaultList()//getModels("token", marqueId)
     }
 
     private fun defaultList(): MutableLiveData<ArrayList<Modele>> {

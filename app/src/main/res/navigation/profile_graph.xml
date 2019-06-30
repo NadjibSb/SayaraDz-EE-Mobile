@@ -6,7 +6,32 @@
 
     <fragment
         android:id="@+id/profileFragment"
-        android:name="sayaradz.ui.ProfileFragment"
+        android:name="sayaradz.ui.fragment.profile.ProfileFragment"
         android:label="Profile"
-        tools:layout="@layout/profile_fragment"/>
+        tools:layout="@layout/profile_fragment">
+        <action
+            android:id="@+id/action_profileFragment_to_notificationFragment"
+            app:destination="@id/notificationFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_myOffersFragment"
+            app:destination="@id/myOffersFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_myCommandsFragment"
+            app:destination="@id/myCommandsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/notificationFragment"
+        android:name="sayaradz.ui.fragment.notification.NotificationFragment"
+        android:label="Notifications"
+        tools:layout="@layout/notification_fragment" />
+    <fragment
+        android:id="@+id/myCommandsFragment"
+        android:name="sayaradz.ui.fragment.myCommands.MyCommandsFragment"
+        android:label="Mes Commandes"
+        tools:layout="@layout/my_commands_fragment" />
+    <fragment
+        android:id="@+id/myOffersFragment"
+        android:name="sayaradz.ui.fragment.myOffers.MyOffersFragment"
+        android:label="Mes Offres"
+        tools:layout="@layout/my_offers_fragment" />
 </navigation>

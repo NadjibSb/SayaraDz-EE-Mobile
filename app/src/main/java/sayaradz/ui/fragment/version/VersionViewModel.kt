@@ -20,7 +20,7 @@ class VersionViewModel(val modeleId: String) : ViewModel() {
 
     init {
         api = ServiceBuilder.buildService(ServiceProvider::class.java)
-        versions = getVersions(token, modeleId)
+        versions = defaultList()//getVersions(token, modeleId)
     }
 
     private fun defaultList(): MutableLiveData<ArrayList<Version>> {

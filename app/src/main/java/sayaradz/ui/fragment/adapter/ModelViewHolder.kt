@@ -13,13 +13,8 @@ import sayaradz.dataClasses.Modele
 import sayaradz.ui.fragment.model.ModelFragmentDirections
 
 class ModelViewHolder private constructor(val layout: View) : RecyclerView.ViewHolder(layout) {
-    var modelName: TextView
-    var modelImage: ImageView
-
-    init {
-        modelName = itemView.findViewById(R.id.item_name)
-        modelImage = itemView.findViewById(R.id.img_item_logo)
-    }
+    var modelName: TextView = itemView.findViewById(R.id.item_name)
+    var modelImage: ImageView = itemView.findViewById(R.id.img_item_logo)
 
     companion object {
         fun creat(parent: ViewGroup): ModelViewHolder {
@@ -30,7 +25,7 @@ class ModelViewHolder private constructor(val layout: View) : RecyclerView.ViewH
     }
 
     fun bind(modele: Modele) {
-        modelName.setText(modele.name)
+        modelName.text = modele.name
         handleClick(layout, modele.id)
 
         Log.i("modele", modele.name)

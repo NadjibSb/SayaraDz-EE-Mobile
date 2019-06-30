@@ -17,13 +17,8 @@ import sayaradz.ui.fragment.marque.MarqueFragmentDirections
 
 
 class MarqueViewHolder private constructor(val layout: View) : RecyclerView.ViewHolder(layout) {
-    var marqueName: TextView
-    var marqueImage: ImageView
-
-    init {
-        marqueName = itemView.findViewById(R.id.item_name)
-        marqueImage = itemView.findViewById(R.id.img_item_logo)
-    }
+    private var marqueName: TextView = itemView.findViewById(R.id.item_name)
+    private var marqueImage: ImageView = itemView.findViewById(R.id.img_item_logo)
 
     companion object {
         fun creat(parent: ViewGroup): MarqueViewHolder {
@@ -34,7 +29,7 @@ class MarqueViewHolder private constructor(val layout: View) : RecyclerView.View
     }
 
     fun bind(marque: Marque) {
-        marqueName.setText(marque.name)
+        marqueName.text = marque.name
         handleClick(layout, marque.id)
 
         Log.i("marque", marque.name)

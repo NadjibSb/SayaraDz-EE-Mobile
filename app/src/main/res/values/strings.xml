@@ -10,5 +10,18 @@
     <string name="fich_tech_description">Peugeot 208 Tech Vision 1.6 HDI 92ch</string>
     <string name="fiche_technique">Fiche Technique</string>
     <string name="options">Options</string>
+    <string name="motorisation">Motorisation :</string>
+    <string name="boite_vitesse">Boite vitesse :</string>
+    <string name="transmission">Transmission :</string>
+    <string name="puissance">Puissance :</string>
+    <string name="consomation">Consomation :</string>
+    <string name="reservoir">Reservoir :</string>
+    <string name="vitesse_max">Vitesse Max :</string>
+    <string name="acceleration">Acceleration :</string>
+    <string name="dimmensions">Dimmensions :</string>
+    <string name="nombre_de_portes">Nombre de Portes :</string>
+    <string name="nombre_de_places">Nombre de places :</string>
+    <string name="prix">Prix :</string>
+    <string name="price_updated">Price updated</string>
 
 </resources>
