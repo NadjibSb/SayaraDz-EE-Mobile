@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import sayaradz.authentification.R
 import sayaradz.dataClasses.Version
 import sayaradz.ui.fragment.version.VersionFragmentDirections
+import sayaradz.ui.mainActivity.MainActivity
 
 class VersionViewHolder private constructor(val layout: View) : RecyclerView.ViewHolder(layout) {
     var versionName: TextView
@@ -42,9 +43,13 @@ class VersionViewHolder private constructor(val layout: View) : RecyclerView.Vie
     }
 
     private fun handleClick(view: View, marqueId: String) {
-        val action = VersionFragmentDirections.actionVersionFragmentToFicheTechFragment()
-        view.setOnClickListener { v: View ->
-            v.findNavController().navigate(action)
+        if (MainActivity.active) {
+            val action = VersionFragmentDirections.actionVersionFragmentToFicheTechFragment()
+            view.setOnClickListener { v: View ->
+                v.findNavController().navigate(action)
+            }
+        } else {
+
         }
     }
 }

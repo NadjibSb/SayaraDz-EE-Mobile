@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName
 data class Marque(
         @SerializedName("pk")
         var id:String,
-        @SerializedName("nomMarque")
+        @SerializedName("nom")
         var name:String,
-        @SerializedName("imageMarque")
+        @SerializedName("image")
         var imageUrl:String)

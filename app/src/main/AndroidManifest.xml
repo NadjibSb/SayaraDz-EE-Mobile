@@ -15,8 +15,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-        <!-- FACEBOOK -->
+        <activity android:name="sayaradz.ui.addAnnonce.AddAnnonceActivity"></activity>
+        <activity
+            android:name="sayaradz.ui.myAnnonces.MesAnnoncesActivity"
+            android:label="@string/title_activity_mes_annonces"
+            android:theme="@style/AppTheme.NoActionBar" /> <!-- FACEBOOK -->
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />

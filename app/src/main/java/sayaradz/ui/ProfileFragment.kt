@@ -1,5 +1,6 @@
 package sayaradz.ui
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,6 +11,8 @@ import android.widget.TextView
 import com.google.firebase.auth.FirebaseAuth
 import com.squareup.picasso.Picasso
 import sayaradz.authentification.R
+import sayaradz.ui.addAnnonce.AddAnnonceActivity
+import sayaradz.ui.myAnnonces.MesAnnoncesActivity
 
 class ProfileFragment : Fragment() {
 
@@ -32,6 +35,7 @@ class ProfileFragment : Fragment() {
         ivProfilePicture = rootView.findViewById<ImageView>(R.id.iv_profile)
         tvName = rootView.findViewById<TextView>(R.id.tv_name)
         tvEmail = rootView.findViewById<TextView>(R.id.tv_email)
+        val mesAnnonces = rootView.findViewById<View>(R.id.annonce_layout)
         val user = firebaseAuth?.currentUser
 
         tvName.text = user?.displayName
@@ -39,6 +43,11 @@ class ProfileFragment : Fragment() {
         Picasso.with(context)
                 .load(user?.photoUrl)
                 .into(ivProfilePicture)
+        mesAnnonces.setOnClickListener {
+
+            startActivity(Intent(rootView.context, MesAnnoncesActivity::class.java))
+
+        }
 
         return rootView
     }

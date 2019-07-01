@@ -23,6 +23,9 @@ const val API_URL="https://sayaradz-ee-backend.herokuapp.com/"
 
 
 class MainActivity : AppCompatActivity() {
+    companion object {
+        var active = false
+    }
     val TAG = "TAG-MainActivity"
     private lateinit var binding: ActivityMainBinding
     private var currentNavController: LiveData<NavController>? = null
@@ -45,11 +48,17 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
+        active=true
         mainActivityViewModel.isAuth().observe(this, Observer { isAuth ->
             if (!isAuth)
                 Toast.makeText(this, "Not connected", Toast.LENGTH_SHORT).show()
                 //startActivity(Intent(this@MainActivity, CreateAccountActivity::class.java))
         })
+    }
+
+    override fun onStop() {
+        super.onStop()
+        active=false
     }
 
     /**
@@ -75,7 +84,7 @@ class MainActivity : AppCompatActivity() {
     private fun setupBottomNavigationBar() {
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
 
-        val navGraphIds = listOf(R.navigation.new_car_graph, R.navigation.search_graph, R.navigation.annonce_graph, R.navigation.profile_graph)
+        val navGraphIds = listOf(R.navigation.new_car_graph, R.navigation.search_graph, R.navigation.home_graph, R.navigation.profile_graph)
 
         // Setup the bottom navigation view with a list of navigation graphs
         val controller = bottomNavigationView.setupWithNavController(

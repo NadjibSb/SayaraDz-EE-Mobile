@@ -14,6 +14,7 @@ import com.bumptech.glide.load.model.LazyHeaders
 import sayaradz.authentification.R
 import sayaradz.dataClasses.Marque
 import sayaradz.ui.fragment.marque.MarqueFragmentDirections
+import sayaradz.ui.mainActivity.MainActivity
 
 
 class MarqueViewHolder private constructor(val layout: View) : RecyclerView.ViewHolder(layout) {
@@ -38,16 +39,24 @@ class MarqueViewHolder private constructor(val layout: View) : RecyclerView.View
         handleClick(layout, marque.id)
 
         Log.i("marque", marque.name)
-        val imageUrl = GlideUrl(marque.imageUrl, LazyHeaders.Builder()
-                .build())
-        Glide.with(this.marqueImage.context).load(imageUrl).into(this.marqueImage)
-        //marqueImage.setImageResource(R.drawable.m_audi)
+        if (marque.imageUrl != "") {
+            val imageUrl = GlideUrl(marque.imageUrl, LazyHeaders.Builder()
+                    .build())
+            Glide.with(this.marqueImage.context).load(imageUrl).into(this.marqueImage)
+            //marqueImage.setImageResource(R.drawable.m_audi)
+        }
     }
 
     private fun handleClick(view: View, marqueId: String) {
-        val action = MarqueFragmentDirections.actionMarqueFragmentToModelFragment(marqueId)
-        view.setOnClickListener { v: View ->
-            v.findNavController().navigate(action)
+        if (MainActivity.active) {
+            val action = MarqueFragmentDirections.actionMarqueFragmentToModelFragment(marqueId)
+            view.setOnClickListener { v: View ->
+                v.findNavController().navigate(action)
+            }
+        }
+        else {
+
+
         }
     }
 }

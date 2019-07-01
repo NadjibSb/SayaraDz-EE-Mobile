@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/profile_graph"
-    app:startDestination="@id/profileFragment"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/profile_graph"
+    app:startDestination="@+id/profileFragment">
 
     <fragment
         android:id="@+id/profileFragment"
         android:name="sayaradz.ui.ProfileFragment"
-        android:label="Profile"
-        tools:layout="@layout/profile_fragment"/>
+        android:label="Profile" />
 </navigation>

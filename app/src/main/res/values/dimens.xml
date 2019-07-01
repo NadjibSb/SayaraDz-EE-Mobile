@@ -3,4 +3,5 @@
     <dimen name="dim_item_marque">5dp</dimen>
     <dimen name="item_textSize">20sp</dimen>
     <dimen name="option_padding">6dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
 </resources>

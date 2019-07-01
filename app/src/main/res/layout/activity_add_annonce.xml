@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="sayaradz.ui.addAnnonce.AddAnnonceActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/TopToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:titleTextColor="#FFF"
+        app:menu="@menu/menu_top_toolbar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+            <LinearLayout
+                android:id="@+id/ll_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?android:attr/selectableItemBackground"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                app:layout_constraintTop_toBottomOf="@+id/TopToolbar">
+
+                <ImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_title" />
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:text="Titre de l'annonce"
+                    android:textSize="16sp"
+                    android:minWidth="125dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageView2"
+                    app:layout_constraintStart_toEndOf="@+id/imageView2"
+                    app:layout_constraintTop_toTopOf="@+id/imageView2" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="32dp"
+                    android:layout_marginStart="10dp"
+                    android:minWidth="100dp"
+                    android:textSize="17dp"
+                    app:backgroundTint="@color/colorRed"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toEndOf="@+id/textView"
+                    app:layout_constraintTop_toTopOf="@+id/textView" />
+
+            </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_descr"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/selectableItemBackground"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        app:layout_constraintTop_toBottomOf="@+id/ll_title">
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_desc" />
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:minWidth="125dp"
+            android:text="Description"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView3"
+            app:layout_constraintStart_toEndOf="@+id/imageView3"
+            app:layout_constraintTop_toTopOf="@+id/imageView3" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="32dp"
+            android:layout_marginStart="10dp"
+            android:minWidth="100dp"
+            android:textSize="17dp"
+            app:backgroundTint="@color/colorRed"
+            app:layout_constraintBottom_toBottomOf="@+id/textView1"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/textView1"
+            app:layout_constraintTop_toTopOf="@+id/textView1" />
+
+    </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/ll_info"
+            android:layout_marginTop="25dp"
+            app:layout_constraintTop_toBottomOf="@id/ll_descr"
+            app:layout_constraintStart_toStartOf="parent"
+            android:orientation="vertical"
+            >
+
+            <com.alespero.expandablecardview.ExpandableCardView
+                android:id="@+id/ecv_marque"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:title="Marque"
+                app:inner_view="@layout/item_marque_dropdown"
+                app:expandOnClick="true"
+                app:animationDuration="300"
+                app:startExpanded="false"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginBottom="20dp"
+                android:background="#000"
+                />
+
+            <com.alespero.expandablecardview.ExpandableCardView
+                android:id="@+id/ecv_model"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:title="Modèle"
+                app:inner_view="@layout/item_model_dropdown"
+                app:expandOnClick="true"
+                app:animationDuration="300"
+                app:startExpanded="false"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginBottom="20dp"
+                android:background="#000"
+                />
+            <com.alespero.expandablecardview.ExpandableCardView
+                android:id="@+id/ecv_version"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:title="Version"
+                app:inner_view="@layout/item_version_dropdown"
+                app:expandOnClick="true"
+                app:animationDuration="300"
+                app:startExpanded="false"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginBottom="20dp"
+                android:background="#000"
+                />
+            <com.alespero.expandablecardview.ExpandableCardView
+                android:id="@+id/ecv_others"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:title="Autres Informations"
+                app:inner_view="@layout/item_others_dropdown"
+                app:expandOnClick="true"
+                app:animationDuration="300"
+                app:startExpanded="false"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginBottom="20dp"
+                android:background="#000"
+                />
+        </LinearLayout>
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="75dp"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="@id/ll_info"
+        app:srcCompat="@drawable/ic_car" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

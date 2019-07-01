@@ -55,7 +55,7 @@ class CreateAccountActivity : AppCompatActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_account)
-        Log.i(TAG, "onCreat")
+        Log.i(TAG, "onCreate")
 
         googleSignInButton = findViewById<View>(R.id.google_sign_in_button) as SignInButton
         facebookSignInButton = findViewById<View>(R.id.facebook_sign_in_button) as LoginButton

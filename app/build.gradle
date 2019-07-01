@@ -90,5 +90,6 @@ dependencies {
     implementation "androidx.room:room-runtime:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
     implementation 'de.hdodenhof:circleimageview:3.0.0'
+    implementation 'com.alespero:expandable-cardview:0.8'
 }
 apply plugin: 'com.google.gms.google-services'

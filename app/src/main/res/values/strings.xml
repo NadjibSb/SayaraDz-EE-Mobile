@@ -10,5 +10,6 @@
     <string name="fich_tech_description">Peugeot 208 Tech Vision 1.6 HDI 92ch</string>
     <string name="fiche_technique">Fiche Technique</string>
     <string name="options">Options</string>
+    <string name="title_activity_mes_annonces">mesAnnoncesActivity</string>
 
 </resources>

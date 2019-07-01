@@ -3,12 +3,12 @@ package sayaradz.dataClasses
 import com.google.gson.annotations.SerializedName
 
 data class Modele (
-        @SerializedName("codeModele")
+        @SerializedName("code")
         var id: String,
         @SerializedName("nom")
         var name: String,
-        @SerializedName("marque")
-        var marque: String,
-        @SerializedName("imageModel")
-        var imageUrl: List<String>
+        @SerializedName("pk")
+        var pk: String,
+        @SerializedName("couleur_set")
+        var colors : List<String>
 )

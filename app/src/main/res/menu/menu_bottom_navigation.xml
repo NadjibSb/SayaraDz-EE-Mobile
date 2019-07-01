@@ -9,9 +9,9 @@
         android:title="Vehicules neufs"
         app:showAsAction="ifRoom" />
     <item
-        android:id="@+id/compose_graph"
-        android:icon="@drawable/ic_car"
-        android:title="Annonces"
+        android:id="@+id/home_graph"
+        android:icon="@drawable/ic_car_garage"
+        android:title="Accueil"
         app:showAsAction="ifRoom" />
 
     <item

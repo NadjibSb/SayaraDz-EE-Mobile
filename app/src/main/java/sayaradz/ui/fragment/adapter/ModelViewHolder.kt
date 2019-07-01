@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import sayaradz.authentification.R
 import sayaradz.dataClasses.Modele
 import sayaradz.ui.fragment.model.ModelFragmentDirections
+import sayaradz.ui.mainActivity.MainActivity
 
 class ModelViewHolder private constructor(val layout: View) : RecyclerView.ViewHolder(layout) {
     var modelName: TextView
@@ -41,9 +42,14 @@ class ModelViewHolder private constructor(val layout: View) : RecyclerView.ViewH
     }
 
     private fun handleClick(view: View, modelId: String) {
-        val action = ModelFragmentDirections.actionModelFragmentToVersionFragment(modelId)
-        view.setOnClickListener { v: View ->
-            v.findNavController().navigate(action)
+        if (MainActivity.active) {
+            val action = ModelFragmentDirections.actionModelFragmentToVersionFragment(modelId)
+            view.setOnClickListener { v: View ->
+                v.findNavController().navigate(action)
+            }
+        } else {
+
+
         }
     }
 }

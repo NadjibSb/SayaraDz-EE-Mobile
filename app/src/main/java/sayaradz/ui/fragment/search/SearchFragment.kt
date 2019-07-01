@@ -14,10 +14,6 @@ import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.smarteist.autoimageslider.DefaultSliderView
-import com.smarteist.autoimageslider.IndicatorAnimations
-import com.smarteist.autoimageslider.SliderAnimations
-import com.smarteist.autoimageslider.SliderLayout
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator
 import retrofit2.Call
 import retrofit2.Callback
@@ -39,7 +35,7 @@ class SearchFragment : Fragment() {
     var modelList = mutableListOf<String>()
     var carsList = ArrayList<Car>()
     var carsList1 = ArrayList<Car>()
-    var typeSelected: String ="occasion"
+    var typeSelected: String = "occasion"
     var marqueSelected: String? = null
     var modelSelected: String? = null
     var priceMin: String? = null
@@ -93,15 +89,15 @@ class SearchFragment : Fragment() {
         marqueAdapter = ArrayAdapter<String>(activity?.applicationContext, R.layout.spinner_item, brandList)
         marqueAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         //Reset
-        btnReset.setOnClickListener{
-            typeSelected=""
-            marqueSelected =null
-            modelSelected= null
-            priceMin= null
+        btnReset.setOnClickListener {
+            typeSelected = ""
+            marqueSelected = null
+            modelSelected = null
+            priceMin = null
             priceMax = null
             kmMin = null
-            kmMax= null
-            yearMin= null
+            kmMax = null
+            yearMin = null
             yearMax = null
             spinnerMarque.setSelection(0)
             spinnerType.setSelection(0)
@@ -358,6 +354,7 @@ class SearchFragment : Fragment() {
         })
         return marquesList
     }
+
     private fun getResult(idToken: String) {
         Log.i(TAG, "DisplayCarList")
         val call = service.getResult(idToken, typeSelected, yearMin, yearMax, kmMin, kmMax, marqueSelected, modelSelected, priceMin, priceMax)
