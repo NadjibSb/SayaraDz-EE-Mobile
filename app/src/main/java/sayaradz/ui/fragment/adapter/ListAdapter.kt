@@ -17,7 +17,8 @@ class ListAdapter(val list: List<Any>,
         MODEL,
         VERSION,
         CAR,
-        NOTIFICATION
+        NOTIFICATION,
+        OFFER
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -27,6 +28,7 @@ class ListAdapter(val list: List<Any>,
             ViewHolderType.VERSION -> VersionViewHolder.creat(parent)
             ViewHolderType.CAR -> CarViewHolder.creat(parent)
             ViewHolderType.NOTIFICATION -> NotificationViewHolder.creat(parent)
+            ViewHolderType.OFFER -> OfferViewHolder.creat(parent)
         }
 
     }
@@ -57,6 +59,11 @@ class ListAdapter(val list: List<Any>,
                 var notif = list[position] as Notification
                 holder as NotificationViewHolder
                 holder.bind(notif)
+            }
+            ViewHolderType.OFFER -> {
+                var offer = list[position] as Offer
+                holder as OfferViewHolder
+                holder.bind(offer)
             }
         }
     }

@@ -9,7 +9,6 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="16dp"
         android:background="@drawable/item_list_rounded_corners">
 
 
@@ -19,11 +18,13 @@
             android:layout_height="70dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            tools:src="@drawable/ic_image"
+            android:layout_marginBottom="16dp"
             app:civ_border_color="#AAF05545"
             app:civ_border_width="1dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/ic_image" />
 
         <TextView
             android:id="@+id/annonce_title"
@@ -44,15 +45,30 @@
             android:id="@+id/annonce_offer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
+            android:layout_marginBottom="8dp"
+            android:textColor="@color/colorPrimaryLight"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/annonce_title"
-            app:layout_constraintTop_toBottomOf="@+id/annonce_title"
+            app:layout_constraintTop_toBottomOf="@+id/annonce_date"
             tools:text="320 000 DA" />
 
+        <TextView
+            android:id="@+id/annonce_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="12-12-2019"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/annonce_title"
+            app:layout_constraintTop_toBottomOf="@+id/annonce_title" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -29,6 +29,5 @@ class NotificationViewModel : ViewModel() {
         }
         finalList.value = list
         return finalList
-
     }
 }

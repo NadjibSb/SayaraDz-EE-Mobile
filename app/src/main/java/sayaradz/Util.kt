@@ -10,7 +10,7 @@ import java.text.SimpleDateFormat
 
 @SuppressLint("SimpleDateFormat")
 fun convertLongToDateString(systemTime: Long): String {
-    return SimpleDateFormat("MMM-dd-yyyy' 'HH:mm")
+    return SimpleDateFormat("dd-mm-yyyy' 'HH:mm")
             .format(systemTime).toString()
 }
 
