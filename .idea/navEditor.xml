@@ -183,6 +183,18 @@
             <LayoutPositions>
               <option name="myPositions">
                 <map>
+                  <entry key="annonceFragment2">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="221" />
+                            <option name="y" value="-461" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="myCommandsFragment">
                     <value>
                       <LayoutPositions>

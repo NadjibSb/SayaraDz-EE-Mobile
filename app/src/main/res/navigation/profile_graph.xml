@@ -18,6 +18,9 @@
         <action
             android:id="@+id/action_profileFragment_to_myCommandsFragment"
             app:destination="@id/myCommandsFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_annonceFragment2"
+            app:destination="@id/annonceFragment2" />
     </fragment>
     <fragment
         android:id="@+id/notificationFragment"
@@ -34,4 +37,9 @@
         android:name="sayaradz.ui.fragment.myOffers.MyOffersFragment"
         android:label="Mes Offres"
         tools:layout="@layout/my_offers_fragment" />
+    <fragment
+        android:id="@+id/annonceFragment2"
+        android:name="sayaradz.ui.fragment.annonce.AnnonceFragment"
+        android:label="Annonces"
+        tools:layout="@layout/annonce_fragment"  />
 </navigation>

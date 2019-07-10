@@ -54,5 +54,9 @@ class ProfileFragment : Fragment() {
             var action = ProfileFragmentDirections.actionProfileFragmentToMyCommandsFragment()
             v.findNavController().navigate(action)
         }
+        binding.annonceLayout.setOnClickListener { v->
+            var action = ProfileFragmentDirections.actionProfileFragmentToAnnonceFragment2()
+            v.findNavController().navigate(action)
+        }
     }
 }
