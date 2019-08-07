@@ -15,13 +15,8 @@ import sayaradz.dataClasses.Car
 import sayaradz.ui.fragment.marque.MarqueFragmentDirections
 
 class CarViewHolder private constructor(val layout: View) : RecyclerView.ViewHolder(layout) {
-    var announceName: TextView
-    var announceImage: ImageView
-
-    init {
-        announceName = itemView.findViewById(R.id.item_name)
-        announceImage = itemView.findViewById(R.id.img_item_logo)
-    }
+    var announceName: TextView = itemView.findViewById(R.id.item_name)
+    var announceImage: ImageView = itemView.findViewById(R.id.img_item_logo)
 
     companion object {
         fun creat(parent: ViewGroup): CarViewHolder {

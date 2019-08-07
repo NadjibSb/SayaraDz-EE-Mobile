@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RadioButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import sayaradz.authentification.R
@@ -11,6 +12,7 @@ import sayaradz.authentification.R
 class ColorAdapter(private val context: Context,
                    private val data: ArrayList<String>) : RecyclerView.Adapter<ColorAdapter.ColorViewHolder>() {
 
+    var mSelectedItem = -1
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ColorViewHolder {
         return ColorViewHolder.creat(parent)
@@ -26,9 +28,11 @@ class ColorAdapter(private val context: Context,
 
 
     class ColorViewHolder private constructor(val layout: View) : RecyclerView.ViewHolder(layout) {
-        var textView: TextView
+        var textView: RadioButton = itemView.findViewById(R.id.circle)
         init {
-            textView = itemView.findViewById(R.id.circle)
+            val l = View.OnClickListener { view ->
+
+            }
         }
 
         companion object {
@@ -42,6 +46,9 @@ class ColorAdapter(private val context: Context,
 
         fun bind(item: String) {
             textView.text = item
+            textView.setOnClickListener {
+                
+            }
         }
 
     }

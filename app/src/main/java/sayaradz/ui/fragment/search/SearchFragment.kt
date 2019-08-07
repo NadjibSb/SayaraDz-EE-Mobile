@@ -14,10 +14,6 @@ import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.smarteist.autoimageslider.DefaultSliderView
-import com.smarteist.autoimageslider.IndicatorAnimations
-import com.smarteist.autoimageslider.SliderAnimations
-import com.smarteist.autoimageslider.SliderLayout
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator
 import retrofit2.Call
 import retrofit2.Callback
@@ -294,7 +290,7 @@ class SearchFragment : Fragment() {
     private fun getModelsList(rootView: View?, idToken: String): MutableList<String> {
         var modelsList = mutableListOf<String>()
         Log.i(TAG, "DisplayModelList")
-        val call = service.getModels(idToken) // The request included the token
+        val call = service.getAllModels(idToken) // The request included the token
         var modelRespond: List<Modele>? = null
 
         call.enqueue(object : Callback<List<Modele>> {
@@ -329,7 +325,7 @@ class SearchFragment : Fragment() {
     private fun getMarquesList(rootView: View, idToken: String): MutableList<String> {
         var marquesList = mutableListOf<String>()
         Log.i(TAG, "DisplayMarqueList")
-        val call = service.getMarques(idToken) // The request included the token
+        val call = service.getAllMarques(idToken) // The request included the token
         var marqueRespond: List<Marque>? = null
         call.enqueue(object : Callback<List<Marque>> {
             override fun onResponse(call: Call<List<Marque>>, response: Response<List<Marque>>) {

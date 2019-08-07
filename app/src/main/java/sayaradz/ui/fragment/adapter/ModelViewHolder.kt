@@ -8,18 +8,17 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.model.GlideUrl
+import com.bumptech.glide.load.model.LazyHeaders
+import com.bumptech.glide.request.RequestOptions
 import sayaradz.authentification.R
 import sayaradz.dataClasses.Modele
 import sayaradz.ui.fragment.model.ModelFragmentDirections
 
 class ModelViewHolder private constructor(val layout: View) : RecyclerView.ViewHolder(layout) {
-    var modelName: TextView
-    var modelImage: ImageView
-
-    init {
-        modelName = itemView.findViewById(R.id.item_name)
-        modelImage = itemView.findViewById(R.id.img_item_logo)
-    }
+    var modelName: TextView = itemView.findViewById(R.id.item_name)
+    var modelImage: ImageView = itemView.findViewById(R.id.img_item_logo)
 
     companion object {
         fun creat(parent: ViewGroup): ModelViewHolder {
@@ -31,13 +30,15 @@ class ModelViewHolder private constructor(val layout: View) : RecyclerView.ViewH
 
     fun bind(modele: Modele) {
         modelName.setText(modele.name)
-        handleClick(layout, modele.id)
+        handleClick(layout, modele.code)
 
-        Log.i("modele", modele.name)
-      /*  val imageUrl = GlideUrl(modele.imageUrl, LazyHeaders.Builder()
+        val imageUrl = GlideUrl(modele.imageUrl, LazyHeaders.Builder()
                 .build())
-        Glide.with(this.modelImage.context).load(imageUrl).into(this.modelImage)*/
-        modelImage.setImageResource(R.drawable.a3_sedan)
+        Glide.with(this.modelImage.context)
+                .load(imageUrl)
+                .apply(RequestOptions().placeholder(R.drawable.ic_image_loading).error(R.drawable.ic_image_error))
+                .into(this.modelImage)
+        //modelImage.setImageResource(R.drawable.a3_sedan)
     }
 
     private fun handleClick(view: View, modelId: String) {

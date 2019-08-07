@@ -19,14 +19,13 @@ import sayaradz.ui.fragment.adapter.ListAdapter
 
 class VersionFragment : Fragment() {
 
-    lateinit var binding: VersionFragmentBinding
-    lateinit var args: VersionFragmentArgs
-    lateinit var viewModel: VersionViewModel
+    private lateinit var binding: VersionFragmentBinding
+    private lateinit var args: VersionFragmentArgs
+    private lateinit var viewModel: VersionViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.version_fragment, container, false)
         args = VersionFragmentArgs.fromBundle(arguments!!)
-        Toast.makeText(context, "Modele id: ${args.modelId}", Toast.LENGTH_SHORT).show()
 
         var viewModelFactory = VersionViewModelFactory(args.modelId)
         viewModel = ViewModelProviders.of(this, viewModelFactory)

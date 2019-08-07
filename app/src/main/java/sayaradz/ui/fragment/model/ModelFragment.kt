@@ -29,7 +29,6 @@ class ModelFragment : Fragment() {
 
         binding = DataBindingUtil.inflate(inflater, R.layout.model_fragment, container, false)
         args = ModelFragmentArgs.fromBundle(arguments!!)
-        Toast.makeText(context, "Marque id: ${args.marqueId}", Toast.LENGTH_SHORT).show()
 
         var viewModelFactory = ModelViewModelFactory(args.marqueId)
         modelViewModel = ViewModelProviders.of(this,viewModelFactory)

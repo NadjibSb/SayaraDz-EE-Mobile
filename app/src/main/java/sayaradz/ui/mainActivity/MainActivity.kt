@@ -110,14 +110,14 @@ class MainActivity : AppCompatActivity() {
 
 
 /*private fun setUpBottomNavigationBar(token: String) {
-    val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
+    val bottomNavigationView = findViewById<BottomNavigationView>(R.code.bottomNavigationView)
     bottomNavigationView.setOnNavigationItemSelectedListener(
             object : BottomNavigationView.OnNavigationItemSelectedListener {
                 override fun onNavigationItemSelected(item: MenuItem): Boolean {
                     val fragment: androidx.fragment.app.Fragment
                     when (item.getItemId()) {
-                        R.id.actionConsult -> fragment = MarqueFragment.getInstance()
-                        R.id.actionProfile -> fragment = ProfileFragment.getInstance()
+                        R.code.actionConsult -> fragment = MarqueFragment.getInstance()
+                        R.code.actionProfile -> fragment = ProfileFragment.getInstance()
                         else -> fragment = SearchFragment.getInstance()
                     }
                     Log.i(TAG, "TOKEN TO SEND: $token")
@@ -126,7 +126,7 @@ class MainActivity : AppCompatActivity() {
                     return true
                 }
             })
-    bottomNavigationView.selectedItemId = R.id.actionConsult
+    bottomNavigationView.selectedItemId = R.code.actionConsult
 }
 
 private fun attachArgs(tag: String, data: String): Bundle {
@@ -137,14 +137,14 @@ private fun attachArgs(tag: String, data: String): Bundle {
 
 private fun replaceFragment(fragment: androidx.fragment.app.Fragment) {
     val fragmentTransaction = supportFragmentManager.beginTransaction()
-    fragmentTransaction.replace(R.id.fragment_container, fragment)
+    fragmentTransaction.replace(R.code.fragment_container, fragment)
     fragmentTransaction.commit()
 }
 _______________________________________________________
 
-override fun onSupportNavigateUp() =  findNavController(R.id.NavHostFragment).navigateUp()
+override fun onSupportNavigateUp() =  findNavController(R.code.NavHostFragment).navigateUp()
 private fun setupNavigation() {
-    val navController = Navigation.findNavController(this, R.id.NavHostFragment)
+    val navController = Navigation.findNavController(this, R.code.NavHostFragment)
     setupActionBarWithNavController(this, navController)
     NavigationUI.setupWithNavController(bottomNavigationView, navController)
 }

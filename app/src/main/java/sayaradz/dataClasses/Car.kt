@@ -3,7 +3,7 @@ package sayaradz.dataClasses
 import com.google.gson.annotations.SerializedName
 
 data class Car(
-        @SerializedName("id")
+        @SerializedName("code")
         var id: Int = 0,
         @SerializedName("title")
         var title: String = "",
