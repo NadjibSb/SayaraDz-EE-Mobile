@@ -27,7 +27,7 @@ class AnnonceViewModel() : ViewModel() {
         var annoncesList = ArrayList<Car>()
         var finalList = MutableLiveData<ArrayList<Car>>()
         for (i in 0..20) {
-            annoncesList.add(Car(i, "Marque $i", "${R.drawable.m_audi}"))
+            annoncesList.add(Car(i, "Anonce$i", "${R.drawable.m_audi}"))
         }
         finalList.value = annoncesList
         return finalList

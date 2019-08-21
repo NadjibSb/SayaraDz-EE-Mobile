@@ -9,7 +9,9 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="fich_tech_description">Peugeot 208 Tech Vision 1.6 HDI 92ch</string>
     <string name="fiche_technique">Fiche Technique</string>
+    <string name="detail_annonce">Détails de l\'annonce </string>
     <string name="options">Options</string>
+    <string name="faire_offre"> Faire une offre </string>
     <string name="title_activity_mes_annonces">mesAnnoncesActivity</string>
 
 </resources>

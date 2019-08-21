@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
         mainActivityViewModel = ViewModelProviders.of(this)
                 .get(MainActivityViewModel::class.java)
 
-        //Setuo UI elements
+        //Setup UI elements
         setSupportActionBar(binding.TopToolbar)
         setupBottomNavigationBar()
         //setupNavigation()

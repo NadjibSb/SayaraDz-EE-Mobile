@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+  <item android:id="@+id/btn_edit"
+        android:title="Modifier"
+  />
+    <item android:id="@+id/btn_delete"
+          android:title="Supprimer"
+    />
+    <item android:id="@+id/btn_archive"
+
+            android:title="Archiver"
+    />
+</menu>
+    <!--android:icon="@drawable/ic_saved"-->

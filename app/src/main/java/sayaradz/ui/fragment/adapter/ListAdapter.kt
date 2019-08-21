@@ -19,7 +19,8 @@ class ListAdapter(val list: List<Any>,
         MARQUE,
         MODEL,
         VERSION,
-        CAR
+        CAR,
+        MyAnnonce
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -28,6 +29,7 @@ class ListAdapter(val list: List<Any>,
             ViewHolderType.MODEL -> ModelViewHolder.creat(parent)
             ViewHolderType.VERSION -> VersionViewHolder.creat(parent)
             ViewHolderType.CAR -> CarViewHolder.creat(parent)
+            ViewHolderType.MyAnnonce -> MyAnnonceViewHolder.creat(parent,context)
         }
 
     }
@@ -50,6 +52,11 @@ class ListAdapter(val list: List<Any>,
                 holder.bind(version)
             }
             ViewHolderType.CAR -> {
+                var announce = list[position] as Car
+                holder as CarViewHolder
+                holder.bind(announce)
+            }
+            ViewHolderType.MyAnnonce -> {
                 var announce = list[position] as Car
                 holder as CarViewHolder
                 holder.bind(announce)
