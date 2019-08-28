@@ -18,10 +18,14 @@ import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.content.FileProvider
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleRegistry
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.alespero.expandablecardview.ExpandableCardView
 import com.google.android.gms.common.util.CollectionUtils
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator
@@ -41,23 +45,40 @@ class AddAnnonceFragment  : Fragment () {
     companion object {
         var active = false
         var marqueId=""
-        var modeleId = ""
+        var modeleId =""
         var versionId=""
+        lateinit var lifecycleRegistry : LifecycleRegistry
+        lateinit var rvModel: RecyclerView
+        lateinit var rvVersion: RecyclerView
+        lateinit var btnAddPhoto: Button
+        lateinit var contextAdd  : Context
+        lateinit var ecvMarque :  ExpandableCardView
+        lateinit var ecvModel :  ExpandableCardView
+        lateinit var ecvVersion :  ExpandableCardView
+        lateinit var ecvOthers :  ExpandableCardView
+        var token = "token"
+
+        fun setUpRecycleView(rv: RecyclerView ,c  : Context) {
+            rv.layoutManager = GridLayoutManager(c,3)
+            rv.itemAnimator = SlideInUpAnimator()
+            rv.setHasFixedSize(true)
+        }
+       fun fullContext( c: Context) {
+
+           contextAdd=c
+       }
     }
 
         /***Static Data for test ***/
-    val marqueList: List<Marque> = CollectionUtils.listOf(Marque("1", "Renault", " "), Marque("2", "Peugeout", ""), Marque("3", "Ford", ""), Marque("4", "Mercedes", ""), Marque("1", "Renault", " "), Marque("2", "Peugeout", ""), Marque("3", "Ford", ""), Marque("4", "Mercedes", ""))//For test
-    val colors = CollectionUtils.listOf<String>("white", "blue", "red")
-    val modelList: List<Modele> = CollectionUtils.listOf(Modele("1", "301", "1", colors), Modele("2", "308", "2", colors), Modele("3", "301", "3", colors))//For test
-    val versionList: List<Version> = CollectionUtils.listOf(Version("1", "v1", "301", ""), Version("2", "v2", "308", ""), Version("3", "v3", "308", ""))//For test
-
+    //val marqueList: List<Marque> = CollectionUtils.listOf(Marque("1", "Renault", " "), Marque("2", "Peugeout", ""), Marque("3", "Ford", ""), Marque("4", "Mercedes", ""), Marque("1", "Renault", " "), Marque("2", "Peugeout", ""), Marque("3", "Ford", ""), Marque("4", "Mercedes", ""))//For test
+//    val colors = CollectionUtils.listOf<String>("white", "blue", "red")
+  //  val modelList: List<Modele> = CollectionUtils.listOf(Modele("1", "301", "1", colors), Modele("2", "308", "2", colors), Modele("3", "301", "3", colors))//For test
+   // val versionList: List<Version> = CollectionUtils.listOf(Version("1", "v1", "301", ""), Version("2", "v2", "308", ""), Version("3", "v3", "308", ""))//For test
     val TAKE_PICTURE = 1
     val SELECT_PICTURE = 2
     lateinit var rvMarque: RecyclerView
-    lateinit var rvModel: RecyclerView
-    lateinit var rvVersion: RecyclerView
     lateinit var btnConfirm: FloatingActionButton
-    lateinit var btnAddPhoto: Button
+
     var currentPath: String? = null
 
     val TAG = "TAG-AddAnnonceFragment"
@@ -71,22 +92,54 @@ class AddAnnonceFragment  : Fragment () {
         binding = DataBindingUtil.inflate(inflater, R.layout.add_annonce_fragment, container, false)
         addAnnonceViewModel = ViewModelProviders.of(this).get(AddAnnonceViewModel::class.java)
 
+        //*****//
+        fullContext(activity!!.applicationContext)
+        lifecycleRegistry = LifecycleRegistry(this)
+        lifecycleRegistry.markState(Lifecycle.State.CREATED)
+        //////****////
+        ecvMarque =binding.root.findViewById(R.id.ecv_marque)
+        ecvModel=binding.root.findViewById(R.id.ecv_model)
+        ecvVersion=binding.root.findViewById(R.id.ecv_version)
+        ecvOthers =binding.root.findViewById(R.id.ecv_others)
         rvMarque = binding.root.findViewById(R.id.marqueListView)
         rvModel = binding.root.findViewById(R.id.modelListView)
         rvVersion = binding.root.findViewById(R.id.versionListView)
-        rvMarque.adapter = ListAdapter(sayaradz.ui.addAnnonce.marqueList, ListAdapter.ViewHolderType.MARQUE, this@AddAnnonceFragment.context!!, "token")
-        rvModel.adapter = ListAdapter(sayaradz.ui.addAnnonce.modelList, ListAdapter.ViewHolderType.MODEL, this@AddAnnonceFragment.context!!, "token")
-        rvVersion.adapter = ListAdapter(sayaradz.ui.addAnnonce.versionList, ListAdapter.ViewHolderType.VERSION, this@AddAnnonceFragment.context!!, "token")
+        addAnnonceViewModel.marques.observe(this, Observer { marques ->
+            rvMarque.adapter = ListAdapter(marques, ListAdapter.ViewHolderType.MARQUE, this@AddAnnonceFragment.context!!, "token")
+        })
         setUpRecycleView(rvMarque)
-        setUpRecycleView(rvModel)
-        setUpRecycleView(rvVersion)
+
+        /****/
+
+        ecvModel.setOnClickListener {
+            if (ecvModel.isExpanded) ecvModel.collapse()
+            else ecvModel.expand()
+        }
+        ecvVersion.setOnClickListener {
+            if (ecvVersion.isExpanded) ecvVersion.collapse()
+            else ecvVersion.expand()
+        }
+
+        /****/
+
         btnConfirm = binding.root.findViewById(R.id.btn_confirm)
         btnAddPhoto = binding.root.findViewById(R.id.btn_add_pic)
 
+
+
         val action = AddAnnonceFragmentDirections.actionAddAnnonceToMyAnnonceFragment()
-        btnConfirm.setOnClickListener { v: View ->
-            v.findNavController().navigate(action)
+        btnConfirm.setOnClickListener {
+            v: View ->
+
+            // Verify all  else  return and message
+
+                v.findNavController().navigate(action)
+
+
         }
+
+
+
 
 
         //Photo Edition
@@ -194,9 +247,6 @@ class AddAnnonceFragment  : Fragment () {
             }
             if (photoFile != null) {
                var photoUri = FileProvider.getUriForFile(this@AddAnnonceFragment.context!!, "sayaraDz.fileProvider" , photoFile)
-                //var photoUri =Uri.fromFile(photoFile)
-              /*  activity!!.
-                activity!!.setCurrentPhotoPath(fileUri.getPath());*/
                 intent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri)
                 startActivityForResult(intent, TAKE_PICTURE)
                 Log.i(TAG, photoUri.toString())
@@ -220,6 +270,7 @@ class AddAnnonceFragment  : Fragment () {
 
     override fun onStart() {
         super.onStart()
+        lifecycleRegistry.markState(Lifecycle.State.STARTED)
         active=true
 
     }

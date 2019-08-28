@@ -11,6 +11,10 @@ import androidx.recyclerview.widget.RecyclerView
 import sayaradz.authentification.R
 import sayaradz.dataClasses.Version
 import sayaradz.ui.fragment.addAnnonce.AddAnnonceFragment
+import sayaradz.ui.fragment.addAnnonce.AddAnnonceFragment.Companion.btnAddPhoto
+import sayaradz.ui.fragment.addAnnonce.AddAnnonceFragment.Companion.ecvOthers
+import sayaradz.ui.fragment.addAnnonce.AddAnnonceFragment.Companion.ecvVersion
+import sayaradz.ui.fragment.addAnnonce.AddAnnonceFragment.Companion.versionId
 import sayaradz.ui.fragment.version.VersionFragmentDirections
 import sayaradz.ui.mainActivity.MainActivity
 
@@ -24,9 +28,11 @@ class VersionViewHolder private constructor(val layout: View) : RecyclerView.Vie
     }
 
     companion object {
+        lateinit var itemViewversion : View
         fun creat(parent: ViewGroup): VersionViewHolder {
             val itemView = LayoutInflater.from(parent.context)
                     .inflate(R.layout.list_item, parent, false)
+            itemViewversion=itemView
             return VersionViewHolder(itemView)
         }
     }
@@ -34,6 +40,17 @@ class VersionViewHolder private constructor(val layout: View) : RecyclerView.Vie
     fun bind(version: Version) {
         versionName.setText(version.name)
         handleClick(layout, version.id)
+      if (AddAnnonceFragment.active)
+          itemViewversion.setOnClickListener {
+              versionId=version.id
+              ecvOthers.visibility=View.VISIBLE
+              if (ecvOthers.visibility == View.VISIBLE)
+              {
+                  btnAddPhoto.visibility=View.VISIBLE
+              }
+
+              ecvVersion.collapse()
+          }
 
         Log.i("version", version.name)
         /*val imageUrl = GlideUrl(marque.imageUrl, LazyHeaders.Builder()
@@ -49,10 +66,6 @@ class VersionViewHolder private constructor(val layout: View) : RecyclerView.Vie
             view.setOnClickListener { v: View ->
                 v.findNavController().navigate(action)
             }
-        } else {
-
-            AddAnnonceFragment.versionId=versionId
-
         }
     }
 }

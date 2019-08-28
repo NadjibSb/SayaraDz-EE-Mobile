@@ -10,5 +10,7 @@ data class Modele (
         @SerializedName("pk")
         var pk: String,
         @SerializedName("couleur_set")
-        var colors : List<String>
+        var colors : List<String> ,
+        @SerializedName("image")
+        var image : String
 )

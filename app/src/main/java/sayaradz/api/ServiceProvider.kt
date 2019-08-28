@@ -19,7 +19,7 @@ interface ServiceProvider {
 
 
     // Getting modeles by brand
-    @GET("api/modele")
+    @GET("api/modele/mobile")
     fun getModelsByMarque(@Header("Authorization") token: String, @Query("marqueId") marqueId: String): Call<List<Modele>>
 
     // Getting versions by model

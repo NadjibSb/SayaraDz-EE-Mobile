@@ -28,7 +28,7 @@ class VersionViewModel(val modeleId: String) : ViewModel() {
         var versionList = ArrayList<Version>()
         var finalList = MutableLiveData<ArrayList<Version>>()
         for (i in 0..20) {
-            versionList.add(Version("$i", "Version $i", "${R.drawable.a3_sedan}","url"))
+           // versionList.add(Version("$i", "Version $i", "${R.drawable.a3_sedan}","url"))
         }
         finalList.value = versionList
         return finalList
