@@ -25,9 +25,10 @@ class CarAdapter(private val cars: ArrayList<Car>, val context: Context)
             image = itemView.findViewById(R.id.img_item_logo)
         }
     }
-
+    lateinit var carItemView : View
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CarViewHolder {
         val marqueItemView = LayoutInflater.from(parent.context).inflate(R.layout.list_item, parent, false)
+        carItemView=marqueItemView
         return CarViewHolder(marqueItemView)
     }
 
@@ -36,6 +37,11 @@ class CarAdapter(private val cars: ArrayList<Car>, val context: Context)
         holder.nameTextView.setText(car.title)
         Log.i("CAAAAR", car.title)
         Glide.with(context).load(car.imageVehicle1).into(holder.image)
+        holder.itemView.setOnClickListener {
+
+            Log.i("CLICK","item")
+        }
+
     }
 
     override fun getItemCount() = cars.size

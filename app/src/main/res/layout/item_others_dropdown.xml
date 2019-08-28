@@ -48,6 +48,7 @@
             android:hint=" (en million) "
             android:minWidth="100dp"
             android:textSize="17dp"
+            android:id="@+id/ed_price"
             android:layout_marginStart="24dp"
             app:backgroundTint="@color/colorRed"
             android:layout_width="wrap_content"
@@ -96,6 +97,7 @@
 
         <androidx.appcompat.widget.AppCompatEditText
             android:hint="ex : rouge"
+            android:id="@+id/ed_color"
             android:minWidth="100dp"
             android:textSize="17dp"
             app:backgroundTint="@color/colorRed"
@@ -144,6 +146,7 @@
             />
 
         <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/ed_km"
             android:hint=" (en km) "
             android:minWidth="100dp"
             android:textSize="17dp"
@@ -193,6 +196,7 @@
             />
 
         <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/ed_year"
             android:hint=" ex:2015 "
             android:minWidth="100dp"
             android:textSize="17dp"

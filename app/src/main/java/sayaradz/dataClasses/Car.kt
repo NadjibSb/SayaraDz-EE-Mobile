@@ -23,8 +23,21 @@ data class Car(
         var kilometrage: Int = 0,
         @SerializedName("prix")
         var prix: Int = 0,
-        @SerializedName("commentaires")
-        var commentaires: String = "",
         @SerializedName("vehicule")
-        var idVehicule: Int = 0
+        var idVehicule: Int = 0 ,
+        @SerializedName("commentaires")
+        var commentaires: String
+      /*  @SerializedName("marque_name")
+        var marqueName: String,
+        @SerializedName("model_name")
+        var modelName: String ,
+        @SerializedName("version_name")
+        var versionName: String ,
+        @SerializedName("color")
+        var color: String ,
+        @SerializedName("description")
+        var description: String = ""*/
+
+
+
 )

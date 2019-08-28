@@ -27,7 +27,7 @@ interface ServiceProvider {
     fun getVersionsByModele(@Header("Authorization") token: String, @Query("modelId") modeleId: String): Call<List<Version>>
 
     // Getting all the models
-    @GET("api/modele")
+    @GET("api/modele/mobile")
     fun getModels(@Header("Authorization") token: String): Call<List<Modele>>
 
    /* @GET("/media/images/marques/{imageName}")
@@ -51,6 +51,9 @@ interface ServiceProvider {
     @GET("api/annonce")
     fun getAnnounceByUserId(@Header("Authorization") token: String ): Call<List<Car>>
 
+    // Getting  selected Announcement detail
+    @GET("api/annonce/detail/{annonceId}")
+    fun getAnnounceDetails(@Header("Authorization") token: String ,@Path("annonceId") annonceId: String): Call<Car>
 
 
 

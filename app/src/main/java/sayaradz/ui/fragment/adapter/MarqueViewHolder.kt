@@ -27,6 +27,7 @@ import sayaradz.ui.fragment.addAnnonce.AddAnnonceFragment.Companion.ecvOthers
 import sayaradz.ui.fragment.addAnnonce.AddAnnonceFragment.Companion.ecvVersion
 import sayaradz.ui.fragment.addAnnonce.AddAnnonceViewModel
 import sayaradz.ui.fragment.marque.MarqueFragmentDirections
+import sayaradz.ui.fragment.search.SearchFragmentDirections
 import sayaradz.ui.mainActivity.MainActivity
 
 

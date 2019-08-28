@@ -27,17 +27,6 @@ class MyAnnonceViewModel: ViewModel() {
         annonces = getAnnonces(token)
     }
 
-    private fun defaultList(): MutableLiveData<ArrayList<Car>> {
-
-        var annoncesList = ArrayList<Car>()
-        var finalList = MutableLiveData<ArrayList<Car>>()
-        for (i in 0..20) {
-            annoncesList.add(Car(i, "Annonce $i", "${R.drawable.m_audi}"))
-        }
-        finalList.value = annoncesList
-        return finalList
-
-    }
 
     private fun getAnnonces(idToken: String): MutableLiveData<ArrayList<Car>> {
 

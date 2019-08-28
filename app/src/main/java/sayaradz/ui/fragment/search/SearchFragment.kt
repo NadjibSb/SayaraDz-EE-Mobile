@@ -25,6 +25,7 @@ import sayaradz.dataClasses.Car
 import sayaradz.dataClasses.Marque
 import sayaradz.dataClasses.Modele
 import sayaradz.ui.fragment.adapter.CarAdapter
+import sayaradz.ui.fragment.adapter.ListAdapter
 import java.util.*
 
 
@@ -51,13 +52,18 @@ class SearchFragment : Fragment() {
     val modellsList = mutableListOf("Modèle", "208", "301") //For test
     lateinit var recyclerView: RecyclerView
     val service = ServiceBuilder.buildService(ServiceProvider::class.java)
-    lateinit var adapter: CarAdapter
+    lateinit var adapter: ListAdapter
     var M1 = "-01-01"
     var M2 = "-12-31"
 
 
     companion object {
         fun getInstance() = SearchFragment()
+         var mTypeSelected="occasion"
+       fun changeType(type :String)
+        {
+          mTypeSelected=type
+        }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -90,7 +96,7 @@ class SearchFragment : Fragment() {
         marqueAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         //Reset
         btnReset.setOnClickListener {
-            typeSelected = ""
+            typeSelected ="occasion"
             marqueSelected = null
             modelSelected = null
             priceMin = null
@@ -264,9 +270,12 @@ class SearchFragment : Fragment() {
 
             override fun onItemSelected(parent: AdapterView<*>, view: View, pos: Int, id: Long) {
                 Log.i("TYPE", "IN")
-                if (parent.getItemAtPosition(pos).toString().toLowerCase() != "type")
+                if (parent.getItemAtPosition(pos).toString().toLowerCase() != "type") {
                     typeSelected = parent.getItemAtPosition(pos).toString().toLowerCase()
-                else typeSelected = ""
+                    changeType(typeSelected)
+                }
+
+                else typeSelected ="occasion"
                 getResult(token!!)
             }
         }
@@ -423,7 +432,8 @@ class SearchFragment : Fragment() {
     }
 
     private fun setUpRecycleView(list: ArrayList<Car>) {
-        adapter = CarAdapter(list, this@SearchFragment.context!!)
+       // adapter = CarAdapter(list, this@SearchFragment.context!!)
+        adapter = ListAdapter(list, ListAdapter.ViewHolderType.CAR, this@SearchFragment.context!!, "token")
         recyclerView.adapter = adapter
         recyclerView.layoutManager = GridLayoutManager(context, 1)
         recyclerView.itemAnimator = SlideInUpAnimator()

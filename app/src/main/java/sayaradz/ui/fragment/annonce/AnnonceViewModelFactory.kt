@@ -1,15 +1,15 @@
 package sayaradz.ui.fragment.annonce
 
-import sayaradz.ui.fragment.version.VersionViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import java.lang.IllegalArgumentException
+import sayaradz.ui.fragment.model.ModelViewModel
 
-class AnnonceViewModelFactory(val userId: String): ViewModelProvider.Factory {
+class AnnonceViewModelFactory (val annonceId: String) : ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(AnnonceViewModel::class.java)){
-            return VersionViewModel(userId) as T
-        }else
+        if (modelClass.isAssignableFrom(AnnonceViewModel::class.java)) {
+            return AnnonceViewModel(annonceId) as T
+        } else
             throw IllegalArgumentException("Unknown ViewModel class")
     }
+
 }

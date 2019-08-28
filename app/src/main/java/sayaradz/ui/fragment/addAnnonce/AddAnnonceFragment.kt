@@ -14,6 +14,7 @@ import android.util.Log
 import android.view.*
 import android.widget.*
 import androidx.appcompat.widget.AppCompatButton
+import androidx.appcompat.widget.AppCompatEditText
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.content.FileProvider
 import androidx.databinding.DataBindingUtil
@@ -30,6 +31,7 @@ import com.google.android.gms.common.util.CollectionUtils
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator
 import kotlinx.android.synthetic.main.add_annonce_fragment.*
+import kotlinx.android.synthetic.main.annonce_details_to_edit.*
 import sayaradz.authentification.R
 import sayaradz.authentification.databinding.AddAnnonceFragmentBinding
 import sayaradz.dataClasses.Marque
@@ -127,9 +129,20 @@ class AddAnnonceFragment  : Fragment () {
 
 
 
+
         val action = AddAnnonceFragmentDirections.actionAddAnnonceToMyAnnonceFragment()
         btnConfirm.setOnClickListener {
             v: View ->
+
+            var descrp =  binding.root.findViewById<AppCompatEditText>(R.id.ed_descrip).text.toString()
+            var title = binding.root.findViewById<AppCompatEditText>(R.id.ed_title).text.toString()
+            var km = binding.root.findViewById<AppCompatEditText>(R.id.ed_km).text.toString()
+            var price = binding.root.findViewById<AppCompatEditText>(R.id.ed_price).text.toString()
+            var color =binding.root.findViewById<AppCompatEditText>(R.id.ed_color).text.toString()
+            var year=binding.root.findViewById<AppCompatEditText>(R.id.ed_year).text.toString()
+
+             Log.i(TAG, "Description  "+descrp+"  Title  "+title+" KM "+km+" Price "+price)
+
 
             // Verify all  else  return and message
 
