@@ -13,6 +13,7 @@ import com.bumptech.glide.load.model.GlideUrl
 import com.bumptech.glide.load.model.LazyHeaders
 import sayaradz.authentification.R
 import sayaradz.dataClasses.Marque
+import sayaradz.ui.fragment.addAnnonce.AddAnnonceFragment
 import sayaradz.ui.fragment.marque.MarqueFragmentDirections
 import sayaradz.ui.mainActivity.MainActivity
 
@@ -48,7 +49,7 @@ class MarqueViewHolder private constructor(val layout: View) : RecyclerView.View
     }
 
     private fun handleClick(view: View, marqueId: String) {
-        if (MainActivity.active) {
+        if (!AddAnnonceFragment.active) {
             val action = MarqueFragmentDirections.actionMarqueFragmentToModelFragment(marqueId)
             view.setOnClickListener { v: View ->
                 v.findNavController().navigate(action)
@@ -56,7 +57,7 @@ class MarqueViewHolder private constructor(val layout: View) : RecyclerView.View
         }
         else {
 
-
+          AddAnnonceFragment.marqueId=marqueId
         }
     }
 }

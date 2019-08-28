@@ -1,4 +1,4 @@
-package sayaradz.ui.myAnnonces
+package sayaradz.ui.fragment.myAnnonce
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
@@ -12,8 +12,9 @@ import sayaradz.api.ServiceBuilder
 import sayaradz.api.ServiceProvider
 import sayaradz.authentification.R
 import sayaradz.dataClasses.Car
+import java.util.*
 
-class MesAnnoncesActivityViewModel: ViewModel() {
+class MyAnnonceViewModel: ViewModel() {
 
     val TAG = "MesAnnoncesActivityVM"
 

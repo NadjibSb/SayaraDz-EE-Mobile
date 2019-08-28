@@ -10,6 +10,7 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import sayaradz.authentification.R
 import sayaradz.dataClasses.Version
+import sayaradz.ui.fragment.addAnnonce.AddAnnonceFragment
 import sayaradz.ui.fragment.version.VersionFragmentDirections
 import sayaradz.ui.mainActivity.MainActivity
 
@@ -42,13 +43,15 @@ class VersionViewHolder private constructor(val layout: View) : RecyclerView.Vie
         versionImage.setImageResource(R.drawable.a3_sedan)
     }
 
-    private fun handleClick(view: View, marqueId: String) {
-        if (MainActivity.active) {
+    private fun handleClick(view: View, versionId: String) {
+        if (!AddAnnonceFragment.active) {
             val action = VersionFragmentDirections.actionVersionFragmentToFicheTechFragment()
             view.setOnClickListener { v: View ->
                 v.findNavController().navigate(action)
             }
         } else {
+
+            AddAnnonceFragment.versionId=versionId
 
         }
     }

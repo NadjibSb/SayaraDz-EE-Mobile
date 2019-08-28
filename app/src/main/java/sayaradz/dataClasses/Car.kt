@@ -9,7 +9,7 @@ data class Car(
         var title: String = "",
         @SerializedName("pseudoUser")
         var userPseudo: String = "",
-        @SerializedName("idUser")
+        @SerializedName("user")
         var userId: String = "",
         @SerializedName("date")
         var date: String = "",
@@ -25,6 +25,6 @@ data class Car(
         var prix: Int = 0,
         @SerializedName("commentaires")
         var commentaires: String = "",
-        @SerializedName("idVehicule")
+        @SerializedName("vehicule")
         var idVehicule: Int = 0
 )

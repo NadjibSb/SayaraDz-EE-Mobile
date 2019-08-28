@@ -39,7 +39,7 @@ class AnnonceFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
        // annonceViewModel = ViewModelProviders.of(this).get(AnnonceViewModel::class.java)
-        setSliderViews(binding.imageSlider)
+        setSliderViews(binding.details.imageSlider)
 
 
 

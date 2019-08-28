@@ -2,19 +2,25 @@ package sayaradz.ui.fragment.adapter
 
 
 import android.content.Context
+import android.util.Log
 import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.widget.PopupMenu
+import androidx.navigation.findNavController
 import sayaradz.authentification.R
 import sayaradz.dataClasses.Car
+import sayaradz.ui.fragment.myAnnonce.MyAnnonceFragmentDirections
 
 
-class CustomMenuItem (private val it : Car, private val cont : Context) : PopupMenu.OnMenuItemClickListener {
+class CustomMenuItem (private val it : Car , private val layout : View ) : PopupMenu.OnMenuItemClickListener {
 
         override fun onMenuItemClick(menuItem: MenuItem): Boolean {
+
             when (menuItem.itemId) {
 
                 R.id.btn_edit -> {
-                    //Implement
+
+                 edit(layout,it.id.toString())
                     return true
                 }
 
@@ -31,5 +37,12 @@ class CustomMenuItem (private val it : Car, private val cont : Context) : PopupM
             return false
         }
 
-
+    private fun edit(view: View, annonceId: String) {
+        val action = MyAnnonceFragmentDirections.actionMyAnnonceFragmentToEditAnnonceFragment(annonceId)
+        Log.i("MENU_ITEM","EDIIIIIT")
+        view.setOnClickListener { v: View ->
+            v.findNavController().navigate(action)
+        }
     }
+}
+

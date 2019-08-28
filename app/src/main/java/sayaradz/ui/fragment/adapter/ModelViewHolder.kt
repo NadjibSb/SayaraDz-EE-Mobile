@@ -10,6 +10,7 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import sayaradz.authentification.R
 import sayaradz.dataClasses.Modele
+import sayaradz.ui.fragment.addAnnonce.AddAnnonceFragment
 import sayaradz.ui.fragment.model.ModelFragmentDirections
 import sayaradz.ui.mainActivity.MainActivity
 
@@ -42,12 +43,13 @@ class ModelViewHolder private constructor(val layout: View) : RecyclerView.ViewH
     }
 
     private fun handleClick(view: View, modelId: String) {
-        if (MainActivity.active) {
+        if (!AddAnnonceFragment.active) {
             val action = ModelFragmentDirections.actionModelFragmentToVersionFragment(modelId)
             view.setOnClickListener { v: View ->
                 v.findNavController().navigate(action)
             }
         } else {
+            AddAnnonceFragment.modeleId=modelId
 
 
         }

@@ -37,17 +37,18 @@ class CarViewHolder private constructor(val layout: View) : RecyclerView.ViewHol
 
         Log.i("announce", announce.title)
         //Glide.with(context).load(announce.imageVehicle1).into(this.image)
-        val imageUrl = GlideUrl(announce.imageVehicle1, LazyHeaders.Builder()
-                .build())
-        Glide.with(this.announceImage.context).load(imageUrl).into(this.announceImage)
-
+        if (announce.imageVehicle1 != null ) {
+            val imageUrl = GlideUrl(announce.imageVehicle1, LazyHeaders.Builder()
+                    .build())
+            Glide.with(this.announceImage.context).load(imageUrl).into(this.announceImage)
+        }
     }
 
     //TO BE MODIFIED GO TO THE layout ( ANNONCE DETAILS + faire un offre )
-    private fun handleClick(view: View, marqueId: String) {
-        val action = MarqueFragmentDirections.actionMarqueFragmentToModelFragment(marqueId)
-        view.setOnClickListener { v: View ->
-            v.findNavController().navigate(action)
-        }
-    }
+    private fun handleClick(view: View, annonceId: String) {
+        /* val action = MarqueFragmentDirections.actionMarqueFragmentToModelFragment(annonceId)
+         view.setOnClickListener { v: View ->
+             v.findNavController().navigate(action)
+         }*/
+     }
 }

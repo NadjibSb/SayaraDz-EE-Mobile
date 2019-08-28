@@ -8,5 +8,68 @@
     <fragment
         android:id="@+id/profileFragment"
         android:name="sayaradz.ui.ProfileFragment"
-        android:label="Profile" />
+        android:label="Profile" >
+    <action
+        android:id="@+id/action_profileFragment_to_mesAnnoncesFragment"
+        app:destination="@id/myAnnonceFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/myAnnonceFragment"
+        android:name="sayaradz.ui.fragment.myAnnonce.MyAnnonceFragment"
+        android:label="Mes Annonces"
+        tools:layout="@layout/my_annonce_fragment">
+        <action
+            android:id="@+id/action_myAnnonceFragment_to_addAnnonceFragment"
+            app:destination="@id/addAnnonceFragment" />
+        <action
+            android:id="@+id/action_myAnnonceFragment_to_ViewAnnonceFragment"
+            app:destination="@id/viewAnnonceFragment" />
+        <action
+            android:id="@+id/action_myAnnonceFragment_to_EditAnnonceFragment"
+            app:destination="@id/editAnnonceFragment" />
+
+
+    </fragment>
+    <fragment
+        android:id="@+id/addAnnonceFragment"
+        android:name="sayaradz.ui.fragment.addAnnonce.AddAnnonceFragment"
+        android:label="Ajouter une annonce" >
+        <action
+            android:id="@+id/action_addAnnonce_to_myAnnonceFragment"
+            app:destination="@id/myAnnonceFragment" />
+
+
+    </fragment>
+    <fragment
+        android:id="@+id/viewAnnonceFragment"
+        android:name="sayaradz.ui.fragment.myAnnonceView.MyAnnonceViewFragment"
+        android:label="details de mon annonce" >
+        <action
+        android:id="@+id/action_viewAnnonce_to_editAnnonceFragment"
+        app:destination="@id/editAnnonceFragment" />
+        <argument
+            android:name="annonceId"
+            app:argType="string" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/editAnnonceFragment"
+        android:name="sayaradz.ui.fragment.editMyAnnonce.EditAnnonceFragment"
+        android:label="Edition Annonce" >
+        <action
+            android:id="@+id/action_editAnnonceFragment_to_mesAnnoncesFragment"
+            app:destination="@id/myAnnonceFragment" />
+        <argument
+            android:name="annonceId"
+            app:argType="string" />
+
+    </fragment>
+
+
+
+
+
 </navigation>

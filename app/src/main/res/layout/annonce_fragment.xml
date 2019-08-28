@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="sayaradz.ui.fragment.annonce.AnnonceFragment">
 
     <data>
 
@@ -16,7 +18,10 @@
             android:background="#EEE"
             android:orientation="vertical">
 
-             <include layout="@layout/annonce_details"/>
+             <include layout="@layout/annonce_details"
+                      android:id="@+id/details"
+                 tools:context="sayaradz.ui.fragment.annonce.AnnonceFragment"
+                 />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"

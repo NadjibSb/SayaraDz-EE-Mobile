@@ -90,18 +90,18 @@ class CreateAccountActivity : AppCompatActivity(), View.OnClickListener {
         //FaceBook Sign IN
 
         //Facebook Callback manager creation
-        callbackManager = CallbackManager.Factory.create();
+        callbackManager = CallbackManager.Factory.create()
 
         facebookSignInButton.setReadPermissions("email")
-        facebookSignInButton.setReadPermissions("user_friends");
-        facebookSignInButton.setReadPermissions("public_profile");
-        facebookSignInButton.setReadPermissions("user_birthday");
+        facebookSignInButton.setReadPermissions("user_friends")
+        facebookSignInButton.setReadPermissions("public_profile")
+        facebookSignInButton.setReadPermissions("user_birthday")
 
 // Callback registration
         facebookSignInButton.registerCallback(callbackManager, object : FacebookCallback<LoginResult> {
             override fun onSuccess(loginResult: LoginResult) {
                 // App code
-                handleFacebookAccessToken(loginResult.accessToken);
+                handleFacebookAccessToken(loginResult.accessToken)
             }
             override fun onCancel() {
                 // App code

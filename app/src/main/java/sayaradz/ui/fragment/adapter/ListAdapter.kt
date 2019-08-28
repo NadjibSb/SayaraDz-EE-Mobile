@@ -29,7 +29,7 @@ class ListAdapter(val list: List<Any>,
             ViewHolderType.MODEL -> ModelViewHolder.creat(parent)
             ViewHolderType.VERSION -> VersionViewHolder.creat(parent)
             ViewHolderType.CAR -> CarViewHolder.creat(parent)
-            ViewHolderType.MyAnnonce -> MyAnnonceViewHolder.creat(parent,context)
+            ViewHolderType.MyAnnonce -> MyAnnonceViewHolder.creat(parent)
         }
 
     }
@@ -57,9 +57,9 @@ class ListAdapter(val list: List<Any>,
                 holder.bind(announce)
             }
             ViewHolderType.MyAnnonce -> {
-                var announce = list[position] as Car
-                holder as CarViewHolder
-                holder.bind(announce)
+                var myAnnounce = list[position] as Car
+                holder as MyAnnonceViewHolder
+                holder.bind(myAnnounce)
             }
         }
     }

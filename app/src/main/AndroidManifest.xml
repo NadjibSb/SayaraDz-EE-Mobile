@@ -2,6 +2,17 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="sayaradz.authentification">
 
+
+    <uses-feature
+        android:name="android.hardware.camera2"
+        android:required="true"/>
+    <uses-feature
+        android:name="android.hardware.camera.any"
+        android:required="true"/>
+    <uses-feature
+        android:name="android.hardware.camera.autofocus"
+        android:required="false"/>
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
@@ -16,10 +27,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name="sayaradz.ui.addAnnonce.AddAnnonceActivity"></activity>
-        <activity
-            android:name="sayaradz.ui.myAnnonces.MesAnnoncesActivity"
-            android:label="@string/title_activity_mes_annonces"
-            android:theme="@style/AppTheme.NoActionBar" /> <!-- FACEBOOK -->
+       <!-- FACEBOOK -->
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
@@ -59,6 +67,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="sayaraDz.fileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths">
+            </meta-data>
+        </provider>
     </application>
 
 </manifest>

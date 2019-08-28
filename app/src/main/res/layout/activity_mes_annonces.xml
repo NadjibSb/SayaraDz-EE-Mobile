@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+   >
 
     <data>
 
     </data>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="sayaradz.ui.myAnnonces.MesAnnoncesActivity">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/TopToolbar"
@@ -22,34 +23,24 @@
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         app:titleTextColor="#FFF"
         app:menu="@menu/menu_top_toolbar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/annonceListView"
         app:layout_constraintTop_toTopOf="parent"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/annonceListView"
+        <FrameLayout>
+            android:id="@+id/NavHostFragment"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="8dp"
-            tools:listitem="@layout/list_item">
+            android:layout_height="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/TopToolbar"
+            android:name="android.navigation.fragment.NavHostFragment"
+            app:navGraph="@navigation/"
+            app:defaultNavHost="true"
+        </FrameLayout>
 
-        </androidx.recyclerview.widget.RecyclerView>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btn_add_anc"
-        android:layout_width="wrap_content"
-        android:layout_height="75dp"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@drawable/ic_car" />
-
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
     </layout>

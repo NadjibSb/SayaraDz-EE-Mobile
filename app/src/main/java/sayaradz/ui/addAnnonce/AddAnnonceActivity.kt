@@ -12,24 +12,20 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.View
-import android.widget.Button
-import android.widget.LinearLayout
-import android.widget.PopupWindow
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.gms.common.util.CollectionUtils.listOf
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator
-import kotlinx.android.synthetic.main.activity_add_annonce.*
-import kotlinx.android.synthetic.main.activity_mes_annonces.*
+import kotlinx.android.synthetic.main.add_annonce_fragment.*
 import kotlinx.android.synthetic.main.activity_mes_annonces.TopToolbar
 import sayaradz.authentification.R
 import sayaradz.dataClasses.Marque
 import sayaradz.dataClasses.Modele
 import sayaradz.dataClasses.Version
 import sayaradz.ui.fragment.adapter.ListAdapter
-import sayaradz.ui.myAnnonces.MesAnnoncesActivity
 import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat
@@ -51,7 +47,7 @@ class AddAnnonceActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_add_annonce)
+        setContentView(R.layout.add_annonce_fragment)
         setSupportActionBar(TopToolbar)
         rvMarque = findViewById <View>(R.id.marqueListView) as RecyclerView
         rvModel=findViewById <View>(R.id.modelListView) as RecyclerView
@@ -64,11 +60,11 @@ class AddAnnonceActivity : AppCompatActivity() {
         setUpRecycleView(rvVersion)
         btnConfirm = findViewById(R.id.btn_confirm)
         btnAddPhoto = findViewById(R.id.btn_add_pic)
-        btnConfirm.setOnClickListener {
+      /*  btnConfirm.setOnClickListener {
 
-            startActivity(Intent(this@AddAnnonceActivity, MesAnnoncesActivity::class.java))
+          //  startActivity(Intent(this@AddAnnonceActivity, MesAnnoncesActivity::class.java))
 
-        }
+        }*/
 
 
         //Photo Edition
@@ -78,6 +74,7 @@ class AddAnnonceActivity : AppCompatActivity() {
 
             // Inflate a custom view using layout inflater
             val view = inflater.inflate(R.layout.pop_up_photo_view,null)
+
 
             // Initialize a new instance of popup window
             val popupWindow = PopupWindow(
@@ -109,8 +106,8 @@ class AddAnnonceActivity : AppCompatActivity() {
             // popupWindow.setBackgroundDrawable(BitmapDrawable())
 
             // Get the widgets reference from custom view
-            var btnGallery = view.findViewById<Button>(R.id.btn_gallery)
-            var btnCamera = view.findViewById<Button>(R.id.btn_camera)
+            var btnGallery = view.findViewById<ImageButton>(R.id.btn_gallery)
+            var btnCamera = view.findViewById<ImageButton>(R.id.btn_camera)
 
             btnGallery.setOnClickListener {
                 Toast.makeText(this,"GALLERY", Toast.LENGTH_SHORT).show()
@@ -180,7 +177,7 @@ class AddAnnonceActivity : AppCompatActivity() {
             }
             if ( photoFile != null )
             {
-                var photoUri = FileProvider.getUriForFile(this ,"com.example.tdm_project.fileProvider"
+                var photoUri = FileProvider.getUriForFile(this ,"sayaraDz.fileProvider"
                         ,photoFile)
                 intent.putExtra(MediaStore.EXTRA_OUTPUT,photoUri)
                 startActivityForResult(intent,TAKE_PICTURE)

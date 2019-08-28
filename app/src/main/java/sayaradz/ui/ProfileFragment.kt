@@ -8,11 +8,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.navigation.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.squareup.picasso.Picasso
 import sayaradz.authentification.R
-import sayaradz.ui.addAnnonce.AddAnnonceActivity
-import sayaradz.ui.myAnnonces.MesAnnoncesActivity
+
+
 
 class ProfileFragment : Fragment() {
 
@@ -43,11 +44,12 @@ class ProfileFragment : Fragment() {
         Picasso.with(context)
                 .load(user?.photoUrl)
                 .into(ivProfilePicture)
+        val action= ProfileFragmentDirections.actionProfileFragmentToMesAnnoncesFragment()
         mesAnnonces.setOnClickListener {
+            v: View ->
+           v.findNavController().navigate(action)
+       }
 
-            startActivity(Intent(rootView.context, MesAnnoncesActivity::class.java))
-
-        }
 
         return rootView
     }
