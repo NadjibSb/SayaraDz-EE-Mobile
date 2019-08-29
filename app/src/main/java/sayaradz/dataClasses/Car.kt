@@ -26,12 +26,12 @@ data class Car(
         @SerializedName("vehicule")
         var idVehicule: Int = 0 ,
         @SerializedName("commentaires")
-        var commentaires: String
-      /*  @SerializedName("marque_name")
-        var marqueName: String,
+        var commentaires: String ,
+       @SerializedName("marque_name")
+        var marqueName: String ,
         @SerializedName("model_name")
-        var modelName: String ,
-        @SerializedName("version_name")
+        var modelName: String
+       /* @SerializedName("version_name")
         var versionName: String ,
         @SerializedName("color")
         var color: String ,

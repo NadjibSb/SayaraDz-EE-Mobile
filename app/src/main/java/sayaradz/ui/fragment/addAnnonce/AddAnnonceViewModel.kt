@@ -11,12 +11,14 @@ import sayaradz.api.ServiceProvider
 import sayaradz.dataClasses.Marque
 import sayaradz.dataClasses.Modele
 import sayaradz.dataClasses.Version
+import sayaradz.ui.MainActivityViewModel
+import sayaradz.ui.mainActivity.MainActivity
 import java.util.ArrayList
 
 class AddAnnonceViewModel() :ViewModel() {
 
     val TAG = "AddAnnonceViewModel"
-    val token = "token"
+    val token = ""
     var marques: MutableLiveData<ArrayList<Marque>>
     val api: ServiceProvider
 

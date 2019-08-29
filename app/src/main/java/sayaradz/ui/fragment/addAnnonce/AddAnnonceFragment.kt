@@ -143,7 +143,6 @@ class AddAnnonceFragment  : Fragment () {
 
              Log.i(TAG, "Description  "+descrp+"  Title  "+title+" KM "+km+" Price "+price)
 
-
             // Verify all  else  return and message
 
                 v.findNavController().navigate(action)

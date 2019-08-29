@@ -276,6 +276,12 @@
                   <entry key="addAnnonceFragment">
                     <value>
                       <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="500" />
+                            <option name="y" value="12" />
+                          </Point>
+                        </option>
                         <option name="myPositions">
                           <map>
                             <entry key="action_addAnnonce_to_myAnnonceFragment">
@@ -291,6 +297,12 @@
                   <entry key="editAnnonceFragment">
                     <value>
                       <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="744" />
+                            <option name="y" value="369" />
+                          </Point>
+                        </option>
                         <option name="myPositions">
                           <map>
                             <entry key="action_editAnnonceFragment_to_mesAnnoncesFragment">
@@ -306,6 +318,12 @@
                   <entry key="myAnnonceFragment">
                     <value>
                       <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="256" />
+                            <option name="y" value="54" />
+                          </Point>
+                        </option>
                         <option name="myPositions">
                           <map>
                             <entry key="action_myAnnonceFragment_to_EditAnnonceFragment">
@@ -331,6 +349,12 @@
                   <entry key="profileFragment">
                     <value>
                       <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="12" />
+                            <option name="y" value="54" />
+                          </Point>
+                        </option>
                         <option name="myPositions">
                           <map>
                             <entry key="action_profileFragment_to_mesAnnoncesFragment">
@@ -346,6 +370,12 @@
                   <entry key="viewAnnonceFragment">
                     <value>
                       <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="500" />
+                            <option name="y" value="369" />
+                          </Point>
+                        </option>
                         <option name="myPositions">
                           <map>
                             <entry key="action_viewAnnonce_to_editAnnonceFragment">

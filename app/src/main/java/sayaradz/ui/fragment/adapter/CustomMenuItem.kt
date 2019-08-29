@@ -39,8 +39,9 @@ class CustomMenuItem (private val it : Car , private val layout : View ) : Popup
 
     private fun edit(view: View, annonceId: String) {
         val action = MyAnnonceFragmentDirections.actionMyAnnonceFragmentToEditAnnonceFragment(annonceId)
-        Log.i("MENU_ITEM","EDIIIIIT")
+        Log.i("MENU_ITEM",annonceId)
         view.setOnClickListener { v: View ->
+            Log.i("MENU_ITEM","CLICKED")
             v.findNavController().navigate(action)
         }
     }

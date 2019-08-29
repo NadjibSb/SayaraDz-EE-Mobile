@@ -29,7 +29,7 @@ class ListAdapter(val list: List<Any>,
             ViewHolderType.MODEL -> ModelViewHolder.creat(parent)
             ViewHolderType.VERSION -> VersionViewHolder.creat(parent)
             ViewHolderType.CAR -> CarViewHolder.creat(parent)
-            ViewHolderType.MyAnnonce -> MyAnnonceViewHolder.creat(parent)
+            ViewHolderType.MyAnnonce -> MyAnnonceViewHolder.creat(parent,context)
         }
 
     }
