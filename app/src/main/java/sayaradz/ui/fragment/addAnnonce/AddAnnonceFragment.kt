@@ -3,7 +3,6 @@ package sayaradz.ui.fragment.addAnnonce
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Environment
@@ -11,11 +10,12 @@ import android.provider.MediaStore
 import android.transition.Slide
 import android.transition.TransitionManager
 import android.util.Log
-import android.view.*
+import android.view.Gravity
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.*
-import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatEditText
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.content.FileProvider
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -27,18 +27,11 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.alespero.expandablecardview.ExpandableCardView
-import com.google.android.gms.common.util.CollectionUtils
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator
-import kotlinx.android.synthetic.main.add_annonce_fragment.*
-import kotlinx.android.synthetic.main.annonce_details_to_edit.*
 import sayaradz.authentification.R
 import sayaradz.authentification.databinding.AddAnnonceFragmentBinding
-import sayaradz.dataClasses.Marque
-import sayaradz.dataClasses.Modele
-import sayaradz.dataClasses.Version
 import sayaradz.ui.fragment.adapter.ListAdapter
-import sayaradz.ui.fragment.marque.MarqueViewModel
 import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat
@@ -143,7 +136,7 @@ class AddAnnonceFragment  : Fragment () {
 
              Log.i(TAG, "Description  "+descrp+"  Title  "+title+" KM "+km+" Price "+price)
 
-            // Verify all  else  return and message
+            // Verify all  and send query else  return and message
 
                 v.findNavController().navigate(action)
 

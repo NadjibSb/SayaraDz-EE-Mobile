@@ -5,7 +5,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -33,7 +32,23 @@ class EditAnnonceFragment : Fragment() {
 
            //  Log.i("3onwanAvant",binding.details.edit_text_title.text.toString())
             Log.i("3onwanApre",an.title)
-           // binding.details.edit_text_title.text=an.title
+            //Info static can not be updated
+            binding.details.textYearValue.text=an.date
+            binding.details.versionName.text=an.versionName
+            binding.details.modelName.text=an.modelName
+            binding.details.marqueName.text= an.marqueName
+
+            //Info to update
+            binding.details.title.hint = an.title
+            binding.details.etDescrp.hint=an.commentaires
+            binding.details.etColor.hint = an.color
+            binding.details.etKm.hint =an.kilometrage.toString()
+            binding.details.etPrice.hint = an.prix.toString()
+
+
+
+
+
 
         })
 
@@ -42,6 +57,9 @@ class EditAnnonceFragment : Fragment() {
         var btnConfirm = binding.root.findViewById<FloatingActionButton>(R.id.btn_confirm_edition)
       btnConfirm.setOnClickListener {
               v: View ->
+
+          // Sending Query
+
               v.findNavController().navigate(action)
           }
 

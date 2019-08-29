@@ -34,19 +34,18 @@ class AnnonceFragment : Fragment() {
         Log.i("IDENTIFIER",args.annonceId)
         annonceViewModel = ViewModelProviders.of(this,annonceViewModelFactory).get(AnnonceViewModel::class.java)
         annonceViewModel.annonce.observe(this, Observer { an ->
-
-
-            Log.i("3onwanAvant",binding.details.title.text.toString())
-            Log.i("3onwanApre",an.title)
+            
+           /* Log.i("3onwanAvant",binding.details.title.text.toString())
+            Log.i("3onwanApre",an.title)*/
             binding.details.title.text=an.title
              binding.details.textDescrip.text= an.commentaires
             binding.details.textKm.text=an.kilometrage.toString()
             binding.details.textPriceMin.text = an.prix.toString()
             binding.details.textYear.text = an.date
-            //binding.details.versionName.text=an.
+            binding.details.versionName.text=an.versionName
             binding.details.modelName.text=an.modelName
             binding.details.marqueName.text= an.marqueName
-           // binding.details.textColor = an.
+           binding.details.textColor.text = an.color
         })
       var prixToSuggest : String? = binding.prixText.text.toString()
     // Check for the offer

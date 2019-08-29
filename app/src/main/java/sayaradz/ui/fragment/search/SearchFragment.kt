@@ -79,7 +79,7 @@ class SearchFragment : Fragment() {
         rootView.foreground.alpha = 0
         recyclerView = rootView.findViewById(R.id.carListView) as RecyclerView
         setUpRecycleView(carsList)
-        getResult(token!!)
+        getResult(token)
         Log.i(TAG, "QUERY")
         updateList()
         setUpRecycleView(carsList)

@@ -37,6 +37,17 @@ class MyAnnonceViewFragment : Fragment () {
             Log.i("3onwanAvant",binding.details.title.text.toString())
             Log.i("3onwanApre",an.title)
             binding.details.title.text=an.title
+            binding.details.title.text=an.title
+            binding.details.textDescrip.text= an.commentaires
+            binding.details.textKm.text=an.kilometrage.toString()
+            binding.details.textPriceMin.text = an.prix.toString()
+            binding.details.textYear.text = an.date
+            binding.details.versionName.text=an.versionName
+            binding.details.modelName.text=an.modelName
+            binding.details.marqueName.text= an.marqueName
+            binding.details.textColor.text = an.color
+
+
         })
 
 
