@@ -1,4 +1,5 @@
 package sayaradz.ui.fragment.adapter
+
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -15,8 +16,8 @@ import sayaradz.dataClasses.Car
 import sayaradz.ui.fragment.marque.MarqueFragmentDirections
 
 class CarViewHolder private constructor(val layout: View) : RecyclerView.ViewHolder(layout) {
-    private var announceName: TextView = itemView.findViewById(R.id.item_name)
-    private var announceImage: ImageView = itemView.findViewById(R.id.img_item_logo)
+    var announceName: TextView = itemView.findViewById(R.id.item_name)
+    var announceImage: ImageView = itemView.findViewById(R.id.img_item_logo)
 
     companion object {
         fun creat(parent: ViewGroup): CarViewHolder {

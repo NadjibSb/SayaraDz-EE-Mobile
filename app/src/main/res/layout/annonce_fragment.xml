@@ -27,7 +27,7 @@
                 android:layout_marginTop="8dp"
                 tools:listitem="@layout/list_item"></androidx.recyclerview.widget.RecyclerView>
             <!--<com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/btn_add"
+                android:code="@+code/btn_add"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end|bottom"

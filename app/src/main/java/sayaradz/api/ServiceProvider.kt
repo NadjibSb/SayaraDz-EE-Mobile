@@ -5,18 +5,14 @@ import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Path
 import retrofit2.http.Query
-import sayaradz.dataClasses.Car
-import sayaradz.dataClasses.Marque
-import sayaradz.dataClasses.Modele
-import sayaradz.dataClasses.Version
+import sayaradz.dataClasses.*
 
 
 interface ServiceProvider {
 
     // Getting all the brands
     @GET("api/marque")
-    fun getMarques(@Header("Authorization") token: String): Call<List<Marque>>
-
+    fun getAllMarques(@Header("Authorization") token: String): Call<List<Marque>>
 
     // Getting modeles by brand
     @GET("api/modele")
@@ -28,7 +24,15 @@ interface ServiceProvider {
 
     // Getting all the models
     @GET("api/modele")
-    fun getModels(@Header("Authorization") token: String): Call<List<Modele>>
+    fun getAllModels(@Header("Authorization") token: String): Call<List<Modele>>
+
+    // Getting "fich tech" of a specific version
+        @GET("api/fichetechnique/detail/{versionId}")
+    fun getFichTechByVersion(@Header("Authorization") token: String, @Path("versionId") versionId: String): Call<FichTech>
+
+    // Getting details of a specific version
+    @GET("api/version/detail/{versionId}")
+    fun getVersion(@Header("Authorization") token: String, @Path("versionId") versionId: String): Call<Version>
 
    /* @GET("/media/images/marques/{imageName}")
     fun getImage(@Header("Authorization") token: String, @Path("imageName") img: String): Call<ResponseBody>*/

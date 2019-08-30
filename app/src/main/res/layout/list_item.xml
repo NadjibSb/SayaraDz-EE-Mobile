@@ -31,7 +31,7 @@
             android:fontFamily="@font/proxima_nova_regular"
             android:text="Marque test"
             android:textColor="#000"
-            android:textSize="20sp" />
+            android:textSize="18sp" />
     </LinearLayout>
 
 </LinearLayout>

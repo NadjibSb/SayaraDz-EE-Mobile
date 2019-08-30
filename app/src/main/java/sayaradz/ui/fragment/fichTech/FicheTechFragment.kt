@@ -6,17 +6,21 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.smarteist.autoimageslider.DefaultSliderView
 import com.smarteist.autoimageslider.IndicatorAnimations
 import com.smarteist.autoimageslider.SliderAnimations
 import com.smarteist.autoimageslider.SliderLayout
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator
+import kotlinx.android.synthetic.main.fiche_tech_header.view.*
+import kotlinx.android.synthetic.main.fiche_tech_options.view.*
 import sayaradz.authentification.R
 import sayaradz.authentification.databinding.FicheTechFragmentBinding
 import sayaradz.dataClasses.FichTech
@@ -32,6 +36,8 @@ class FicheTechFragment : Fragment() {
 
     private lateinit var viewModel: FicheTechViewModel
     private lateinit var binding: FicheTechFragmentBinding
+    private lateinit var args: FicheTechFragmentArgs
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -41,35 +47,43 @@ class FicheTechFragment : Fragment() {
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(FicheTechViewModel::class.java)
-        binding.viewModel = viewModel
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
 
+        args = FicheTechFragmentArgs.fromBundle(arguments!!)
+        Toast.makeText(context,"version id ${args.versionID}",Toast.LENGTH_SHORT)
+        val factory = FicheTechViewModelFactory(args.versionID)
+        viewModel = ViewModelProviders.of(this,factory).get(FicheTechViewModel::class.java)
         updateUI()
 
-        val mobileArray = arrayListOf("Bleu", "Rouge", "Noir", "Gris", "Blanc", "bordeaux")
-        setUpRecycleView(mobileArray)
     }
 
 
     private fun updateUI() {
         viewModel.versionNew.observe(this, Observer { version ->
             //setup the version images for the slider
-            setSliderViews(binding.imageSlider, version.imgs)
-            fillVersionOptions(version)
+            if (version != null){
+                setSliderViews(binding.header.imageSlider, version.imgs)
+                //fillVersionOptions(version)
+            }
         })
         viewModel.fichTech.observe(this, Observer { ficheTech ->
             //filling all the informations in fiche tech
-            fillFichTech(ficheTech)
+            if (ficheTech != null){
+                fillFichTech(ficheTech)
+            }
         })
+
+        //link colors
+        val mobileArray = arrayListOf("Bleu", "Rouge", "Noir", "Gris", "Blanc", "bordeaux")
+        setUpRecycleView(mobileArray)
     }
 
     private fun fillVersionOptions(version: VersionNew) {
-        val container = binding.optionCheckboxContainer
+        val container = LinearLayout(context) //= binding.optionCheckboxContainer
         for (option in version.options) {
             var cb = CheckBox(context)
-            cb.setText(option.name)
+            cb.text = option.name
             cb.setOnClickListener { view ->
                 if ((view as CheckBox).isChecked)
                     viewModel.updatePrice(option.tarif, ADD)
@@ -82,6 +96,7 @@ class FicheTechFragment : Fragment() {
     }
 
     private fun fillFichTech(ficheTech: FichTech) {
+        /*
         binding.apply {
             marqueName.text = ficheTech.marque
             modelName.text = ficheTech.modele
@@ -98,13 +113,29 @@ class FicheTechFragment : Fragment() {
             dimmension.text = ficheTech.dimmension
             nbrPlaces.text = ficheTech.nbrPlaces
             nbrPortes.text = ficheTech.nbrPortes
-        }
+        }*/
 
+        //link data
+        viewModel.fichTech.observe(viewLifecycleOwner, Observer { f ->
+            binding.core.apply {
+                motorisation.text = f?.motorisation
+                nombrePortes.text = f?.nombrePortes
+                boiteVitesse.text = f?.boiteVitesse
+                puissanceFiscale.text = f?.puissanceFiscale
+                consommation.text = f?.consommation
+                dimensions.text = f?.dimensions
+                transmission.text = f?.transmission
+                vitesseMax.text = f?.vitesseMax
+                acceleration.text = f?.acceleration
+                reservoir.text = f?.capaciteReservoir
+            }
+        })
     }
+
 
     //RecycleView--------------------------------------------
     private fun setUpRecycleView(list: ArrayList<String>) {
-        var recyclerView = binding.colorsListView
+        var recyclerView = binding.options.colorsListView
         recyclerView.adapter = ColorAdapter(this.context!!, list)
         recyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         recyclerView.itemAnimator = SlideInUpAnimator()
@@ -119,7 +150,14 @@ class FicheTechFragment : Fragment() {
         sliderLayout.setSliderTransformAnimation(SliderAnimations.FADETRANSFORMATION)
         sliderLayout.setScrollTimeInSec(2)
 
-        for (url in imgUrls) {
+
+        val default = listOf(
+            "https://www.autobip.com/storage/photos/new_car_prices/20/peugeot_208_tech_vision_1_6_hdi_92ch_2019-03-04-13-0071373.jpg",
+            "https://www.autobip.com/storage/photos/new_car_prices/20/peugeot_208_tech_vision_1_6_hdi_92ch_2019-03-04-13-2892232.jpg",
+            "https://www.autobip.com/storage/photos/new_car_prices/20/peugeot_208_tech_vision_1_6_hdi_92ch_2019-03-04-13-0687668.jpg"
+        )
+
+        for (url in default) {
             val sliderView = DefaultSliderView(context)
             sliderView.imageUrl = url
             sliderView.setImageScaleType(ImageView.ScaleType.CENTER_CROP)

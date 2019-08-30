@@ -1,28 +1,54 @@
 package sayaradz.ui.fragment.fichTech
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import sayaradz.dataClasses.FichTech
-import sayaradz.dataClasses.Option
-import sayaradz.dataClasses.VersionNew
+import sayaradz.api.Api
+import sayaradz.dataClasses.Version
+
 
 const val ADD = 1
 const val SUB = -1
 
-class FicheTechViewModel : ViewModel() {
 
-    private val _fichTech = MutableLiveData<FichTech>()
-    val fichTech: LiveData<FichTech>
+class FicheTechViewModel(versionID: String) : ViewModel() {
+
+
+
+
+    val TAG = "FichTechViewModel"
+    var token = ""
+
+/*
+    private val _version = Api.getVersionDetails(TAG,token,versionID)
+    private val id = _version.ficheTechnique_id
+
+    private val _fichTech = Api.getFichTech(TAG, token, id)
+    val fichTech: LiveData<FichTech?>
         get() = _fichTech
+    */
 
-    private val _versionNew = MutableLiveData<VersionNew>()
-    val versionNew: LiveData<VersionNew>
+
+
+    //private val _versionNew = MutableLiveData<VersionNew>()
+    private val _versionNew = Api.getVersionDetails(TAG,token,versionID)
+    val versionNew: LiveData<Version?>
         get() = _versionNew
 
-    val _price = MutableLiveData<Int>()
+    private val id = "1" //_versionNew.ficheTechnique_id
+
+
+
+    //private val _fichTech = MutableLiveData<FichTech>()
+    private val _fichTech = Api.getFichTech(TAG, token, id)
+    val fichTech: LiveData<FichTech?>
+        get() = _fichTech
+
+
+
+    private val _price = MutableLiveData<Int>()
     val price: LiveData<String>
         get() = Transformations.map(_price) { p->
             p.toString()
@@ -30,18 +56,19 @@ class FicheTechViewModel : ViewModel() {
 
 
     init {
-        _fichTech.value = getDefaultFichTech()
-        _versionNew.value = getDefaultVersion()
+        //_fichTech.value = getDefaultFichTech()
+        //_versionNew.value = getDefaultVersion()
     }
 
     fun updatePrice(value: Int, action: Int) {
         when (action) {
             ADD -> _price.value = _price.value?.plus(value)
             SUB -> _price.value = _price.value?.minus(value)
-            else -> _price.value = getDefaultVersion().tarif
+            //else -> _price.value = getDefaultVersion().tarif
         }
     }
 
+    /*
     private fun getDefaultFichTech(): FichTech {
         return FichTech(
                 "Peugeot",
@@ -92,8 +119,7 @@ class FicheTechViewModel : ViewModel() {
 
         _price.value = version.tarif
         return version
-    }
-
+    }*/
 }
 
 

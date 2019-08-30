@@ -41,9 +41,9 @@ class OfferViewHolder private constructor(val layout: View) : RecyclerView.ViewH
 
 
     private fun handleClick(view: View) {
-        val action = VersionFragmentDirections.actionVersionFragmentToFicheTechFragment()
+        /*val action = VersionFragmentDirections.actionVersionFragmentToFicheTechFragment()
         view.setOnClickListener { v: View ->
             v.findNavController().navigate(action)
-        }
+        }*/
     }
 }

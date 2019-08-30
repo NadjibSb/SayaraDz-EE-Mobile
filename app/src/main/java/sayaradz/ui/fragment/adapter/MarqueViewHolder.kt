@@ -1,6 +1,5 @@
 package sayaradz.ui.fragment.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.model.GlideUrl
 import com.bumptech.glide.load.model.LazyHeaders
+import com.bumptech.glide.request.RequestOptions
 import sayaradz.authentification.R
 import sayaradz.dataClasses.Marque
 import sayaradz.ui.fragment.marque.MarqueFragmentDirections
@@ -30,12 +30,15 @@ class MarqueViewHolder private constructor(val layout: View) : RecyclerView.View
 
     fun bind(marque: Marque) {
         marqueName.text = marque.name
+        if (marque.name.length > 14) marqueName.textSize = 16.0F
         handleClick(layout, marque.id)
 
-        Log.i("marque", marque.name)
         val imageUrl = GlideUrl(marque.imageUrl, LazyHeaders.Builder()
                 .build())
-        Glide.with(this.marqueImage.context).load(imageUrl).into(this.marqueImage)
+        Glide.with(this.marqueImage.context)
+                .load(imageUrl)
+                .apply(RequestOptions().placeholder(R.drawable.ic_image_loading).error(R.drawable.ic_image_error))
+                .into(this.marqueImage)
         //marqueImage.setImageResource(R.drawable.m_audi)
     }
 
