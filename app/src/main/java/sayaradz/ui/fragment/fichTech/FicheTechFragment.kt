@@ -1,6 +1,7 @@
 package sayaradz.ui.fragment.fichTech
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,22 +14,21 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.smarteist.autoimageslider.DefaultSliderView
 import com.smarteist.autoimageslider.IndicatorAnimations
 import com.smarteist.autoimageslider.SliderAnimations
 import com.smarteist.autoimageslider.SliderLayout
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator
-import kotlinx.android.synthetic.main.fiche_tech_header.view.*
-import kotlinx.android.synthetic.main.fiche_tech_options.view.*
 import sayaradz.authentification.R
 import sayaradz.authentification.databinding.FicheTechFragmentBinding
 import sayaradz.dataClasses.FichTech
-import sayaradz.dataClasses.VersionNew
+import sayaradz.dataClasses.Version
 import sayaradz.ui.fragment.adapter.ColorAdapter
 
 
 class FicheTechFragment : Fragment() {
+
+    private val TAG = "FicheTechFragment"
 
     companion object {
         fun newInstance() = FicheTechFragment()
@@ -60,27 +60,44 @@ class FicheTechFragment : Fragment() {
 
 
     private fun updateUI() {
-        viewModel.versionNew.observe(this, Observer { version ->
-            //setup the version images for the slider
+        viewModel.version.observe(this, Observer { version ->
+
             if (version != null){
+                //setup the version images for the slider
                 setSliderViews(binding.header.imageSlider, version.imgs)
-                //fillVersionOptions(version)
-            }
-        })
-        viewModel.fichTech.observe(this, Observer { ficheTech ->
-            //filling all the informations in fiche tech
-            if (ficheTech != null){
-                fillFichTech(ficheTech)
+                fillVersionDetails(version)
+                Log.i(TAG, "prix : ${version.price}")
+                viewModel.initilizePrice(version.price)
+
+                viewModel.getFichTech(version.ficheTechnique_id).observe(this, Observer { ficheTech ->
+                    //filling all the informations in fiche tech
+                    if (ficheTech != null){
+                        fillFichTech(ficheTech)
+                    }
+                })
+
             }
         })
 
         //link colors
         val mobileArray = arrayListOf("Bleu", "Rouge", "Noir", "Gris", "Blanc", "bordeaux")
         setUpRecycleView(mobileArray)
+
+        binding.btnCommande.setOnClickListener {
+            onCommande()
+        }
     }
 
-    private fun fillVersionOptions(version: VersionNew) {
-        val container = LinearLayout(context) //= binding.optionCheckboxContainer
+    private fun fillVersionDetails(version: Version) {
+
+        binding.header.apply {
+            marqueName.text = version.marque_name
+            modelName.text = version.model_name
+            versionName.text = version.name
+        }
+
+        /*
+        val container = binding.optionCheckboxContainer
         for (option in version.options) {
             var cb = CheckBox(context)
             cb.text = option.name
@@ -92,44 +109,30 @@ class FicheTechFragment : Fragment() {
                 Toast.makeText(context, resources.getString(R.string.price_updated), Toast.LENGTH_SHORT).show()
             }
             container.addView(cb)
-        }
+        }*/
     }
 
     private fun fillFichTech(ficheTech: FichTech) {
-        /*
-        binding.apply {
-            marqueName.text = ficheTech.marque
-            modelName.text = ficheTech.modele
-            versionName.text = ficheTech.version
-            description.text = ficheTech.description
-            motorisation.text = ficheTech.motorisation
-            boiteVitesse.text = ficheTech.boiteVitesse
-            transmission.text = ficheTech.transmission
-            puissance.text = ficheTech.puissance
-            consomation.text = ficheTech.consomation
-            reservoir.text = ficheTech.reservoir
-            vitesseMax.text = ficheTech.vitesseMax
-            acceleration.text = ficheTech.acceleration
-            dimmension.text = ficheTech.dimmension
-            nbrPlaces.text = ficheTech.nbrPlaces
-            nbrPortes.text = ficheTech.nbrPortes
-        }*/
 
-        //link data
-        viewModel.fichTech.observe(viewLifecycleOwner, Observer { f ->
-            binding.core.apply {
-                motorisation.text = f?.motorisation
-                nombrePortes.text = f?.nombrePortes
-                boiteVitesse.text = f?.boiteVitesse
-                puissanceFiscale.text = f?.puissanceFiscale
-                consommation.text = f?.consommation
-                dimensions.text = f?.dimensions
-                transmission.text = f?.transmission
-                vitesseMax.text = f?.vitesseMax
-                acceleration.text = f?.acceleration
-                reservoir.text = f?.capaciteReservoir
-            }
-        })
+        binding.core.apply {
+            motorisation.text = ficheTech?.motorisation
+            nombrePortes.text = ficheTech?.nombrePortes
+            boiteVitesse.text = ficheTech?.boiteVitesse
+            puissanceFiscale.text = ficheTech?.puissanceFiscale
+            consommation.text = ficheTech?.consommation
+            dimensions.text = ficheTech?.dimensions
+            transmission.text = ficheTech?.transmission
+            vitesseMax.text = ficheTech?.vitesseMax
+            acceleration.text = ficheTech?.acceleration
+            reservoir.text = ficheTech?.capaciteReservoir
+        }
+    }
+
+    fun onCommande(){
+        Log.i(TAG,"Commande clicked")
+        viewModel.updatePrice(100, ADD)
+
+        Log.i(TAG," price ${viewModel.price.value}")
     }
 
 
@@ -148,7 +151,7 @@ class FicheTechFragment : Fragment() {
         var sliderLayout = layout
         sliderLayout.setIndicatorAnimation(IndicatorAnimations.THIN_WORM) //set indicator animation by using SliderLayout.Animations. :WORM or THIN_WORM or COLOR or DROP or FILL or NONE or SCALE or SCALE_DOWN or SLIDE and SWAP!!
         sliderLayout.setSliderTransformAnimation(SliderAnimations.FADETRANSFORMATION)
-        sliderLayout.setScrollTimeInSec(2)
+        sliderLayout.scrollTimeInSec = 2
 
 
         val default = listOf(

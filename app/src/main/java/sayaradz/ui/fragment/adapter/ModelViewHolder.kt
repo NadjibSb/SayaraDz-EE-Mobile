@@ -29,7 +29,7 @@ class ModelViewHolder private constructor(val layout: View) : RecyclerView.ViewH
 
     fun bind(modele: Modele) {
         modelName.setText(modele.name)
-        handleClick(layout, modele.code)
+        handleClick(layout, modele.pk)
 
         val imageUrl = GlideUrl(modele.imageUrl, LazyHeaders.Builder()
                 .build())

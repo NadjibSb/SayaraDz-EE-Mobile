@@ -155,11 +155,11 @@ class Api {
 
             val call = api.getFichTechByVersion(idToken, fichTechID) // The request included the token
             var fichTech: FichTech?
-            val to_return = MutableLiveData<FichTech?>()
+            val toReturn = MutableLiveData<FichTech?>()
 
             call.enqueue(object : Callback<FichTech> {
                 override fun onResponse(call: Call<FichTech>, response: Response<FichTech>) {
-                    Log.i(TAG, "DisplayVersionList: call enqueue")
+                    Log.i(TAG, "Display FichTech: call enqueue")
 
                     if (!response.isSuccessful()) {
                         Log.i(TAG, "CODE:" + response.code().toString())
@@ -175,7 +175,7 @@ class Api {
                         content += "BV: " + fichTech?.boiteVitesse + "\n"
                         content += "mot: " + fichTech?.motorisation + "\n"
                         Log.i(TAG, "\n=========\n$content")
-                        to_return.value = fichTech
+                        toReturn.value = fichTech
 
                     }
                 }
@@ -184,7 +184,7 @@ class Api {
                     Log.i(TAG, "error CODE:" + t.message)
                 }
             })
-            return to_return
+            return toReturn
         }
 
 

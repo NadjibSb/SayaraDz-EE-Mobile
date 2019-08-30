@@ -70,6 +70,7 @@
                     tools:text="1000000" />
 
                 <Button
+                    android:id="@+id/btn_commande"
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
                     android:layout_marginStart="24dp"

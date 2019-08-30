@@ -1,11 +1,12 @@
 package sayaradz.ui.fragment.fichTech
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
-import sayaradz.dataClasses.FichTech
 import sayaradz.api.Api
+import sayaradz.dataClasses.FichTech
 import sayaradz.dataClasses.Version
 
 
@@ -16,57 +17,38 @@ const val SUB = -1
 class FicheTechViewModel(versionID: String) : ViewModel() {
 
 
-
-
-    val TAG = "FichTechViewModel"
+    private val TAG = "FichTechViewModel"
     var token = ""
 
-/*
-    private val _version = Api.getVersionDetails(TAG,token,versionID)
-    private val id = _version.ficheTechnique_id
-
-    private val _fichTech = Api.getFichTech(TAG, token, id)
-    val fichTech: LiveData<FichTech?>
-        get() = _fichTech
-    */
-
-
-
-    //private val _versionNew = MutableLiveData<VersionNew>()
-    private val _versionNew = Api.getVersionDetails(TAG,token,versionID)
-    val versionNew: LiveData<Version?>
-        get() = _versionNew
-
-    private val id = "1" //_versionNew.ficheTechnique_id
-
-
-
-    //private val _fichTech = MutableLiveData<FichTech>()
-    private val _fichTech = Api.getFichTech(TAG, token, id)
-    val fichTech: LiveData<FichTech?>
-        get() = _fichTech
-
-
+    private val _version = Api.getVersionDetails(TAG, token, versionID)
+    val version: LiveData<Version?>
+        get() = _version
 
     private val _price = MutableLiveData<Int>()
     val price: LiveData<String>
-        get() = Transformations.map(_price) { p->
+        get() = Transformations.map(_price) { p ->
             p.toString()
         }
 
 
-    init {
-        //_fichTech.value = getDefaultFichTech()
-        //_versionNew.value = getDefaultVersion()
+
+    fun getFichTech(id: String): MutableLiveData<FichTech?> {
+        return Api.getFichTech(TAG, token, id)
     }
 
+    fun initilizePrice(value: Int){
+        _price.value = value
+        Log.i(TAG, "price : ${_price.value}")
+    }
     fun updatePrice(value: Int, action: Int) {
         when (action) {
             ADD -> _price.value = _price.value?.plus(value)
             SUB -> _price.value = _price.value?.minus(value)
-            //else -> _price.value = getDefaultVersion().tarif
         }
+
+        Log.i(TAG,"price ${price.value}")
     }
+
 
     /*
     private fun getDefaultFichTech(): FichTech {

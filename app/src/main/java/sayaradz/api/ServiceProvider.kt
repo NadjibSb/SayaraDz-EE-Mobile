@@ -20,7 +20,7 @@ interface ServiceProvider {
 
     // Getting versions by model
     @GET("api/version")
-    fun getVersionsByModele(@Header("Authorization") token: String, @Query("modelId") modeleId: String): Call<List<Version>>
+    fun getVersionsByModele(@Header("Authorization") token: String, @Query("modeleId") modeleId: String): Call<List<Version>>
 
     // Getting all the models
     @GET("api/modele")

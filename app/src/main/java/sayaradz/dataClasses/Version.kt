@@ -21,7 +21,9 @@ data class Version(
         var imgs: List<String>,
 
         @SerializedName("prix")
-        var price: String,
+        var price: Int,
+        @SerializedName("optionsToModif")
+        var options: List<Option>,
         @SerializedName("ficheTechnique")
         var ficheTechnique_id: String
 )
