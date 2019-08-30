@@ -40,17 +40,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/option" />
 
-        <TextView
-            android:id="@+id/color_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="16dp"
-            android:text="Couleur"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/devider" />
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/color_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -60,17 +51,33 @@
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/color_text">
+            app:layout_constraintTop_toBottomOf="@+id/devider">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/colors_list_view"
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/color_text"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:itemCount="5"
-                tools:listitem="@layout/color_list_item">
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="Couleur"
+                android:textColor="@color/dark_grey"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-            </androidx.recyclerview.widget.RecyclerView>
-        </LinearLayout>
+            <View
+                android:id="@+id/color_view"
+                android:background="#AAA"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <CheckBox
             android:id="@+id/checkBox"

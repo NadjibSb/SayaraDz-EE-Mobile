@@ -23,5 +23,6 @@
     <string name="nombre_de_places">Nombre de places :</string>
     <string name="prix">Prix :</string>
     <string name="price_updated">Price updated</string>
+    <string name="choose_color">Choisissez une couleur </string>
 
 </resources>

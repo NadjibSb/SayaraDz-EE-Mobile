@@ -19,15 +19,13 @@ import sayaradz.authentification.databinding.ActivityMainBinding
 import sayaradz.ui.MainActivityViewModel
 import sayaradz.ui.setupWithNavController
 
-const val API_URL="https://sayaradz-ee-backend.herokuapp.com/"
 
 
 class MainActivity : AppCompatActivity() {
     val TAG = "TAG-MainActivity"
     private lateinit var binding: ActivityMainBinding
     private var currentNavController: LiveData<NavController>? = null
-    lateinit var mainActivityViewModel: MainActivityViewModel
-
+    private lateinit var mainActivityViewModel: MainActivityViewModel
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,7 +46,7 @@ class MainActivity : AppCompatActivity() {
         mainActivityViewModel.isAuth().observe(this, Observer { isAuth ->
             if (!isAuth)
                 Toast.makeText(this, "Not connected", Toast.LENGTH_SHORT).show()
-                //startActivity(Intent(this@MainActivity, CreateAccountActivity::class.java))
+            //startActivity(Intent(this@MainActivity, CreateAccountActivity::class.java))
         })
     }
 
