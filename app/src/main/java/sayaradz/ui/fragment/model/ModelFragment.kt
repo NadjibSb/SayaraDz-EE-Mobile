@@ -1,6 +1,7 @@
 package sayaradz.ui.fragment.model
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,6 +20,8 @@ import sayaradz.ui.fragment.adapter.ListAdapter
 
 class ModelFragment : Fragment() {
 
+    private val TAG = "TAG-ModelFragment"
+
     lateinit var binding: ModelFragmentBinding
     lateinit var args: ModelFragmentArgs
     lateinit var modelViewModel: ModelViewModel
@@ -34,10 +37,27 @@ class ModelFragment : Fragment() {
         modelViewModel = ViewModelProviders.of(this,viewModelFactory)
                 .get(ModelViewModel::class.java)
 
-        modelViewModel.models.observe(this, Observer { modeles ->
-            setUpRecycleView(binding.root, modeles)
+        // loading view
+        binding.modelListView.visibility = View.GONE
+        binding.shimmerLayout.visibility = View.VISIBLE
+        binding.shimmerLayout.startShimmerAnimation()
+
+        // when data loaded
+        modelViewModel.models.observe(this, Observer { models ->
+
+            binding.shimmerLayout.stopShimmerAnimation()
+            binding.shimmerLayout.visibility = View.GONE
+            if (models.size >0){
+                binding.modelListView.visibility = View.VISIBLE
+                setUpRecycleView(binding.root, models)
+            }else{
+                Log.i(TAG, "empty")
+                binding.emptyListView.visibility = View.VISIBLE
+            }
 
         })
+
+
         return binding.root
     }
 

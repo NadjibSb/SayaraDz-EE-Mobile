@@ -1,6 +1,7 @@
 package sayaradz.ui.fragment.marque
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,7 +19,7 @@ import sayaradz.ui.fragment.adapter.ListAdapter
 
 
 class MarqueFragment : Fragment() {
-    val TAG = "TAG-MarqueFragment"
+    private val TAG = "TAG-MarqueFragment"
     lateinit var binding: MarqueFragmentBinding
 
     private lateinit var marqueViewModel: MarqueViewModel
@@ -30,9 +31,24 @@ class MarqueFragment : Fragment() {
         //(activity as MainActivity).actionBar.title = "Marques"
         marqueViewModel = ViewModelProviders.of(this).get(MarqueViewModel::class.java)
 
+        // loading view
+        binding.marqueListView.visibility = View.GONE
+        binding.shimmerLayout.visibility = View.VISIBLE
+        binding.shimmerLayout.startShimmerAnimation()
 
+        // when data loaded
         marqueViewModel.marques.observe(this, Observer { marques ->
-            setUpRecycleView(binding.root, marques)
+
+            binding.shimmerLayout.stopShimmerAnimation()
+            binding.shimmerLayout.visibility = View.GONE
+
+            if (marques.size >0){ // if there is data to display
+                binding.marqueListView.visibility = View.VISIBLE
+                setUpRecycleView(binding.root, marques)
+            }else{ // if the list is empty
+                Log.i(TAG, "empty")
+                binding.emptyListView.visibility = View.VISIBLE
+            }
         })
         return binding.root
     }

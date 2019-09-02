@@ -1,6 +1,7 @@
 package sayaradz.ui.fragment.version
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,6 +20,8 @@ import sayaradz.ui.fragment.adapter.ListAdapter
 
 class VersionFragment : Fragment() {
 
+    private val TAG = "TAG-VersionFragment"
+
     private lateinit var binding: VersionFragmentBinding
     private lateinit var args: VersionFragmentArgs
     private lateinit var viewModel: VersionViewModel
@@ -31,8 +34,25 @@ class VersionFragment : Fragment() {
         viewModel = ViewModelProviders.of(this, viewModelFactory)
                 .get(VersionViewModel::class.java)
 
+
+        // loading view
+        binding.versionListView.visibility = View.GONE
+        binding.shimmerLayout.visibility = View.VISIBLE
+        binding.shimmerLayout.startShimmerAnimation()
+
+        // when data loaded
         viewModel.versions.observe(this, Observer { versions ->
-            setUpRecycleView(binding.root, versions)
+
+            binding.shimmerLayout.stopShimmerAnimation()
+            binding.shimmerLayout.visibility = View.GONE
+
+            if (versions.size >0){ // if there is data to display
+                binding.versionListView.visibility = View.VISIBLE
+                setUpRecycleView(binding.root, versions)
+            }else{ // if the list is empty
+                Log.i(TAG, "empty")
+                binding.emptyListView.visibility = View.VISIBLE
+            }
         })
 
 

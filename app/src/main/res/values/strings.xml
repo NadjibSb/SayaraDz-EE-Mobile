@@ -24,5 +24,6 @@
     <string name="prix">Prix :</string>
     <string name="price_updated">Price updated</string>
     <string name="choose_color">Choisissez une couleur </string>
+    <string name="no_item">Aucun item à afficher</string>
 
 </resources>

@@ -95,5 +95,8 @@ dependencies {
 
     //color picker
     implementation 'petrov.kristiyan:colorpicker-library:1.1.10'
+
+    //shimmer_placeholder
+    implementation 'com.facebook.shimmer:shimmer:0.1.0@aar'
 }
 apply plugin: 'com.google.gms.google-services'
