@@ -9,6 +9,7 @@ import sayaradz.api.ServiceBuilder
 import sayaradz.api.ServiceProvider
 import sayaradz.authentification.R
 import sayaradz.dataClasses.Car
+import sayaradz.ui.MainActivityViewModel
 
 class AnnonceViewModel( val annonceId: String) : ViewModel() {
 
@@ -17,7 +18,7 @@ class AnnonceViewModel( val annonceId: String) : ViewModel() {
     // HERE GETTING DATA FOR AN ANNONCE CLICKED
   var annonce : MutableLiveData<Car>
 
-    var token = ""
+    var token = MainActivityViewModel.token
     val api: ServiceProvider
 
     init {

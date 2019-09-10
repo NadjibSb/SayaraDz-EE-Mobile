@@ -1,11 +1,16 @@
 package sayaradz.ui.fragment.addAnnonce
 
+import android.app.Activity
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.database.Cursor
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Environment
+import android.provider.DocumentsContract
 import android.provider.MediaStore
 import android.transition.Slide
 import android.transition.TransitionManager
@@ -17,6 +22,7 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.core.content.FileProvider
+import androidx.core.graphics.PathUtils
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
@@ -27,11 +33,21 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.alespero.expandablecardview.ExpandableCardView
+import com.facebook.FacebookSdk.getApplicationContext
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.firebase.auth.FirebaseAuth
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator
+import kotlinx.android.synthetic.main.add_annonce_fragment.*
+import okhttp3.MediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import sayaradz.authentification.R
 import sayaradz.authentification.databinding.AddAnnonceFragmentBinding
+import sayaradz.dataClasses.AnnoncePost
+import sayaradz.dataClasses.Vehicule
+import sayaradz.ui.MainActivityViewModel
 import sayaradz.ui.fragment.adapter.ListAdapter
+import sayaradz.ui.mainActivity.MainActivity
 import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat
@@ -40,8 +56,8 @@ class AddAnnonceFragment  : Fragment () {
     companion object {
         var active = false
         var marqueId=""
-        var modeleId =""
-        var versionId=""
+        var modeleId =0 // ref not id
+        var versionId="" // name not id
         lateinit var lifecycleRegistry : LifecycleRegistry
         lateinit var rvModel: RecyclerView
         lateinit var rvVersion: RecyclerView
@@ -51,7 +67,8 @@ class AddAnnonceFragment  : Fragment () {
         lateinit var ecvModel :  ExpandableCardView
         lateinit var ecvVersion :  ExpandableCardView
         lateinit var ecvOthers :  ExpandableCardView
-        var token = "token"
+        var token = MainActivityViewModel.token
+
 
         fun setUpRecycleView(rv: RecyclerView ,c  : Context) {
             rv.layoutManager = GridLayoutManager(c,3)
@@ -69,12 +86,15 @@ class AddAnnonceFragment  : Fragment () {
 //    val colors = CollectionUtils.listOf<String>("white", "blue", "red")
   //  val modelList: List<Modele> = CollectionUtils.listOf(Modele("1", "301", "1", colors), Modele("2", "308", "2", colors), Modele("3", "301", "3", colors))//For test
    // val versionList: List<Version> = CollectionUtils.listOf(Version("1", "v1", "301", ""), Version("2", "v2", "308", ""), Version("3", "v3", "308", ""))//For test
+
     val TAKE_PICTURE = 1
     val SELECT_PICTURE = 2
     lateinit var rvMarque: RecyclerView
     lateinit var btnConfirm: FloatingActionButton
+     var stringUri = "url"
 
     var currentPath: String? = null
+    var M1 = "-01-01"
 
     val TAG = "TAG-AddAnnonceFragment"
     lateinit var binding: AddAnnonceFragmentBinding
@@ -100,7 +120,7 @@ class AddAnnonceFragment  : Fragment () {
         rvModel = binding.root.findViewById(R.id.modelListView)
         rvVersion = binding.root.findViewById(R.id.versionListView)
         addAnnonceViewModel.marques.observe(this, Observer { marques ->
-            rvMarque.adapter = ListAdapter(marques, ListAdapter.ViewHolderType.MARQUE, this@AddAnnonceFragment.context!!, "token")
+            rvMarque.adapter = ListAdapter(marques, ListAdapter.ViewHolderType.MARQUE, this@AddAnnonceFragment.context!!,token)
         })
         setUpRecycleView(rvMarque)
 
@@ -121,7 +141,7 @@ class AddAnnonceFragment  : Fragment () {
         btnAddPhoto = binding.root.findViewById(R.id.btn_add_pic)
 
 
-
+      Log.i("TOKEN" , token)
 
         val action = AddAnnonceFragmentDirections.actionAddAnnonceToMyAnnonceFragment()
         btnConfirm.setOnClickListener {
@@ -134,13 +154,39 @@ class AddAnnonceFragment  : Fragment () {
             var color =binding.root.findViewById<AppCompatEditText>(R.id.ed_color).text.toString()
             var year=binding.root.findViewById<AppCompatEditText>(R.id.ed_year).text.toString()
 
-             Log.i(TAG, "Description  "+descrp+"  Title  "+title+" KM "+km+" Price "+price)
 
             // Verify all  and send query else  return and message
+            Log.i("PHOTOOO",stringUri)
 
-                v.findNavController().navigate(action)
+            var madate=year+M1
+            Log.i("DATE",madate)
+              if (km != "" && price != "" && descrp != "" && title != "" && color != ""  && year != "") {
+                  var car = Vehicule(km.toInt(), madate, versionId, modeleId, color)
+                 // var annonce = AnnoncePost(car, title, price.toInt(), descrp)
+                  var image : MultipartBody.Part
+                   var file =  File(stringUri)
+
+                  var requestFile =
+                          RequestBody.create(
+                                 MediaType.parse("image/*"),
+                                  file
+                          )
+                  image =
+                          MultipartBody.Part.createFormData("picture", file.getName(), requestFile)
+
+                  Log.i(TAG, "Description  "+descrp+"  Title  "+title+" KM "+km+" Price "+price+ " version PK " + car.versionPk + " Model Pk "+ car.modelPk + " Date"+ car.date)
 
 
+                   AddAnnonceViewModel.createAnnonce(token,image,car,title,price.toInt(),descrp)
+
+                  v.findNavController().navigate(action)
+
+              } else {
+
+                  showDialog(root_layout,this@AddAnnonceFragment.context!!)
+
+
+              }
         }
 
 
@@ -192,7 +238,8 @@ class AddAnnonceFragment  : Fragment () {
 
             btnGallery.setOnClickListener {
                 Toast.makeText(this@AddAnnonceFragment.context!!, "GALLERY", Toast.LENGTH_SHORT).show()
-                DispatchGalleryIntent()
+               // DispatchGalleryIntent()
+                pickPhotoFromGallery()
 
             }
             btnCamera.setOnClickListener {
@@ -230,6 +277,14 @@ class AddAnnonceFragment  : Fragment () {
         intent.type = "image/*"
         intent.action = Intent.ACTION_GET_CONTENT
         startActivityForResult(Intent.createChooser(intent, "selectionner une image"), SELECT_PICTURE)
+    }
+
+    private fun pickPhotoFromGallery() {
+        val pickImageIntent = Intent(
+                Intent.ACTION_PICK,
+                MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+        )
+        startActivityForResult(pickImageIntent, SELECT_PICTURE)
     }
 
     private fun DispatchCameraIntent() {
@@ -284,4 +339,87 @@ class AddAnnonceFragment  : Fragment () {
         super.onStop()
         active = false
     }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        var uri : Uri?= null
+        if (requestCode == TAKE_PICTURE && resultCode == Activity.RESULT_OK )
+        { try
+        {
+            val file = File(currentPath)
+            uri = Uri.fromFile(file)
+            stringUri=currentPath!!
+        }catch ( e: IOException)
+        {
+            e.printStackTrace()
+        }
+
+        }
+
+        if (requestCode == SELECT_PICTURE && resultCode == Activity.RESULT_OK )
+        { try
+        {
+            uri = data!!.data
+
+            //var selectedFilePath =  uri.path
+           var filePathColumn = arrayOf(MediaStore.Images.Media.DATA)
+            val cursor = activity!!.contentResolver.query(uri!!, filePathColumn, null, null, null)!!
+
+            cursor.moveToFirst()
+
+            val columnIndex = cursor.getColumnIndex(MediaStore.Images.Media.DATA)
+            val mediaPath = cursor.getString(columnIndex)
+            Log.i("path", mediaPath)
+            cursor.close()
+            stringUri = mediaPath
+            cursor.close()
+
+
+        }catch ( e: IOException)
+        {
+            e.printStackTrace()
+        }
+
+        }
+
+
+        //stringUri = uri.toString()
+
+
+
+
+
+
+    }
+
+
+    //Alert
+    private fun showDialog(rootView: View, c : Context )
+    {
+        val builder = AlertDialog.Builder(c)
+
+        // Set the alert dialog title
+        builder.setTitle("Ajout unvalide")
+
+        // Display a message on alert dialog
+        builder.setMessage("Veuillez remplir les champs qui manquent")
+
+        // Set a positive button and its click listener on alert dialog
+        builder.setPositiveButton("OK"){dialog, which ->
+            // Do something when user press the positive button
+            Toast.makeText(c,"Ok", Toast.LENGTH_SHORT).show()
+
+        }
+
+
+
+        // Finally, make the alert dialog using builder
+        val dialog: AlertDialog = builder.create()
+
+        // Display the alert dialog on app interface
+        dialog.show()
+    }
+
+
+
+
 }

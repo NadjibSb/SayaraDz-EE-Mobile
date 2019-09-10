@@ -47,16 +47,16 @@ class ModelViewHolder private constructor(val layout: View) : RecyclerView.ViewH
 
     fun bind(modele: Modele) {
         modelName.setText(modele.name)
-        handleClick(layout, modele.id)
+        handleClick(layout, modele.pk)   // they change it not id !!
         if(AddAnnonceFragment.active)
-       itemViewmodel.setOnClickListener {
+       layout.setOnClickListener {
            var token =  AddAnnonceFragment.token
            var context = AddAnnonceFragment.contextAdd
-           if (modele.id!= null) {
-               AddAnnonceFragment.modeleId = modele.id
-               Log.i("TEST" , "Correct ID"+ modele.id)
+           if (modele.id != null) {
+               AddAnnonceFragment.modeleId = modele.refId  // RefId
+               Log.i("TEST" , "Correct ID"+ modele.name)
                // ABOUT  THE MODEL ASSOCIATED LIST
-               var listVersion= AddAnnonceViewModel.getVersions(token,AddAnnonceFragment.modeleId)
+               var listVersion= AddAnnonceViewModel.getVersions(token,modele.pk)
                listVersion.observe(this, Observer { versions ->
                    AddAnnonceFragment.rvVersion.adapter = ListAdapter(versions, ListAdapter.ViewHolderType.VERSION, context,token)
                })

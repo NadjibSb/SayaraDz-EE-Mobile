@@ -27,11 +27,11 @@ data class Car(
         var idVehicule: Int = 0 ,
         @SerializedName("commentaires")
         var commentaires: String ,
-       @SerializedName("marque_name")
+        @SerializedName("marque_name")
         var marqueName: String ,
         @SerializedName("model_name")
         var modelName: String,
-       @SerializedName("version_name")
+        @SerializedName("version_name")
         var versionName: String ,
         @SerializedName("couleur")
         var color: String

@@ -8,7 +8,10 @@ import retrofit2.Callback
 import retrofit2.Response
 import sayaradz.api.ServiceBuilder
 import sayaradz.api.ServiceProvider
+import sayaradz.dataClasses.AnnoncePost
+import sayaradz.dataClasses.AnnonceUpdate
 import sayaradz.dataClasses.Car
+import sayaradz.ui.MainActivityViewModel
 
 class EditAnnonceViewModel  ( val annonceId: String) : ViewModel() {
 
@@ -17,7 +20,7 @@ class EditAnnonceViewModel  ( val annonceId: String) : ViewModel() {
     // HERE GETTING DATA FOR AN ANNONCE CLICKED
     var annonce : MutableLiveData<Car>
 
-    var token = ""
+    var token = MainActivityViewModel.token
     val api: ServiceProvider
 
     init {
@@ -60,6 +63,41 @@ class EditAnnonceViewModel  ( val annonceId: String) : ViewModel() {
             }
         })
         return finalAnnonce
+    }
+
+    companion object {
+        val TAG = "EditAnnonceViewModel"
+        val api = ServiceBuilder.buildService(ServiceProvider::class.java)
+        // Update
+        fun updateAnnonce ( idToken : String , annonceId: String , annonce :AnnonceUpdate )
+        {
+
+            val call0 = api.updateAnnounce(idToken,annonceId,annonce)
+            call0.enqueue(object : Callback<AnnonceUpdate> {
+                override fun onResponse(call: Call<AnnonceUpdate>, response: Response<AnnonceUpdate>) {
+                    Log.i(TAG, "DisplayAnnonce: call enqueue")
+
+                    if (!response.isSuccessful()) {
+                        Log.i(TAG,"UPDATED")
+                        Log.i(TAG, "CODE:" + response.code().toString())
+                        return
+                    }
+
+
+                }
+                override fun onFailure(call: Call<AnnonceUpdate>, t: Throwable) {
+                    Log.i(TAG, "error CODE:" + t.message)
+                }
+            })
+
+        }
+
+
+
+
+
+
+
     }
 
 }

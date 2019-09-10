@@ -20,6 +20,7 @@ import jp.wasabeef.recyclerview.animators.SlideInUpAnimator
 import sayaradz.authentification.R
 import sayaradz.authentification.databinding.MyAnnonceFragmentBinding
 import sayaradz.dataClasses.Car
+import sayaradz.ui.MainActivityViewModel
 import sayaradz.ui.fragment.adapter.ListAdapter
 
 class MyAnnonceFragment : Fragment() {
@@ -29,7 +30,7 @@ class MyAnnonceFragment : Fragment() {
         lateinit var lifecycleRegistry : LifecycleRegistry
         lateinit var recyclerView : RecyclerView
         lateinit var contextMyAn : Context
-        var token=""
+        var token= MainActivityViewModel.token
         fun life( life : LifecycleRegistry , rv : RecyclerView , context : Context)
         {   contextMyAn = context
             lifecycleRegistry=life

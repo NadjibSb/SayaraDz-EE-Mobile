@@ -57,20 +57,22 @@ class MarqueViewHolder private constructor(val layout: View) : RecyclerView.View
 
     fun bind(marque: Marque) {
         marqueName.setText(marque.name)
-        handleClick(layout, marque.id)
+        if (!AddAnnonceFragment.active) handleClick(layout, marque.id)
         if (AddAnnonceFragment.active)
-        itemViewmarque.setOnClickListener {
-            Log.i("TEST" , "Correct ID"+ marque.id)
+
+       layout.setOnClickListener {
+            Log.i("TEST" , "Correct ID"+ marque.name)
             var token =  AddAnnonceFragment.token
             var context = AddAnnonceFragment.contextAdd
             if (marque.id!= null) {
                 AddAnnonceFragment.marqueId=marque.id
+                Log.i("TESTMARQUE" , "Correct ID"+ marque.id)
                 // ABOUT  THE MODEL ASSOCIATED LIST
-                var listModel= AddAnnonceViewModel.getModels(token,AddAnnonceFragment.marqueId)
-                  listModel.observe(this, Observer { models ->
-                      AddAnnonceFragment.rvModel.adapter = ListAdapter(models, ListAdapter.ViewHolderType.MODEL, context,token)
-                  })
-                  AddAnnonceFragment.setUpRecycleView(AddAnnonceFragment.rvModel ,context)
+                var listModel= AddAnnonceViewModel.getModels(token,marque.id)
+                listModel.observe(this, Observer { models ->
+                    AddAnnonceFragment.rvModel.adapter = ListAdapter(models, ListAdapter.ViewHolderType.MODEL, context,token)
+                })
+                AddAnnonceFragment.setUpRecycleView(AddAnnonceFragment.rvModel ,context)
 
                 // ABOUT THE CARD VIEW
                 ecvModel.visibility=View.VISIBLE

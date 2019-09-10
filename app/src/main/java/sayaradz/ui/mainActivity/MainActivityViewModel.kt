@@ -13,7 +13,10 @@ import com.google.firebase.auth.GetTokenResult
 class MainActivityViewModel : ViewModel() {
 
     val TAG = "TAG-MainActivityVM"
-    private lateinit var token: String
+    companion object {
+       lateinit var token: String
+    }
+
 
     fun isAuth(): LiveData<Boolean> {
         val user = FirebaseAuth.getInstance()?.currentUser
@@ -33,22 +36,23 @@ class MainActivityViewModel : ViewModel() {
                 })
         return isAuth
     }
-
     fun getToken(): String {
-        if (token == null) {
-            val user = FirebaseAuth.getInstance()?.currentUser
-            user?.getIdToken(true)
-                    ?.addOnCompleteListener(object : OnCompleteListener<GetTokenResult> {
-                        override fun onComplete(task: Task<GetTokenResult>) {
-                            if (task.isSuccessful()) {
-                                token = task.getResult()!!.getToken()!!  // Having the token
-                                Log.i(TAG, "TOKEN CORRECT: $token")
-                            }
+
+        val user = FirebaseAuth.getInstance()?.currentUser
+        user?.getIdToken(true)
+                ?.addOnCompleteListener(object : OnCompleteListener<GetTokenResult> {
+                    override fun onComplete(task: Task<GetTokenResult>) {
+                        if (task.isSuccessful()) {
+                            token = task.getResult()!!.getToken()!!  // Having the token
+                            Log.i("MainActivity", "TOKEN CORRECT: $token")
                         }
-                    })
-        }
+                    }
+                })
+
         return token
     }
+
+
 
     fun signOut() {
         FirebaseAuth.getInstance()?.signOut()

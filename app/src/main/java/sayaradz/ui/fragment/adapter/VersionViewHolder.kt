@@ -41,8 +41,10 @@ class VersionViewHolder private constructor(val layout: View) : RecyclerView.Vie
         versionName.setText(version.name)
         handleClick(layout, version.id)
       if (AddAnnonceFragment.active)
-          itemViewversion.setOnClickListener {
-              versionId=version.id
+          layout.setOnClickListener {
+
+              versionId=version.name //
+              Log.i("TEST", version.id + ""+version.name)
               ecvOthers.visibility=View.VISIBLE
               if (ecvOthers.visibility == View.VISIBLE)
               {
@@ -52,7 +54,7 @@ class VersionViewHolder private constructor(val layout: View) : RecyclerView.Vie
               ecvVersion.collapse()
           }
 
-        Log.i("version", version.name)
+
         /*val imageUrl = GlideUrl(marque.imageUrl, LazyHeaders.Builder()
                 .addHeader("Authorization", token)
                 .build())

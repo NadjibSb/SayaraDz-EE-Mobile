@@ -1,14 +1,11 @@
 package sayaradz.api
 
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import okhttp3.ResponseBody
 import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import retrofit2.http.*
-import sayaradz.dataClasses.Car
-import sayaradz.dataClasses.Marque
-import sayaradz.dataClasses.Modele
-import sayaradz.dataClasses.Version
+import sayaradz.dataClasses.*
 
 
 interface ServiceProvider {
@@ -24,7 +21,7 @@ interface ServiceProvider {
 
     // Getting versions by model
     @GET("api/version")
-    fun getVersionsByModele(@Header("Authorization") token: String, @Query("modelId") modeleId: String): Call<List<Version>>
+    fun getVersionsByModele(@Header("Authorization") token: String, @Query("modeleId") modeleId: String): Call<List<Version>>
 
     // Getting all the models
     @GET("api/modele/mobile")
@@ -60,6 +57,43 @@ interface ServiceProvider {
     @DELETE("api/annonce/delete/{annonceId}/")
     fun deleteAnnounce(@Header("Authorization") token: String ,@Path("annonceId") annonceId: String) : Call<ResponseBody>
 
+   /* //Create annonce
+    @POST ("api/annonce/create/")
+    fun createAnnounce (@Header("Authorization") token: String,@Body annonce :AnnoncePost) : Call<AnnoncePost>*/
+
+    //Update annonce
+    @PUT ("api/annonce/update/{annonceId}/")
+    fun updateAnnounce (@Header("Authorization") token: String,@Path("annonceId") annonceId: String,@Body annonce :AnnonceUpdate) : Call<AnnonceUpdate>
+
+    //Create annonce
+    @Multipart
+    @POST ("api/annonce/create/")
+    fun createAnnounce (@Header("Authorization") token: String, @Part ("titre")  titre : RequestBody ,
+                                                                      @Part ("vehicule") vehicule : RequestBody ,
+                                                                      @Part("prix") prix : RequestBody ,
+                                                                      @Part("commentaires") commentaires : RequestBody) : Call<ResponseBody>
+//Create Vehicule occasion
+@Multipart
+@POST ("api/vehiculeoccasion/create/")
+fun createVehicule (@Header("Authorization") token: String,
+                    @Part file : MultipartBody.Part,
+                    @Part("kilometrage")  kilometrage : RequestBody ,
+                    @Part ("date")  date : RequestBody ,
+                    @Part("version") version :RequestBody,
+                    @Part("couleur") couleur: RequestBody ,
+                    @Part("modele") modele : RequestBody
+                    ) : Call<Car>
+
+
+    // Getting modeles by brand
+    @GET("api/refmodele/")
+    fun getModelsRefByMarque(@Header("Authorization") token: String, @Query("marqueId") marqueId: String): Call<List<Modele>>
+
+    // Getting versions by model
+    @GET("api/refversion")
+    fun getVersionsRefByModele(@Header("Authorization") token: String, @Query("modeleId") modeleId: String): Call<List<Version>>
+
+
+
 
 }
-

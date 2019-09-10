@@ -11,6 +11,14 @@ data class Modele (
         var pk: String,
         @SerializedName("couleur_set")
         var colors : List<String> ,
+        @SerializedName("ref_id")
+        var refId : Int ,
+        @SerializedName("marque_nom")
+        var marqueName : String ,
+        @SerializedName("marqueId")
+        var marqueId : String ,
         @SerializedName("image")
         var image : String
+
+
 )

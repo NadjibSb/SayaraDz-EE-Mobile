@@ -23,6 +23,7 @@ import sayaradz.authentification.R
 import sayaradz.dataClasses.Car
 import sayaradz.dataClasses.Marque
 import sayaradz.dataClasses.Modele
+import sayaradz.ui.MainActivityViewModel
 import sayaradz.ui.fragment.adapter.ListAdapter
 import java.util.*
 import kotlin.collections.ArrayList
@@ -84,7 +85,7 @@ class SearchFragment : Fragment() {
         updateList()
         setUpRecycleView(carsList)
         //Having the Token to  ACCESS
-        token = ""// this.arguments!!.getString("TOKEN")
+        token = MainActivityViewModel.token// this.arguments!!.getString("TOKEN")
         Log.i(TAG, "TOKEN RECEIVED: $token")
 
         // REMPLIR LIST WITH QUERY
@@ -258,6 +259,7 @@ class SearchFragment : Fragment() {
         typeAdapter = ArrayAdapter(activity?.applicationContext, R.layout.spinner_item, typeList)
         typeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinnerType.adapter=typeAdapter
+        spinnerType.setSelection(0,false)
         spinnerType.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
 
            override fun onNothingSelected(p0: AdapterView<*>?) {
