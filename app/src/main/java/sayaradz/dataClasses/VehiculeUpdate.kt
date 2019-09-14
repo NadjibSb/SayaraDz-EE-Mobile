@@ -12,6 +12,14 @@ data class VehiculeUpdate (
         var date: String = "",
         @SerializedName("couleur")
         @Expose
-        var color: String
-
+        var color: String,
+        @SerializedName("image1")
+        @Expose
+        var image1: String,
+        @SerializedName("image2")
+        @Expose
+        var image2: String,
+        @SerializedName("image3")
+        @Expose
+        var image3: String
 )

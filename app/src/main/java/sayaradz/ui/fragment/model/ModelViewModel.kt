@@ -9,16 +9,18 @@ import retrofit2.Response
 import sayaradz.api.ServiceBuilder
 import sayaradz.api.ServiceProvider
 import sayaradz.dataClasses.Modele
+import sayaradz.ui.MainActivityViewModel
 
 class ModelViewModel(val marqueId: String) : ViewModel() {
 
     val TAG = "ModelViewModel"
     var models: MutableLiveData<ArrayList<Modele>>
     val api: ServiceProvider
+    var token = MainActivityViewModel.token
 
     init {
         api = ServiceBuilder.buildService(ServiceProvider::class.java)
-        models = getModels("token", marqueId)
+        models = getModels(token, marqueId)
     }
 
     private fun defaultList(): MutableLiveData<ArrayList<Modele>> {

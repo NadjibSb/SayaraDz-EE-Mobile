@@ -30,7 +30,7 @@ import kotlin.collections.ArrayList
 
 
 class SearchFragment : Fragment() {
-    var token: String=""
+    var token = MainActivityViewModel.token
     val TAG = "TAG-SearchFragment"
     var brandList = mutableListOf<String>()//ArrayList<String>()
     var modelList = mutableListOf<String>()

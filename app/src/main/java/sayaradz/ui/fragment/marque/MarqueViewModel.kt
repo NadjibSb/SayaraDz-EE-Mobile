@@ -10,12 +10,13 @@ import sayaradz.api.ServiceBuilder
 import sayaradz.api.ServiceProvider
 import sayaradz.authentification.R
 import sayaradz.dataClasses.Marque
+import sayaradz.ui.MainActivityViewModel
 import java.util.*
 
 class MarqueViewModel : ViewModel() {
 
     val TAG = "MarqueViewModel"
-    val token = "token"
+    val token = MainActivityViewModel.token
     var marques: MutableLiveData<ArrayList<Marque>>
     val api: ServiceProvider
 

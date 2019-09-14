@@ -26,6 +26,10 @@
     <argument
         android:name="annonceId"
         app:argType="string" />
+        <action
+            android:id="@+id/action_annonceFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
+
 
 </fragment>
 

@@ -18,6 +18,7 @@ import sayaradz.api.ServiceBuilder
 import sayaradz.api.ServiceProvider
 import sayaradz.authentification.R
 import sayaradz.dataClasses.Car
+import sayaradz.ui.MainActivityViewModel
 import sayaradz.ui.fragment.adapter.ListAdapter
 import java.util.*
 import kotlin.coroutines.AbstractCoroutineContextElement
@@ -31,7 +32,7 @@ class MyAnnonceViewModel: ViewModel() , LifecycleOwner {
     companion object {
         val TAG = "DELETE"
         lateinit var newAnnonces: MutableLiveData<ArrayList<Car>>
-        var token = ""
+        var token = MainActivityViewModel.token
         lateinit var context : Context
         lateinit var life : LifecycleOwner
         fun fill ( list : MutableLiveData<ArrayList<Car>> , context :Context ) {
@@ -98,6 +99,45 @@ class MyAnnonceViewModel: ViewModel() , LifecycleOwner {
                     AnnounceRespond = response.body()  // Getting the list
                     if (AnnounceRespond != null) {
                          annonceList.clear()
+                        Log.i(TAG, "REPONSES: HERE is ALL THE Announcement OF current User")
+                        for (m in AnnounceRespond!!) {
+                            var content = ""
+                            content += "ID: " + m.id + "\n"
+                            content += "Name: " + m.title + "\n"
+                            Log.i(TAG, "\n=========\n$content")
+                            annonceList.add(m)
+                        }
+                        finalList.value = annonceList
+
+                    }
+                }
+
+                override fun onFailure(call: Call<List<Car>>, t: Throwable) {
+                    Log.i(TAG, "error CODE:" + t.message)
+                }
+            })
+            return finalList
+        }
+
+        fun getAnnonces(idToken: String): MutableLiveData<ArrayList<Car>> {
+
+            val call = api.getAnnounceByUserId(idToken) // The request included the token
+            var AnnounceRespond: List<Car>? = null
+            var annonceList = ArrayList<Car>()
+            var finalList = MutableLiveData<ArrayList<Car>>()
+
+            call.enqueue(object : Callback<List<Car>> {
+                override fun onResponse(call: Call<List<Car>>, response: Response<List<Car>>) {
+                    Log.i(TAG, "DisplayAnnonceList: call enqueue")
+
+                    if (!response.isSuccessful()) {
+                        Log.i(TAG, "CODE:" + response.code().toString())
+                        return
+                    }
+
+                    AnnounceRespond = response.body()  // Getting the list
+                    if (AnnounceRespond != null) {
+                        // annonceList.clear()
                         Log.i(TAG, "REPONSES: HERE is ALL THE Announcement OF current User")
                         for (m in AnnounceRespond!!) {
                             var content = ""

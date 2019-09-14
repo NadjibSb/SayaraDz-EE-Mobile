@@ -15,7 +15,7 @@ class MainActivityViewModel : ViewModel() {
     val TAG = "TAG-MainActivityVM"
     companion object {
        lateinit var token0: String
-        lateinit var token : String
+         var token : String =""
 
     }
 

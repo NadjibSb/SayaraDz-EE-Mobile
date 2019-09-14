@@ -47,6 +47,7 @@ import sayaradz.dataClasses.AnnoncePost
 import sayaradz.dataClasses.Vehicule
 import sayaradz.ui.MainActivityViewModel
 import sayaradz.ui.fragment.adapter.ListAdapter
+import sayaradz.ui.fragment.myAnnonce.MyAnnonceViewModel
 import sayaradz.ui.mainActivity.MainActivity
 import java.io.File
 import java.io.IOException
@@ -177,7 +178,7 @@ class AddAnnonceFragment  : Fragment () {
                   Log.i(TAG, "Description  "+descrp+"  Title  "+title+" KM "+km+" Price "+price+ " version PK " + car.versionPk + " Model Pk "+ car.modelPk + " Date"+ car.date)
 
 
-                   AddAnnonceViewModel.createAnnonce(token,image,car,title,price.toInt(),descrp)
+                   addAnnonceViewModel.createAnnonce(token,image,car,title,price.toInt(),descrp)
 
                   v.findNavController().navigate(action)
 
@@ -384,7 +385,7 @@ class AddAnnonceFragment  : Fragment () {
 
         //stringUri = uri.toString()
 
-
+        MyAnnonceViewModel.newAnnonces=MyAnnonceViewModel.getAnnonces(token)
 
 
 

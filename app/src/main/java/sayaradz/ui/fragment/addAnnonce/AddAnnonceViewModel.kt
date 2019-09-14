@@ -68,11 +68,72 @@ class AddAnnonceViewModel() :ViewModel() {
         })
         return finalList
     }
-// Adding Companion object
-    companion object {
+    // Creation
+    fun createAnnonce ( idToken : String , image : MultipartBody.Part , vehicule : Vehicule , titre: String , prix : Int  , commentaires :String )
+    {
 
+
+        val call0 = api.createVehicule(idToken,image,convert(vehicule.kilometrage.toString()), convert(vehicule.date),convert(vehicule.versionPk), convert(vehicule.color),convert(vehicule.modelPk.toString()))
+        call0.enqueue(object : Callback<Car> {
+            override fun onResponse(call: Call<Car>, response: Response<Car>) {
+                Log.i(TAG, "CREATE VEHICULE")
+                var car  = response.body()!!
+                var call1 = api.createAnnounce(idToken, convert(titre), convert(car.id.toString()), convert(prix.toString()),convert(commentaires))
+                Log.i("CAAAR",car.id.toString())
+                call1.enqueue(object : Callback<ResponseBody> {
+                    override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+                        Log.i(TAG, "CREATE ANNONCE")
+
+                        if (!response.isSuccessful()) {
+                            Log.i(TAG,"CREATED ANNONCE")
+                            Log.i(TAG, "CODE:" + response.code().toString() + "" + response.body().toString())
+
+                            return
+                        }
+
+                    }
+                    override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                        Log.i(TAG, "error CODE:" + t.message)
+                    }
+                })
+
+
+
+                if (!response.isSuccessful()) {
+                    Log.i(TAG,"CREATED VEHICULE")
+                    Log.i("QUERY",vehicule.date +"" + vehicule.versionPk)
+                    Log.i(TAG, "CODE:" + response.code().toString())
+                    return
+                }
+
+
+
+
+            }
+            override fun onFailure(call: Call<Car>, t: Throwable) {
+                Log.i(TAG, "error CODE:" + t.message)
+            }
+        })
+
+
+
+
+    }
+
+
+
+
+
+    fun convert ( a : String) : RequestBody {
+        return  RequestBody.create(MediaType.parse("text/plain"), a)
+    }
+
+
+    // Adding Companion object
+    companion object {
         val TAG = "AddAnnonceViewModel"
         val api = ServiceBuilder.buildService(ServiceProvider::class.java)
+
         fun getModels(idToken: String, marqueId: String): MutableLiveData<ArrayList<Modele>> {
 
             val call = api.getModelsByMarque(idToken, marqueId) // The request included the token
@@ -152,62 +213,8 @@ class AddAnnonceViewModel() :ViewModel() {
         }
 
 
-      // Creation
-     fun createAnnonce ( idToken : String , image : MultipartBody.Part , vehicule : Vehicule , titre: String , prix : Int  , commentaires :String )
-      {
 
 
-          val call0 = api.createVehicule(idToken,image,convert(vehicule.kilometrage.toString()), convert(vehicule.date),convert(vehicule.versionPk), convert(vehicule.color),convert(vehicule.modelPk.toString()))
-          call0.enqueue(object : Callback<Car> {
-              override fun onResponse(call: Call<Car>, response: Response<Car>) {
-                  Log.i(TAG, "CREATE VEHICULE")
-                  var car  = response.body()!!
-                  var call1 = api.createAnnounce(idToken, convert(titre), convert(car.id.toString()), convert(prix.toString()),convert(commentaires))
-                  Log.i("CAAAR",car.id.toString())
-                    call1.enqueue(object : Callback<ResponseBody> {
-                      override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
-                          Log.i(TAG, "CREATE ANNONCE")
-
-                          if (!response.isSuccessful()) {
-                              Log.i(TAG,"CREATED ANNONCE")
-                              Log.i(TAG, "CODE:" + response.code().toString() + "" + response.body().toString())
-
-                              return
-                          }
-
-                      }
-                      override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-                          Log.i(TAG, "error CODE:" + t.message)
-                      }
-                  })
-
-
-
-                  if (!response.isSuccessful()) {
-                      Log.i(TAG,"CREATED VEHICULE")
-                      Log.i("QUERY",vehicule.date +"" + vehicule.versionPk)
-                      Log.i(TAG, "CODE:" + response.code().toString())
-                      return
-                  }
-
-
-
-
-              }
-              override fun onFailure(call: Call<Car>, t: Throwable) {
-                  Log.i(TAG, "error CODE:" + t.message)
-              }
-          })
-
-
-
-
-      }
-
-
-     fun convert ( a : String) : RequestBody {
-         return  RequestBody.create(MediaType.parse("text/plain"), a)
-     }
 
 
 

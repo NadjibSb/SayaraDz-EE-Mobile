@@ -398,9 +398,34 @@
             <LayoutPositions>
               <option name="myPositions">
                 <map>
-                  <entry key="searchFragment">
+                  <entry key="annonceFragment">
                     <value>
                       <LayoutPositions />
+                    </value>
+                  </entry>
+                  <entry key="ficheTechFragment">
+                    <value>
+                      <LayoutPositions />
+                    </value>
+                  </entry>
+                  <entry key="searchFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_searchFragment_to_annonceFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_searchFragment_to_fichTechFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
+                      </LayoutPositions>
                     </value>
                   </entry>
                 </map>

@@ -10,12 +10,13 @@ import sayaradz.api.ServiceBuilder
 import sayaradz.api.ServiceProvider
 import sayaradz.authentification.R
 import sayaradz.dataClasses.Version
+import sayaradz.ui.MainActivityViewModel
 
 class VersionViewModel(val modeleId: String) : ViewModel() {
 
     val TAG = "VersionViewModel"
     var versions: MutableLiveData<ArrayList<Version>>
-    var token = ""
+    var token =MainActivityViewModel.token
     val api: ServiceProvider
 
     init {
