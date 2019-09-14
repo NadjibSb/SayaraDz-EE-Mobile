@@ -17,6 +17,7 @@ import sayaradz.authentification.R
 import sayaradz.authentification.databinding.ModelFragmentBinding
 import sayaradz.dataClasses.Modele
 import sayaradz.ui.fragment.adapter.ListAdapter
+import sayaradz.ui.mainActivity.MainActivity
 
 class ModelFragment : Fragment() {
 
@@ -33,16 +34,16 @@ class ModelFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.model_fragment, container, false)
         args = ModelFragmentArgs.fromBundle(arguments!!)
 
-        var viewModelFactory = ModelViewModelFactory(args.marqueId)
+        var viewModelFactory = ModelViewModelFactory(args.marqueId, (activity as MainActivity).getToken())
         modelViewModel = ViewModelProviders.of(this,viewModelFactory)
                 .get(ModelViewModel::class.java)
 
-        // loading view
+        // annimation while loading data
         binding.modelListView.visibility = View.GONE
         binding.shimmerLayout.visibility = View.VISIBLE
         binding.shimmerLayout.startShimmerAnimation()
 
-        // when data loaded
+        // when data loaded => display list or empty list
         modelViewModel.models.observe(this, Observer { models ->
 
             binding.shimmerLayout.stopShimmerAnimation()
@@ -57,8 +58,32 @@ class ModelFragment : Fragment() {
 
         })
 
+        setupPullToRefresh()
 
         return binding.root
+    }
+
+    private fun setupPullToRefresh() {
+        binding.swiperefresh.setOnRefreshListener {
+            modelViewModel.getModels()
+            modelViewModel.models.observe(this, Observer { models ->
+
+                binding.shimmerLayout.stopShimmerAnimation()
+                binding.shimmerLayout.visibility = View.GONE
+                if (models.size > 0) {
+                    binding.modelListView.visibility = View.VISIBLE
+                    setUpRecycleView(binding.root, models)
+                } else {
+                    Log.i(TAG, "empty")
+                    binding.emptyListView.visibility = View.VISIBLE
+                }
+                binding.swiperefresh.isRefreshing = false
+            })
+        }
+        binding.swiperefresh.setColorSchemeResources(
+                R.color.colorPrimaryLight,
+                R.color.colorPrimary,
+                R.color.colorPrimaryDark)
     }
 
     //RecycleView--------------------------------------------

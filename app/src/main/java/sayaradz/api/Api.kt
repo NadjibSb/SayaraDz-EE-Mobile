@@ -29,7 +29,7 @@ class Api {
                 override fun onResponse(call: Call<List<Marque>>, response: Response<List<Marque>>) {
                     Log.i(TAG, "DisplayMarqueList: call enqueue")
 
-                    if (!response.isSuccessful()) {
+                    if (!response.isSuccessful) {
                         Log.i(TAG, "CODE:" + response.code().toString())
                         return
                     }
@@ -39,9 +39,7 @@ class Api {
                         Log.i(TAG, "REPONSES: HERE is ALL THE BRANDS:")
                         for (m in marqueRespond!!) {
                             var content = ""
-                            content += "ID: " + m.id + "\n"
-                            content += "Name: " + m.name + "\n"
-                            content += "Name: " + m.imageUrl
+                            content += " $m \n"
                             Log.i(TAG, "\n=========\n$content")
                             marqueList.add(m)
                         }
@@ -81,11 +79,7 @@ class Api {
                         Log.i(TAG, "REPONSES: HERE is ALL THE MODELS OF $marqueId MARQUE:")
                         for (m in modeleRespond!!) {
                             var content = ""
-                            content += "pk: " + m.pk + "\n"
-                            content += "ID: " + m.code + "\n"
-                            content += "Name: " + m.name + "\n"
-                            content += "colors: " + m.colors + "\n"
-                            content += "img: " + m.imageUrl + "\n"
+                            content += "$m + \n"
 
                             Log.i(TAG, "\n=========\n$content")
                             modelList.add(m)
@@ -115,7 +109,7 @@ class Api {
                 override fun onResponse(call: Call<List<Version>>, response: Response<List<Version>>) {
                     Log.i(TAG, "DisplayVersionList: call enqueue")
 
-                    if (!response.isSuccessful()) {
+                    if (!response.isSuccessful) {
                         Log.i(TAG, "CODE:" + response.code().toString())
                         return
                     }
@@ -125,15 +119,7 @@ class Api {
                         Log.i(TAG, "REPONSES: HERE is ALL THE VERSIONS OF $modeleId MARQUE:")
                         for (m in versioneRespond!!) {
                             var content = ""
-                            content += "ID: " + m.id + "\n"
-                            content += "code: " + m.code + "\n"
-                            content += "Name: " + m.name + "\n"
-                            content += "model: " + m.model_id + "\n"
-                            content += "model: " + m.model_name + "\n"
-                            content += "marque: " + m.marque_name + "\n"
-                            content += "image: " + m.imageUrl + "\n"
-                            content += "prix: " + m.price + "\n"
-                            //content += "Image: " + m.imageUrl
+                            content += " $m \n"
                             Log.i(TAG, "\n=========\n$content")
                             versionList.add(m)
                         }
@@ -161,7 +147,7 @@ class Api {
                 override fun onResponse(call: Call<FichTech>, response: Response<FichTech>) {
                     Log.i(TAG, "Display FichTech: call enqueue")
 
-                    if (!response.isSuccessful()) {
+                    if (!response.isSuccessful) {
                         Log.i(TAG, "CODE:" + response.code().toString())
                         return
                     }
@@ -170,10 +156,7 @@ class Api {
 
                     if (response != null) {
                         var content = ""
-                        content += "ID: " + fichTech?.id + "\n"
-                        content += "Acc: " + fichTech?.acceleration + "\n"
-                        content += "BV: " + fichTech?.boiteVitesse + "\n"
-                        content += "mot: " + fichTech?.motorisation + "\n"
+                        content +=  fichTech?.toString() + "\n"
                         Log.i(TAG, "\n=========\n$content")
                         toReturn.value = fichTech
 
@@ -207,14 +190,7 @@ class Api {
 
                     if (response != null) {
                         var content = ""
-                        content += "ID: " + version?.id + "\n"
-                        content += "code: " + version?.code + "\n"
-                        content += "Name: " + version?.name + "\n"
-                        content += "model: " + version?.model_id + "\n"
-                        content += "model: " + version?.model_name + "\n"
-                        content += "marque: " + version?.marque_name + "\n"
-                        content += "image: " + version?.imageUrl + "\n"
-                        content += "prix: " + version?.price + "\n"
+                        content += version?.toString() + "\n"
                         Log.i(TAG, "\n=========\n$content")
                         to_return.value = version
                     }

@@ -2,7 +2,8 @@
     <string name="app_name">SayaraDz</string>
     <string name="request_client_id">1078199315736-tutm29gji4t02p731mp3o51v21l4imlk.apps.googleusercontent.com</string>
     <string name="facebook_app_id">262996364600105</string>
-    <string name="fb_login_protocol_scheme">f160971222fc33a78dde29db0c208280</string>
+    <!--string name="fb_login_protocol_scheme">f160971222fc33a78dde29db0c208280</string-->
+    <string name="fb_login_protocol_scheme">fb262996364600105</string>
     <string name="login"> Se connecter </string>
 
     <!-- TODO: Remove or change this placeholder text -->

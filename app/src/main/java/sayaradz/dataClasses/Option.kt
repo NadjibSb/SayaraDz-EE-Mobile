@@ -7,9 +7,9 @@ data class Option(
         val pk: String,
         @SerializedName("code")
         val code: String,
-        @SerializedName("name")
+        @SerializedName("nom")
         val name: String,
         @SerializedName("prix")
-        val tarif: Int
+        val price: Int
 ) {
 }

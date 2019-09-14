@@ -14,11 +14,10 @@ const val ADD = 1
 const val SUB = -1
 
 
-class FicheTechViewModel(versionID: String) : ViewModel() {
+class FicheTechViewModel(versionID: String, val token: String) : ViewModel() {
 
 
     private val TAG = "FichTechViewModel"
-    var token = ""
 
     private val _version = Api.getVersionDetails(TAG, token, versionID)
     val version: LiveData<Version?>
@@ -99,7 +98,7 @@ class FicheTechViewModel(versionID: String) : ViewModel() {
                 1000000
         )
 
-        _price.value = version.tarif
+        _price.value = version.price
         return version
     }*/
 }

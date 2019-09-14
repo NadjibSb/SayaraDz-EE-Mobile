@@ -5,10 +5,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import java.lang.IllegalArgumentException
 
-class AnnonceViewModelFactory(val userId: String): ViewModelProvider.Factory {
+class AnnonceViewModelFactory(): ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(AnnonceViewModel::class.java)){
-            return VersionViewModel(userId) as T
+            return AnnonceViewModel() as T
         }else
             throw IllegalArgumentException("Unknown ViewModel class")
     }

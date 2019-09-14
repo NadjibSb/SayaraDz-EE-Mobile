@@ -5,13 +5,17 @@ import androidx.lifecycle.ViewModel
 import sayaradz.api.Api
 import sayaradz.dataClasses.Modele
 
-class ModelViewModel(val marqueId: String) : ViewModel() {
+class ModelViewModel(val marqueId: String, val token: String) : ViewModel() {
 
-    val TAG = "ModelViewModel"
+    private val TAG = "ModelViewModel"
     var models: MutableLiveData<ArrayList<Modele>>
 
     init {
-        models = Api.getModels(TAG, "token", marqueId)
+        models = Api.getModels(TAG, token, marqueId)
+    }
+
+    fun getModels(){
+        models = Api.getModels(TAG, token, marqueId)
     }
 
     private fun defaultList(): MutableLiveData<ArrayList<Modele>> {

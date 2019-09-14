@@ -6,13 +6,16 @@ import sayaradz.api.Api
 import sayaradz.authentification.R
 import sayaradz.dataClasses.Marque
 
-class MarqueViewModel : ViewModel() {
+class MarqueViewModel(val token: String) : ViewModel() {
 
-    val TAG = "MarqueViewModel"
-    val token = "token"
+    private val TAG = "MarqueViewModel"
     var marques: MutableLiveData<ArrayList<Marque>>
 
     init {
+        marques = Api.getMarques(TAG, token)
+    }
+
+    fun getMarques(){
         marques = Api.getMarques(TAG, token)
     }
 

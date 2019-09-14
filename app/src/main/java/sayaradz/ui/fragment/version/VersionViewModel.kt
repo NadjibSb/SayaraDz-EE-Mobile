@@ -5,13 +5,16 @@ import androidx.lifecycle.ViewModel
 import sayaradz.api.Api
 import sayaradz.dataClasses.Version
 
-class VersionViewModel(modeleId: String) : ViewModel() {
+class VersionViewModel(val modeleId: String, val token: String) : ViewModel() {
 
     val TAG = "VersionViewModel"
     var versions: MutableLiveData<ArrayList<Version>>
-    var token = ""
 
     init {
+        versions = Api.getVersions(TAG, token, modeleId)
+    }
+
+    fun getVersions(){
         versions = Api.getVersions(TAG, token, modeleId)
     }
 

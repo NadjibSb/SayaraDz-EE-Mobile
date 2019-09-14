@@ -98,5 +98,8 @@ dependencies {
 
     //shimmer_placeholder
     implementation 'com.facebook.shimmer:shimmer:0.1.0@aar'
+
+    //pull to refresh
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.0.0'
 }
 apply plugin: 'com.google.gms.google-services'

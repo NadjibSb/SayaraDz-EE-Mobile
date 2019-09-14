@@ -21,6 +21,7 @@ import sayaradz.authentification.R
 import sayaradz.authentification.databinding.FicheTechFragmentBinding
 import sayaradz.dataClasses.FichTech
 import sayaradz.dataClasses.Version
+import sayaradz.ui.mainActivity.MainActivity
 
 
 class FicheTechFragment : Fragment() {
@@ -48,8 +49,7 @@ class FicheTechFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         args = FicheTechFragmentArgs.fromBundle(arguments!!)
-        Toast.makeText(context, "version id ${args.versionID}", Toast.LENGTH_SHORT)
-        val factory = FicheTechViewModelFactory(args.versionID)
+        val factory = FicheTechViewModelFactory(args.versionID, (activity as MainActivity).getToken())
         viewModel = ViewModelProviders.of(this, factory).get(FicheTechViewModel::class.java)
         updateUI()
 
@@ -61,8 +61,11 @@ class FicheTechFragment : Fragment() {
 
             if (version != null) {
                 //setup the version images for the slider
-                setSliderViews(binding.header.imageSlider, version.imgs)
+                val images = arrayListOf(version.image1, version.image2, version.image3)
+                setSliderViews(binding.header.imageSlider, images)
+
                 fillVersionDetails(version)
+
                 Log.i(TAG, "prix : ${version.price}")
                 viewModel.initilizePrice(version.price)
 
@@ -72,7 +75,6 @@ class FicheTechFragment : Fragment() {
                         fillFichTech(ficheTech)
                     }
                 })
-
             }
         })
 
@@ -100,9 +102,9 @@ class FicheTechFragment : Fragment() {
             cb.text = option.name
             cb.setOnClickListener { view ->
                 if ((view as CheckBox).isChecked)
-                    viewModel.updatePrice(option.tarif, ADD)
+                    viewModel.updatePrice(option.price, ADD)
                 else
-                    viewModel.updatePrice(option.tarif, SUB)
+                    viewModel.updatePrice(option.price, SUB)
                 Toast.makeText(context, resources.getString(R.string.price_updated), Toast.LENGTH_SHORT).show()
             }
             container.addView(cb)
@@ -147,7 +149,7 @@ class FicheTechFragment : Fragment() {
                 // put code
             }
         })
-                .setColumns(3)
+                .setColumns(5)
                 .setTitle(getString(R.string.choose_color))
                 .setRoundColorButton(true)
                 .setColors(colors)

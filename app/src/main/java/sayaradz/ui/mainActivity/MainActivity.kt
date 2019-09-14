@@ -16,9 +16,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import sayaradz.authentification.CreateAccountActivity
 import sayaradz.authentification.R
 import sayaradz.authentification.databinding.ActivityMainBinding
-import sayaradz.ui.MainActivityViewModel
 import sayaradz.ui.setupWithNavController
-
 
 
 class MainActivity : AppCompatActivity() {
@@ -32,22 +30,17 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
-        mainActivityViewModel = ViewModelProviders.of(this)
-                .get(MainActivityViewModel::class.java)
-
-        //Setuo UI elements
-        setSupportActionBar(binding.TopToolbar)
-        setupBottomNavigationBar()
-        //setupNavigation()
-    }
-
-    override fun onStart() {
-        super.onStart()
+        mainActivityViewModel = ViewModelProviders.of(this).get(MainActivityViewModel::class.java)
         mainActivityViewModel.isAuth().observe(this, Observer { isAuth ->
             if (!isAuth)
                 Toast.makeText(this, "Not connected", Toast.LENGTH_SHORT).show()
             //startActivity(Intent(this@MainActivity, CreateAccountActivity::class.java))
         })
+
+        //Setuo UI elements
+        setSupportActionBar(binding.TopToolbar)
+        setupBottomNavigationBar()
+        //setupNavigation()
     }
 
     /**
@@ -103,7 +96,16 @@ class MainActivity : AppCompatActivity() {
         super.onRestoreInstanceState(savedInstanceState)
         setupBottomNavigationBar()
     }
+
     /**_____________________________________________________________**/
+
+    fun getToken(): String {
+        return mainActivityViewModel.getToken()
+    }
+
+    fun isAuth(): LiveData<Boolean> {
+        return mainActivityViewModel.isAuth()
+    }
 }
 
 

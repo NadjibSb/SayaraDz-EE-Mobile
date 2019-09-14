@@ -17,6 +17,7 @@ import sayaradz.authentification.R
 import sayaradz.authentification.databinding.VersionFragmentBinding
 import sayaradz.dataClasses.Version
 import sayaradz.ui.fragment.adapter.ListAdapter
+import sayaradz.ui.mainActivity.MainActivity
 
 class VersionFragment : Fragment() {
 
@@ -30,17 +31,17 @@ class VersionFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.version_fragment, container, false)
         args = VersionFragmentArgs.fromBundle(arguments!!)
 
-        var viewModelFactory = VersionViewModelFactory(args.modelId)
+        var viewModelFactory = VersionViewModelFactory(args.modelId, (activity as MainActivity).getToken())
         viewModel = ViewModelProviders.of(this, viewModelFactory)
                 .get(VersionViewModel::class.java)
 
 
-        // loading view
+        // annimation while loading data
         binding.versionListView.visibility = View.GONE
         binding.shimmerLayout.visibility = View.VISIBLE
         binding.shimmerLayout.startShimmerAnimation()
 
-        // when data loaded
+        // when data loaded => display list
         viewModel.versions.observe(this, Observer { versions ->
 
             binding.shimmerLayout.stopShimmerAnimation()
@@ -55,8 +56,34 @@ class VersionFragment : Fragment() {
             }
         })
 
+        setupPullToRefresh()
+
 
         return binding.root
+    }
+
+    private fun setupPullToRefresh() {
+        binding.swiperefresh.setOnRefreshListener {
+            viewModel.getVersions()
+            viewModel.versions.observe(this, Observer { versions ->
+
+                binding.shimmerLayout.stopShimmerAnimation()
+                binding.shimmerLayout.visibility = View.GONE
+
+                if (versions.size > 0) { // if there is data to display
+                    binding.versionListView.visibility = View.VISIBLE
+                    setUpRecycleView(binding.root, versions)
+                } else { // if the list is empty
+                    Log.i(TAG, "empty")
+                    binding.emptyListView.visibility = View.VISIBLE
+                }
+                binding.swiperefresh.isRefreshing = false
+            })
+        }
+        binding.swiperefresh.setColorSchemeResources(
+                R.color.colorPrimaryLight,
+                R.color.colorPrimary,
+                R.color.colorPrimaryDark)
     }
 
 

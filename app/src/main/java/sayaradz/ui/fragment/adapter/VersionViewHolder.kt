@@ -29,9 +29,9 @@ class VersionViewHolder private constructor(val layout: View) : RecyclerView.Vie
 
     fun bind(version: Version) {
         versionName.text = version.name
-        handleClick(layout, version.id)
+        handleClick(layout, version.code)
 
-        val imageUrl = GlideUrl(version.imageUrl, LazyHeaders.Builder()
+        val imageUrl = GlideUrl(version.image1, LazyHeaders.Builder()
                 .build())
         Glide.with(versionImage.context)
                 .load(imageUrl)
