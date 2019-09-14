@@ -1,5 +1,6 @@
 package sayaradz.ui.fragment.addAnnonce
 
+import android.Manifest
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
@@ -35,7 +36,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.alespero.expandablecardview.ExpandableCardView
 import com.facebook.FacebookSdk.getApplicationContext
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
+import com.karumi.dexter.Dexter
+import com.karumi.dexter.PermissionToken
+import com.karumi.dexter.listener.PermissionDeniedResponse
+import com.karumi.dexter.listener.PermissionGrantedResponse
+import com.karumi.dexter.listener.single.PermissionListener
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator
 import kotlinx.android.synthetic.main.add_annonce_fragment.*
 import okhttp3.MediaType
@@ -239,8 +246,9 @@ class AddAnnonceFragment  : Fragment () {
 
             btnGallery.setOnClickListener {
                 Toast.makeText(this@AddAnnonceFragment.context!!, "GALLERY", Toast.LENGTH_SHORT).show()
-               // DispatchGalleryIntent()
-                pickPhotoFromGallery()
+
+               // pickPhotoFromGallery()
+                askGalleyPermission(root_layout)
 
             }
             btnCamera.setOnClickListener {
@@ -272,7 +280,7 @@ class AddAnnonceFragment  : Fragment () {
         rv.itemAnimator = SlideInUpAnimator()
         rv.setHasFixedSize(true)
     }
-
+     /***  Not used **/
     private fun DispatchGalleryIntent() {
         val intent = Intent()
         intent.type = "image/*"
@@ -420,6 +428,57 @@ class AddAnnonceFragment  : Fragment () {
         dialog.show()
     }
 
+    private fun askGalleyPermission( v: View) {
+
+        //on utilise Dexter pour manipuler les differentes permissions reliées
+        Dexter.withActivity(this@AddAnnonceFragment.activity)
+                .withPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                .withListener(object : PermissionListener {
+                    override fun onPermissionRationaleShouldBeShown(
+                            permission: com.karumi.dexter.listener.PermissionRequest?,
+                            token: PermissionToken?
+                    ) {
+                        AlertDialog.Builder(this@AddAnnonceFragment.context!!)
+                                .setTitle(
+                                        "Problemes reliés l'apareil"
+                                )
+                                .setMessage(
+                                       " Verifier votre votre appareil"
+                                )
+                                .setNegativeButton(
+                                        android.R.string.cancel
+                                ) { dialog, _ ->
+                                    dialog.dismiss()
+                                    token?.cancelPermissionRequest()
+                                }
+                                .setPositiveButton(
+                                        android.R.string.ok
+                                ) { dialog, _ ->
+                                    dialog.dismiss()
+                                    token?.continuePermissionRequest()
+                                }
+                                .setOnDismissListener {
+                                    token?.cancelPermissionRequest()
+                                }
+                                .show()
+                    }
+
+                    override fun onPermissionGranted(
+                            response: PermissionGrantedResponse?
+                    ) {
+                        pickPhotoFromGallery()
+                    }
+
+                    override fun onPermissionDenied(
+                            response: PermissionDeniedResponse?
+                    ) {
+                        Snackbar.make( v , "Denied" ,Snackbar.LENGTH_LONG
+                        )
+                                .show()
+                    }
+                })
+                .check()
+    }
 
 
 
