@@ -1,7 +1,7 @@
+
 package sayaradz.dataClasses
 
 import com.google.gson.annotations.SerializedName
-
 
 data class Marque(
         @SerializedName("pk")

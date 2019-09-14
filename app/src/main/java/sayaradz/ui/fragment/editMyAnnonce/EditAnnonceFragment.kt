@@ -93,6 +93,7 @@ class EditAnnonceFragment : Fragment() {
           if (binding.details.etPrice.text.toString() != "" ) price = binding.details.etPrice.text.toString().toInt()
 
           car = VehiculeUpdate(km,date,color)
+          Log.i("UPDATE","HEERE")
           annonce = AnnonceUpdate(car,title , price,descr)
 
           // Sending Query

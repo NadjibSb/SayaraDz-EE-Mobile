@@ -172,7 +172,7 @@ class AddAnnonceFragment  : Fragment () {
                                   file
                           )
                   image =
-                          MultipartBody.Part.createFormData("picture", file.getName(), requestFile)
+                          MultipartBody.Part.createFormData("image1", file.getName(), requestFile)
 
                   Log.i(TAG, "Description  "+descrp+"  Title  "+title+" KM "+km+" Price "+price+ " version PK " + car.versionPk + " Model Pk "+ car.modelPk + " Date"+ car.date)
 

@@ -53,17 +53,12 @@
             android:windowSoftInputMode="adjustNothing">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
-                <!--
-                    <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-                -->
             </intent-filter>
         </activity>
-        <activity android:name=".CreateAccountActivity">
+        <activity android:name="sayaradz.authentification.CreateAccountActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

@@ -14,19 +14,24 @@ class MainActivityViewModel : ViewModel() {
 
     val TAG = "TAG-MainActivityVM"
     companion object {
-       lateinit var token: String
+       lateinit var token0: String
+        lateinit var token : String
+
     }
 
 
     fun isAuth(): LiveData<Boolean> {
         val user = FirebaseAuth.getInstance()?.currentUser
         val isAuth = MutableLiveData<Boolean>()
+        token =user!!.uid
+        Log.i("IDDD",token)
         user?.getIdToken(true)
                 ?.addOnCompleteListener(object : OnCompleteListener<GetTokenResult> {
                     override fun onComplete(task: Task<GetTokenResult>) {
                         if (task.isSuccessful()) {
-                            token = task.getResult()!!.getToken()!!
-                            Log.i(TAG, "TOKEN CORRECT: $token")
+                            token0 = task.getResult()!!.getToken()!!
+                            Log.i(TAG, "TOKEN CORRECT: $token0")
+                            token=token0
                             isAuth.value = true
 
                         } else {
@@ -43,13 +48,13 @@ class MainActivityViewModel : ViewModel() {
                 ?.addOnCompleteListener(object : OnCompleteListener<GetTokenResult> {
                     override fun onComplete(task: Task<GetTokenResult>) {
                         if (task.isSuccessful()) {
-                            token = task.getResult()!!.getToken()!!  // Having the token
-                            Log.i("MainActivity", "TOKEN CORRECT: $token")
+                            token0 = task.getResult()!!.getToken()!!  // Having the token
+                            Log.i("MainActivity", "TOKEN CORRECT: $token0")
                         }
                     }
                 })
 
-        return token
+        return token0
     }
 
 
