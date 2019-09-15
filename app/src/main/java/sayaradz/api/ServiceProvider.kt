@@ -100,7 +100,13 @@ fun createVehicule (@Header("Authorization") token: String,
     @GET("api/refversion")
     fun getVersionsRefByModele(@Header("Authorization") token: String, @Query("modeleId") modeleId: String): Call<List<Version>>
 
+    // Getting My offers
+    @GET("api/Offre")
+    fun getMyOffers(@Header("Authorization") token: String): Call<List<OfferToPost>>
 
+    // Send an offer
+    @POST ("api/offre")  // To change
+    fun sendMyOffer(@Header("Authorization") token: String ,@Body offer :OfferToPost) : Call<ResponseBody>
 
 
 }

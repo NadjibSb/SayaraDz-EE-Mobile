@@ -15,8 +15,8 @@ class MainActivityViewModel : ViewModel() {
     fun isAuth(): LiveData<Boolean> {
         val user = FirebaseAuth.getInstance()?.currentUser
         val isAuth = MutableLiveData<Boolean>()
-        var userId =user!!.uid
-        Log.i("IDDD",userId)
+       // var userId =user!!.uid
+        //Log.i("IDDD",userId)
         user?.getIdToken(true)?.addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         token = task.result!!.token!!

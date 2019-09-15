@@ -68,7 +68,7 @@ class ListAdapter(val list: List<Any>,
                 holder.bind(notif)
             }
             ViewHolderType.OFFER -> {
-                var offer = list[position] as Offer
+                var offer = list[position] as OfferToPost
                 holder as OfferViewHolder
                 holder.bind(offer)
             }

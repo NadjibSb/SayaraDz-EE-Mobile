@@ -5,13 +5,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import sayaradz.authentification.R
 import sayaradz.convertLongToDateString
-import sayaradz.dataClasses.Offer
+import sayaradz.dataClasses.OfferToPost
 import sayaradz.inflateImageFromUrl
-import sayaradz.ui.fragment.version.VersionFragmentDirections
 
 class OfferViewHolder private constructor(val layout: View) : RecyclerView.ViewHolder(layout) {
     private var title: TextView = itemView.findViewById(R.id.annonce_title)
@@ -27,8 +25,10 @@ class OfferViewHolder private constructor(val layout: View) : RecyclerView.ViewH
         }
     }
 
-    fun bind(offer: Offer) {
-        title.text = offer.title
+    fun bind(offer: OfferToPost) {
+
+        TODO(" We have to  fill the item of my offer")
+       /* title.text = offer.title
         date.text = convertLongToDateString(offer.date)
         amount.text = offer.amount.toString() + " DA"
         inflateImageFromUrl(
@@ -36,7 +36,7 @@ class OfferViewHolder private constructor(val layout: View) : RecyclerView.ViewH
                 annonceImage,
                 R.drawable.ic_image,
                 R.drawable.ic_image,
-                "")
+                "")*/
     }
 
 

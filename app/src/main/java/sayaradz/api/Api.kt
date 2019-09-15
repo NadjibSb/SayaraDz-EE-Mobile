@@ -2,13 +2,11 @@ package sayaradz.api
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
+import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import sayaradz.dataClasses.FichTech
-import sayaradz.dataClasses.Marque
-import sayaradz.dataClasses.Modele
-import sayaradz.dataClasses.Version
+import sayaradz.dataClasses.*
 
 class Api {
     companion object {
@@ -202,5 +200,35 @@ class Api {
             })
             return to_return
         }
+
+     // Send offer
+     fun sendOffer( TAG : String ,idToken : String , offer : OfferToPost) {
+         val call = api.sendMyOffer(idToken,offer)
+         Log.i(TAG, "CREATE OFFER")
+
+         call.enqueue(object : Callback<ResponseBody> {
+             override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+                 Log.i(TAG, "CREATE ANNONCE")
+
+                 if (!response.isSuccessful()) {
+                     Log.i(TAG, "CREATED OFFER ")
+                     Log.i(TAG, "CODE:" + response.code().toString() + "" + response.body().toString())
+
+                     return
+                 }
+
+             }
+
+             override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                 Log.i(TAG, "error CODE:" + t.message)
+             }
+         })
+     }
+
     }
+
+
+
+
+
 }

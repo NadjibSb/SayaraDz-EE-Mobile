@@ -19,7 +19,7 @@ class NotificationViewModel : ViewModel() {
         var list = ArrayList<Notification>()
         for (i in 0..3) {
             list.add(Notification(
-                    "Offer",
+                    "OfferToPost",
                     "Nadjib",
                     "https://media.licdn.com/dms/image/C4D03AQHpYbfkM15lNw/profile-displayphoto-shrink_200_200/0?e=1564617600&v=beta&t=4SuPPRR3gJgpa3Sl9anhPr0RCcOjJvGSv1d7I1aGK3s",
                     System.currentTimeMillis(),

@@ -13,9 +13,9 @@ import jp.wasabeef.recyclerview.animators.SlideInUpAnimator
 
 import sayaradz.authentification.R
 import sayaradz.authentification.databinding.MyOffersFragmentBinding
-import sayaradz.dataClasses.Notification
-import sayaradz.dataClasses.Offer
+import sayaradz.dataClasses.OfferToPost
 import sayaradz.ui.fragment.adapter.ListAdapter
+import sayaradz.ui.mainActivity.MainActivity
 
 class MyOffersFragment : Fragment() {
 
@@ -34,7 +34,8 @@ class MyOffersFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(MyOffersViewModel::class.java)
+        var factory= MyOffersViewModelFactory((activity as MainActivity).getToken())
+        viewModel = ViewModelProviders.of(this, factory).get(MyOffersViewModel::class.java)
 
         viewModel.offers.observe(this, Observer { list->
             setUpRecycleView(binding.root, list)
@@ -42,7 +43,7 @@ class MyOffersFragment : Fragment() {
     }
 
     //RecycleView--------------------------------------------
-    private fun setUpRecycleView(rootView: View, list: List<Offer>) {
+    private fun setUpRecycleView(rootView: View, list: List<OfferToPost>) {
         var recyclerView = binding.offersList
         recyclerView.adapter = ListAdapter(
                 list,

@@ -2,6 +2,7 @@ package sayaradz.ui.fragment.annonce
 
 import android.content.Context
 import android.os.Bundle
+import android.text.Editable
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -20,8 +21,10 @@ import com.smarteist.autoimageslider.DefaultSliderView
 import com.smarteist.autoimageslider.IndicatorAnimations
 import com.smarteist.autoimageslider.SliderAnimations
 import com.smarteist.autoimageslider.SliderLayout
+import sayaradz.api.Api
 import sayaradz.authentification.R
 import sayaradz.authentification.databinding.AnnonceFragmentBinding
+import sayaradz.dataClasses.OfferToPost
 import sayaradz.ui.mainActivity.MainActivity
 
 class AnnonceFragment : Fragment() {
@@ -31,6 +34,8 @@ class AnnonceFragment : Fragment() {
     lateinit var binding: AnnonceFragmentBinding
     var prixMin = 0
     var img = ""
+    var annonceId =""
+    lateinit var prixToSuggest : Editable
     lateinit var btnFaireOffre: Button
     lateinit var annonceViewModel: AnnonceViewModel
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -38,6 +43,7 @@ class AnnonceFragment : Fragment() {
         var args = AnnonceFragmentArgs.fromBundle(arguments!!)
         var annonceViewModelFactory = AnnonceViewModelFactory(args.annonceId, (activity as MainActivity).getToken())
         Log.i("IDENTIFIER", args.annonceId)
+        annonceId=args.annonceId
         annonceViewModel = ViewModelProviders.of(this, annonceViewModelFactory).get(AnnonceViewModel::class.java)
         annonceViewModel.annonce.observe(this, Observer { an ->
 
@@ -59,7 +65,7 @@ class AnnonceFragment : Fragment() {
         // Check for the offer
         btnFaireOffre = binding.btnOffre
         btnFaireOffre.setOnClickListener { v: View ->
-            var prixToSuggest = binding.prix.text
+             prixToSuggest = binding.prix.text
             if (!prixToSuggest.isNullOrBlank()) {
                 Log.i("PRICE", prixToSuggest.toString())
                 if (prixToSuggest.toString().toInt() >= prixMin) showDialogOk(this@AnnonceFragment.context!!, v)
@@ -94,7 +100,17 @@ class AnnonceFragment : Fragment() {
             // Do something when user press the positive button
             Toast.makeText(c, "offre faite avec succès ", Toast.LENGTH_SHORT).show()
 
+
             // Send the query of sending Offre and go to searchFrag
+           /* var  current = LocalDateTime.now()
+            val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS")
+            val formatted = current.format(formatter) */
+
+
+            var offer = OfferToPost (annonceId,prixToSuggest.toString().toInt())
+            Api.sendOffer(TAG,(activity as MainActivity).getToken(),offer)
+
+
             v.findNavController().navigate(action)
 
         }
@@ -155,5 +171,9 @@ class AnnonceFragment : Fragment() {
             //at last add this view in your layout :
             sliderLayout.addSliderView(sliderView)
         }
+
     }
+
+
+
 }
