@@ -13,12 +13,13 @@ import retrofit2.Response
 import sayaradz.api.ServiceBuilder
 import sayaradz.api.ServiceProvider
 import sayaradz.dataClasses.*
+import sayaradz.ui.MainActivityViewModel
 import java.util.ArrayList
 
 class AddAnnonceViewModel() :ViewModel() {
 
     val TAG = "AddAnnonceViewModel"
-    val token = ""
+    val token =MainActivityViewModel.token
     var marques: MutableLiveData<ArrayList<Marque>>
     val api: ServiceProvider
 
