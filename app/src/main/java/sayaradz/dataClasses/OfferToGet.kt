@@ -4,11 +4,11 @@ import com.google.gson.annotations.SerializedName
 
 
 data class OfferToGet(
-        @SerializedName("")
+        @SerializedName("prix")
             val prix: Int,
-        @SerializedName("")
+        @SerializedName("annonce")
             val annonceId : String,
-        @SerializedName("")
+        @SerializedName("state")
             var etat : Boolean
 
 

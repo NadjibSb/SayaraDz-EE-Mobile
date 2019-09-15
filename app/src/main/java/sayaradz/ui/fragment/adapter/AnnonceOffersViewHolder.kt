@@ -12,7 +12,7 @@ import sayaradz.dataClasses.OfferToPost
 
 class AnnonceOffersViewHolder private constructor(val layout: View) : RecyclerView.ViewHolder(layout) {
     private var amount: TextView = itemView.findViewById(R.id.offer_price)
-
+    private var annonceImage: ImageView = itemView.findViewById(R.id.annonce_img)
 
     companion object {
         fun creat(parent: ViewGroup): AnnonceOffersViewHolder {
@@ -25,6 +25,9 @@ class AnnonceOffersViewHolder private constructor(val layout: View) : RecyclerVi
     fun bind(offer: OfferToGet) {
 
         amount.text = offer.prix.toString() + " DA"
+       annonceImage.setImageResource(R.drawable.ic_tag)
+
+
     }
 
 
