@@ -9,7 +9,8 @@ import retrofit2.Response
 import sayaradz.api.Api
 import sayaradz.dataClasses.OfferToGet
 
-class MyOffersViewModel (token : String ) : ViewModel() {
+
+class MyAnnonceOffersViewModel (token : String ) : ViewModel() {
 
     var offers: MutableLiveData<ArrayList<OfferToGet>>
     val TAG = "TAG-OfferViewModel"
@@ -25,10 +26,8 @@ class MyOffersViewModel (token : String ) : ViewModel() {
         var list = ArrayList<OfferToGet>()
         for (i in 0..3) {
             list.add(OfferToGet(
-                    950000,
-                    "Clio 4 2017",
+                    950000 ,"Clio 4 2017",
                     false
-
             ))
         }
         finalList.value = list

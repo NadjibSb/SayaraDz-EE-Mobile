@@ -7,27 +7,24 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import sayaradz.authentification.R
-import sayaradz.convertLongToDateString
 import sayaradz.dataClasses.OfferToGet
 import sayaradz.dataClasses.OfferToPost
-import sayaradz.inflateImageFromUrl
 
-class OfferViewHolder private constructor(val layout: View) : RecyclerView.ViewHolder(layout) {
+class AnnonceOffersViewHolder private constructor(val layout: View) : RecyclerView.ViewHolder(layout) {
     private var amount: TextView = itemView.findViewById(R.id.offer_price)
-    private var annonceImage: ImageView = itemView.findViewById(R.id.annonce_img)
+
 
     companion object {
-        fun creat(parent: ViewGroup): OfferViewHolder {
+        fun creat(parent: ViewGroup): AnnonceOffersViewHolder {
             val itemView = LayoutInflater.from(parent.context)
                     .inflate(R.layout.my_offers_list_item, parent, false)
-            return OfferViewHolder(itemView)
+            return AnnonceOffersViewHolder(itemView)
         }
     }
 
     fun bind(offer: OfferToGet) {
 
         amount.text = offer.prix.toString() + " DA"
-
     }
 
 

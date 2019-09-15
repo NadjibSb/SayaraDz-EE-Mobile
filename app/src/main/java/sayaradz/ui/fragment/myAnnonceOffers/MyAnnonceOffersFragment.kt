@@ -1,4 +1,4 @@
-package sayaradz.ui.fragment.myOffers
+package sayaradz.ui.fragment.myAnnonceOffers
 
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
@@ -12,31 +12,34 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator
 
 import sayaradz.authentification.R
+import sayaradz.authentification.databinding.MyAnnonceOffersFragmentBinding
 import sayaradz.authentification.databinding.MyOffersFragmentBinding
 import sayaradz.dataClasses.OfferToGet
 import sayaradz.dataClasses.OfferToPost
 import sayaradz.ui.fragment.adapter.ListAdapter
+import sayaradz.ui.fragment.myOffers.MyAnnonceOffersViewModel
+import sayaradz.ui.fragment.myOffers.MyAnnonceOffersViewModelFactory
 import sayaradz.ui.mainActivity.MainActivity
 
-class MyOffersFragment : Fragment() {
+class MyAnnonceOffersFragment : Fragment() {
 
     companion object {
-        fun newInstance() = MyOffersFragment()
+        fun newInstance() = MyAnnonceOffersFragment()
     }
 
-    private lateinit var viewModel: MyOffersViewModel
-    private lateinit var binding: MyOffersFragmentBinding
+    private lateinit var viewModel: MyAnnonceOffersViewModel
+    private lateinit var binding: MyAnnonceOffersFragmentBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        binding = DataBindingUtil.inflate(inflater,R.layout.my_offers_fragment, container, false)
+        binding = DataBindingUtil.inflate(inflater,R.layout.my_annonce_offers_fragment, container, false)
         return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        var factory= MyOffersViewModelFactory((activity as MainActivity).getToken())
-        viewModel = ViewModelProviders.of(this, factory).get(MyOffersViewModel::class.java)
+        var factory= MyAnnonceOffersViewModelFactory((activity as MainActivity).getToken())
+        viewModel = ViewModelProviders.of(this, factory).get(MyAnnonceOffersViewModel::class.java)
 
         viewModel.offers.observe(this, Observer { list->
             setUpRecycleView(binding.root, list)
@@ -48,8 +51,8 @@ class MyOffersFragment : Fragment() {
         var recyclerView = binding.offersList
         recyclerView.adapter = ListAdapter(
                 list,
-                ListAdapter.ViewHolderType.OFFER,
-                this@MyOffersFragment.context!!,
+                ListAdapter.ViewHolderType.ANNONCE_OFFERS,
+                this@MyAnnonceOffersFragment.context!!,
                 "token")
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.itemAnimator = SlideInUpAnimator()

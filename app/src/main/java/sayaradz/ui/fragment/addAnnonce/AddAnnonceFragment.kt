@@ -163,7 +163,7 @@ class AddAnnonceFragment : Fragment() {
 
             var madate = year + M1
             Log.i("DATE", madate)
-            if (km != "" && price != "" && descrp != "" && title != "" && color != "" && year != "") {
+            if (km != "" && price != "" && descrp != "" && title != "" && color != "" && year != "" && stringUri != "url") {
                 var car = Vehicule(km.toInt(), madate, versionId, modeleId, color)
                 // var annonce = AnnoncePost(car, title, price.toInt(), descrp)
                 var image: MultipartBody.Part

@@ -131,7 +131,7 @@ class SearchFragment : Fragment() {
             //YearSpinner 10 last years
             val current_year = Calendar.getInstance().get(Calendar.YEAR).toString()
             val yearsList: MutableList<String> = mutableListOf(current_year)
-            for (i in 1..10) yearsList.add((current_year.toInt() - i).toString())
+            for (i in 1..20) yearsList.add((current_year.toInt() - i).toString())
             yearsList.add(0, "Choisir")
 
             val adapter = ArrayAdapter<String>(activity?.applicationContext, R.layout.spinner_item, yearsList)

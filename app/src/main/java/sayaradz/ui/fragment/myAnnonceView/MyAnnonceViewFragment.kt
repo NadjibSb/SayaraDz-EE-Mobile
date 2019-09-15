@@ -61,13 +61,21 @@ class MyAnnonceViewFragment : Fragment () {
 
         //val args:MyAnnonceViewFragmentArgs by navArgs()
         //annonceId = args.annonceId
+        var btnOffer = binding.root.findViewById<FloatingActionButton>(R.id.btn_offer)
         var btnEdit = binding.root.findViewById<FloatingActionButton>(R.id.btn_edit)
         val action = MyAnnonceViewFragmentDirections.actionViewAnnonceToEditAnnonceFragment(args.annonceId)
         btnEdit.setOnClickListener {
             v: View ->
             v.findNavController().navigate(action)
         }
+        val actionOffer = MyAnnonceViewFragmentDirections.actionViewAnnonceToMyAnnonceOffersFragment()
+        btnOffer.setOnClickListener {
+            v: View ->
+          v.findNavController().navigate(actionOffer)
+        }
         return binding.root
+
+
     }
     private fun setSliderViews(layout: SliderLayout , imageUrl : String) {
 

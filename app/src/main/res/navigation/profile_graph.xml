@@ -56,6 +56,9 @@
         <action
         android:id="@+id/action_viewAnnonce_to_editAnnonceFragment"
         app:destination="@id/editAnnonceFragment" />
+        <action
+            android:id="@+id/action_viewAnnonce_to_myAnnonceOffersFragment"
+            app:destination="@id/myAnnonceOffersFragment" />
         <argument
             android:name="annonceId"
             app:argType="string" />
@@ -91,4 +94,9 @@
         android:name="sayaradz.ui.fragment.myOffers.MyOffersFragment"
         android:label="Mes Offres"
         tools:layout="@layout/my_offers_fragment" />
+    <fragment
+        android:id="@+id/myAnnonceOffersFragment"
+        android:name="sayaradz.ui.fragment.myAnnonceOffers.MyAnnonceOffersFragment"
+        android:label="L'Offres de mon annonce "
+        tools:layout="@layout/my_annonce_offers_fragment" />
 </navigation>

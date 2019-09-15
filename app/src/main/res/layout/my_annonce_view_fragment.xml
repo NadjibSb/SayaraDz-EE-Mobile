@@ -13,7 +13,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:background="#EEE"
             android:orientation="vertical">
 
@@ -22,16 +22,38 @@
                 tools:context="sayaradz.ui.fragment.myAnnonceView.MyAnnonceViewFragment"
 
                 />
-
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/btn_edit"
-                android:layout_width="wrap_content"
-                android:layout_height="75dp"
-                android:layout_gravity="bottom|end"
-                android:layout_margin="@dimen/fab_margin"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintRight_toRightOf="@id/ll_info"
-                app:srcCompat="@drawable/ic_edit_black_24dp" />
+
+
+                >
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/btn_offer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="75dp"
+                    android:layout_gravity="bottom|start"
+                    android:layout_margin="@dimen/fab_margin"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:srcCompat="@drawable/ic_tag_black_24dp" />
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/btn_edit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="75dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_margin="@dimen/fab_margin"
+                    app:srcCompat="@drawable/ic_edit_black_24dp" />
+
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
         </LinearLayout>
     </ScrollView>
 </layout>
