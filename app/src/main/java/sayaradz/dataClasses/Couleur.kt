@@ -2,7 +2,7 @@ package sayaradz.dataClasses
 
 import com.google.gson.annotations.SerializedName
 
-data class Color(
+data class Couleur(
 
         @SerializedName("pk")
         var id:String,

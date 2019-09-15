@@ -86,7 +86,9 @@ class MyAnnonceFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
+
         lifecycleRegistry.markState(Lifecycle.State.STARTED)
+
 
     }
 

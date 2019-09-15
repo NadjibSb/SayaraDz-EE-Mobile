@@ -33,12 +33,6 @@ class MyAnnonceViewModel(var token: String) : ViewModel(), LifecycleOwner {
         var token = ""
         lateinit var life: LifecycleOwner
         fun fill(list: MutableLiveData<ArrayList<Car>>, context: Context, t: String) {
-            /*newAnnonces = list
-            newAnnonces.observe(life, Observer { annonces ->
-                Log.i("SIZE IN FULL" , annonces.size.toString())
-                        annonces.clear()
-
-                    })*/
             token = t
             newAnnonces = list
             newAnnonces.observe(life, Observer { annonces ->
@@ -46,6 +40,7 @@ class MyAnnonceViewModel(var token: String) : ViewModel(), LifecycleOwner {
                 MyAnnonceFragment.recyclerView.adapter = ListAdapter(annonces, ListAdapter.ViewHolderType.MyAnnonce, context, token)
                 MyAnnonceFragment.recyclerView.adapter!!.notifyDataSetChanged()
             })
+
 
 
         }

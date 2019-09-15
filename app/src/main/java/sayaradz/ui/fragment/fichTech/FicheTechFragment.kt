@@ -20,6 +20,7 @@ import com.smarteist.autoimageslider.SliderLayout
 import petrov.kristiyan.colorpicker.ColorPicker
 import sayaradz.authentification.R
 import sayaradz.authentification.databinding.FicheTechFragmentBinding
+import sayaradz.dataClasses.Couleur
 import sayaradz.dataClasses.FichTech
 import sayaradz.dataClasses.Version
 import sayaradz.ui.mainActivity.MainActivity
@@ -28,6 +29,7 @@ import sayaradz.ui.mainActivity.MainActivity
 class FicheTechFragment : Fragment() {
 
     private val TAG = "TAG-FicheTechFragment"
+    private var selectedColor = 0
 
     companion object {
         fun newInstance() = FicheTechFragment()
@@ -80,16 +82,14 @@ class FicheTechFragment : Fragment() {
                         fillFichTech(ficheTech)
                     }
                 })
+                binding.btnCommande.setOnClickListener {
+                    onCommande()
+                }
+                binding.options.colorView.setOnClickListener {
+                    fillColors(version.colors)
+                }
             }
         })
-
-        binding.btnCommande.setOnClickListener {
-            onCommande()
-        }
-
-        binding.options.colorView.setOnClickListener {
-            colorPickerDialog()
-        }
     }
 
     private fun fillVersionDetails(version: Version) {
@@ -109,7 +109,7 @@ class FicheTechFragment : Fragment() {
                 if ((view as CheckBox).isChecked) {
                     viewModel.updatePrice(option.price, ADD)
                     viewModel.addOption(option.pk)
-                }else {
+                } else {
                     viewModel.updatePrice(option.price, SUB)
                     viewModel.omitOption(option.pk)
                 }
@@ -118,6 +118,7 @@ class FicheTechFragment : Fragment() {
             }
             container.addView(cb)
         }
+
     }
 
     private fun fillFichTech(ficheTech: FichTech) {
@@ -136,36 +137,47 @@ class FicheTechFragment : Fragment() {
         }
     }
 
+    private fun fillColors(list: List<Couleur>) {
+        val colors = arrayListOf<String>()
+        val regex = Regex("^#([A-Fa-f0-9]{6})", RegexOption.IGNORE_CASE)
+        for (c in list) {
+            val hexaCode = "#" + c.code[0] + "0" + c.code[1] + "0" + c.code[2] + "0"
+            if (regex.matches(hexaCode)) colors.add(hexaCode)
+            else colors.add("#AAAAAA")
+        }
+        Log.i(TAG, colors.toString())
+        if (colors.size > 0) colorPickerDialog(colors)
+    }
+
+
+    private fun colorPickerDialog(colors: ArrayList<String>) {
+        if (colors.size>0){
+            val colorPicker = ColorPicker(this.activity)
+            colorPicker.setOnChooseColorListener(object : ColorPicker.OnChooseColorListener {
+                override fun onChooseColor(position: Int, color: Int) {
+                    Log.i(TAG, "position $position color $color")
+                    binding.options.colorView.setBackgroundColor(Color.parseColor(colors[position]))
+                    selectedColor = position
+                }
+                override fun onCancel() {
+                    // put code
+                }
+            })
+                    .setColumns(5)
+                    .setTitle(getString(R.string.choose_color))
+                    .setRoundColorButton(true)
+                    .setColors(colors)
+                    .setDefaultColorButton(Color.parseColor(colors[0]))
+                    .show()
+        }
+    }
+
+
     fun onCommande() {
         Log.i(TAG, "Commande clicked")
         viewModel.updatePrice(100, ADD)
-
         Log.i(TAG, " price ${viewModel.price.value}")
     }
-
-    private fun colorPickerDialog() {
-
-        var colors = arrayListOf("#A05250", "#0A5250", "#00A255", "#235525")
-
-        val colorPicker = ColorPicker(this.activity)
-        colorPicker.setOnChooseColorListener(object : ColorPicker.OnChooseColorListener {
-            override fun onChooseColor(position: Int, color: Int) {
-                Log.i(TAG, "position $position color $color")
-                binding.options.colorView.setBackgroundColor(Color.parseColor(colors[position]))
-            }
-
-            override fun onCancel() {
-                // put code
-            }
-        })
-                .setColumns(5)
-                .setTitle(getString(R.string.choose_color))
-                .setRoundColorButton(true)
-                .setColors(colors)
-                .setDefaultColorButton(Color.parseColor(colors[0]))
-                .show()
-    }
-
 
     private fun setSliderViews(layout: SliderLayout, imgUrls: List<String>) {
 
@@ -173,7 +185,6 @@ class FicheTechFragment : Fragment() {
         sliderLayout.setIndicatorAnimation(IndicatorAnimations.THIN_WORM) //set indicator animation by using SliderLayout.Animations. :WORM or THIN_WORM or COLOR or DROP or FILL or NONE or SCALE or SCALE_DOWN or SLIDE and SWAP!!
         sliderLayout.setSliderTransformAnimation(SliderAnimations.FADETRANSFORMATION)
         sliderLayout.scrollTimeInSec = 2
-
 
         val default = listOf(
                 "https://www.autobip.com/storage/photos/new_car_prices/20/peugeot_208_tech_vision_1_6_hdi_92ch_2019-03-04-13-0071373.jpg",
@@ -188,7 +199,5 @@ class FicheTechFragment : Fragment() {
             //at last add this view in your layout :
             sliderLayout.addSliderView(sliderView)
         }
-
     }
-
 }

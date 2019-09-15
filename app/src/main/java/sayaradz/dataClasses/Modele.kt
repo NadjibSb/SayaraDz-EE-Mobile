@@ -29,7 +29,7 @@ data class Modele (
         @SerializedName("code")
         var code: String,
         @SerializedName("couleur_set")
-        var colors: Set<Color>,
+        var colors: Set<Couleur>,
         @SerializedName("image")
         var imageUrl: String,
         @SerializedName("ref_id")
