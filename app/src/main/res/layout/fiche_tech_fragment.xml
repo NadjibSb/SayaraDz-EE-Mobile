@@ -60,7 +60,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="24dp"
-                    android:text="@{viewModel.price}"
+                    android:text="@{@string/price_format(viewModel.priceString)}"
                     android:textSize="18sp"
                     android:textStyle="bold"
                     app:layout_constraintBaseline_toBaselineOf="@+id/prix_txt"

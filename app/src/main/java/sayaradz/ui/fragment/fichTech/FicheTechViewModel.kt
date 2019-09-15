@@ -17,17 +17,29 @@ const val SUB = -1
 class FicheTechViewModel(versionID: String, val token: String) : ViewModel() {
 
 
-    private val TAG = "FichTechViewModel"
+    private val TAG = "TAG-FichTechViewModel"
+
+    val options = arrayListOf<String>()
 
     private val _version = Api.getVersionDetails(TAG, token, versionID)
     val version: LiveData<Version?>
         get() = _version
 
     private val _price = MutableLiveData<Int>()
-    val price: LiveData<String>
-        get() = Transformations.map(_price) { p ->
-            p.toString()
+    val price: LiveData<Int>
+        get() = _price
+    val priceString: LiveData<String>
+        get() = Transformations.map(_price){ _p->
+            val p = "$_p"
+            var s = ""
+            s = if (p.length>4) "${p. substring(0,p.length-4)}, ${p.substring(p.length-4,p.length)}"
+                else p
+            s
         }
+
+    init {
+        _price.value = 0
+    }
 
 
 
@@ -37,15 +49,22 @@ class FicheTechViewModel(versionID: String, val token: String) : ViewModel() {
 
     fun initilizePrice(value: Int){
         _price.value = value
-        Log.i(TAG, "price : ${_price.value}")
+        //Log.i(TAG, "price (init): ${_price.value}")
     }
     fun updatePrice(value: Int, action: Int) {
         when (action) {
             ADD -> _price.value = _price.value?.plus(value)
             SUB -> _price.value = _price.value?.minus(value)
         }
+        //Log.i(TAG,"price (update): ${_price.value}")
+    }
 
-        Log.i(TAG,"price ${price.value}")
+    fun addOption(optionId: String) {
+        options.add(optionId)
+    }
+
+    fun omitOption(optionId: String) {
+        options.remove(optionId)
     }
 
 

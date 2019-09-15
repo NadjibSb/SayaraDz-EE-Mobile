@@ -27,4 +27,6 @@
     <string name="choose_color">Choisissez une couleur </string>
     <string name="no_item">Aucun item à afficher</string>
 
+    <string name="price_format"> %s DA</string>
+
 </resources>

@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CheckBox
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
@@ -26,7 +27,7 @@ import sayaradz.ui.mainActivity.MainActivity
 
 class FicheTechFragment : Fragment() {
 
-    private val TAG = "FicheTechFragment"
+    private val TAG = "TAG-FicheTechFragment"
 
     companion object {
         fun newInstance() = FicheTechFragment()
@@ -41,7 +42,7 @@ class FicheTechFragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fiche_tech_fragment, container, false)
 
-        binding.lifecycleOwner = this
+
         return binding.root
     }
 
@@ -51,6 +52,8 @@ class FicheTechFragment : Fragment() {
         args = FicheTechFragmentArgs.fromBundle(arguments!!)
         val factory = FicheTechViewModelFactory(args.versionID, (activity as MainActivity).getToken())
         viewModel = ViewModelProviders.of(this, factory).get(FicheTechViewModel::class.java)
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = this
         updateUI()
 
     }
@@ -66,8 +69,10 @@ class FicheTechFragment : Fragment() {
 
                 fillVersionDetails(version)
 
-                Log.i(TAG, "prix : ${version.price}")
+                Log.i(TAG, "prix (api) : ${version.price}")
+                Log.i(TAG, "prix (before init) : ${viewModel.price.value}")
                 viewModel.initilizePrice(version.price)
+                Log.i(TAG, "prix (after init) : ${viewModel.price.value}")
 
                 viewModel.getFichTech(version.ficheTechnique_id).observe(this, Observer { ficheTech ->
                     //filling all the informations in fiche tech
@@ -95,20 +100,24 @@ class FicheTechFragment : Fragment() {
             versionName.text = version.name
         }
 
-        /*
-        val container = binding.optionCheckboxContainer
+
+        val container = binding.options.optionCheckboxContainer
         for (option in version.options) {
             var cb = CheckBox(context)
             cb.text = option.name
             cb.setOnClickListener { view ->
-                if ((view as CheckBox).isChecked)
+                if ((view as CheckBox).isChecked) {
                     viewModel.updatePrice(option.price, ADD)
-                else
+                    viewModel.addOption(option.pk)
+                }else {
                     viewModel.updatePrice(option.price, SUB)
+                    viewModel.omitOption(option.pk)
+                }
                 Toast.makeText(context, resources.getString(R.string.price_updated), Toast.LENGTH_SHORT).show()
+                Log.i(TAG, "prix (updated) : ${viewModel.price.value} options ${viewModel.options}")
             }
             container.addView(cb)
-        }*/
+        }
     }
 
     private fun fillFichTech(ficheTech: FichTech) {
