@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class Modele (
         @SerializedName("code")
-        var id: String,
+        var code: String,
         @SerializedName("nom")
         var name: String,
         @SerializedName("pk")
@@ -18,7 +18,20 @@ data class Modele (
         @SerializedName("marqueId")
         var marqueId : String ,
         @SerializedName("image")
-        var image : String
-
-
+        var imageUrl : String ,
+        @SerializedName("couleur")
+        var color : List<String>
+//=======
+       /* @SerializedName("pk")
+        var pk: String,
+        @SerializedName("nom")
+        var name: String,
+        @SerializedName("code")
+        var code: String,
+        @SerializedName("couleur_set")
+        var colors: Set<Color>,
+        @SerializedName("image")
+        var imageUrl: String,
+        @SerializedName("ref_id")
+        var refId : Int */
 )

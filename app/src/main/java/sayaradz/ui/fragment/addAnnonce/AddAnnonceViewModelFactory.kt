@@ -6,10 +6,10 @@ import androidx.lifecycle.ViewModelProvider
 import sayaradz.dataClasses.Modele
 import java.util.ArrayList
 
-class AddAnnonceViewModelFactory(val modelList : List<Modele>) : ViewModelProvider.Factory {
+class AddAnnonceViewModelFactory(val token : String) : ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(AddAnnonceViewModel::class.java)) {
-            return AddAnnonceViewModel() as T
+            return AddAnnonceViewModel(token) as T
         } else
             throw IllegalArgumentException("Unknown ViewModel class")
     }

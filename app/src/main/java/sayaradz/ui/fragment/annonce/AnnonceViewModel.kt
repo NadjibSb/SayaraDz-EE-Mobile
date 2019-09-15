@@ -1,4 +1,5 @@
 package sayaradz.ui.fragment.annonce
+
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -7,29 +8,26 @@ import retrofit2.Callback
 import retrofit2.Response
 import sayaradz.api.ServiceBuilder
 import sayaradz.api.ServiceProvider
-import sayaradz.authentification.R
 import sayaradz.dataClasses.Car
-import sayaradz.ui.MainActivityViewModel
 
-class AnnonceViewModel( val annonceId: String) : ViewModel() {
+class AnnonceViewModel(val annonceId: String, val token: String) : ViewModel() {
 
     val TAG = "AnnonceViewModel"
 
     // HERE GETTING DATA FOR AN ANNONCE CLICKED
-  var annonce : MutableLiveData<Car>
+    var annonce: MutableLiveData<Car>
 
-    var token = MainActivityViewModel.token
     val api: ServiceProvider
 
     init {
         api = ServiceBuilder.buildService(ServiceProvider::class.java)
-        annonce = getAnnonceDetails(annonceId,token)
+        annonce = getAnnonceDetails(annonceId, token)
     }
 
 
-   private fun getAnnonceDetails(annonceId: String ,idToken: String): MutableLiveData<Car> {
+    private fun getAnnonceDetails(annonceId: String, idToken: String): MutableLiveData<Car> {
 
-        val call = api.getAnnounceDetails(idToken,annonceId) // The request included the token
+        val call = api.getAnnounceDetails(idToken, annonceId) // The request included the token
         var AnnounceRespond: Car? = null
         var finalAnnonce = MutableLiveData<Car>()
 
@@ -49,11 +47,11 @@ class AnnonceViewModel( val annonceId: String) : ViewModel() {
                     finalAnnonce.value = AnnounceRespond
 
 
-                    }
-                Log.i("TAG",AnnounceRespond!!.userId)
-
-
                 }
+                Log.i("TAG", AnnounceRespond!!.userId)
+
+
+            }
 
 
             override fun onFailure(call: Call<Car>, t: Throwable) {

@@ -22,6 +22,7 @@ import sayaradz.authentification.R
 import sayaradz.authentification.databinding.MyAnnonceFragmentBinding
 import sayaradz.authentification.databinding.MyAnnonceViewFragmentBinding
 import sayaradz.ui.fragment.myAnnonce.MyAnnonceViewModel
+import sayaradz.ui.mainActivity.MainActivity
 
 class MyAnnonceViewFragment : Fragment () {
 
@@ -36,7 +37,7 @@ class MyAnnonceViewFragment : Fragment () {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.my_annonce_view_fragment, container, false)
         var args=MyAnnonceViewFragmentArgs.fromBundle(arguments!!)
-        var myannonceViewViewModelFactory =  MyAnnonceViewViewModelFactory( args.annonceId )
+        var myannonceViewViewModelFactory =  MyAnnonceViewViewModelFactory( args.annonceId ,(activity as MainActivity).getToken() )
         Log.i("IDENTIFIER",args.annonceId)
         myAnnonceViewViewModel = ViewModelProviders.of(this,myannonceViewViewModelFactory).get(MyAnnonceViewViewModel::class.java)
         myAnnonceViewViewModel.annonce.observe(this, Observer { an ->

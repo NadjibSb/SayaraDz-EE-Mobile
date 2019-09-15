@@ -9,16 +9,15 @@ import retrofit2.Response
 import sayaradz.api.ServiceBuilder
 import sayaradz.api.ServiceProvider
 import sayaradz.dataClasses.Car
-import sayaradz.ui.MainActivityViewModel
 
-class MyAnnonceViewViewModel  ( val annonceId: String) : ViewModel() {
+
+class MyAnnonceViewViewModel  ( val annonceId: String , token : String ) : ViewModel() {
 
     val TAG = "MyAnnonceViewViewModel"
 
     // HERE GETTING DATA FOR AN ANNONCE CLICKED  + Possibility of clicking modify
     var annonce : MutableLiveData<Car>
 
-    var token = MainActivityViewModel.token
     val api: ServiceProvider
 
     init {

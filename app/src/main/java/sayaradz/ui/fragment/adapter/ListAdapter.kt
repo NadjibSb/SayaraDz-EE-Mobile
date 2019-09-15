@@ -3,14 +3,11 @@ package sayaradz.ui.fragment.adapter
 import android.content.Context
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import sayaradz.dataClasses.Car
-import sayaradz.dataClasses.Marque
-import sayaradz.dataClasses.Modele
-import sayaradz.dataClasses.Version
+import sayaradz.dataClasses.*
 
 
 class ListAdapter(val list: List<Any>,
-                  val viewHolderType: ViewHolderType,
+                  private val viewHolderType: ViewHolderType,
                   val context: Context,
                   val token: String)
     : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -20,7 +17,9 @@ class ListAdapter(val list: List<Any>,
         MODEL,
         VERSION,
         CAR,
-        MyAnnonce
+        MyAnnonce,
+        NOTIFICATION,
+        OFFER
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -29,7 +28,9 @@ class ListAdapter(val list: List<Any>,
             ViewHolderType.MODEL -> ModelViewHolder.creat(parent)
             ViewHolderType.VERSION -> VersionViewHolder.creat(parent)
             ViewHolderType.CAR -> CarViewHolder.creat(parent)
-            ViewHolderType.MyAnnonce -> MyAnnonceViewHolder.creat(parent,context)
+            ViewHolderType.MyAnnonce -> MyAnnonceViewHolder.creat(parent, context)
+            ViewHolderType.NOTIFICATION -> NotificationViewHolder.creat(parent)
+            ViewHolderType.OFFER -> OfferViewHolder.creat(parent)
         }
 
     }
@@ -60,6 +61,16 @@ class ListAdapter(val list: List<Any>,
                 var myAnnounce = list[position] as Car
                 holder as MyAnnonceViewHolder
                 holder.bind(myAnnounce)
+            }
+            ViewHolderType.NOTIFICATION -> {
+                var notif = list[position] as Notification
+                holder as NotificationViewHolder
+                holder.bind(notif)
+            }
+            ViewHolderType.OFFER -> {
+                var offer = list[position] as Offer
+                holder as OfferViewHolder
+                holder.bind(offer)
             }
         }
     }

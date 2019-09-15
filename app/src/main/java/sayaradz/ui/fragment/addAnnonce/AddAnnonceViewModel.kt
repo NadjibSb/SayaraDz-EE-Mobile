@@ -10,89 +10,48 @@ import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import sayaradz.api.Api
 import sayaradz.api.ServiceBuilder
 import sayaradz.api.ServiceProvider
 import sayaradz.dataClasses.*
-import sayaradz.ui.MainActivityViewModel
-import java.util.ArrayList
+import java.util.*
 
-class AddAnnonceViewModel() :ViewModel() {
+class AddAnnonceViewModel(val token: String) : ViewModel() {
 
     val TAG = "AddAnnonceViewModel"
-    val token =MainActivityViewModel.token
     var marques: MutableLiveData<ArrayList<Marque>>
     val api: ServiceProvider
 
     init {
         api = ServiceBuilder.buildService(ServiceProvider::class.java)
-        marques = getMarques(token)
+        marques = Api.getMarques(TAG, token)
     }
 
 
-
-    private fun getMarques(idToken: String): MutableLiveData<ArrayList<Marque>> {
-
-
-        val call = api.getMarques(idToken) // The request included the token
-        var marqueRespond: List<Marque>?
-        var marqueList = ArrayList<Marque>()
-        var finalList = MutableLiveData<ArrayList<Marque>>()
-
-        call.enqueue(object : Callback<List<Marque>> {
-            override fun onResponse(call: Call<List<Marque>>, response: Response<List<Marque>>) {
-                Log.i(TAG, "DisplayMarqueList: call enqueue")
-
-                if (!response.isSuccessful()) {
-                    Log.i(TAG, "CODE:" + response.code().toString())
-                    return
-                }
-
-                marqueRespond = response.body()  // Getting the list
-                if (marqueRespond != null) {
-                    Log.i(TAG, "REPONSES: HERE is ALL THE BRANDS FROM OUR SERVER:")
-                    for (m in marqueRespond!!) {
-                        var content = ""
-                        content += "ID: " + m.id + "\n"
-                        content += "Name: " + m.name + "\n"
-                        content += "Name: " + m.imageUrl
-                        Log.i(TAG, "\n=========\n$content")
-                        marqueList.add(m)
-                    }
-                    finalList.value = marqueList
-                    //Log.i("TAG",marqueList.toString())
-                }
-            }
-
-            override fun onFailure(call: Call<List<Marque>>, t: Throwable) {
-                Log.i(TAG, "error CODE:" + t.message)
-            }
-        })
-        return finalList
-    }
     // Creation
-    fun createAnnonce ( idToken : String , image : MultipartBody.Part , vehicule : Vehicule , titre: String , prix : Int  , commentaires :String )
-    {
+    fun createAnnonce(idToken: String, image: MultipartBody.Part, vehicule: Vehicule, titre: String, prix: Int, commentaires: String) {
 
 
-        val call0 = api.createVehicule(idToken,image,convert(vehicule.kilometrage.toString()), convert(vehicule.date),convert(vehicule.versionPk), convert(vehicule.color),convert(vehicule.modelPk.toString()))
+        val call0 = api.createVehicule(idToken, image, convert(vehicule.kilometrage.toString()), convert(vehicule.date), convert(vehicule.versionPk), convert(vehicule.color), convert(vehicule.modelPk.toString()))
         call0.enqueue(object : Callback<Car> {
             override fun onResponse(call: Call<Car>, response: Response<Car>) {
                 Log.i(TAG, "CREATE VEHICULE")
-                var car  = response.body()!!
-                var call1 = api.createAnnounce(idToken, convert(titre), convert(car.id.toString()), convert(prix.toString()),convert(commentaires))
-                Log.i("CAAAR",car.id.toString())
+                var car = response.body()!!
+                var call1 = api.createAnnounce(idToken, convert(titre), convert(car.id.toString()), convert(prix.toString()), convert(commentaires))
+                Log.i("CAAAR", car.id.toString())
                 call1.enqueue(object : Callback<ResponseBody> {
                     override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
                         Log.i(TAG, "CREATE ANNONCE")
 
                         if (!response.isSuccessful()) {
-                            Log.i(TAG,"CREATED ANNONCE")
+                            Log.i(TAG, "CREATED ANNONCE")
                             Log.i(TAG, "CODE:" + response.code().toString() + "" + response.body().toString())
 
                             return
                         }
 
                     }
+
                     override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
                         Log.i(TAG, "error CODE:" + t.message)
                     }
@@ -101,32 +60,26 @@ class AddAnnonceViewModel() :ViewModel() {
 
 
                 if (!response.isSuccessful()) {
-                    Log.i(TAG,"CREATED VEHICULE")
-                    Log.i("QUERY",vehicule.date +"" + vehicule.versionPk)
+                    Log.i(TAG, "CREATED VEHICULE")
+                    Log.i("QUERY", vehicule.date + "" + vehicule.versionPk)
                     Log.i(TAG, "CODE:" + response.code().toString())
                     return
                 }
 
 
-
-
             }
+
             override fun onFailure(call: Call<Car>, t: Throwable) {
                 Log.i(TAG, "error CODE:" + t.message)
             }
         })
 
 
-
-
     }
 
 
-
-
-
-    fun convert ( a : String) : RequestBody {
-        return  RequestBody.create(MediaType.parse("text/plain"), a)
+    fun convert(a: String): RequestBody {
+        return RequestBody.create(MediaType.parse("text/plain"), a)
     }
 
 
@@ -156,9 +109,7 @@ class AddAnnonceViewModel() :ViewModel() {
                         Log.i(TAG, "REPONSES: HERE is ALL THE MODELS OF $marqueId MARQUE:")
                         for (m in modeleRespond!!) {
                             var content = ""
-                            content += "ID: " + m.id + "\n"
-                            content += "Name: " + m.name + "\n"
-                            //content += "Image: " + m.imageUrl
+                            content += "$m \n"
                             Log.i(TAG, "\n=========\n$content")
                             modelList.add(m)
                         }
@@ -214,25 +165,7 @@ class AddAnnonceViewModel() :ViewModel() {
         }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
     }
-
-
-
-
-
-
 
 
 }

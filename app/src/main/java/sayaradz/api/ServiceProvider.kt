@@ -12,8 +12,7 @@ interface ServiceProvider {
 
     // Getting all the brands
     @GET("api/marque")
-    fun getMarques(@Header("Authorization") token: String): Call<List<Marque>>
-
+    fun getAllMarques(@Header("Authorization") token: String): Call<List<Marque>>
 
     // Getting modeles by brand
     @GET("api/modele/mobile")
@@ -23,9 +22,17 @@ interface ServiceProvider {
     @GET("api/version")
     fun getVersionsByModele(@Header("Authorization") token: String, @Query("modeleId") modeleId: String): Call<List<Version>>
 
-    // Getting all the models
-    @GET("api/modele/mobile")
-    fun getModels(@Header("Authorization") token: String): Call<List<Modele>>
+
+    @GET("api/modele")
+    fun getAllModels(@Header("Authorization") token: String): Call<List<Modele>>
+
+    // Getting "fich tech" of a specific version
+        @GET("api/fichetechnique/detail/{versionId}")
+    fun getFichTechByVersion(@Header("Authorization") token: String, @Path("versionId") versionId: String): Call<FichTech>
+
+    // Getting details of a specific version
+    @GET("api/version/detail/{versionId}")
+    fun getVersion(@Header("Authorization") token: String, @Path("versionId") versionId: String): Call<Version>
 
    /* @GET("/media/images/marques/{imageName}")
     fun getImage(@Header("Authorization") token: String, @Path("imageName") img: String): Call<ResponseBody>*/

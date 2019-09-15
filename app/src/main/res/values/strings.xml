@@ -2,7 +2,8 @@
     <string name="app_name">SayaraDz</string>
     <string name="request_client_id">1078199315736-tutm29gji4t02p731mp3o51v21l4imlk.apps.googleusercontent.com</string>
     <string name="facebook_app_id">262996364600105</string>
-    <string name="fb_login_protocol_scheme">f160971222fc33a78dde29db0c208280</string>
+    <!--string name="fb_login_protocol_scheme">f160971222fc33a78dde29db0c208280</string-->
+    <string name="fb_login_protocol_scheme">fb262996364600105</string>
     <string name="login"> Se connecter </string>
 
     <!-- TODO: Remove or change this placeholder text -->
@@ -13,5 +14,22 @@
     <string name="options">Options</string>
     <string name="faire_offre"> Faire une offre </string>
     <string name="title_activity_mes_annonces">mesAnnoncesActivity</string>
+    <string name="motorisation">Motorisation :</string>
+    <string name="boite_vitesse">Boite vitesse :</string>
+    <string name="transmission">Transmission :</string>
+    <string name="puissance">Puissance :</string>
+    <string name="consomation">Consomation :</string>
+    <string name="reservoir">Reservoir :</string>
+    <string name="vitesse_max">Vitesse Max :</string>
+    <string name="acceleration">Acceleration :</string>
+    <string name="dimmensions">Dimmensions :</string>
+    <string name="nombre_de_portes">Nombre de Portes :</string>
+    <string name="nombre_de_places">Nombre de places :</string>
+    <string name="prix">Prix :</string>
+    <string name="price_updated">Price updated</string>
+    <string name="choose_color">Choisissez une couleur </string>
+    <string name="no_item">Aucun item à afficher</string>
+
+    <string name="price_format"> %s DA</string>
 
 </resources>

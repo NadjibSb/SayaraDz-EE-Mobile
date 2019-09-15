@@ -1,6 +1,7 @@
 package sayaradz.ui.fragment.version
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,28 +17,73 @@ import sayaradz.authentification.R
 import sayaradz.authentification.databinding.VersionFragmentBinding
 import sayaradz.dataClasses.Version
 import sayaradz.ui.fragment.adapter.ListAdapter
+import sayaradz.ui.mainActivity.MainActivity
 
 class VersionFragment : Fragment() {
 
-    lateinit var binding: VersionFragmentBinding
-    lateinit var args: VersionFragmentArgs
-    lateinit var viewModel: VersionViewModel
+    private val TAG = "TAG-VersionFragment"
+
+    private lateinit var binding: VersionFragmentBinding
+    private lateinit var args: VersionFragmentArgs
+    private lateinit var viewModel: VersionViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.version_fragment, container, false)
         args = VersionFragmentArgs.fromBundle(arguments!!)
-        Toast.makeText(context, "Modele id: ${args.modelId}", Toast.LENGTH_SHORT).show()
 
-        var viewModelFactory = VersionViewModelFactory(args.modelId)
+        var viewModelFactory = VersionViewModelFactory(args.modelId, (activity as MainActivity).getToken())
         viewModel = ViewModelProviders.of(this, viewModelFactory)
                 .get(VersionViewModel::class.java)
 
+
+        // annimation while loading data
+        binding.versionListView.visibility = View.GONE
+        binding.shimmerLayout.visibility = View.VISIBLE
+        binding.shimmerLayout.startShimmerAnimation()
+
+        // when data loaded => display list
         viewModel.versions.observe(this, Observer { versions ->
-            setUpRecycleView(binding.root, versions)
+
+            binding.shimmerLayout.stopShimmerAnimation()
+            binding.shimmerLayout.visibility = View.GONE
+
+            if (versions.size >0){ // if there is data to display
+                binding.versionListView.visibility = View.VISIBLE
+                setUpRecycleView(binding.root, versions)
+            }else{ // if the list is empty
+                Log.i(TAG, "empty")
+                binding.emptyListView.visibility = View.VISIBLE
+            }
         })
+
+        setupPullToRefresh()
 
 
         return binding.root
+    }
+
+    private fun setupPullToRefresh() {
+        binding.swiperefresh.setOnRefreshListener {
+            viewModel.getVersions()
+            viewModel.versions.observe(this, Observer { versions ->
+
+                binding.shimmerLayout.stopShimmerAnimation()
+                binding.shimmerLayout.visibility = View.GONE
+
+                if (versions.size > 0) { // if there is data to display
+                    binding.versionListView.visibility = View.VISIBLE
+                    setUpRecycleView(binding.root, versions)
+                } else { // if the list is empty
+                    Log.i(TAG, "empty")
+                    binding.emptyListView.visibility = View.VISIBLE
+                }
+                binding.swiperefresh.isRefreshing = false
+            })
+        }
+        binding.swiperefresh.setColorSchemeResources(
+                R.color.colorPrimaryLight,
+                R.color.colorPrimary,
+                R.color.colorPrimaryDark)
     }
 
 

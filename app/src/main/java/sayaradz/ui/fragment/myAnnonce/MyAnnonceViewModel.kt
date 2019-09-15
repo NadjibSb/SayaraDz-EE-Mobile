@@ -1,13 +1,12 @@
 package sayaradz.ui.fragment.myAnnonce
 
 import android.content.Context
-import android.graphics.Color
 import android.util.Log
-import android.view.View
-import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
-import androidx.lifecycle.*
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModel
 import com.facebook.login.LoginManager
 import com.google.firebase.auth.FirebaseAuth
 import okhttp3.ResponseBody
@@ -16,69 +15,66 @@ import retrofit2.Callback
 import retrofit2.Response
 import sayaradz.api.ServiceBuilder
 import sayaradz.api.ServiceProvider
-import sayaradz.authentification.R
 import sayaradz.dataClasses.Car
-import sayaradz.ui.MainActivityViewModel
 import sayaradz.ui.fragment.adapter.ListAdapter
 import java.util.*
-import kotlin.coroutines.AbstractCoroutineContextElement
 
-class MyAnnonceViewModel: ViewModel() , LifecycleOwner {
+class MyAnnonceViewModel(var token: String) : ViewModel(), LifecycleOwner {
     override fun getLifecycle(): Lifecycle {
         return MyAnnonceFragment.lifecycleRegistry
     }
 
     val TAG = "MesAnnoncesActivityVM"
+
     companion object {
         val TAG = "DELETE"
         lateinit var newAnnonces: MutableLiveData<ArrayList<Car>>
-        var token = MainActivityViewModel.token
-        lateinit var context : Context
-        lateinit var life : LifecycleOwner
-        fun fill ( list : MutableLiveData<ArrayList<Car>> , context :Context ) {
+        lateinit var context: Context
+        var token = ""
+        lateinit var life: LifecycleOwner
+        fun fill(list: MutableLiveData<ArrayList<Car>>, context: Context, t: String) {
             /*newAnnonces = list
             newAnnonces.observe(life, Observer { annonces ->
                 Log.i("SIZE IN FULL" , annonces.size.toString())
                         annonces.clear()
 
                     })*/
+            token = t
             newAnnonces = list
             newAnnonces.observe(life, Observer { annonces ->
-                Log.i("SIZE AFTER CLEAR" , annonces.size.toString())
+                Log.i("SIZE AFTER CLEAR", annonces.size.toString())
                 MyAnnonceFragment.recyclerView.adapter = ListAdapter(annonces, ListAdapter.ViewHolderType.MyAnnonce, context, token)
                 MyAnnonceFragment.recyclerView.adapter!!.notifyDataSetChanged()
             })
 
 
-
-
-
         }
+
         var api = ServiceBuilder.buildService(ServiceProvider::class.java)
 
 
-
-         fun getNewAnnonces(idToken: String, annonceId : String): MutableLiveData<ArrayList<Car>> {
+        fun getNewAnnonces(idToken: String, annonceId: String): MutableLiveData<ArrayList<Car>> {
 
             // delete annonces
-             val call0 = api.deleteAnnounce(idToken,annonceId)
+            val call0 = api.deleteAnnounce(idToken, annonceId)
 
-             call0.enqueue(object : Callback<ResponseBody> {
-                 override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
-                     Log.i(TAG, "DisplayAnnonce: call enqueue")
+            call0.enqueue(object : Callback<ResponseBody> {
+                override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+                    Log.i(TAG, "DisplayAnnonce: call enqueue")
 
-                     if (!response.isSuccessful()) {
-                         Log.i(TAG,"DELETED")
-                         Log.i(TAG, "CODE:" + response.code().toString())
-                         return
-                     }
+                    if (!response.isSuccessful()) {
+                        Log.i(TAG, "DELETED")
+                        Log.i(TAG, "CODE:" + response.code().toString())
+                        return
+                    }
 
 
-                 }
-                 override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-                     Log.i(TAG, "error CODE:" + t.message)
-                 }
-             })
+                }
+
+                override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                    Log.i(TAG, "error CODE:" + t.message)
+                }
+            })
 
 
             // get new Annonces
@@ -98,7 +94,7 @@ class MyAnnonceViewModel: ViewModel() , LifecycleOwner {
 
                     AnnounceRespond = response.body()  // Getting the list
                     if (AnnounceRespond != null) {
-                         annonceList.clear()
+                        annonceList.clear()
                         Log.i(TAG, "REPONSES: HERE is ALL THE Announcement OF current User")
                         for (m in AnnounceRespond!!) {
                             var content = ""
@@ -160,13 +156,14 @@ class MyAnnonceViewModel: ViewModel() , LifecycleOwner {
 
 
     }
+
     var annonces: MutableLiveData<ArrayList<Car>>
 
     init {
         api = ServiceBuilder.buildService(ServiceProvider::class.java)
         annonces = getAnnonces(token)
         life = this
-        fill(annonces,MyAnnonceFragment.contextMyAn)
+        fill(annonces, MyAnnonceFragment.contextMyAn, token)
     }
 
 
@@ -188,7 +185,7 @@ class MyAnnonceViewModel: ViewModel() , LifecycleOwner {
 
                 AnnounceRespond = response.body()  // Getting the list
                 if (AnnounceRespond != null) {
-                   // annonceList.clear()
+                    // annonceList.clear()
                     Log.i(TAG, "REPONSES: HERE is ALL THE Announcement OF current User")
                     for (m in AnnounceRespond!!) {
                         var content = ""
@@ -208,9 +205,6 @@ class MyAnnonceViewModel: ViewModel() , LifecycleOwner {
         })
         return finalList
     }
-
-
-
 
 
     fun signOut() {

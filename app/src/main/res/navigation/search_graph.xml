@@ -39,6 +39,9 @@
         android:label="Faire Une Commande"
         tools:layout="@layout/fiche_tech_fragment" >
 
+        <argument
+            android:name="versionID"
+            app:argType="string" />
     </fragment>
 
 

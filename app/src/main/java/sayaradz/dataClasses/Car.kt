@@ -34,7 +34,10 @@ data class Car(
         @SerializedName("version_name")
         var versionName: String ,
         @SerializedName("couleur")
-        var color: String
+        var color: String,
+        @SerializedName("version_id")
+        var versionId : String
+
 
 
 

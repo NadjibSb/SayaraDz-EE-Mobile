@@ -9,6 +9,8 @@
     <color name="window_background">#FFF</color>
     <color name="text_color_light">#FFF</color>
     <color name="dark_grey">#333333</color>
+    <color name="shimmer_bg">#dddddd</color>
+    <color name="light_gray">#bbbbbb</color>
 
 
     <!--<color name="colorPrimary">#3F51B5</color>-->

@@ -42,5 +42,9 @@
         android:id="@+id/ficheTechFragment"
         android:name="sayaradz.ui.fragment.fichTech.FicheTechFragment"
         android:label="Fiche Technique"
-        tools:layout="@layout/fiche_tech_fragment" />
+        tools:layout="@layout/fiche_tech_fragment" >
+        <argument
+            android:name="versionID"
+            app:argType="string" />
+    </fragment>
 </navigation>

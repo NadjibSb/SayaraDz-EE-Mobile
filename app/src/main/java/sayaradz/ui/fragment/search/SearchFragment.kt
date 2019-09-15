@@ -23,14 +23,14 @@ import sayaradz.authentification.R
 import sayaradz.dataClasses.Car
 import sayaradz.dataClasses.Marque
 import sayaradz.dataClasses.Modele
-import sayaradz.ui.MainActivityViewModel
 import sayaradz.ui.fragment.adapter.ListAdapter
+import sayaradz.ui.mainActivity.MainActivity
 import java.util.*
 import kotlin.collections.ArrayList
 
 
 class SearchFragment : Fragment() {
-    var token = MainActivityViewModel.token
+    var token =""
     val TAG = "TAG-SearchFragment"
     var brandList = mutableListOf<String>()//ArrayList<String>()
     var modelList = mutableListOf<String>()
@@ -85,7 +85,7 @@ class SearchFragment : Fragment() {
         updateList()
         setUpRecycleView(carsList)
         //Having the Token to  ACCESS
-        token = MainActivityViewModel.token// this.arguments!!.getString("TOKEN")
+        token = (activity as MainActivity).getToken()
         Log.i(TAG, "TOKEN RECEIVED: $token")
 
         // REMPLIR LIST WITH QUERY
@@ -298,7 +298,7 @@ class SearchFragment : Fragment() {
     private fun getModelsList(rootView: View?, idToken: String): MutableList<String> {
         var modelsList = mutableListOf<String>()
         Log.i(TAG, "DisplayModelList")
-        val call = service.getModels(idToken) // The request included the token
+        val call = service.getAllModels(idToken) // The request included the token
         var modelRespond: List<Modele>? = null
 
         call.enqueue(object : Callback<List<Modele>> {
@@ -333,7 +333,7 @@ class SearchFragment : Fragment() {
     private fun getMarquesList(rootView: View, idToken: String): MutableList<String> {
         var marquesList = mutableListOf<String>()
         Log.i(TAG, "DisplayMarqueList")
-        val call = service.getMarques(idToken) // The request included the token
+        val call = service.getAllMarques(idToken) // The request included the token
         var marqueRespond: List<Marque>? = null
         call.enqueue(object : Callback<List<Marque>> {
             override fun onResponse(call: Call<List<Marque>>, response: Response<List<Marque>>) {

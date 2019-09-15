@@ -23,6 +23,7 @@ import sayaradz.dataClasses.Car
 import sayaradz.ui.fragment.myAnnonce.MyAnnonceFragment
 import sayaradz.ui.fragment.myAnnonce.MyAnnonceFragmentDirections
 import sayaradz.ui.fragment.myAnnonce.MyAnnonceViewModel
+import sayaradz.ui.mainActivity.MainActivity
 
 
 class MyAnnonceViewHolder private constructor(val layout: View ,context : Context) : RecyclerView.ViewHolder(layout)  {
@@ -102,7 +103,7 @@ class MyAnnonceViewHolder private constructor(val layout: View ,context : Contex
             // Send the query of delete and display the new list
 
             //MyAnnonceViewModel.newAnnonces=
-            MyAnnonceViewModel.fill( MyAnnonceViewModel.getNewAnnonces(token,annonceId),MyAnnonceFragment.contextMyAn)
+            MyAnnonceViewModel.fill( MyAnnonceViewModel.getNewAnnonces(token,annonceId),MyAnnonceFragment.contextMyAn,token)
 
 
 

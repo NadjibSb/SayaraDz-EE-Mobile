@@ -1,4 +1,5 @@
 package sayaradz.ui.fragment.adapter
+
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -16,13 +17,8 @@ import sayaradz.ui.fragment.search.SearchFragment.Companion.mTypeSelected
 import sayaradz.ui.fragment.search.SearchFragmentDirections
 
 class CarViewHolder private constructor(val layout: View) : RecyclerView.ViewHolder(layout) {
-    var announceName: TextView
-    var announceImage: ImageView
-
-    init {
-        announceName = itemView.findViewById(R.id.item_name)
-        announceImage = itemView.findViewById(R.id.img_item_logo)
-    }
+    var announceName: TextView = itemView.findViewById(R.id.item_name)
+    var announceImage: ImageView = itemView.findViewById(R.id.img_item_logo)
 
     companion object {
         lateinit var carItem : View
@@ -35,8 +31,8 @@ class CarViewHolder private constructor(val layout: View) : RecyclerView.ViewHol
     }
 
     fun bind(announce: Car) {
-        announceName.setText(announce.title)
-        handleClick(layout, announce.id.toString())
+        announceName.text = announce.title
+        handleClick(layout, announce.id.toString(),announce.versionId.toString())
         Log.i("announce", announce.title)
         //Glide.with(context).load(announce.imageVehicle1).into(this.image)
         if (announce.imageVehicle1 != null) {
@@ -47,10 +43,12 @@ class CarViewHolder private constructor(val layout: View) : RecyclerView.ViewHol
     }
 
     //TO BE MODIFIED GO TO THE layout ( ANNONCE DETAILS + faire un offre )
-    private fun handleClick(view: View, annonceId: String) {
+    private fun handleClick(view: View, annonceId: String? , versionId : String?) {
         Log.i("CAR","OnClick")
-        val actionOccas = SearchFragmentDirections.actionSearchFragmentToAnnonceFragment(annonceId)
-      val actionNeuf =SearchFragmentDirections.actionSearchFragmentToFichTechFragment()
+        lateinit var actionOccas : SearchFragmentDirections.ActionSearchFragmentToAnnonceFragment
+        lateinit var actionNeuf : SearchFragmentDirections.ActionSearchFragmentToFichTechFragment
+        if (!annonceId.isNullOrEmpty())  actionOccas=SearchFragmentDirections.actionSearchFragmentToAnnonceFragment(annonceId)
+        if (!versionId.isNullOrEmpty()) actionNeuf= SearchFragmentDirections.actionSearchFragmentToFichTechFragment(versionId)
                 view.setOnClickListener { v: View ->
                     if (mTypeSelected == "occasion") {
                         Log.i("CAR","Occasion")

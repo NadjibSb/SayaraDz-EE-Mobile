@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="sayaradz.ui.fragment.notification.NotificationFragment">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/notif_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:listitem="@layout/notification_list_item">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+    </FrameLayout>
+</layout>

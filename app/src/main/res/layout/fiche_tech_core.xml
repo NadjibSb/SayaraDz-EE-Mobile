@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:background="@drawable/fich_tech_round_corners"
+        tools:context="sayaradz.ui.fragment.fichTech.FicheTechFragment">
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="8dp"
+            android:text="@string/fiche_technique"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="32dp"
+            android:background="@color/colorPrimaryLight"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view">
+
+            <TextView
+                android:id="@+id/motorisation_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:padding="@dimen/option_padding"
+                android:text="Motorisation :"
+                android:textColor="@color/dark_grey"
+                app:layout_constraintEnd_toStartOf="@+id/motorisation"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/motorisation"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:padding="@dimen/option_padding"
+                tools:text="1.6 Essence, 95ch"
+                app:layout_constraintBaseline_toBaselineOf="@+id/motorisation_txt"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/motorisation_txt" />
+
+            <TextView
+                android:id="@+id/puissanceFiscale_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:padding="@dimen/option_padding"
+                android:text="Puissance Fiscale :"
+                android:textColor="@color/dark_grey"
+                app:layout_constraintEnd_toStartOf="@+id/puissanceFiscale"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/motorisation_txt" />
+
+            <TextView
+                android:id="@+id/puissanceFiscale"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:padding="@dimen/option_padding"
+                tools:text="5500"
+                app:layout_constraintBaseline_toBaselineOf="@+id/puissanceFiscale_txt"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/puissanceFiscale_txt" />
+
+            <TextView
+                android:id="@+id/boiteVitesse_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:padding="@dimen/option_padding"
+                android:text="Boite vitesse :"
+                android:textColor="@color/dark_grey"
+                app:layout_constraintEnd_toStartOf="@+id/boiteVitesse"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/puissanceFiscale_txt" />
+
+            <TextView
+                android:id="@+id/boiteVitesse"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                tools:text="6 vitesses"
+                app:layout_constraintBaseline_toBaselineOf="@+id/boiteVitesse_txt"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/boiteVitesse_txt" />
+
+            <TextView
+                android:id="@+id/transmission_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:padding="@dimen/option_padding"
+                android:text="Transmission :"
+                android:textColor="@color/dark_grey"
+                app:layout_constraintEnd_toStartOf="@+id/transmission"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/boiteVitesse_txt" />
+
+            <TextView
+                android:id="@+id/transmission"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:padding="@dimen/option_padding"
+                tools:text="Manuelle"
+                app:layout_constraintBaseline_toBaselineOf="@+id/transmission_txt"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/transmission_txt" />
+
+
+
+            <TextView
+                android:id="@+id/acceleration_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:padding="@dimen/option_padding"
+                android:text="Acceleration :"
+                android:textColor="@color/dark_grey"
+                app:layout_constraintEnd_toStartOf="@+id/acceleration"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/transmission_txt" />
+
+            <TextView
+                android:id="@+id/acceleration"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:padding="@dimen/option_padding"
+                tools:text="13s"
+                app:layout_constraintBaseline_toBaselineOf="@+id/acceleration_txt"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/acceleration_txt" />
+
+
+            <TextView
+                android:id="@+id/vitesseMax_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:padding="@dimen/option_padding"
+                android:text="Vitesse Max :"
+                android:textColor="@color/dark_grey"
+                app:layout_constraintEnd_toStartOf="@+id/vitesseMax"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/acceleration_txt" />
+
+            <TextView
+                android:id="@+id/vitesseMax"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:padding="@dimen/option_padding"
+                tools:text="220km/h"
+                app:layout_constraintBaseline_toBaselineOf="@+id/vitesseMax_txt"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/vitesseMax_txt" />
+
+
+            <TextView
+                android:id="@+id/consommation_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:padding="@dimen/option_padding"
+                android:text="Consommation :"
+                android:textColor="@color/dark_grey"
+                app:layout_constraintEnd_toStartOf="@+id/consommation"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/vitesseMax_txt" />
+
+            <TextView
+                android:id="@+id/consommation"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:padding="@dimen/option_padding"
+                tools:text="7.3/4.8/5.7 l/100km"
+                app:layout_constraintBaseline_toBaselineOf="@+id/consommation_txt"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/consommation_txt" />
+
+
+
+            <TextView
+                android:id="@+id/reservoir_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:padding="@dimen/option_padding"
+                android:text="Reservoir :"
+                android:textColor="@color/dark_grey"
+                app:layout_constraintEnd_toStartOf="@+id/reservoir"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/consommation_txt" />
+
+            <TextView
+                android:id="@+id/reservoir"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:padding="@dimen/option_padding"
+                tools:text="50 L"
+                app:layout_constraintBaseline_toBaselineOf="@+id/reservoir_txt"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/reservoir_txt" />
+
+
+            <TextView
+                android:id="@+id/nombrePortes_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:padding="@dimen/option_padding"
+                android:text="Nombre de Portes :"
+                android:textColor="@color/dark_grey"
+                app:layout_constraintEnd_toStartOf="@+id/nombrePortes"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/reservoir_txt" />
+
+            <TextView
+                android:id="@+id/nombrePortes"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:padding="@dimen/option_padding"
+                tools:text="5"
+                app:layout_constraintBaseline_toBaselineOf="@+id/nombrePortes_txt"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/nombrePortes_txt" />
+
+
+
+            <TextView
+                android:id="@+id/dimensions_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:padding="@dimen/option_padding"
+                android:text="Dimensions :"
+                android:textColor="@color/dark_grey"
+                app:layout_constraintEnd_toStartOf="@+id/dimensions"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/nombrePortes_txt" />
+
+            <TextView
+                android:id="@+id/dimensions"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:padding="@dimen/option_padding"
+                tools:text="403/170/150 cm"
+                app:layout_constraintBaseline_toBaselineOf="@+id/dimensions_txt"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/dimensions_txt" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

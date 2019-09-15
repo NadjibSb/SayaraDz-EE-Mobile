@@ -7,11 +7,20 @@
 
     <fragment
         android:id="@+id/profileFragment"
-        android:name="sayaradz.ui.ProfileFragment"
+        android:name="sayaradz.ui.fragment.profile.ProfileFragment"
         android:label="Profile" >
-    <action
-        android:id="@+id/action_profileFragment_to_mesAnnoncesFragment"
-        app:destination="@id/myAnnonceFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_mesAnnoncesFragment"
+            app:destination="@id/myAnnonceFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_notificationFragment"
+            app:destination="@id/notificationFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_myOffersFragment"
+            app:destination="@id/myOffersFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_myCommandsFragment"
+            app:destination="@id/myCommandsFragment" />
 
     </fragment>
 
@@ -29,9 +38,8 @@
         <action
             android:id="@+id/action_myAnnonceFragment_to_EditAnnonceFragment"
             app:destination="@id/editAnnonceFragment" />
-
-
     </fragment>
+
     <fragment
         android:id="@+id/addAnnonceFragment"
         android:name="sayaradz.ui.fragment.addAnnonce.AddAnnonceFragment"
@@ -39,9 +47,8 @@
         <action
             android:id="@+id/action_addAnnonce_to_myAnnonceFragment"
             app:destination="@id/myAnnonceFragment" />
-
-
     </fragment>
+
     <fragment
         android:id="@+id/viewAnnonceFragment"
         android:name="sayaradz.ui.fragment.myAnnonceView.MyAnnonceViewFragment"
@@ -69,7 +76,19 @@
     </fragment>
 
 
-
-
-
+    <fragment
+        android:id="@+id/notificationFragment"
+        android:name="sayaradz.ui.fragment.notification.NotificationFragment"
+        android:label="Notifications"
+        tools:layout="@layout/notification_fragment" />
+    <fragment
+        android:id="@+id/myCommandsFragment"
+        android:name="sayaradz.ui.fragment.myCommands.MyCommandsFragment"
+        android:label="Mes Commandes"
+        tools:layout="@layout/my_commands_fragment" />
+    <fragment
+        android:id="@+id/myOffersFragment"
+        android:name="sayaradz.ui.fragment.myOffers.MyOffersFragment"
+        android:label="Mes Offres"
+        tools:layout="@layout/my_offers_fragment" />
 </navigation>

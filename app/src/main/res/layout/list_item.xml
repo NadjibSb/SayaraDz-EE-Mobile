@@ -20,6 +20,7 @@
             android:id="@+id/img_item_logo"
             android:layout_width="200dp"
             android:layout_height="100dp"
+            android:layout_margin="5dp"
             android:layout_weight="1"
             tools:src="@drawable/m_audi" />
 

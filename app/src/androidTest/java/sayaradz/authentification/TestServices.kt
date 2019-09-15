@@ -35,7 +35,7 @@ public fun testResponse ()
                                 .addConverterFactory(GsonConverterFactory.create())
                                 .build()
                         val jsonPlaceHolderApi = retrofit.create(ServiceProvider::class.java)
-                    var response = jsonPlaceHolderApi.getMarques(idToken).execute()
+                    var response = jsonPlaceHolderApi.getAllMarques(idToken).execute()
                        var marques=response.body()
 
                     assertEquals(15,marques!!.size)
