@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="2dp">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -14,14 +15,34 @@
 
         <ImageView
             android:id="@+id/annonce_img"
-            android:layout_width="35dp"
-            android:layout_height="40dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_marginStart="16dp"
-            android:layout_marginBottom="16dp"
             android:layout_marginTop="16dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@drawable/ic_tag" />
+
+
+        <ImageView
+            android:id="@+id/vehicule_img"
+            android:layout_width="191dp"
+            android:layout_height="74dp"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/a3_sedan"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/annonce_img" />
+
+        <ImageView
+            android:id="@+id/pending"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:src="@drawable/ic_pending"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/textView" />
 
         <TextView
             android:id="@+id/offer_price"
@@ -31,48 +52,24 @@
             android:layout_marginTop="16dp"
             android:textSize="18sp"
             android:textStyle="bold"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/annonce_img"
+            app:layout_constraintStart_toEndOf="@+id/annonce_img"
+            app:layout_constraintTop_toTopOf="parent"
             tools:text="Clio 4 2016" />
-
 
         <TextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="8dp"
             android:text="En Attente"
-            android:layout_marginTop="10dp"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/vehicule_img"
             android:textColor="@color/colorPrimaryLight"
-            app:layout_constraintStart_toEndOf="@id/pending"
-          />
-
-        <ImageView
-            android:id="@+id/vehicule_img"
-            android:layout_width="191dp"
-            android:layout_height="74dp"
-            android:src="@drawable/a3_sedan"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.49"
-            app:layout_constraintStart_toEndOf="@+id/annonce_img"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:id="@+id/pending"
-            android:layout_width="33dp"
-            android:layout_height="31dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginStart="100dp"
-            android:src="@drawable/ic_pending"
-            app:layout_constraintEnd_toStartOf="@+id/textView"
-            app:layout_constraintTop_toBottomOf="@id/vehicule_img"
-            app:layout_constraintStart_toStartOf="@id/vehicule_img"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintTop_toBottomOf="@+id/vehicule_img" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

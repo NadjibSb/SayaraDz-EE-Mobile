@@ -24,7 +24,7 @@ class AnnonceOffersViewHolder private constructor(val layout: View) : RecyclerVi
 
     fun bind(offer: OfferToGet) {
 
-        amount.text = offer.prix.toString() + " DA"
+        amount.text = offer.prix.toString() + "millions"
        annonceImage.setImageResource(R.drawable.ic_tag)
 
     }

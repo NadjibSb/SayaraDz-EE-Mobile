@@ -68,7 +68,6 @@ class MyAnnonceViewHolder private constructor(val layout: View, context: Context
             //Show Dialog to confirm
             showDialog(layout, context, announce.id.toString())
         }
-
     }
 
 

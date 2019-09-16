@@ -26,7 +26,7 @@ class OfferViewHolder private constructor(val layout: View) : RecyclerView.ViewH
 
     fun bind(offer: OfferToGet) {
 
-        amount.text = offer.prix.toString() + " DA"
+        amount.text = offer.prix.toString() + "millions"
         annonceImage.setImageResource(R.drawable.ic_tag)
 
     }
