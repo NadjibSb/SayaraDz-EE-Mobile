@@ -28,7 +28,7 @@ class MyAnnonceViewFragment : Fragment () {
 
 
 
-    val TAG = "TAG-MyAnnonceViewFragment"
+    val TAG = "TAG-MyAnnonceVF"
     private lateinit var binding: MyAnnonceViewFragmentBinding
     lateinit var myAnnonceViewViewModel: MyAnnonceViewViewModel
     var img =""
@@ -53,6 +53,7 @@ class MyAnnonceViewFragment : Fragment () {
             binding.details.marqueName.text= an.marqueName
             binding.details.textColor.text = an.color
              img=an.imageVehicle1
+            Log.i(TAG,"image $img")
 
 
         })
@@ -81,17 +82,16 @@ class MyAnnonceViewFragment : Fragment () {
         var sliderLayout = layout
         sliderLayout.setIndicatorAnimation(IndicatorAnimations.THIN_WORM) //set indicator animation by using SliderLayout.Animations. :WORM or THIN_WORM or COLOR or DROP or FILL or NONE or SCALE or SCALE_DOWN or SLIDE and SWAP!!
         sliderLayout.setSliderTransformAnimation(SliderAnimations.FADETRANSFORMATION)
-        sliderLayout.setScrollTimeInSec(2)
+        sliderLayout.scrollTimeInSec = 2
+        Log.i(TAG,imageUrl )
 
-        for (i in 0..3) {
+        for (i in 0..2) {
 
             val sliderView = DefaultSliderView(context)
 
             when (i) {
                 0 -> sliderView.imageUrl = imageUrl
-                1 -> sliderView.imageUrl = "https://www.autobip.com/storage/photos/new_car_prices/20/peugeot_208_tech_vision_1_6_hdi_92ch_2019-03-04-13-2892232.jpg"
-                2 -> sliderView.imageUrl = "https://www.autobip.com/storage/photos/new_car_prices/20/peugeot_208_tech_vision_1_6_hdi_92ch_2019-03-04-13-0687668.jpg"
-                3 -> sliderView.imageUrl = "https://www.autobip.com/storage/photos/new_car_prices/20/peugeot_208_tech_vision_1_6_hdi_92ch_2019-03-04-13-4228700.jpg"
+                1 -> sliderView.imageUrl = imageUrl
             }
 
             sliderView.setImageScaleType(ImageView.ScaleType.CENTER_CROP)

@@ -75,10 +75,15 @@ interface ServiceProvider {
     fun createAnnounce (@Header("Authorization") token: String,@Body annonce :AnnoncePost) : Call<AnnoncePost>*/
 
     //Update annonce
-    @PUT ("api/annonce/update/{annonceId}/")
+    @PATCH ("api/annonce/update/{annonceId}/")
     fun updateAnnounce (@Header("Authorization") token: String,@Path("annonceId") annonceId: String,@Body annonce :AnnonceUpdate) : Call<AnnonceUpdate>
 
+    //Update vehicule
+    @PATCH ("api/vehiculeoccasion/update/{vehiculeId}/")
+    fun updateVehicule (@Header("Authorization") token: String,@Path("vehiculeId") vehiculeId: String,@Body vehicule :VehiculeUpdate) : Call<VehiculeUpdate>
+
     //Create annonce
+
     @Multipart
     @POST ("api/annonce/create/")
     fun createAnnounce (@Header("Authorization") token: String, @Part ("titre")  titre : RequestBody ,

@@ -16,9 +16,16 @@ import com.smarteist.autoimageslider.DefaultSliderView
 import com.smarteist.autoimageslider.IndicatorAnimations
 import com.smarteist.autoimageslider.SliderAnimations
 import com.smarteist.autoimageslider.SliderLayout
+import okhttp3.MultipartBody
+import okhttp3.ResponseBody
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import sayaradz.authentification.R
 import sayaradz.authentification.databinding.EditAnnonceFragmentBinding
 import sayaradz.dataClasses.AnnonceUpdate
+import sayaradz.dataClasses.Car
+import sayaradz.dataClasses.Vehicule
 import sayaradz.dataClasses.VehiculeUpdate
 import sayaradz.ui.mainActivity.MainActivity
 
@@ -36,6 +43,7 @@ class EditAnnonceFragment : Fragment() {
     lateinit var descr: String
     var km = 0
     var price = 0
+    var carId = ""
     lateinit var title: String
 
 
@@ -51,6 +59,7 @@ class EditAnnonceFragment : Fragment() {
 
             //  Log.i("3onwanAvant",binding.details.edit_text_title.text.toString())
             Log.i("3onwanApre", an.title)
+            carId=an.idVehicule.toString()
             //Info static can not be updated
             date = an.date
             img1 = an.imageVehicle1
@@ -90,18 +99,23 @@ class EditAnnonceFragment : Fragment() {
             if (binding.details.etDescrp.text.toString() != "") descr = binding.details.etDescrp.text.toString()
             if (binding.details.etPrice.text.toString() != "") price = binding.details.etPrice.text.toString().toInt()
 
-            car = VehiculeUpdate(km, date, color, img1, img2, img3)
+            car = VehiculeUpdate(km, date, color)
             Log.i("UPDATE", "HEERE")
-            annonce = AnnonceUpdate(car, title, price, descr)
+
+            annonce = AnnonceUpdate(title, price, descr)
             setSliderViews(binding.details.imageSlider, img1)
             // Sending Query
-            editAnnonceViewModel.updateAnnonce(annnonceId, annonce)
+            editAnnonceViewModel.updateAnnonce(annnonceId,carId,car,annonce)
 
             v.findNavController().navigate(action)
         }
 
         return binding.root
     }
+
+
+
+
 
 
     private fun setSliderViews(layout: SliderLayout, imageUrl: String) {
@@ -128,5 +142,10 @@ class EditAnnonceFragment : Fragment() {
             sliderLayout.addSliderView(sliderView)
         }
     }
+
+
+
+
+
 
 }
