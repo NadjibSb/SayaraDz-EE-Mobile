@@ -29,16 +29,19 @@ class MyAnnonceOffersFragment : Fragment() {
 
     private lateinit var viewModel: MyAnnonceOffersViewModel
     private lateinit var binding: MyAnnonceOffersFragmentBinding
+    var annonceId=""
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater,R.layout.my_annonce_offers_fragment, container, false)
+       var args=MyAnnonceOffersFragmentArgs.fromBundle(arguments!!)
+        annonceId = args.annonceId
         return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        var factory= MyAnnonceOffersViewModelFactory((activity as MainActivity).getToken())
+        var factory= MyAnnonceOffersViewModelFactory((activity as MainActivity).getToken(),annonceId)
         viewModel = ViewModelProviders.of(this, factory).get(MyAnnonceOffersViewModel::class.java)
 
         viewModel.offers.observe(this, Observer { list->

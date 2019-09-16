@@ -97,6 +97,12 @@
     <fragment
         android:id="@+id/myAnnonceOffersFragment"
         android:name="sayaradz.ui.fragment.myAnnonceOffers.MyAnnonceOffersFragment"
-        android:label="L'Offres de mon annonce "
-        tools:layout="@layout/my_annonce_offers_fragment" />
+        android:label="L'Offres de mon annonce ">
+        <argument
+            android:name="annonceId"
+            app:argType="string" />
+    </fragment>
+       <argument
+        android:name="annonceId"
+        app:argType="string" />
 </navigation>

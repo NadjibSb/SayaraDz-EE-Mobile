@@ -31,7 +31,6 @@ class MyAnnonceViewFragment : Fragment () {
     val TAG = "TAG-MyAnnonceViewFragment"
     private lateinit var binding: MyAnnonceViewFragmentBinding
     lateinit var myAnnonceViewViewModel: MyAnnonceViewViewModel
-    var annonceId=""
     var img =""
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -68,7 +67,7 @@ class MyAnnonceViewFragment : Fragment () {
             v: View ->
             v.findNavController().navigate(action)
         }
-        val actionOffer = MyAnnonceViewFragmentDirections.actionViewAnnonceToMyAnnonceOffersFragment()
+        val actionOffer = MyAnnonceViewFragmentDirections.actionViewAnnonceToMyAnnonceOffersFragment(args.annonceId)
         btnOffer.setOnClickListener {
             v: View ->
           v.findNavController().navigate(actionOffer)

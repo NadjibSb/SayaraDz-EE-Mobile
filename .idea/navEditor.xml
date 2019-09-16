@@ -346,6 +346,18 @@
                       </LayoutPositions>
                     </value>
                   </entry>
+                  <entry key="myAnnonceOffersFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="54" />
+                            <option name="y" value="655" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="myCommandsFragment">
                     <value>
                       <LayoutPositions>
@@ -363,8 +375,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-160" />
-                            <option name="y" value="371" />
+                            <option name="x" value="-316" />
+                            <option name="y" value="543" />
                           </Point>
                         </option>
                       </LayoutPositions>
@@ -430,6 +442,11 @@
                         <option name="myPositions">
                           <map>
                             <entry key="action_viewAnnonce_to_editAnnonceFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_viewAnnonce_to_myAnnonceOffersFragment">
                               <value>
                                 <LayoutPositions />
                               </value>

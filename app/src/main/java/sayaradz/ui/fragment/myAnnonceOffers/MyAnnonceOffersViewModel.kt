@@ -10,14 +10,14 @@ import sayaradz.api.Api
 import sayaradz.dataClasses.OfferToGet
 
 
-class MyAnnonceOffersViewModel (token : String ) : ViewModel() {
+class MyAnnonceOffersViewModel (token : String , annonceId: String ) : ViewModel() {
 
     var offers: MutableLiveData<ArrayList<OfferToGet>>
     val TAG = "TAG-OfferViewModel"
 
     init {
         offers = defaultList()
-       // offers = getOffres(TAG,token)
+       // offers = getAnnonceOffres(TAG,token,annonceId)
     }
 
     private fun defaultList(): MutableLiveData<ArrayList<OfferToGet>> {
@@ -33,10 +33,10 @@ class MyAnnonceOffersViewModel (token : String ) : ViewModel() {
         finalList.value = list
         return finalList
     }
-    fun getOffres(TAG: String, idToken: String): MutableLiveData<ArrayList<OfferToGet>> {
+    fun getAnnonceOffres(TAG: String, idToken: String,annonceId :String): MutableLiveData<ArrayList<OfferToGet>> {
 
 
-        val call = Api.api.getMyOffers(idToken) // The request included the token
+        val call = Api.api.getMyAnnonceOffers(idToken,annonceId) // The request included the token
         var offerRespond: List<OfferToGet>?
         var offerList = ArrayList<OfferToGet>()
         var finalList = MutableLiveData<ArrayList<OfferToGet>>()
