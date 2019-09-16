@@ -30,7 +30,7 @@ import kotlin.collections.ArrayList
 
 
 class SearchFragment : Fragment() {
-    var token =""
+    var token = ""
     val TAG = "TAG-SearchFragment"
     var brandList = mutableListOf<String>()//ArrayList<String>()
     var modelList = mutableListOf<String>()
@@ -70,6 +70,7 @@ class SearchFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val rootView: View? = inflater.inflate(R.layout.search_fragment, container, false)
+        token = (activity as MainActivity).getToken()
         var spinnerMarque = rootView!!.findViewById<View>(R.id.spinner_marque) as Spinner
         var spinnerType = rootView.findViewById<View>(R.id.spinner_type) as Spinner
         var rootLayout = rootView.findViewById<View>(R.id.root_layout) as FrameLayout?

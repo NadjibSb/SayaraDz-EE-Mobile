@@ -10,7 +10,7 @@ data class Modele (
         @SerializedName("pk")
         var pk: String,
         @SerializedName("couleur_set")
-        var colors : List<String> ,
+        var colors : List<Color> ,
         @SerializedName("ref_id")
         var refId : Int ,
         @SerializedName("marque_nom")
