@@ -52,6 +52,7 @@ import sayaradz.ui.mainActivity.MainActivity
 import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat
+import java.util.*
 
 class AddAnnonceFragment : Fragment() {
 
@@ -162,27 +163,33 @@ class AddAnnonceFragment : Fragment() {
             Log.i("PHOTOOO", stringUri)
 
             var madate = year + M1
+            var currentyear = Calendar.getInstance().get(Calendar.YEAR).toString().toInt()
             Log.i("DATE", madate)
             if (km != "" && price != "" && descrp != "" && title != "" && color != "" && year != "" && stringUri != "url") {
-                var car = Vehicule(km.toInt(), madate, versionId, modeleId, color)
-                // var annonce = AnnoncePost(car, title, price.toInt(), descrp)
-                var image: MultipartBody.Part
-                var file = File(stringUri)
 
-                var requestFile =
-                        RequestBody.create(
-                                MediaType.parse("image/*"),
-                                file
-                        )
-                image =
-                        MultipartBody.Part.createFormData("image1", file.getName(), requestFile)
+                if ( year.toInt() < currentyear - 30 || year.toInt()> currentyear) Snackbar.make(root_layout,"L'année que vous avez entré est invalide",Snackbar.LENGTH_SHORT).show()
+                else {
 
-                Log.i(TAG, "Description  " + descrp + "  Title  " + title + " KM " + km + " Price " + price + " version PK " + car.versionPk + " Model Pk " + car.modelPk + " Date" + car.date)
+                    var car = Vehicule(km.toInt(), madate, versionId, modeleId, color)
+                    // var annonce = AnnoncePost(car, title, price.toInt(), descrp)
+                    var image: MultipartBody.Part
+                    var file = File(stringUri)
+
+                    var requestFile =
+                            RequestBody.create(
+                                    MediaType.parse("image/*"),
+                                    file
+                            )
+                    image =
+                            MultipartBody.Part.createFormData("image1", file.getName(), requestFile)
+
+                    Log.i(TAG, "Description  " + descrp + "  Title  " + title + " KM " + km + " Price " + price + " version PK " + car.versionPk + " Model Pk " + car.modelPk + " Date" + car.date)
 
 
-                addAnnonceViewModel.createAnnonce(token, image, car, title, price.toInt(), descrp)
+                    addAnnonceViewModel.createAnnonce(token, image, car, title, price.toInt(), descrp)
 
-                v.findNavController().navigate(action)
+                    v.findNavController().navigate(action)
+                }
 
             } else {
 

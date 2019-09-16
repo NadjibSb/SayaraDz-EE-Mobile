@@ -17,7 +17,7 @@ class AnnonceOffersViewHolder private constructor(val layout: View) : RecyclerVi
     companion object {
         fun creat(parent: ViewGroup): AnnonceOffersViewHolder {
             val itemView = LayoutInflater.from(parent.context)
-                    .inflate(R.layout.my_offers_list_item, parent, false)
+                    .inflate(R.layout.my_annonce_offers_list_item, parent, false)
             return AnnonceOffersViewHolder(itemView)
         }
     }
@@ -26,7 +26,6 @@ class AnnonceOffersViewHolder private constructor(val layout: View) : RecyclerVi
 
         amount.text = offer.prix.toString() + " DA"
        annonceImage.setImageResource(R.drawable.ic_tag)
-
 
     }
 

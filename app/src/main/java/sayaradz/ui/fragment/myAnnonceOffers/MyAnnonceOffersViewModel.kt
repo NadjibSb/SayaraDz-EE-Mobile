@@ -16,8 +16,8 @@ class MyAnnonceOffersViewModel (token : String , annonceId: String ) : ViewModel
     val TAG = "TAG-OfferViewModel"
 
     init {
-        offers = defaultList()
-       // offers = getAnnonceOffres(TAG,token,annonceId)
+       // offers = defaultList()
+        offers = getAnnonceOffres(TAG,token,annonceId)
     }
 
     private fun defaultList(): MutableLiveData<ArrayList<OfferToGet>> {

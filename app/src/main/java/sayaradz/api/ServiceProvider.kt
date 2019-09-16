@@ -109,8 +109,8 @@ fun createVehicule (@Header("Authorization") token: String,
     fun sendMyOffer(@Header("Authorization") token: String ,@Body offer :OfferToPost) : Call<ResponseBody>
 
     // Send an offer
-    @GET ("api/Offre/{annonceId}")
-    fun getMyAnnonceOffers(@Header("Authorization") token: String , @Path ("annonceId") annonceId : String ) : Call<List<OfferToGet>>
+    @GET ("api/Offre/annonce")
+    fun getMyAnnonceOffers(@Header("Authorization") token: String , @Query ("annonce") annonceId : String ) : Call<List<OfferToGet>>
 
 
 }

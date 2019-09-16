@@ -50,7 +50,10 @@
         </activity> <!-- FACEBOOK -->
         <activity
             android:name="sayaradz.ui.mainActivity.MainActivity"
-            android:windowSoftInputMode="adjustResize">
+            android:windowSoftInputMode="adjustPan"
+            android:allowBackup="true"
+            android:hardwareAccelerated="true"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
             </intent-filter>
