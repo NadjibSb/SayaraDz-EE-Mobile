@@ -26,8 +26,14 @@ interface ServiceProvider {
     @GET("api/modele")
     fun getAllModels(@Header("Authorization") token: String): Call<List<Modele>>
 
+    //@FormUrlEncoded
+    @POST("api/commande/")
+    fun sendCommande(@Header("Authorization") token: String,
+                     @Body commande: Commande
+    ): Call<String>
+
     // Getting "fich tech" of a specific version
-        @GET("api/fichetechnique/detail/{versionId}")
+        @GET("api/fichetechnique/{versionId}")
     fun getFichTechByVersion(@Header("Authorization") token: String, @Path("versionId") versionId: String): Call<FichTech>
 
     // Getting details of a specific version

@@ -47,6 +47,9 @@
         <action
             android:id="@+id/action_addAnnonce_to_myAnnonceFragment"
             app:destination="@id/myAnnonceFragment" />
+        <action
+            android:id="@+id/action_addAnnonce_to_myProfileFragment"
+            app:destination="@id/profileFragment" />
     </fragment>
 
     <fragment

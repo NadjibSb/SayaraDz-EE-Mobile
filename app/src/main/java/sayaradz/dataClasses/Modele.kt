@@ -10,7 +10,7 @@ data class Modele (
         @SerializedName("pk")
         var pk: String,
         @SerializedName("couleur_set")
-        var colors : List<Color> ,
+        var colors : List<Couleur> ,
         @SerializedName("ref_id")
         var refId : Int ,
         @SerializedName("marque_nom")
@@ -29,7 +29,7 @@ data class Modele (
         @SerializedName("code")
         var code: String,
         @SerializedName("couleur_set")
-        var colors: Set<Color>,
+        var colors: Set<Couleur>,
         @SerializedName("image")
         var imageUrl: String,
         @SerializedName("ref_id")

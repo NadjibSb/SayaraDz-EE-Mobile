@@ -3,7 +3,7 @@ package sayaradz.dataClasses
 import com.google.gson.annotations.SerializedName
 
 data class Version(
-/**
+        /**
         @SerializedName("code")
         var id: String,
         @SerializedName("nom")
@@ -26,7 +26,7 @@ data class Version(
         var options: List<String>
 
 
-=======*/
+        =======*/
         @SerializedName("pk")
         var id: String,
         @SerializedName("code")
@@ -53,5 +53,7 @@ data class Version(
         @SerializedName("options")
         var options: List<Option>,
         @SerializedName("ficheTechnique")
-        var ficheTechnique_id: String
+        var ficheTechnique_id: String,
+        @SerializedName("couleur")
+        var colors: List<Couleur>
 )

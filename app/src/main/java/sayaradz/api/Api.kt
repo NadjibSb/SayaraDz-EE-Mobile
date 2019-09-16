@@ -225,6 +225,25 @@ class Api {
          })
      }
 
+        fun sendCommande(TAG: String, idToken: String, versionID: String, colorId: String, options: List<String>){
+            val call = api.sendCommande(idToken, Commande(versionID, colorId, options))
+
+            call.enqueue(object : Callback<String> {
+                override fun onResponse(call: Call<String>, response: Response<String>) {
+                    Log.i(TAG, "sendCommande: call enqueue")
+
+                    if (!response.isSuccessful) {
+                        Log.i(TAG, "CODE:" + response.code().toString())
+                        return
+                    }
+                    Log.i(TAG, "sendCommande => response:"+response.body())
+                }
+
+                override fun onFailure(call: Call<String>, t: Throwable) {
+                    Log.i(TAG, "error CODE:" + t.message)
+                }
+            })
+        }
     }
 
 

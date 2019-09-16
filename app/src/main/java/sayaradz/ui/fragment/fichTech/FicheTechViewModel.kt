@@ -67,6 +67,12 @@ class FicheTechViewModel(versionID: String, val token: String) : ViewModel() {
         options.remove(optionId)
     }
 
+    fun commande(colorId: Int) {
+        if (_version.value !=  null ){
+            Api.sendCommande(TAG,token, _version.value!!.code, _version.value!!.colors[colorId].id, options)
+        }
+    }
+
 
     /*
     private fun getDefaultFichTech(): FichTech {

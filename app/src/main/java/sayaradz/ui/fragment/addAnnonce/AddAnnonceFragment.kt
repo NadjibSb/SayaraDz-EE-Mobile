@@ -148,7 +148,7 @@ class AddAnnonceFragment : Fragment() {
 
         Log.i("TOKEN", token)
 
-        val action = AddAnnonceFragmentDirections.actionAddAnnonceToMyAnnonceFragment()
+        val action = AddAnnonceFragmentDirections.actionAddAnnonceToMyProfileFragment()
         btnConfirm.setOnClickListener { v: View ->
 
             var descrp = binding.root.findViewById<AppCompatEditText>(R.id.ed_descrip).text.toString()
@@ -387,8 +387,6 @@ class AddAnnonceFragment : Fragment() {
 
 
         //stringUri = uri.toString()
-
-        MyAnnonceViewModel.newAnnonces = MyAnnonceViewModel.getAnnonces(token)
 
 
     }
