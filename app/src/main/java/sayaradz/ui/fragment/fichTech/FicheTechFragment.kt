@@ -1,7 +1,10 @@
 package sayaradz.ui.fragment.fichTech
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.graphics.Color
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -56,6 +59,7 @@ class FicheTechFragment : Fragment() {
         viewModel = ViewModelProviders.of(this, factory).get(FicheTechViewModel::class.java)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
+        binding.progressLayout.visibility = View.VISIBLE
         updateUI()
 
     }
@@ -64,6 +68,7 @@ class FicheTechFragment : Fragment() {
     private fun updateUI() {
         viewModel.version.observe(this, Observer { version ->
 
+            binding.progressLayout.visibility = View.GONE
             if (version != null) {
                 //setup the version images for the slider
                 val images = arrayListOf(version.image1, version.image2, version.image3)
@@ -108,10 +113,10 @@ class FicheTechFragment : Fragment() {
             cb.setOnClickListener { view ->
                 if ((view as CheckBox).isChecked) {
                     viewModel.updatePrice(option.price, ADD)
-                    viewModel.addOption(option.pk)
+                    viewModel.addOption(option.code)
                 } else {
                     viewModel.updatePrice(option.price, SUB)
-                    viewModel.omitOption(option.pk)
+                    viewModel.omitOption(option.code)
                 }
                 Toast.makeText(context, resources.getString(R.string.price_updated), Toast.LENGTH_SHORT).show()
                 Log.i(TAG, "prix (updated) : ${viewModel.price.value} options ${viewModel.options}")
@@ -175,8 +180,21 @@ class FicheTechFragment : Fragment() {
 
     fun onCommande() {
         Log.i(TAG, "Commande clicked")
-        viewModel.updatePrice(100, ADD)
-        Log.i(TAG, " price ${viewModel.price.value}")
+        binding.progressLayout.visibility = View.VISIBLE
+        Handler().postDelayed({
+            binding.progressLayout.visibility = View.GONE
+            dialogBox("Commande Effectué", "Votre commande de vehicule est bien effectué.")
+        }, 4000)
+        viewModel.commande(selectedColor)
+    }
+    private fun dialogBox(title: String, text: String){
+        AlertDialog.Builder(context)
+                .setTitle(title)
+                .setMessage(text)
+                .setPositiveButton("OK") { dialog, int ->
+                    Log.i(TAG,"$dialog $int")
+                }
+                .show()
     }
 
     private fun setSliderViews(layout: SliderLayout, imgUrls: List<String>) {
@@ -192,7 +210,7 @@ class FicheTechFragment : Fragment() {
                 "https://www.autobip.com/storage/photos/new_car_prices/20/peugeot_208_tech_vision_1_6_hdi_92ch_2019-03-04-13-0687668.jpg"
         )
 
-        for (url in default) {
+        for (url in imgUrls) {
             val sliderView = DefaultSliderView(context)
             sliderView.imageUrl = url
             sliderView.setImageScaleType(ImageView.ScaleType.CENTER_CROP)
