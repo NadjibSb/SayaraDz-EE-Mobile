@@ -24,6 +24,7 @@ Sayara-Dz is an online digital marketplace for new / used vehicles. The project 
 - Android with Kotlin
 - Android jetpack's navigation
 - MVVM architechture
+- Consume a REST API with Retrofit
 
 
 ### Demo
