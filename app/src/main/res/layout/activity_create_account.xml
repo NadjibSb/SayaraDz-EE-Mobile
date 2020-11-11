@@ -9,8 +9,8 @@
 
     <com.google.android.gms.common.SignInButton
         android:id="@+id/google_sign_in_button"
-        android:layout_width="210dp"
-        android:layout_height="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
@@ -24,8 +24,11 @@
 
     <com.facebook.login.widget.LoginButton
         android:id="@+id/facebook_sign_in_button"
-        android:layout_width="210dp"
-        android:layout_height="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
         android:layout_below="@id/google_sign_in_button"
         android:layout_gravity="center_horizontal"
         android:layout_marginStart="8dp"
