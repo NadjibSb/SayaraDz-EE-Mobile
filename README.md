@@ -5,9 +5,9 @@ Sayara-Dz is an online digital marketplace for new / used vehicles. The project 
 - **Frontend App** : A dashboard for Admins, & vehicles contractors. Built with React.js ([Repository]())
 - **Mobile App** : An Android App for the end user. Built with Android/Kotlin ([this repository](https://github.com/NadjibSb/SayaraDz-EE-Mobile))
 
-# Sayara-Dz [Mobile App]
+## Sayara-Dz [Mobile App]
 
-## Features
+### Features
 - Google / Facebook Login \
 **New vehicles :**
 - Display the list of new vehicles posted by contractors & listed by Brand / Model / Version  
@@ -20,13 +20,13 @@ Sayara-Dz is an online digital marketplace for new / used vehicles. The project 
 - Display the caracteristique of the vehicle
 - send a price offer to the seller
 
-## Technologies
+### Technologies
 - Android with Kotlin
 - Android jetpack's navigation
 - MVVM architechture
 
 
-## Demo
+### Demo
 
 <div align="center">
   <img src="Screenshots/0.png" height="500px" margin=" 25px 50px 25px 50px"/> 
